@@ -9,7 +9,7 @@
 
 財報數據擷取，不含質化分析
 
-### RAG 概念已實作 [V]
+### ✅ RAG 概念已實作 
 1. 萃取文件裡的表格, fixed size chunk + slide-window + OCR
 2. Rewrite query, 支援多輪對話並且轉成結構化內容(JSON格式)
 3. 股票代號名稱正規化。會轉換公司俗稱、綽號成股票代號。
