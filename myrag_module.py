@@ -6,6 +6,7 @@ from sentence_transformers import SentenceTransformer
 import json
 import re
 from entity_normalizer import StockEntityNormalizer
+from typing import Generator
 
 
 class FinancialRAGService:
@@ -191,9 +192,36 @@ class FinancialRAGService:
     return results["documents"][0] if results["documents"] else []
 
 
-  def rag_chat(self, user_query: str, top_k: int = 5, where_filter: dict | None = None) -> str:
-    """核心問答流程：問題改寫 -> 向量檢索 -> 增強生成 -> 更新記憶
+  def rag_chat(self, user_query: str, top_k: int, where_filter: dict | None = None) -> str:
+    """(同步回應版)核心問答流程：問題改寫 -> 向量檢索 -> 增強生成 -> 更新記憶
     第二階段: 檢索與生成"""
+    messages = self._rag_core(user_query, top_k, where_filter)
+
+    # 生成回答
+    response = self.llm_client.chat.completions.create(
+      model=self.llm_model,
+      messages=messages,
+      temperature=0.1, # 財報重視精確，維持低溫度
+      )
+    answer = response.choices[0].message.content.strip()
+
+    self._update_message_history(user_query, answer)
+
+    return answer
+
+  def _update_message_history(self, user_query, answer):
+    """更新記憶體裡的對話歷史"""
+    
+    # 更新記憶體對話歷史(純 Python 操作，不碰 ChromaDB)
+    self.chat_history.append({"role": "user", "content": user_query})
+    self.chat_history.append({"role": "assistant", "content": answer})
+
+    # 保持記憶長度，避免 token 受限(最近六則訊息)
+    if len(self.chat_history) > self.max_history_messages:
+      self.chat_history = self.chat_history[-self.max_history_messages:]
+
+  def _rag_core(self, user_query: str, top_k: int = 5, where_filter: dict | None = None) -> str:
+    """ RAG 核心流程的共用函式: 問題改寫 -> 向量檢索 -> 增強生成 """
     print(f"\n[系統] 收到使用者提問: {user_query}")
     retrieved_contexts = {}
 
@@ -213,8 +241,8 @@ class FinancialRAGService:
       for task in plan.get("sub_queries", []):
         raw_ticker = task.get("ticker")
         sub_query = task.get("search_query", refined_query)
-        
-        # 進入資料庫檢索前，進行格式搭配
+      
+      # 進入資料庫檢索前，進行格式搭配
         db_ticker = self._adapt_ticker_for_db(raw_ticker)
         current_where = {"ticker": db_ticker} if db_ticker else None
 
@@ -222,25 +250,25 @@ class FinancialRAGService:
         label = raw_ticker if raw_ticker else task.get("company_name", "通用資料")
         retrieved_contexts[label] = docs
     else:
-      # 2. 降級到第 2 層，純文字改寫(Rewrite Query)
+    # 2. 降級到第 2 層，純文字改寫(Rewrite Query)
       print("[管線狀態] 觸發降級機制 -> 執行【第 2 層：純文字語意改寫】")
 
-      # 透過 Normalizer 自動從改寫與句中抓取所有提及的廠商
+    # 透過 Normalizer 自動從改寫與句中抓取所有提及的廠商
       extracted_entities = self.normalizer.extract_entities_from_text(refined_query)
 
       if extracted_entities:
-        # 即使 LLM 沒輸出 JSON，只要句子中有提到公司，分別執行 Metadata 檢索
+      # 即使 LLM 沒輸出 JSON，只要句子中有提到公司，分別執行 Metadata 檢索
         for entity in extracted_entities:
           ticker = entity["canonical_ticker"]
           where_filter = {"ticker": ticker}
           docs = self.retrieve(search_query=refined_query,
-                               top_k=top_k,
-                               where_filter=where_filter)
+                              top_k=top_k,
+                              where_filter=where_filter)
           retrieved_contexts[f"{entity['formal_name']} ({ticker})"] = docs
       else:
-        # 若完全找不到對應股票，才退為全域搜尋
+      # 若完全找不到對應股票，才退為全域搜尋
         docs = self.retrieve(search_query=refined_query,
-                             top_k=top_k*2, where_filter=None)
+                            top_k=top_k*2, where_filter=None)
 
     # 3. 組裝 Context 與送出生成
     context_text = self.build_compared_results(retrieved_contexts)
@@ -250,6 +278,7 @@ class FinancialRAGService:
       "你是一名專業的台美股財報分析助理。請嚴格依據提供的參考資料與對話歷史回答。"
       "若進行跨公司比較，請務必使用 Markdown 表格對齊數據，並標註資料來源。"
       "若資料未提及，請直接回答[財報未揭露]，嚴禁自行捏造數據。"
+      "在回答前，請務必將你的思考與檢索過程包覆在 <think> 與 </think> 標籤之中。" # TODO: can be commented for deepseek or qwen model
     )
     user_content = f"[參考資料]\n{context_text}\n\n[使用者問題]\n{user_query}"
 
@@ -258,24 +287,28 @@ class FinancialRAGService:
     # 帶入最近兩輪歷史對話，維持語境連貫
     messages.extend(self.chat_history[-self.max_history_messages:])
     messages.append({"role": "user", "content": user_content})
+    return messages
 
-    # 生成回答
+  def rag_chat_stream(self, user_query: str, top_k: int, where_filter: dict | None = None) -> Generator :
+    """(串流回應版)核心問答流程：問題改寫 -> 向量檢索 -> 增強生成 -> 更新記憶
+        第二階段: 檢索與生成"""
+    messages = self._rag_core(user_query=user_query, top_k=top_k, where_filter=where_filter)
     response = self.llm_client.chat.completions.create(
       model=self.llm_model,
       messages=messages,
-      temperature=0.1, # 財報重視精確，維持低溫度
-      )
-    answer = response.choices[0].message.content.strip()
+      temperature=0.1,
+      stream=True, # 啟用串流輸出
+    )
 
-    # 更新記憶體對話歷史(純 Python 操作，不碰 ChromaDB)
-    self.chat_history.append({"role": "user", "content": user_query})
-    self.chat_history.append({"role": "assistant", "content": answer})
+    full_answer = ''
+    for chunk in response:
+      token = chunk.choices[0].delta.content
+      if token:
+        full_answer += token
+        yield token
 
-    # 保持記憶長度，避免 token 受限(最近六則訊息)
-    if len(self.chat_history) > self.max_history_messages:
-      self.chat_history = self.chat_history[-self.max_history_messages:]
-
-    return answer
+    # 更新對話歷史
+    self._update_message_history(user_query, full_answer)
 
   def _clean_json_output(self, raw_text: str) -> str:
     """利用正規表示式，取得字串中最外層的 JSON 物件"""
