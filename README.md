@@ -3,7 +3,7 @@
 ## 用途
 
 個人經驗與能力展示
-[多輪對話](https://github.com/yhunglee/myFinancialRAG_prototype/screenshots/multirounds-chat-terminal.png)
+![多輪對話](./screenshots/multirounds-chat-terminal.png)
 
 ## 特點
 
