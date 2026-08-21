@@ -19,9 +19,8 @@ def on_chat_start():
 
 @cl.on_message
 async def main(message: cl.Message):
-  # Your custom logic goes here...
 
-  # 必須先 send 一個空訊息，才能開始 stream_token
+  # 一開始就建立並發送主對話框
   msg = cl.Message(content="")
   await msg.send()
 
@@ -34,8 +33,6 @@ async def main(message: cl.Message):
   # 用來比對是否正在形成標籤的字首
   target_tags = ["<think>", "</think>"]
 
-  # -----
-  # Solution 2
   for token in rag_service.rag_chat_stream(message.content):
     buffer += token
 
@@ -44,7 +41,8 @@ async def main(message: cl.Message):
       is_thinking = True
       buffer = buffer.replace("<think>", "") # 清除標籤
       if not think_step:
-        think_step = cl.Step(name="AI財報推理過程", type="run")
+        # 1-1. 利用 parent_id=msg.id 將思考面板強制掛載到主對話框內部
+        think_step = cl.Step(name="AI 財報推理過程", type="run", parent_id=msg.id)
         await think_step.send()
 
     # 2. 判斷是否完整捕捉到標籤結束
@@ -79,8 +77,10 @@ async def main(message: cl.Message):
         await think_step.stream_token(buffer)
         buffer = ""
       elif not is_thinking:
-        await msg.stream_token(buffer)
-        buffer = ''
+        # 3. 直接輸出至主對話框，再也不用擔心順序錯亂
+        if buffer:
+          await msg.stream_token(buffer)
+          buffer = ""
 
   # 5. 確保迴圈結束後，剩餘的字元也有輸出
   if buffer:
@@ -89,62 +89,11 @@ async def main(message: cl.Message):
     elif not is_thinking:
       await msg.stream_token(buffer)
 
+  # 迴圈結束後，更新最終 UI 狀態
   if think_step:
     await think_step.update()
   await msg.update()
 
-
-  # ======
-  # Solution 1
-  # for token in rag_service.rag_chat_stream(message.content):
-  #   buffer += token
-
-  #   # 判斷是否進入思考區塊
-  #   if "<think>" in buffer and not is_thinking:
-  #     is_thinking = True
-  #     buffer = buffer.replace("<think>", "") # 清除標籤
-  #     think_step = cl.Step(name="AI財報推理過程", type="run")
-  #     await think_step.send()
-
-  #   # 判斷是否結束思考區塊
-  #   if "</think>" in buffer and is_thinking:
-  #     is_thinking = False
-
-  #     # 處理掉 </think> 之前的剩餘思考文字
-  #     thought_text = buffer.split("</think>")[0]
-  #     if thought_text:
-  #       await think_step.stream_token(thought_text)
-  #     await think_step.update()
-
-  #     # 將 buffer 剩下的解答部分保留
-  #     buffer = buffer.split("</think>")[1]
-  #     await msg.send() # 開始發送主訊息
-
-  #   # 根據狀態決定 Token 要流向哪裡
-  #   if is_thinking and think_step:
-  #     # 清空緩衝區並輸出到思考面板
-  #     await think_step.stream_token(buffer)
-  #     buffer = ''
-  #   elif not is_thinking and not buffer.isspace():
-  #     # 清空緩衝區並輸出到主畫面
-  #     await msg.stream_token(buffer)
-  #     buffer = ''
-
-  # # 迴圈結束後，更新最終 UI 狀態
-  # if think_step:
-  #   await think_step.update()
-
-  # await msg.update()
-
-    
-
-  # ======
-  # response = rag_service.rag_chat(message.content)
-
-  # # Send a response back to the user
-  # await cl.Message(
-  #     content=f"{response}",
-  # ).send()
 
 @cl.on_chat_end
 def on_chat_end():
