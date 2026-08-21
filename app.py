@@ -21,51 +21,120 @@ def on_chat_start():
 async def main(message: cl.Message):
   # Your custom logic goes here...
 
+  # 必須先 send 一個空訊息，才能開始 stream_token
   msg = cl.Message(content="")
+  await msg.send()
+
   think_step = None
   is_thinking = False
 
   # 建立緩衝區來處理被切斷的標籤字串
   buffer = ''
+
+  # 用來比對是否正在形成標籤的字首
+  target_tags = ["<think>", "</think>"]
+
+  # -----
+  # Solution 2
   for token in rag_service.rag_chat_stream(message.content):
     buffer += token
 
-    # 判斷是否進入思考區塊
-    if "<think>" in buffer and not is_thinking:
+    # 1. 判斷是否完整捕捉到標籤開始
+    if "<think>" in buffer:
       is_thinking = True
       buffer = buffer.replace("<think>", "") # 清除標籤
-      think_step = cl.Step(name="AI財報推理過程", type="run")
-      await think_step.send()
+      if not think_step:
+        think_step = cl.Step(name="AI財報推理過程", type="run")
+        await think_step.send()
 
-    # 判斷是否結束思考區塊
-    if "</think>" in buffer and is_thinking:
+    # 2. 判斷是否完整捕捉到標籤結束
+    if "</think>" in buffer:
       is_thinking = False
+      parts = buffer.split("</think>")
+      thought_text = parts[0]
 
-      # 處理掉 </think> 之前的剩餘思考文字
-      thought_text = buffer.split("</think>")[0]
-      if thought_text:
+      # 把結束標籤前的文字送進思考面板
+      if thought_text and think_step:
         await think_step.stream_token(thought_text)
-      await think_step.update()
+      if think_step:
+        await think_step.update()
 
-      # 將 buffer 剩下的解答部分保留
-      buffer = buffer.split("</think>")[1]
-      await msg.send() # 開始發送主訊息
+      # 剩下的文字保留給主畫面
+      buffer = parts[1] if len(parts) > 1 else ""
 
-    # 根據狀態決定 Token 要流向哪裡
+    # 3. 核心邊界處理: 檢查緩衝區結尾是否為標籤的[部分片段]
+    is_forming_tag = False
+    for tag in target_tags:
+      # 檢查從長度 1 到 tag 全長， buffer 的結尾是否吻合
+      for i in range(1, len(tag)):
+        if buffer.endswith(tag[:i]):
+          is_forming_tag = True
+          break
+      if is_forming_tag:
+        break
+
+    # 4. 如果沒有正在形成標籤，才安全地將緩衝區內容輸出
+    if not is_forming_tag:
+      if is_thinking and think_step:
+        await think_step.stream_token(buffer)
+        buffer = ""
+      elif not is_thinking:
+        await msg.stream_token(buffer)
+        buffer = ''
+
+  # 5. 確保迴圈結束後，剩餘的字元也有輸出
+  if buffer:
     if is_thinking and think_step:
-      # 清空緩衝區並輸出到思考面板
       await think_step.stream_token(buffer)
-      buffer = ''
-    elif not is_thinking and not buffer.isspace():
-      # 清空緩衝區並輸出到主畫面
+    elif not is_thinking:
       await msg.stream_token(buffer)
-      buffer = ''
 
-  # 迴圈結束後，更新最終 UI 狀態
   if think_step:
     await think_step.update()
-
   await msg.update()
+
+
+  # ======
+  # Solution 1
+  # for token in rag_service.rag_chat_stream(message.content):
+  #   buffer += token
+
+  #   # 判斷是否進入思考區塊
+  #   if "<think>" in buffer and not is_thinking:
+  #     is_thinking = True
+  #     buffer = buffer.replace("<think>", "") # 清除標籤
+  #     think_step = cl.Step(name="AI財報推理過程", type="run")
+  #     await think_step.send()
+
+  #   # 判斷是否結束思考區塊
+  #   if "</think>" in buffer and is_thinking:
+  #     is_thinking = False
+
+  #     # 處理掉 </think> 之前的剩餘思考文字
+  #     thought_text = buffer.split("</think>")[0]
+  #     if thought_text:
+  #       await think_step.stream_token(thought_text)
+  #     await think_step.update()
+
+  #     # 將 buffer 剩下的解答部分保留
+  #     buffer = buffer.split("</think>")[1]
+  #     await msg.send() # 開始發送主訊息
+
+  #   # 根據狀態決定 Token 要流向哪裡
+  #   if is_thinking and think_step:
+  #     # 清空緩衝區並輸出到思考面板
+  #     await think_step.stream_token(buffer)
+  #     buffer = ''
+  #   elif not is_thinking and not buffer.isspace():
+  #     # 清空緩衝區並輸出到主畫面
+  #     await msg.stream_token(buffer)
+  #     buffer = ''
+
+  # # 迴圈結束後，更新最終 UI 狀態
+  # if think_step:
+  #   await think_step.update()
+
+  # await msg.update()
 
     
 
