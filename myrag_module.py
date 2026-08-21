@@ -192,7 +192,7 @@ class FinancialRAGService:
     return results["documents"][0] if results["documents"] else []
 
 
-  def rag_chat(self, user_query: str, top_k: int, where_filter: dict | None = None) -> str:
+  def rag_chat(self, user_query: str, top_k: int = 5, where_filter: dict | None = None) -> str:
     """(同步回應版)核心問答流程：問題改寫 -> 向量檢索 -> 增強生成 -> 更新記憶
     第二階段: 檢索與生成"""
     messages = self._rag_core(user_query, top_k, where_filter)
@@ -289,7 +289,7 @@ class FinancialRAGService:
     messages.append({"role": "user", "content": user_content})
     return messages
 
-  def rag_chat_stream(self, user_query: str, top_k: int, where_filter: dict | None = None) -> Generator :
+  def rag_chat_stream(self, user_query: str, top_k: int = 5 , where_filter: dict | None = None) -> Generator :
     """(串流回應版)核心問答流程：問題改寫 -> 向量檢索 -> 增強生成 -> 更新記憶
         第二階段: 檢索與生成"""
     messages = self._rag_core(user_query=user_query, top_k=top_k, where_filter=where_filter)
