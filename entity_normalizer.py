@@ -106,7 +106,7 @@ class StockEntityNormalizer:
       return None
 
     cleaned_text = raw_entity.strip().lower()
-    canonical_ticker = self.alias_to_ticker[cleaned_text]
+    canonical_ticker = self.alias_to_ticker.get(cleaned_text)
 
     if canonical_ticker:
       return self.stock_database[canonical_ticker]
