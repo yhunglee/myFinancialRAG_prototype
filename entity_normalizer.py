@@ -128,7 +128,15 @@ class StockEntityNormalizer:
     text_lower = text.lower()
     for alias in sorted_aliases:
       # 使用邊界或包含判斷(中文直接包含，英文用詞邊界判斷)
-      if re.search(r'\b' + re.escape(alias) + r'\b', text_lower) if alias.isascii() else (alias in text_lower):
+      if alias.isascii():
+        is_matched = re.search(
+          rf'\b{re.escape(alias)}\b',
+          text_lower
+        )
+      else:
+        is_matched = alias in text_lower
+
+      if is_matched:
         canonical_ticker = self.alias_to_ticker[alias]
         if canonical_ticker not in matched_tickers:
           matched_tickers.add(canonical_ticker)
