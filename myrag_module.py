@@ -260,7 +260,8 @@ class FinancialRAGService:
       # 即使 LLM 沒輸出 JSON，只要句子中有提到公司，分別執行 Metadata 檢索
         for entity in extracted_entities:
           ticker = entity["canonical_ticker"]
-          where_filter = {"ticker": ticker}
+          db_ticker = self._adapt_ticker_for_db(ticker)
+          where_filter = {"ticker": db_ticker}
           docs = self.retrieve(search_query=refined_query,
                               top_k=top_k,
                               where_filter=where_filter)
