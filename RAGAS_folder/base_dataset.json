@@ -1,0 +1,51 @@
+[
+  {
+    "question": "比較發哥和 GG 2025年第四季營收",
+    "contexts": [],
+    "answer": "",
+    "ground_truth": ""
+  },
+  {
+    "question": "台積電2025年第四季營收",
+    "contexts": [],
+    "answer": "",
+    "ground_truth": ""
+  },
+  {
+    "question": "2330 2025年第三季營收",
+    "contexts": [],
+    "answer": "",
+    "ground_truth": ""
+  },
+  {
+    "question": "台積電 2025 年第四季的合併營收是多少?",
+    "contexts": [],
+    "answer": "",
+    "ground_truth": ""
+  },
+  {
+    "question": "3nm 製程收益佔台積電 2025年第四季營收比例是幾%?",
+    "contexts": [],
+    "answer": "",
+    "ground_truth": "3nm process technology contributed 28% of total wafer revenue in 4Q25 while 5nm and 7nm accounted for 35% and 14% respectively. "
+  },
+  {
+    "question": "聯發科2025年第四季營收",
+    "contexts": [],
+    "answer": "",
+    "ground_truth": ""
+  },
+  {
+    "question": "MTK的2025年第四季營收",
+    "contexts": [],
+    "answer": "",
+    "ground_truth": ""
+  },
+  {
+    "question": "GG 2025年第三季營收",
+    "contexts": [],
+    "answer": "",
+    "ground_truth": ""
+  },
+  
+]
