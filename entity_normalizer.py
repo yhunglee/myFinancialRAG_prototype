@@ -1,11 +1,12 @@
 import re
-from typing import Dict, List, Optional, TypedDict
+from typing import Dict, List, NotRequired, Optional, TypedDict
 
 class StockMetadata(TypedDict):
   canonical_ticker: str # 標準代號(例如: "2330.TW", "NVDA")
   formal_name: str # 正式全名(例如: "台灣積體電路製造", "NVIDIA Corporation")
   market: str # 市場("TW" 或 "US")
   aliases: List[str] # 別名、縮寫、俗稱
+  matched_alias: NotRequired[str] # 符合的別名
 
 class StockEntityNormalizer:
   """
@@ -140,6 +141,8 @@ class StockEntityNormalizer:
         canonical_ticker = self.alias_to_ticker[alias]
         if canonical_ticker not in matched_tickers:
           matched_tickers.add(canonical_ticker)
-          matched_metadata.append(self.stock_database[canonical_ticker])
+          matched_dict = self.stock_database.get(canonical_ticker).copy()
+          matched_dict['matched_alias'] = text_lower
+          matched_metadata.append(matched_dict)
 
     return matched_metadata
