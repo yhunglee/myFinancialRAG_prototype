@@ -16,6 +16,7 @@
 4. 資料相關性和來源, Metadata filtering
 5. Idempotent Upsert, 做在向量資料庫索引 Market-stockTicker-year-quarter-idx
 6. 知識庫和對話歷史的資料隔離，使用向量資料庫 ChromaDB 和記憶體
+7. 對話介面 GUI
 
 
 ### 程式碼特點:    
@@ -37,7 +38,7 @@
 3. 判斷問題是量化或質化分析的 Router
 4. Hybrid search(BM25, Re-ranking)
 5. llamaIndex, LangChain
-6. 對話介面 GUI
+
 
 ## 系統需求
 可在地端正常運作，已驗過在 NVIDIA 4080 顯卡 + 2B / 4B 大語言模型正常運作。不須顯卡也能執行，速度會較慢。
