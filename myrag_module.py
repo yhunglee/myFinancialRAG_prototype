@@ -1,12 +1,13 @@
 from __future__ import annotations
 
+import asyncio
 import chromadb
-from openai import OpenAI
+from openai import AsyncOpenAI, OpenAI
 from sentence_transformers import SentenceTransformer
 import json
 import re
 from entity_normalizer import StockEntityNormalizer
-from typing import Generator, List
+from typing import AsyncGenerator
 
 
 class FinancialRAGService:
@@ -36,6 +37,11 @@ class FinancialRAGService:
       base_url=lm_studio_url,
       api_key="lm-studio" # 任意字詞，因為沒有開認證
       )
+    # 專供 Chainlit UI 串流使用的非同步 Client
+    self.async_llm_client = AsyncOpenAI(
+      base_url=lm_studio_url,
+      api_key="lm-studio" 
+    )
     self.llm_model = llm_model
 
     # 4. 狀態管理(對話記憶與滑動視窗上限)
@@ -321,11 +327,14 @@ class FinancialRAGService:
     messages.append({"role": "user", "content": user_content})
     return messages
 
-  def rag_chat_stream(self, user_query: str, top_k: int = 5 , where_filter: dict | None = None) -> Generator :
+  async def rag_chat_stream(self, user_query: str, top_k: int = 5 , where_filter: dict | None = None) -> AsyncGenerator[str, None] :
     """(串流回應版)核心問答流程：問題改寫 -> 向量檢索 -> 增強生成 -> 更新記憶
         第二階段: 檢索與生成"""
-    messages = self._rag_core(user_query=user_query, top_k=top_k, where_filter=where_filter)
-    response = self.llm_client.chat.completions.create(
+    # 利用 to_thread 將耗時的同步前處理丟到背景執行，釋放 Event Loop
+    messages = await asyncio.to_thread(
+        self._rag_core, user_query, top_k, where_filter
+    )
+    response = await self.async_llm_client.chat.completions.create(
       model=self.llm_model,
       messages=messages,
       temperature=0.1,
@@ -333,7 +342,7 @@ class FinancialRAGService:
     )
 
     full_answer = ''
-    for chunk in response:
+    async for chunk in response:
       token = chunk.choices[0].delta.content
       if token:
         full_answer += token

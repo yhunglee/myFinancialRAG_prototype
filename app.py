@@ -34,7 +34,7 @@ async def main(message: cl.Message):
   # 用來比對是否正在形成標籤的字首
   target_tags = ["<think>", "</think>"]
 
-  for token in rag_service.rag_chat_stream(message.content):
+  async for token in rag_service.rag_chat_stream(message.content):
     buffer += token
 
     # 1. 判斷是否完整捕捉到標籤開始
