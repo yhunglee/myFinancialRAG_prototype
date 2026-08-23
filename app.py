@@ -16,6 +16,7 @@ rag_service = FinancialRAGService(
 @cl.on_chat_start
 def on_chat_start():
   print("A new chat session has started!")
+  rag_service.clean_history()
 
 @cl.on_message
 async def main(message: cl.Message):
