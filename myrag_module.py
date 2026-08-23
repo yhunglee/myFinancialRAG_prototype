@@ -342,11 +342,45 @@ class FinancialRAGService:
     )
 
     full_answer = ''
+    has_yielded_think_start = False
+    has_yielded_think_end = False
+
     async for chunk in response:
-      token = chunk.choices[0].delta.content
+      # 避免 chunk.choices 為空的極端 API 邊界狀況
+      if not chunk.choices:
+          continue
+          
+      delta = chunk.choices[0].delta
+      
+      # 1. 攔截原生支援的推理欄位 (reasoning_content)
+      reasoning_token = getattr(delta, "reasoning_content", None)
+      if reasoning_token:
+        # 如果是第一個推理 token，幫它補上前端需要的 <think> 標籤開始
+        if not has_yielded_think_start:
+            yield "<think>\n"
+            full_answer += "<think>\n"
+            has_yielded_think_start = True
+        
+        yield reasoning_token
+        full_answer += reasoning_token
+        continue
+
+      # 2. 當推理結束，準備輸出正式 content 時，補上標籤結束
+      if has_yielded_think_start and not has_yielded_think_end:
+          yield "\n</think>\n"
+          full_answer += "\n</think>\n"
+          has_yielded_think_end = True
+
+      # 3. 攔截標準的正式回答
+      token = delta.content
       if token:
         full_answer += token
         yield token
+
+    # 確保串流意外結束時，標籤依然有完美閉合
+    if has_yielded_think_start and not has_yielded_think_end:
+        yield "\n</think>\n"
+        full_answer += "\n</think>\n"
 
     # 更新對話歷史
     self._update_message_history(user_query, full_answer)
