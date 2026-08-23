@@ -1,123 +1,123 @@
 [
   {
-    "question": "比較發哥和 GG 2025年第四季營收",
-    "contexts": [],
-    "answer": "",
-    "ground_truth": ""
+    "user_input": "比較發哥和 GG 2025年第四季營收",
+    "retrieved_contexts": [],
+    "response": "",
+    "reference": ""
   },
   {
-    "question": "台積電2025年第四季營收",
-    "contexts": [],
-    "answer": "",
-    "ground_truth": "Net revenue was NT$1,046.09 billion"
+    "user_input": "台積電2025年第四季營收",
+    "retrieved_contexts": [],
+    "response": "",
+    "reference": "Net revenue was NT$1,046.09 billion"
   },
   {
-    "question": "2330 2025年第三季營收",
-    "contexts": [],
-    "answer": "",
-    "ground_truth": ""
+    "user_input": "2330 2025年第三季營收",
+    "retrieved_contexts": [],
+    "response": "",
+    "reference": ""
   },
   {
-    "question": "台積電 2025 年第四季的合併營收是多少?",
-    "contexts": [],
-    "answer": "",
-    "ground_truth": ""
+    "user_input": "台積電 2025 年第四季的合併營收是多少?",
+    "retrieved_contexts": [],
+    "response": "",
+    "reference": ""
   },
   {
-    "question": "3nm 製程收益佔台積電 2025年第四季營收比例是幾%?",
-    "contexts": [],
-    "answer": "",
-    "ground_truth": "3nm process technology contributed 28% of total wafer revenue in 4Q25 while 5nm and 7nm accounted for 35% and 14% respectively. "
+    "user_input": "3nm 製程收益佔台積電 2025年第四季營收比例是幾%?",
+    "retrieved_contexts": [],
+    "response": "",
+    "reference": "3nm process technology contributed 28% of total wafer revenue in 4Q25 while 5nm and 7nm accounted for 35% and 14% respectively. "
   },
    {
-    "question": "3nm 製程收益佔台積電 2024年第四季營收比例是幾%?",
-    "contexts": [],
-    "answer": "",
-    "ground_truth": "3nm process technology contributed 26% of total wafer revenue in 4Q24."
+    "user_input": "3nm 製程收益佔台積電 2024年第四季營收比例是幾%?",
+    "retrieved_contexts": [],
+    "response": "",
+    "reference": "3nm process technology contributed 26% of total wafer revenue in 4Q24."
   },
   {
-    "question": "依照晶圓製程世代，3nm 製程收益佔台積電 2025年全年營收比例是幾%?",
-    "contexts": [],
-    "answer": "",
-    "ground_truth": "3nm process technology contributed 24% of total wafer revenue in 2025."
+    "user_input": "依照晶圓製程世代，3nm 製程收益佔台積電 2025年全年營收比例是幾%?",
+    "retrieved_contexts": [],
+    "response": "",
+    "reference": "3nm process technology contributed 24% of total wafer revenue in 2025."
   },
   {
-    "question": "依照晶圓製程世代，3nm 製程收益佔台積電 2024年全年營收比例是幾%?",
-    "contexts": [],
-    "answer": "",
-    "ground_truth": "3nm process technology contributed 18% of total wafer revenue in 2024."
+    "user_input": "依照晶圓製程世代，3nm 製程收益佔台積電 2024年全年營收比例是幾%?",
+    "retrieved_contexts": [],
+    "response": "",
+    "reference": "3nm process technology contributed 18% of total wafer revenue in 2024."
   },
   {
-    "question": "TSMC 在2025年第四季的銷貨成本是?",
-    "contexts": [],
-    "answer": "",
-    "ground_truth": "NTD 394.10 billions"
+    "user_input": "TSMC 在2025年第四季的銷貨成本是?",
+    "retrieved_contexts": [],
+    "response": "",
+    "reference": "NTD 394.10 billions"
   },
   {
-    "question": "GG 2025年第三季營收是?",
-    "contexts": [],
-    "answer": "",
-    "ground_truth": "Net revenue was NT$989.92 billion in 3Q25."
+    "user_input": "GG 2025年第三季營收是?",
+    "retrieved_contexts": [],
+    "response": "",
+    "reference": "Net revenue was NT$989.92 billion in 3Q25."
   },
   {
-    "question": "GG 2025年第四季對第三季營收增長比例是?",
-    "contexts": [],
-    "answer": "",
-    "ground_truth": "Net revenue in 4Q25 was 5.4% increased from in 3Q25."
+    "user_input": "GG 2025年第四季對第三季營收增長比例是?",
+    "retrieved_contexts": [],
+    "response": "",
+    "reference": "Net revenue in 4Q25 was 5.4% increased from in 3Q25."
   },
   {
-    "question": "台積電 2025年第四季淨利率是?",
-    "contexts": [],
-    "answer": "",
-    "ground_truth": "Net profit margin in 4Q25 was 48.3%."
+    "user_input": "台積電 2025年第四季淨利率是?",
+    "retrieved_contexts": [],
+    "response": "",
+    "reference": "Net profit margin in 4Q25 was 48.3%."
   },
   {
-    "question": "台積電 2025年全年淨利率是?",
-    "contexts": [],
-    "answer": "",
-    "ground_truth": "Net profit margin in 2025 was 45.1%."
+    "user_input": "台積電 2025年全年淨利率是?",
+    "retrieved_contexts": [],
+    "response": "",
+    "reference": "Net profit margin in 2025 was 45.1%."
   },
   {
-    "question": "TSMC 2025年全年毛利率是?",
-    "contexts": [],
-    "answer": "",
-    "ground_truth": "On a full year basis, gross margin was 59.9% in 2025."
+    "user_input": "TSMC 2025年全年毛利率是?",
+    "retrieved_contexts": [],
+    "response": "",
+    "reference": "On a full year basis, gross margin was 59.9% in 2025."
   },
   {
-    "question": "TSMC 2024年全年毛利率是?",
-    "contexts": [],
-    "answer": "",
-    "ground_truth": "On a full year basis, gross margin was 56.1% in 2024."
+    "user_input": "TSMC 2024年全年毛利率是?",
+    "retrieved_contexts": [],
+    "response": "",
+    "reference": "On a full year basis, gross margin was 56.1% in 2024."
   },
   {
-    "question": "TSMC 2025年全年營收比例來自 High performance computing是幾%? 如果依照應用領域",
-    "contexts": [],
-    "answer": "",
-    "ground_truth": "On a full year basis, net revenue from HPC was 58% by platform in 2025."
+    "user_input": "TSMC 2025年全年營收比例來自 High performance computing是幾%? 如果依照應用領域",
+    "retrieved_contexts": [],
+    "response": "",
+    "reference": "On a full year basis, net revenue from HPC was 58% by platform in 2025."
   },
   {
-    "question": "TSMC 2024年全年營收比例來自 High performance computing是幾%?",
-    "contexts": [],
-    "answer": "",
-    "ground_truth": "On a full year basis, net revenue from HPC was 51% by platform in 2024."
+    "user_input": "TSMC 2024年全年營收比例來自 High performance computing是幾%?",
+    "retrieved_contexts": [],
+    "response": "",
+    "reference": "On a full year basis, net revenue from HPC was 51% by platform in 2024."
   },
   {
-    "question": "TSMC 依照客戶來源地區分，2025年全年營收比例來自北美地區是幾%?",
-    "contexts": [],
-    "answer": "",
-    "ground_truth": "In 2025, revenue from customers based in North America accounted for 75% of total net revenue."
+    "user_input": "TSMC 依照客戶來源地區分，2025年全年營收比例來自北美地區是幾%?",
+    "retrieved_contexts": [],
+    "response": "",
+    "reference": "In 2025, revenue from customers based in North America accounted for 75% of total net revenue."
   },
   {
-    "question": "聯發科2025年第四季營收",
-    "contexts": [],
-    "answer": "",
-    "ground_truth": ""
+    "user_input": "聯發科2025年第四季營收",
+    "retrieved_contexts": [],
+    "response": "",
+    "reference": ""
   },
   {
-    "question": "MTK的2025年第四季營收",
-    "contexts": [],
-    "answer": "",
-    "ground_truth": ""
+    "user_input": "MTK的2025年第四季營收",
+    "retrieved_contexts": [],
+    "response": "",
+    "reference": ""
   }
   
   
