@@ -3,10 +3,7 @@
 ## 用途
 
 個人經驗與能力展示    
-<iframe width="560" height="315" src="https://www.youtube.com/embed/IZwksbgmWEw?si=e2SNjnivIztHs6XK" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-
-
-[embed](https://www.youtube.com/watch?v=IZwksbgmWEw)
+![YT操作影片](https://www.youtube.com/embed/IZwksbgmWEw)
 ![多輪對話](./screenshots/multirounds-chat-terminal.png)
 
 ## 特點
@@ -52,6 +49,9 @@
 1. 表格文件情境仰賴套件 Anydoc 解析，它會保留情境。
 2. 掃描的表格文件，改用套件 Docling 。
 3. 目前僅有台積電和聯發科的 25Q4 季報。
+
+## 已知問題
+1. 每位使用者的訊息沒有完全隔離。暫時不處理。
 
 ## 軟體授權
 
