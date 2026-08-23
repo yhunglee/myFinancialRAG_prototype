@@ -18,10 +18,34 @@
     "reference": ""
   },
   {
-    "user_input": "台積電 2025 年第四季的合併營收是多少?",
+    "user_input": "在季度現金流分析報告裡，TSMC 在2025年第四季的期末現金餘額?",
     "retrieved_contexts": [],
     "response": "",
-    "reference": ""
+    "reference": "In end of 4Q2025 and quarterly cash flow analysis, ending cash balance was NT$2,768.86 billion."
+  },
+  {
+    "user_input": "在季度現金流分析報告裡，台積電2025年第四季現金部位變動金額是?",
+    "retrieved_contexts": [],
+    "response": "",
+    "reference": "During the fourth quarter, cash position increased by NTD297.10 billion."
+  },
+  {
+    "user_input": "在季度現金流分析報告裡，台積電2025年第三季期末現金餘額是?",
+    "retrieved_contexts": [],
+    "response": "",
+    "reference": "In end of 3Q2025 and quarterly cash flow analysis, ending cash balance was NT$2,470.76 billion."
+  },
+  {
+    "user_input": "在季度現金流分析報告裡，TSMC 在2024年第四季的期末現金餘額?",
+    "retrieved_contexts": [],
+    "response": "",
+    "reference": "In end of 4Q2024 and quarterly cash flow analysis, ending cash balance was NTD 2,127.63 billions."
+  },
+  {
+    "user_input": "TSMC 在2025年第四季的增加或減少自由現金流餘額?",
+    "retrieved_contexts": [],
+    "response": "",
+    "reference": "Free cash flow increased by NT$229.22 billion in 4Q25"
   },
   {
     "user_input": "3nm 製程收益佔台積電 2025年第四季營收比例是幾%?",
@@ -66,6 +90,12 @@
     "reference": "Net revenue in 4Q25 was 5.4% increased from in 3Q25."
   },
   {
+    "user_input": "台積電 2025年第四季和第三季的現金股利金額是?",
+    "retrieved_contexts": [],
+    "response": "",
+    "reference": "Cash dividends in 4Q25 was NT$ 129.66 billions. Cash dividends in 3Q25 was NT$ 116.70 billions."
+  },
+  {
     "user_input": "台積電 2025年第四季淨利率是?",
     "retrieved_contexts": [],
     "response": "",
@@ -90,7 +120,7 @@
     "reference": "On a full year basis, gross margin was 56.1% in 2024."
   },
   {
-    "user_input": "TSMC 2025年全年營收比例來自 High performance computing是幾%? 如果依照應用領域",
+    "user_input": "TSMC 2025年全年營收比例來自 High performance computing是幾%? 如果依照應用領域區分。",
     "retrieved_contexts": [],
     "response": "",
     "reference": "On a full year basis, net revenue from HPC was 58% by platform in 2025."
@@ -106,6 +136,42 @@
     "retrieved_contexts": [],
     "response": "",
     "reference": "In 2025, revenue from customers based in North America accounted for 75% of total net revenue."
+  },
+  {
+    "user_input": "台積電2025年第四季營業淨來源金額是?",
+    "retrieved_contexts": [],
+    "response": "",
+    "reference": "During the fourth quarter, net cash generated from operating activities totaled NT$725.51 billion."
+  },
+  {
+    "user_input": "台積電2025年全年投資淨來源金額是?",
+    "retrieved_contexts": [],
+    "response": "",
+    "reference": "On a full year basis, Net cash used in investing activities was NT$1,144.39 billion,"
+  },
+  {
+    "user_input": "台積電有沒有公布2026年預期資本支出?",
+    "retrieved_contexts": [],
+    "response": "",
+    "reference": "無"
+  },
+  {
+    "user_input": "台積電有沒有公布2026年 forwarded PE?",
+    "retrieved_contexts": [],
+    "response": "",
+    "reference": "無"
+  },
+  {
+    "user_input": "台積電對於2026年產業景氣展望是?",
+    "retrieved_contexts": [],
+    "response": "",
+    "reference": "無"
+  },
+  {
+    "user_input": "台積電和聯發科 2025 年第四季的毛利金額?",
+    "retrieved_contexts": [],
+    "response": "",
+    "reference": "TSMC's Gross Profit in 4Q25 was NT$651.99 billion. MTK's Gross Profit in 4Q25 was NT$69,281 million."
   },
   {
     "user_input": "聯發科2025年第四季營收",
