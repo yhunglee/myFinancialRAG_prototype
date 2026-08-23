@@ -2,7 +2,11 @@
 
 ## 用途
 
-個人經驗與能力展示
+個人經驗與能力展示    
+<iframe width="560" height="315" src="https://www.youtube.com/embed/IZwksbgmWEw?si=e2SNjnivIztHs6XK" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+
+[embed](https://www.youtube.com/watch?v=IZwksbgmWEw)
 ![多輪對話](./screenshots/multirounds-chat-terminal.png)
 
 ## 特點
