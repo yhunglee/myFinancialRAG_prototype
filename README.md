@@ -3,7 +3,7 @@
 ## 用途
 
 個人經驗與能力展示    
-[![YT操作影片](https://www.youtube.com/embed/IZwksbgmWEw)](https://www.youtube.com/embed/IZwksbgmWEw)
+[![Demo影片](http://img.youtube.com/vi/IZwksbgmWEw/0.jpg)](https://www.youtube.com/watch?v=IZwksbgmWEw "YT 操作影片")
 ![多輪對話](./screenshots/multirounds-chat-terminal.png)
 
 ## 特點
