@@ -294,6 +294,7 @@ class FinancialRAGService:
       # 若完全找不到對應股票，才退為全域搜尋
         docs = self.retrieve(search_query=refined_query,
                             top_k=top_k*2, where_filter=None)
+        # TODO: may have a bug here, need to be resolved
 
     # 3. 組裝 Context 與送出生成
     context_text = self.build_compared_results(retrieved_contexts)
