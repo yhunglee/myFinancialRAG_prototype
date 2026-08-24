@@ -6,6 +6,20 @@
 [![Demo影片](http://img.youtube.com/vi/IZwksbgmWEw/0.jpg)](https://www.youtube.com/watch?v=IZwksbgmWEw "YT 操作影片")
 ![多輪對話](./screenshots/multirounds-chat-terminal.png)
 
+### 提醒
+仍持續改變中，並非最終完成品
+
+## 使用前的前置作業
+1. 安裝 LM Studio，並使用 Gemma4-E2B-Instruct 模型。啟用 Developer 分頁的 Server API 狀態，並且令 API 入口可以透過 localhost 存取，例如: http://127.0.0.1:1234。
+2. 安裝 NVIDIA CUDA 13.1 or 12.6
+3. 安裝 Python 3.13
+4. 安裝其他套件，透過指令 `pip install -r requirements.txt`
+5. 修改檔案 `financial_ingestion_advanced.py` 的最後 5 行參數，為了建立在本機 ChromaDB 的各公司財報向量資料
+
+## 使用: 啟動對談畫面
+`chainlit run app.py -w`
+
+
 ## 特點
 
 財報數據擷取，不含質化分析
@@ -42,7 +56,7 @@
 
 
 ## 系統需求
-可在地端正常運作，已驗過在 NVIDIA 4080 顯卡 + 2B / 4B 大語言模型正常運作。不須顯卡也能執行，速度會較慢。
+可在地端正常運作，已驗過在 NVIDIA 4080 顯卡 + Gemma4 的 2B / 4B 大語言模型正常運作。不須顯卡也能執行，速度會較慢。
 
 
 ## FAQ
@@ -70,5 +84,3 @@ AGPL-v3
   version = {1.0.0},
   year = {2024}
 }
-
-# Financial RAG prototype for TW and US financial reports
