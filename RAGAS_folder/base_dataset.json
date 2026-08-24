@@ -147,7 +147,7 @@
     "user_input": "台積電2025年全年投資淨來源金額是?",
     "retrieved_contexts": [],
     "response": "",
-    "reference": "On a full year basis, Net cash used in investing activities was NT$1,144.39 billion,"
+    "reference": "On a full year basis, Net cash used in investing activities was NT$1,144.39 billion"
   },
   {
     "user_input": "台積電有沒有公布2026年預期資本支出?",
@@ -177,31 +177,139 @@
     "user_input": "聯發科2025年第四季營收",
     "retrieved_contexts": [],
     "response": "",
-    "reference": ""
+    "reference": "聯發科2025年第四季營收是 NT$150,188 百萬元"
   },
   {
     "user_input": "MTK的2025年第四季營收",
     "retrieved_contexts": [],
     "response": "",
-    "reference": ""
+    "reference": "MTK2025年第四季營收是 NT$150,188 百萬元"
+  },
+  {
+    "user_input": "發哥 2025年第三季營收",
+    "retrieved_contexts": [],
+    "response": "",
+    "reference": "聯發科2025年第三季營收是 142,097 百萬元"
+  },
+  {
+    "user_input": "MTK 在2025年第四季的每股盈餘是?",
+    "retrieved_contexts": [],
+    "response": "",
+    "reference": "MTK 2025年第四季基本每股盈餘是 14.39 元"
+  },
+  {
+    "user_input": "在年度合併現金流量表裡，聯發科2025年現金部位變動金額是?",
+    "retrieved_contexts": [],
+    "response": "",
+    "reference": "聯發科2025年本期現金及約當現金增加數是新台幣 31,594 百萬元"
+  },
+  {
+    "user_input": "在年度合併現金流量表裡，聯發科2024年現金部位變動金額是?",
+    "retrieved_contexts": [],
+    "response": "",
+    "reference": "聯發科2024年本期現金及約當現金增加數是新台幣 38,300 百萬元"
+  },
+  {
+    "user_input": "在年度合併現金流量表裡，聯發科在2024年的期末現金餘額?",
+    "retrieved_contexts": [],
+    "response": "",
+    "reference": "聯發科在2024年的期末現金及約當現金餘額是新台幣 203,696 百萬元"
+  },
+  {
+    "user_input": "MTK 在2025年的自由現金流餘額?",
+    "retrieved_contexts": [],
+    "response": "",
+    "reference": "聯發科在2025年的自由現金流餘額是新台幣125,039 百萬元，由營業活動之淨現金流入 162,793 百萬元 加 投資活動之淨現金流出 負 37,754 百萬元，得出"
+  },
+  {
+    "user_input": "2454 在2025年第四季的銷貨成本是?",
+    "retrieved_contexts": [],
+    "response": "",
+    "reference": "2454 的營業成本是 NT$80,907 百萬元"
+  },
+  {
+    "user_input": "MTK 2025年第四季對第三季營收增長比例是?",
+    "retrieved_contexts": [],
+    "response": "",
+    "reference": "聯發科的第四季營業收入QoQ增長比例是5.7%"
+  },
+  {
+    "user_input": "聯發科 2025年第四季淨利率是?",
+    "retrieved_contexts": [],
+    "response": "",
+    "reference": "聯發科的2025年第四季淨利率是 15.36%，由本期淨利 23,074 除以 營業收入 150,188 百萬元計算得出"
+  },
+  {
+    "user_input": "聯發科 2025年全年淨利率是?",
+    "retrieved_contexts": [],
+    "response": "",
+    "reference": "聯發科的2025年全年淨利率是17.8%"
+  },
+  {
+    "user_input": "MTK 2025年全年毛利率是?",
+    "retrieved_contexts": [],
+    "response": "",
+    "reference": "MTK 2025年全年毛利率是 47.5%"
+  },
+  {
+    "user_input": "MTK 2024年全年毛利率是?",
+    "retrieved_contexts": [],
+    "response": "",
+    "reference": "MTK 2024年全年毛利率是 49.6%"
+  },
+  {
+    "user_input": "MTK2025年全年營業淨來源金額是?",
+    "retrieved_contexts": [],
+    "response": "",
+    "reference": "聯發科2025年全年營業活動之淨現金流入是新台幣162,793 百萬元"
+  },
+  {
+    "user_input": "MTK2025年全年投資淨來源金額是?",
+    "retrieved_contexts": [],
+    "response": "",
+    "reference": "聯發科2025年全年投資活動之淨現金流出是新台幣37,754 百萬元"
+  },
+  {
+    "user_input": "聯發科 2025年第四季和第三季的營業費用金額是?",
+    "retrieved_contexts": [],
+    "response": "",
+    "reference": "聯發科 2025年第四季的營業費用金額是新台幣 47,431 百萬元，第三季的營業費用是 43,924 百萬元"
+  },
+  {
+    "user_input": "MTK 2025年第四季和2024年第四季的營業費用",
+    "retrieved_contexts": [],
+    "response": "",
+    "reference": "聯發科 2025年第四季的營業費用金額是新台幣 47,431 百萬元，2024年第四季的營業費用是 45,589 百萬元"
+  },
+  {
+    "user_input": "在合併資產負債表裡，MTK 2025年全年存貨比例佔資產總計是幾%?",
+    "retrieved_contexts": [],
+    "response": "",
+    "reference": "MTK 2025年存貨佔資產總計比例是9.0%"
+  },
+  {
+    "user_input": "在合併資產負債表裡，MTK 2024年全年存貨比例佔資產總計是幾%?",
+    "retrieved_contexts": [],
+    "response": "",
+    "reference": "MTK 2025年存貨佔資產總計比例是8.4%"
   },
   {
     "user_input": "聯發科有沒有公布2026年預期資本支出?",
     "retrieved_contexts": [],
     "response": "",
-    "reference": "無"
+    "reference": "本項無資訊"
   },
   {
     "user_input": "MTK有沒有公布2026年 forwarded PE?",
     "retrieved_contexts": [],
     "response": "",
-    "reference": "無"
+    "reference": "本項無資訊"
   },
   {
     "user_input": "2454對於2026年產業景氣展望是?",
     "retrieved_contexts": [],
     "response": "",
-    "reference": "無"
+    "reference": "本項無資訊"
   }
   
   
