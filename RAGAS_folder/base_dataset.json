@@ -2,312 +2,364 @@
   {
     "user_input": "比較發哥和 GG 2025年第四季營收",
     "retrieved_contexts": [],
+    "retrieved_metadata": [],
     "response": "",
     "reference": ""
   },
   {
     "user_input": "台積電2025年第四季營收",
     "retrieved_contexts": [],
+    "retrieved_metadata": [],
     "response": "",
     "reference": "Net revenue was NT$1,046.09 billion"
   },
   {
     "user_input": "2330 2025年第三季營收",
     "retrieved_contexts": [],
+    "retrieved_metadata": [],
     "response": "",
     "reference": ""
   },
   {
     "user_input": "在季度現金流分析報告裡，TSMC 在2025年第四季的期末現金餘額?",
     "retrieved_contexts": [],
+    "retrieved_metadata": [],
     "response": "",
     "reference": "In end of 4Q2025 and quarterly cash flow analysis, ending cash balance was NT$2,768.86 billion."
   },
   {
     "user_input": "在季度現金流分析報告裡，台積電2025年第四季現金部位變動金額是?",
     "retrieved_contexts": [],
+    "retrieved_metadata": [],
     "response": "",
     "reference": "During the fourth quarter, cash position increased by NTD297.10 billion."
   },
   {
     "user_input": "在季度現金流分析報告裡，台積電2025年第三季期末現金餘額是?",
     "retrieved_contexts": [],
+    "retrieved_metadata": [],
     "response": "",
     "reference": "In end of 3Q2025 and quarterly cash flow analysis, ending cash balance was NT$2,470.76 billion."
   },
   {
     "user_input": "在季度現金流分析報告裡，TSMC 在2024年第四季的期末現金餘額?",
     "retrieved_contexts": [],
+    "retrieved_metadata": [],
     "response": "",
     "reference": "In end of 4Q2024 and quarterly cash flow analysis, ending cash balance was NTD 2,127.63 billions."
   },
   {
     "user_input": "TSMC 在2025年第四季的增加或減少自由現金流餘額?",
     "retrieved_contexts": [],
+    "retrieved_metadata": [],
     "response": "",
     "reference": "Free cash flow increased by NT$229.22 billion in 4Q25"
   },
   {
     "user_input": "3nm 製程收益佔台積電 2025年第四季營收比例是幾%?",
     "retrieved_contexts": [],
+    "retrieved_metadata": [],
     "response": "",
     "reference": "3nm process technology contributed 28% of total wafer revenue in 4Q25 while 5nm and 7nm accounted for 35% and 14% respectively. "
   },
    {
     "user_input": "3nm 製程收益佔台積電 2024年第四季營收比例是幾%?",
     "retrieved_contexts": [],
+    "retrieved_metadata": [],
     "response": "",
     "reference": "3nm process technology contributed 26% of total wafer revenue in 4Q24."
   },
   {
     "user_input": "依照晶圓製程世代，3nm 製程收益佔台積電 2025年全年營收比例是幾%?",
     "retrieved_contexts": [],
+    "retrieved_metadata": [],
     "response": "",
     "reference": "3nm process technology contributed 24% of total wafer revenue in 2025."
   },
   {
     "user_input": "依照晶圓製程世代，3nm 製程收益佔台積電 2024年全年營收比例是幾%?",
     "retrieved_contexts": [],
+    "retrieved_metadata": [],
     "response": "",
     "reference": "3nm process technology contributed 18% of total wafer revenue in 2024."
   },
   {
     "user_input": "TSMC 在2025年第四季的銷貨成本是?",
     "retrieved_contexts": [],
+    "retrieved_metadata": [],
     "response": "",
     "reference": "NTD 394.10 billions"
   },
   {
     "user_input": "GG 2025年第三季營收是?",
     "retrieved_contexts": [],
+    "retrieved_metadata": [],
     "response": "",
     "reference": "Net revenue was NT$989.92 billion in 3Q25."
   },
   {
     "user_input": "GG 2025年第四季對第三季營收增長比例是?",
     "retrieved_contexts": [],
+    "retrieved_metadata": [],
     "response": "",
     "reference": "Net revenue in 4Q25 was 5.4% increased from in 3Q25."
   },
   {
     "user_input": "台積電 2025年第四季和第三季的現金股利金額是?",
     "retrieved_contexts": [],
+    "retrieved_metadata": [],
     "response": "",
     "reference": "Cash dividends in 4Q25 was NT$ 129.66 billions. Cash dividends in 3Q25 was NT$ 116.70 billions."
   },
   {
     "user_input": "台積電 2025年第四季淨利率是?",
     "retrieved_contexts": [],
+    "retrieved_metadata": [],
     "response": "",
     "reference": "Net profit margin in 4Q25 was 48.3%."
   },
   {
     "user_input": "台積電 2025年全年淨利率是?",
     "retrieved_contexts": [],
+    "retrieved_metadata": [],
     "response": "",
     "reference": "Net profit margin in 2025 was 45.1%."
   },
   {
     "user_input": "TSMC 2025年全年毛利率是?",
     "retrieved_contexts": [],
+    "retrieved_metadata": [],
     "response": "",
     "reference": "On a full year basis, gross margin was 59.9% in 2025."
   },
   {
     "user_input": "TSMC 2024年全年毛利率是?",
     "retrieved_contexts": [],
+    "retrieved_metadata": [],
     "response": "",
     "reference": "On a full year basis, gross margin was 56.1% in 2024."
   },
   {
     "user_input": "TSMC 2025年全年營收比例來自 High performance computing是幾%? 如果依照應用領域區分。",
     "retrieved_contexts": [],
+    "retrieved_metadata": [],
     "response": "",
     "reference": "On a full year basis, net revenue from HPC was 58% by platform in 2025."
   },
   {
     "user_input": "TSMC 2024年全年營收比例來自 High performance computing是幾%?",
     "retrieved_contexts": [],
+    "retrieved_metadata": [],
     "response": "",
     "reference": "On a full year basis, net revenue from HPC was 51% by platform in 2024."
   },
   {
     "user_input": "TSMC 依照客戶來源地區分，2025年全年營收比例來自北美地區是幾%?",
     "retrieved_contexts": [],
+    "retrieved_metadata": [],
     "response": "",
     "reference": "In 2025, revenue from customers based in North America accounted for 75% of total net revenue."
   },
   {
     "user_input": "台積電2025年第四季營業淨來源金額是?",
     "retrieved_contexts": [],
+    "retrieved_metadata": [],
     "response": "",
     "reference": "During the fourth quarter, net cash generated from operating activities totaled NT$725.51 billion."
   },
   {
     "user_input": "台積電2025年全年投資淨來源金額是?",
     "retrieved_contexts": [],
+    "retrieved_metadata": [],
     "response": "",
     "reference": "On a full year basis, Net cash used in investing activities was NT$1,144.39 billion"
   },
   {
     "user_input": "台積電有沒有公布2026年預期資本支出?",
     "retrieved_contexts": [],
+    "retrieved_metadata": [],
     "response": "",
     "reference": "無"
   },
   {
     "user_input": "台積電有沒有公布2026年 forwarded PE?",
     "retrieved_contexts": [],
+    "retrieved_metadata": [],
     "response": "",
     "reference": "無"
   },
   {
     "user_input": "台積電對於2026年產業景氣展望是?",
     "retrieved_contexts": [],
+    "retrieved_metadata": [],
     "response": "",
     "reference": "無"
   },
   {
     "user_input": "台積電和聯發科 2025 年第四季的毛利金額?",
     "retrieved_contexts": [],
+    "retrieved_metadata": [],
     "response": "",
     "reference": "TSMC's Gross Profit in 4Q25 was NT$651.99 billion. MTK's Gross Profit in 4Q25 was NT$69,281 million."
   },
   {
     "user_input": "聯發科2025年第四季營收",
     "retrieved_contexts": [],
+    "retrieved_metadata": [],
     "response": "",
     "reference": "聯發科2025年第四季營收是 NT$150,188 百萬元"
   },
   {
     "user_input": "MTK的2025年第四季營收",
     "retrieved_contexts": [],
+    "retrieved_metadata": [],
     "response": "",
     "reference": "MTK2025年第四季營收是 NT$150,188 百萬元"
   },
   {
     "user_input": "發哥 2025年第三季營收",
     "retrieved_contexts": [],
+    "retrieved_metadata": [],
     "response": "",
     "reference": "聯發科2025年第三季營收是 142,097 百萬元"
   },
   {
     "user_input": "MTK 在2025年第四季的每股盈餘是?",
     "retrieved_contexts": [],
+    "retrieved_metadata": [],
     "response": "",
     "reference": "MTK 2025年第四季基本每股盈餘是 14.39 元"
   },
   {
     "user_input": "在年度合併現金流量表裡，聯發科2025年現金部位變動金額是?",
     "retrieved_contexts": [],
+    "retrieved_metadata": [],
     "response": "",
     "reference": "聯發科2025年本期現金及約當現金增加數是新台幣 31,594 百萬元"
   },
   {
     "user_input": "在年度合併現金流量表裡，聯發科2024年現金部位變動金額是?",
     "retrieved_contexts": [],
+    "retrieved_metadata": [],
     "response": "",
     "reference": "聯發科2024年本期現金及約當現金增加數是新台幣 38,300 百萬元"
   },
   {
     "user_input": "在年度合併現金流量表裡，聯發科在2024年的期末現金餘額?",
     "retrieved_contexts": [],
+    "retrieved_metadata": [],
     "response": "",
     "reference": "聯發科在2024年的期末現金及約當現金餘額是新台幣 203,696 百萬元"
   },
   {
     "user_input": "MTK 在2025年的自由現金流餘額?",
     "retrieved_contexts": [],
+    "retrieved_metadata": [],
     "response": "",
     "reference": "聯發科在2025年的自由現金流餘額是新台幣125,039 百萬元，由營業活動之淨現金流入 162,793 百萬元 加 投資活動之淨現金流出 負 37,754 百萬元，得出"
   },
   {
     "user_input": "2454 在2025年第四季的銷貨成本是?",
     "retrieved_contexts": [],
+    "retrieved_metadata": [],
     "response": "",
     "reference": "2454 的營業成本是 NT$80,907 百萬元"
   },
   {
     "user_input": "MTK 2025年第四季對第三季營收增長比例是?",
     "retrieved_contexts": [],
+    "retrieved_metadata": [],
     "response": "",
     "reference": "聯發科的第四季營業收入QoQ增長比例是5.7%"
   },
   {
     "user_input": "聯發科 2025年第四季淨利率是?",
     "retrieved_contexts": [],
+    "retrieved_metadata": [],
     "response": "",
     "reference": "聯發科的2025年第四季淨利率是 15.36%，由本期淨利 23,074 除以 營業收入 150,188 百萬元計算得出"
   },
   {
     "user_input": "聯發科 2025年全年淨利率是?",
     "retrieved_contexts": [],
+    "retrieved_metadata": [],
     "response": "",
     "reference": "聯發科的2025年全年淨利率是17.8%"
   },
   {
     "user_input": "MTK 2025年全年毛利率是?",
     "retrieved_contexts": [],
+    "retrieved_metadata": [],
     "response": "",
     "reference": "MTK 2025年全年毛利率是 47.5%"
   },
   {
     "user_input": "MTK 2024年全年毛利率是?",
     "retrieved_contexts": [],
+    "retrieved_metadata": [],
     "response": "",
     "reference": "MTK 2024年全年毛利率是 49.6%"
   },
   {
     "user_input": "MTK2025年全年營業淨來源金額是?",
     "retrieved_contexts": [],
+    "retrieved_metadata": [],
     "response": "",
     "reference": "聯發科2025年全年營業活動之淨現金流入是新台幣162,793 百萬元"
   },
   {
     "user_input": "MTK2025年全年投資淨來源金額是?",
     "retrieved_contexts": [],
+    "retrieved_metadata": [],
     "response": "",
     "reference": "聯發科2025年全年投資活動之淨現金流出是新台幣37,754 百萬元"
   },
   {
     "user_input": "聯發科 2025年第四季和第三季的營業費用金額是?",
     "retrieved_contexts": [],
+    "retrieved_metadata": [],
     "response": "",
     "reference": "聯發科 2025年第四季的營業費用金額是新台幣 47,431 百萬元，第三季的營業費用是 43,924 百萬元"
   },
   {
     "user_input": "MTK 2025年第四季和2024年第四季的營業費用",
     "retrieved_contexts": [],
+    "retrieved_metadata": [],
     "response": "",
     "reference": "聯發科 2025年第四季的營業費用金額是新台幣 47,431 百萬元，2024年第四季的營業費用是 45,589 百萬元"
   },
   {
     "user_input": "在合併資產負債表裡，MTK 2025年全年存貨比例佔資產總計是幾%?",
     "retrieved_contexts": [],
+    "retrieved_metadata": [],
     "response": "",
     "reference": "MTK 2025年存貨佔資產總計比例是9.0%"
   },
   {
     "user_input": "在合併資產負債表裡，MTK 2024年全年存貨比例佔資產總計是幾%?",
     "retrieved_contexts": [],
+    "retrieved_metadata": [],
     "response": "",
     "reference": "MTK 2025年存貨佔資產總計比例是8.4%"
   },
   {
     "user_input": "聯發科有沒有公布2026年預期資本支出?",
     "retrieved_contexts": [],
+    "retrieved_metadata": [],
     "response": "",
     "reference": "本項無資訊"
   },
   {
     "user_input": "MTK有沒有公布2026年 forwarded PE?",
     "retrieved_contexts": [],
+    "retrieved_metadata": [],
     "response": "",
     "reference": "本項無資訊"
   },
   {
     "user_input": "2454對於2026年產業景氣展望是?",
     "retrieved_contexts": [],
+    "retrieved_metadata": [],
     "response": "",
     "reference": "本項無資訊"
   }
