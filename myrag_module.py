@@ -181,7 +181,7 @@ class FinancialRAGService:
       search_query: str,
       top_k: int = 2,
       where_filter: dict | None = None
-  ) -> list[str]:
+  ) -> tuple[list[str], list[dict]]:
     """執行純向量搜尋(支援選擇性 Metadata Filtering)"""
 
     query_vector = self.embedding_model.encode(
@@ -198,13 +198,30 @@ class FinancialRAGService:
       query_params["where"] = where_filter
 
     results = self.collection.query(**query_params)
-    return results["documents"][0] if results["documents"] else []
+    
+    documents = (
+      results["documents"][0]
+      if results.get("documents")
+      else []
+    )
+
+    metadatas = (
+      results["metadatas"][0]
+      if results.get("metadatas")
+      else []
+    )
+
+    return documents, metadatas
 
 
   def rag_chat(self, user_query: str, top_k: int = 5, where_filter: dict | None = None) -> str:
     """(同步回應版)核心問答流程：問題改寫 -> 向量檢索 -> 增強生成 -> 更新記憶
     第二階段: 檢索與生成"""
-    messages = self._rag_core(user_query, top_k, where_filter)
+    messages, retrieved_contexts, retrieved_metadata = self._rag_core(
+      user_query,
+      top_k,
+      where_filter
+      )
 
     # 生成回答
     response = self.llm_client.chat.completions.create(
@@ -233,6 +250,7 @@ class FinancialRAGService:
     """ RAG 核心流程的共用函式: 問題改寫 -> 向量檢索 -> 增強生成 """
     print(f"\n[系統] 收到使用者提問: {user_query}")
     retrieved_contexts = {}
+    retrieved_metadata = {}
 
     # 透過 Normalizer 自動從句中抓取所有提及的廠商
     extracted_entities = self.normalizer.extract_entities_from_text(user_query)
@@ -273,9 +291,12 @@ class FinancialRAGService:
         db_ticker = self._adapt_ticker_for_db(raw_ticker)
         current_where = {"ticker": db_ticker} if db_ticker else None
 
-        docs = self.retrieve(search_query=sub_query, top_k=top_k, where_filter=current_where)
+        docs, metadatas = self.retrieve(search_query=sub_query, top_k=top_k, where_filter=current_where)
+
         label = raw_ticker if raw_ticker else task.get("company_name", "通用資料")
+
         retrieved_contexts[label] = docs
+        retrieved_metadata[label] = metadatas
     else:
     # 2. 降級到第 2 層，純文字改寫(Rewrite Query)
       print("[管線狀態] 觸發降級機制 -> 執行【第 2 層：純文字語意改寫】")
@@ -286,13 +307,18 @@ class FinancialRAGService:
           ticker = entity["canonical_ticker"]
           db_ticker = self._adapt_ticker_for_db(ticker)
           where_filter = {"ticker": db_ticker}
-          docs = self.retrieve(search_query=refined_query,
+
+          docs, metadatas = self.retrieve(search_query=refined_query,
                               top_k=top_k,
                               where_filter=where_filter)
-          retrieved_contexts[f"{entity['formal_name']} ({ticker})"] = docs
+          
+          label = f"{entity['formal_name']} ({ticker})"
+
+          retrieved_contexts[label] = docs
+          retrieved_metadata[label] = metadatas
       else:
       # 若完全找不到對應股票，才退為全域搜尋
-        docs = self.retrieve(search_query=refined_query,
+        docs, metadatas = self.retrieve(search_query=refined_query,
                             top_k=top_k*2, where_filter=None)
         # TODO: may have a bug here, need to be resolved
 
@@ -326,13 +352,13 @@ class FinancialRAGService:
     # 帶入最近兩輪歷史對話，維持語境連貫
     messages.extend(self.chat_history[-self.max_history_messages:])
     messages.append({"role": "user", "content": user_content})
-    return messages
+    return messages, retrieved_contexts, retrieved_metadata
 
   async def rag_chat_stream(self, user_query: str, top_k: int = 5 , where_filter: dict | None = None) -> AsyncGenerator[str, None] :
     """(串流回應版)核心問答流程：問題改寫 -> 向量檢索 -> 增強生成 -> 更新記憶
         第二階段: 檢索與生成"""
     # 利用 to_thread 將耗時的同步前處理丟到背景執行，釋放 Event Loop
-    messages = await asyncio.to_thread(
+    messages, retrieved_contexts, retrieved_metadata = await asyncio.to_thread(
         self._rag_core, user_query, top_k, where_filter
     )
     response = await self.async_llm_client.chat.completions.create(
