@@ -7,7 +7,6 @@ import pandas as pd
 
 from openai import AsyncOpenAI
 
-from ragas import EvaluationDataset, evaluate
 from ragas.llms import llm_factory
 
 from ragas.metrics.collections import (
@@ -267,6 +266,13 @@ def main():
   raw_data = load_intermediate_dataset()
 
   samples = normalize_samples(raw_data)
+
+  # debug mode. TODO: remove 
+  samples = samples[:3]
+  print(
+    f"DEBUG mode: evaluating only "
+    f"{len(samples)} samples."
+  )
 
   judge_llm = create_judge_llm()
 
