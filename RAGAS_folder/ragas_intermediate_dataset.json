@@ -233,7 +233,7 @@
       }
     ],
     "response": "<think>\n1.  **分析請求：** 使用者要求獲取 TSMC 在 2025 年第四季的期末現金餘額。\n2.  **檢索資料：** 我需要掃描提供的參考資料中關於 2025 年第四季度（4Q25）的現金流或資產負債表數據。\n3.  **定位關鍵數據：**\n    *   在「III - 1. Liquidity Analysis (Balance Sheet Items) (In NT$ billions)」表格中，針對 4Q25 的「Cash & Marketable Securities」是 3,068.59。\n    *   在「VI. Recap of Recent Important Events & Announcements」的最後一組數據中，「Ending Cash Balance」在 4Q25 為 2,767.86。\n4.  **判斷最準確答案：** 「Ending Cash Balance」通常代表期末餘額，因此我將採用此數據作為期末現金餘額的回答。\n5.  **格式化輸出：** 根據指示，如果進行跨公司比較則使用表格，但此處是單一公司的數據提取，直接回答即可。\n</think>\nTSMC 在 2025 年第四季的期末現金餘額為 **NT$2,767.86 billion** (根據「Ending Cash Balance」數據)。",
-    "reference": "In end of 4Q2025 and quarterly cash flow analysis, ending cash balance was NT$2,768.86 billion."
+    "reference": "In end of 4Q2025 and quarterly cash flow analysis, ending cash balance was NT$2,767.86 billion."
   },
   {
     "user_input": "在季度現金流分析報告裡，台積電2025年第四季現金部位變動金額是?",
