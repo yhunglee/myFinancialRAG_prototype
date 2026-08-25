@@ -7,7 +7,11 @@ from sentence_transformers import SentenceTransformer
 import json
 import re
 from entity_normalizer import StockEntityNormalizer
-from typing import AsyncGenerator
+from typing import AsyncGenerator, TypeAlias
+
+RetrievedContexts: TypeAlias = dict[str, list[str]]
+RetrievedMetadata: TypeAlias = dict[str, list[dict]]
+RAGMessages: TypeAlias = list[dict[str, str]]
 
 
 class FinancialRAGService:
@@ -219,7 +223,7 @@ class FinancialRAGService:
       user_query: str,
       top_k: int = 5,
       where_filter: dict | None = None
-    ) -> tuple[str, dict[str, list[str]], dict[str, list[dict]]]:
+    ) -> tuple[str, RetrievedContexts, RetrievedMetadata]:
     """(同步回應版)核心問答流程：問題改寫 -> 向量檢索 -> 增強生成 -> 更新記憶
     第二階段: 檢索與生成"""
     messages, retrieved_contexts, retrieved_metadata = self._rag_core(
@@ -256,7 +260,7 @@ class FinancialRAGService:
       user_query: str,
       top_k: int = 5,
       where_filter: dict | None = None
-    ) -> tuple[list[dict[str, str]], dict[str, list[str]], dict[str, list[dict]]]:
+    ) -> tuple[RAGMessages, RetrievedContexts, RetrievedMetadata]:
     """ RAG 核心流程的共用函式: 問題改寫 -> 向量檢索 -> 增強生成 """
     print(f"\n[系統] 收到使用者提問: {user_query}")
     retrieved_contexts = {}
