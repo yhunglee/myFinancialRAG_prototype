@@ -31,7 +31,7 @@ OUTPUT_REFERENCE = BASE_DIR / "ragas_results_with_reference.csv"
 LM_STUDIO_BASE_URL = "http://127.0.0.1:1234/v1"
 
 # TODO: add model ID
-JUDGE_MODEL = ""
+JUDGE_MODEL = "qwen3.5-9b"
 
 # =======================================
 # Utility
