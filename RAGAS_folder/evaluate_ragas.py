@@ -152,6 +152,15 @@ def create_judge_llm():
     client=instructor_client,
     model=JUDGE_MODEL,
     provider="openai",
+
+    # RAGAS 預設只有 1024，
+    # 增加 Judge structured output 空間
+    max_tokens=4096,
+    # 注意：
+    # Qwen Judge 的 thinking 模式目前由 LM Studio
+    # Developer -> Inference 設定控制。
+    # 必須停用 thinking，否則 RAGAS 的 structured output
+    # 容易因 reasoning 消耗大量 output tokens 而被截斷。
   )
 
   return judge_llm
