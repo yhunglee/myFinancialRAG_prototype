@@ -131,12 +131,17 @@ def evaluate_faithfulness(
 
   dataset = EvaluationDataset.from_list(samples)
 
+  # RAGAS 0.4：
+  # metric 建立時直接指定 Judge LLM
+  faithfulness_metric = Faithfulness(
+    llm=judge_llm
+  )
+
   result = evaluate(
     dataset=dataset,
     metrics=[
-      Faithfulness(),
+      faithfulness_metric,
     ],
-    llm=judge_llm,
 
     # Local LLM 先不要同時使用太多 request
     batch_size=1,
@@ -187,13 +192,21 @@ def evaluate_reference_metrics(
   print("Evaluating reference-based metrics")
   print("====================================")
 
+  # RAGAS 0.4：
+  # metric 建立時直接指定 Judge LLM
+  factual_correct_metric = FactualCorrectness(
+    llm=judge_llm
+  )
+  context_recall_metric = ContextRecall(
+    llm=judge_llm,
+  )
+
   result = evaluate(
     dataset=dataset,
     metrics=[
-      FactualCorrectness(),
-      ContextRecall(),
+      factual_correct_metric,
+      context_recall_metric,
     ],
-    llm=judge_llm,
     batch_size=1,
     raise_exceptions=False,
     show_progress=True,
