@@ -96,22 +96,22 @@ def normalize_samples(data: list[dict]) -> list[dict]:
         item["user_input"],
       )
 
-    sample = {
-      "user_input": item["user_input"],
-      "retrieved_contexts":
-        item["retrieved_contexts"],
+  sample = {
+    "user_input": item["user_input"],
+    "retrieved_contexts":
+      item["retrieved_contexts"],
 
-      "response":
-        cleaned_response,
+    "response":
+      cleaned_response,
 
-      "reference":
-        item.get(
-          "reference",
-          "",
-        ).strip(),
-    }
+    "reference":
+      item.get(
+        "reference",
+        "",
+      ).strip(),
+  }
 
-    samples.append(sample)
+  samples.append(sample)
 
   return samples
 
