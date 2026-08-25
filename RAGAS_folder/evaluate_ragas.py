@@ -95,22 +95,22 @@ def normalize_samples(data: list[dict]) -> list[dict]:
         item["user_input"],
       )
 
-      sample = {
-        "user_input": item["user_input"],
-        "retrieved_contexts":
-          item["retrieved_contexts"],
+    sample = {
+      "user_input": item["user_input"],
+      "retrieved_contexts":
+        item["retrieved_contexts"],
 
-        "response":
-          cleaned_response,
+      "response":
+        cleaned_response,
 
-        "reference":
-          item.get(
-            "reference",
-            "",
-          ).strip(),
-      }
+      "reference":
+        item.get(
+          "reference",
+          "",
+        ).strip(),
+    }
 
-      samples.append(sample)
+    samples.append(sample)
 
   return samples
 
@@ -153,84 +153,169 @@ def evaluate_faithfulness(
     judge_llm,
 ):
 
-  print("\n========================================")
-  print("Evaluating Faithfulness")
-  print("========================================")
+    print("\n========================================")
+    print("Evaluating Faithfulness")
+    print("========================================")
 
-  metric = Faithfulness(
-      llm=judge_llm
-  )
-
-  rows = []
-
-  total = len(samples)
-
-  for index, sample in enumerate(samples, start=1):
-
-    print(
-        f"\n[{index}/{total}] "
-        f"Faithfulness: {sample['user_input']}"
+    metric = Faithfulness(
+        llm=judge_llm
     )
 
-    try:
+    rows = []
 
-      result = metric.score(
-          user_input=sample["user_input"],
-          response=sample["response"],
-          retrieved_contexts=sample["retrieved_contexts"],
-      )
+    total = len(samples)
 
-      print("    result type =", type(result))
-      print("    result      =", result)
-      print("    result.value=", result.value)
+    for index, sample in enumerate(samples, start=1):
 
-      score = float(result.value)
+        print(
+            f"\n[{index}/{total}] "
+            f"Faithfulness: {sample['user_input']}"
+        )
 
-      if math.isnan(score):
-          print("    WARNING: Faithfulness returned NaN")
-          print("    response length =", len(sample["response"]))
-          print(
-              "    retrieved_contexts count =",
-              len(sample["retrieved_contexts"]),
-          )
-          print(
-              "    response preview =",
-              repr(sample["response"][:300]),
-          )
-      else:
-          print(f"    score = {score:.4f}")
+        # 每一筆 sample 都先初始化，
+        # 避免 try 成功時 reason 尚未宣告
+        score = None
+        reason = None
 
-    except Exception as e:
+        try:
+            result = metric.score(
+                user_input=sample["user_input"],
+                response=sample["response"],
+                retrieved_contexts=sample["retrieved_contexts"],
+            )
 
-      print(
-          f"    ERROR: {type(e).__name__}: {e}"
-      )
+            # ----------------------------------------
+            # Debug：觀察 RAGAS 實際回傳內容
+            # ----------------------------------------
+            print(
+                "    result type =",
+                type(result),
+            )
+            print(
+                "    result      =",
+                result,
+            )
+            print(
+                "    result.value=",
+                result.value,
+            )
 
-      score = None
-      reason = str(e)
+            # ----------------------------------------
+            # Score
+            # ----------------------------------------
+            score = float(result.value)
 
-    row = {
-      "user_input": sample["user_input"],
-      "response": sample["response"],
-      "reference": sample.get(
-          "reference",
-          "",
-      ),
-      "faithfulness": score,
-      "faithfulness_reason": reason,
-    }
+            # 某些 metric result 可能有 reason，
+            # 沒有則回傳 None
+            reason = getattr(
+                result,
+                "reason",
+                None,
+            )
 
-    rows.append(row)
+            # ----------------------------------------
+            # NaN 檢查
+            # ----------------------------------------
+            if math.isnan(score):
 
-  df = pd.DataFrame(rows)
+                print(
+                    "    WARNING: "
+                    "Faithfulness returned NaN"
+                )
 
-  df.to_csv(
-      OUTPUT_ALL,
-      index=False,
-      encoding="utf-8-sig",
-  )
+                print(
+                    "    response length =",
+                    len(sample["response"]),
+                )
 
-  return df
+                print(
+                    "    retrieved_contexts count =",
+                    len(
+                        sample["retrieved_contexts"]
+                    ),
+                )
+
+                print(
+                    "    response preview =",
+                    repr(
+                        sample["response"][:300]
+                    ),
+                )
+
+                # 額外檢查 contexts
+                for context_index, context in enumerate(
+                    sample["retrieved_contexts"],
+                    start=1,
+                ):
+
+                    print(
+                        f"    context "
+                        f"{context_index} length =",
+                        len(context),
+                    )
+
+                    print(
+                        f"    context "
+                        f"{context_index} preview =",
+                        repr(context[:200]),
+                    )
+
+            else:
+                print(
+                    f"    score = {score:.4f}"
+                )
+
+        except Exception as e:
+
+            print(
+                f"    ERROR: "
+                f"{type(e).__name__}: {e}"
+            )
+
+            score = None
+            reason = str(e)
+
+        # ----------------------------------------
+        # Save result
+        # ----------------------------------------
+        row = {
+            "user_input":
+                sample["user_input"],
+
+            "response":
+                sample["response"],
+
+            "reference":
+                sample.get(
+                    "reference",
+                    "",
+                ),
+
+            "faithfulness":
+                score,
+
+            "faithfulness_reason":
+                reason,
+        }
+
+        rows.append(row)
+
+    # ----------------------------------------
+    # Convert to DataFrame
+    # ----------------------------------------
+    df = pd.DataFrame(rows)
+
+    # ----------------------------------------
+    # Save CSV
+    # ----------------------------------------
+    df.to_csv(
+        OUTPUT_ALL,
+        index=False,
+        encoding="utf-8-sig",
+    )
+
+    return df
+
 
 # =========================================
 # Evaluation 2
