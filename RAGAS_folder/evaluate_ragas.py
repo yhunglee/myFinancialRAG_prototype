@@ -7,7 +7,8 @@ import pandas as pd
 
 from openai import AsyncOpenAI
 
-from ragas.llms import llm_factory
+import instructor
+from ragas.llms import InstructorLLM
 
 from ragas.metrics.collections import (
   Faithfulness,
@@ -15,7 +16,7 @@ from ragas.metrics.collections import (
   ContextRecall,
 )
 import math
-import instructor
+
 
 
 # ========================================
@@ -129,15 +130,28 @@ def create_judge_llm():
     max_retries=2,
   )
 
-  judge_llm = llm_factory(
-    model=JUDGE_MODEL,
-    client=client,
+  # ----------------------------------------
+  # 2. 用 Instructor 包裝
+  #
+  # 關鍵：
+  # LM Studio 支援 json_schema，
+  # 不接受 json_object。
+  # ----------------------------------------
+  instructor_client = instructor.from_openai(
+    client,
+    mode=instructor.Mode.JSON_SCHEMA,
+  )
 
-    
-    # LM Studio / local OpenAI-compatible backend
-    # 優先讓 Instructor 使用 Markdown JSON，
-    # 避免依賴 OpenAI 原生 response_format。
-    mode=instructor.Mode.MD_JSON,
+  # ----------------------------------------
+  # 3. 建立 RAGAS InstructorLLM
+  #
+  # 不再呼叫 llm_factory()，
+  # 避免 RAGAS 0.4.3 再次使用預設 Mode.JSON
+  # ----------------------------------------
+  judge_llm = InstructorLLM(
+    client=instructor_client,
+    model=JUDGE_MODEL,
+    provider="openai",
   )
 
   return judge_llm
