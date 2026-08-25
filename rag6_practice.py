@@ -16,9 +16,11 @@ if __name__ == "__main__":
   # 模擬多輪回答
   q1 = "台積電 2025 年第四季營收是多少？"
   print(f"User: {q1}")
-  print(f"AI: {rag_service.rag_chat(q1)}\n")
+  msg1, context1, metadata1 = rag_service.rag_chat(q1)
+  print(f"AI: {msg1}\n")
 
   # q2 = "那它的營業利益率是多少?"
   q2 = "台積電和發哥的 2025 年第四季營收是多少?"
+  msg2, context2, metadata2 = rag_service.rag_chat(q2)
   print(f"User: {q2}")
   print(f"AI: {rag_service.rag_chat(q2, top_k=5)}\n")

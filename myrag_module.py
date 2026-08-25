@@ -214,7 +214,12 @@ class FinancialRAGService:
     return documents, metadatas
 
 
-  def rag_chat(self, user_query: str, top_k: int = 5, where_filter: dict | None = None) -> str:
+  def rag_chat(
+      self,
+      user_query: str,
+      top_k: int = 5,
+      where_filter: dict | None = None
+    ) -> tuple[str, dict[str, list[str]], dict[str, list[dict]]]:
     """(同步回應版)核心問答流程：問題改寫 -> 向量檢索 -> 增強生成 -> 更新記憶
     第二階段: 檢索與生成"""
     messages, retrieved_contexts, retrieved_metadata = self._rag_core(
@@ -233,7 +238,7 @@ class FinancialRAGService:
 
     self._update_message_history(user_query, answer)
 
-    return answer
+    return answer, retrieved_contexts, retrieved_metadata
 
   def _update_message_history(self, user_query, answer):
     """更新記憶體裡的對話歷史"""
@@ -246,7 +251,12 @@ class FinancialRAGService:
     if len(self.chat_history) > self.max_history_messages:
       self.chat_history = self.chat_history[-self.max_history_messages:]
 
-  def _rag_core(self, user_query: str, top_k: int = 5, where_filter: dict | None = None) -> str:
+  def _rag_core(
+      self,
+      user_query: str,
+      top_k: int = 5,
+      where_filter: dict | None = None
+    ) -> tuple[list[dict[str, str]], dict[str, list[str]], dict[str, list[dict]]]:
     """ RAG 核心流程的共用函式: 問題改寫 -> 向量檢索 -> 增強生成 """
     print(f"\n[系統] 收到使用者提問: {user_query}")
     retrieved_contexts = {}
