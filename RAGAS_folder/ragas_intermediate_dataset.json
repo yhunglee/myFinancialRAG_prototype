@@ -15,78 +15,78 @@
     ],
     "retrieved_metadata": [
       {
-        "year": 2025,
         "chunk_index": 4,
-        "quarter": "Q4",
-        "ticker": "2454",
-        "market": "TW"
-      },
-      {
+        "year": 2025,
         "quarter": "Q4",
         "market": "TW",
-        "chunk_index": 0,
-        "ticker": "2454",
-        "year": 2025
-      },
-      {
-        "year": 2025,
-        "chunk_index": 7,
-        "quarter": "Q4",
-        "ticker": "2454",
-        "market": "TW"
-      },
-      {
-        "year": 2025,
-        "market": "TW",
-        "quarter": "Q4",
-        "ticker": "2454",
-        "chunk_index": 12
-      },
-      {
-        "market": "TW",
-        "quarter": "Q4",
-        "chunk_index": 5,
-        "year": 2025,
         "ticker": "2454"
       },
       {
-        "ticker": "2330",
-        "year": 2025,
         "quarter": "Q4",
-        "chunk_index": 29,
-        "market": "TW"
+        "market": "TW",
+        "ticker": "2454",
+        "year": 2025,
+        "chunk_index": 0
+      },
+      {
+        "chunk_index": 7,
+        "market": "TW",
+        "year": 2025,
+        "ticker": "2454",
+        "quarter": "Q4"
+      },
+      {
+        "year": 2025,
+        "market": "TW",
+        "chunk_index": 12,
+        "quarter": "Q4",
+        "ticker": "2454"
+      },
+      {
+        "year": 2025,
+        "ticker": "2454",
+        "quarter": "Q4",
+        "market": "TW",
+        "chunk_index": 5
       },
       {
         "ticker": "2330",
+        "year": 2025,
+        "chunk_index": 29,
+        "market": "TW",
+        "quarter": "Q4"
+      },
+      {
+        "chunk_index": 9,
+        "ticker": "2330",
+        "year": 2025,
+        "quarter": "Q4",
+        "market": "TW"
+      },
+      {
         "quarter": "Q4",
         "market": "TW",
-        "chunk_index": 9,
+        "chunk_index": 34,
+        "ticker": "2330",
         "year": 2025
       },
       {
         "year": 2025,
-        "quarter": "Q4",
+        "chunk_index": 23,
         "market": "TW",
         "ticker": "2330",
-        "chunk_index": 34
+        "quarter": "Q4"
       },
       {
+        "market": "TW",
         "quarter": "Q4",
-        "chunk_index": 23,
         "year": 2025,
-        "ticker": "2330",
-        "market": "TW"
-      },
-      {
-        "quarter": "Q4",
         "chunk_index": 62,
-        "ticker": "2330",
-        "year": 2025,
-        "market": "TW"
+        "ticker": "2330"
       }
     ],
-    "response": "<think>\n1.  **分析請求：** 使用者要求比較「發哥」（聯發科，2454.TW）和「GG」（台積電，2330.TW）在 2025 年第四季的營收。\n2.  **檢索資料 (聯發科 2454.TW)：** 在參考資料中找到了聯發科 2025 年第四季的淨銷售額（Net Sales）。\n    *   4Q 2025 Net Sales: 150,188 百萬新台幣。\n3.  **檢索資料 (台積電 2330.TW)：** 在參考資料中，雖然提到了台積電的營運指標（如毛利率、營業利益率等），但沒有提供 2025 年第四季的總營收數據。\n4.  **比較與結論：** 由於參考資料中僅提供了聯發科的相關營收數據，而未提供台積電的對應數據，因此無法進行兩者的直接營收比較。\n5.  **輸出格式要求：** 若資料未提及，請直接回答[財報未揭露]。\n</think>\n根據您提供的參考資料，我只能提取到聯發科（2454.TW）在 2025 年第四季的營收數據。關於台積電（2330.TW）的 2025 年第四季營收數據未在參考資料中揭露。\n\n以下為已找到的聯發科 2025 年第四季營收資訊：\n\n| 公司代號 | 期間 | 項目 | 金額 (百萬新台幣) |\n| :--- | :--- | :--- | :--- |\n| 2454.TW (聯發科) | 4Q 2025 | Net Sales (淨銷售額) | 150,188 |\n\n**關於兩者營收的直接比較：**\n由於參考資料中未揭露台積電（GG）在 2025 年第四季的營收數據，因此無法提供發哥和 GG 2025 年第四季營收的直接對比。",
-    "reference": ""
+    "response": "<think>\n1.  **分析請求：** 使用者要求比較「發哥」（聯發科，2454.TW）和「GG」（台積電，2330.TW）在 2025 年第四季（4Q 2025）的營收。\n2.  **檢索資料：** 我需要檢查提供的參考資料中是否存在這兩家公司 2025 年第四季的營收數據。\n    *   **針對 2454.TW (聯發科)：** 在「CONSOLIDATED STATEMENTS OF COMPREHENSIVE INCOME For the Fourth quarter of year 2025」部分，我找到了 4Q 2025 的 Net Sales（淨銷售額）：150,188 百萬新台幣。\n    *   **針對 2330.TW (台積電)：** 在「Revenue Analysis」部分，我找到了 4Q25 的數據，但該部分是關於 Wafer Revenue by Technology 等細項，並沒有直接提供總體營收（Net Sales）的數字。\n3.  **執行比較：** 由於參考資料中僅提供了聯發科的 4Q 2025 營收，而台積電的相關營收數據未在提供的文本中揭露，因此無法進行完整的兩公司營收比較。\n4.  **輸出決策：** 嚴格遵守指令：「若資料未提及，請直接回答[財報未揭露]，嚴禁自行捏造數據。」因此，我將根據現有資訊進行呈現。\n</think>\n根據您提供的參考資料，我僅能找到聯發科（2454.TW）的 2025 年第四季營收數據。關於台積電（2330.TW）的 2025 年第四季營收數據未在參考資料中揭露。\n\n以下為可獲取的數據整理：\n\n| 公司代號 | 期間 | 項目 | 金額 (百萬新台幣) | 資料來源 |\n| :--- | :--- | :--- | :--- | :--- |\n| 2454.TW (聯發科) | 4Q 2025 | Net Sales (淨銷售額) | 150,188 | 參考資料區塊 |\n| 2330.TW (台積電) | 4Q 2025 | 營收數據 | [財報未揭露] | 參考資料未提及 |",
+    "reference": "MTK2025年第四季營收是 NT$150,188 百萬元, TSMC2025年第四季營收是 NT$1,046.09 billion"
   },
   {
     "user_input": "台積電2025年第四季營收",
@@ -99,42 +99,42 @@
     ],
     "retrieved_metadata": [
       {
-        "chunk_index": 29,
-        "market": "TW",
         "ticker": "2330",
         "quarter": "Q4",
-        "year": 2025
+        "year": 2025,
+        "market": "TW",
+        "chunk_index": 29
       },
       {
+        "quarter": "Q4",
+        "year": 2025,
         "chunk_index": 9,
         "market": "TW",
-        "year": 2025,
-        "ticker": "2330",
-        "quarter": "Q4"
+        "ticker": "2330"
       },
       {
         "market": "TW",
-        "ticker": "2330",
         "quarter": "Q4",
+        "ticker": "2330",
         "year": 2025,
         "chunk_index": 25
       },
       {
-        "market": "TW",
+        "chunk_index": 62,
         "quarter": "Q4",
-        "year": 2025,
         "ticker": "2330",
-        "chunk_index": 62
+        "year": 2025,
+        "market": "TW"
       },
       {
-        "ticker": "2330",
         "chunk_index": 37,
+        "ticker": "2330",
+        "year": 2025,
         "market": "TW",
-        "quarter": "Q4",
-        "year": 2025
+        "quarter": "Q4"
       }
     ],
-    "response": "<think>\n1.  **分析請求：** 使用者要求獲取「台積電2025年第四季營收」。\n2.  **檢索資料：** 檢查提供的參考資料中是否有直接提及該數據。\n3.  **定位數據：** 在「I. Revenue Analysis」部分，我找到一個表格，其中包含「Net Revenue」的數據按季度劃分：\n\n| Wafer Revenue by Technology | 4Q25 | 3Q25 | 4Q24 | 2025 | 2024 |\n| :--- | :--- | :--- | :--- | :--- | :--- |\n| Net Revenue | 1,046.09 | 989.92 | 868.46 | 3,809.05 | 2,894.31 |\n\n4.  **提取結果：** 對應「4Q25」的「Net Revenue」是 1,046.09 (單位為 NT$ billions)。\n5.  **結論：** 根據參考資料，台積電2025年第四季的淨營收數據為 1,046.09 億新台幣。\n</think>\n台積電2025年第四季的淨營收（Net Revenue）為 **1,046.09 億新台幣** (NT$ billions)。\n\n*資料來源：參考資料區塊中「I. Revenue Analysis」表格。*",
+    "response": "<think>\n1.  **分析請求：** 使用者要求獲取「台積電2025年第四季營收」。\n2.  **檢索資料：** 掃描參考資料區塊，尋找與收入（Revenue）相關的數據。\n3.  **定位數據：** 在「I. Revenue Analysis」部分，我找到一個表格，其中包含「Net Revenue」（淨營收）的數據，並按季度標註了時間點。\n4.  **精確匹配：** 查找對應「4Q25」（即2025年第四季）的「Net Revenue」。\n    *   在該表格中，`Net Revenue` 對應 `4Q25` 的數值是 `1,046.09` (單位為 NT$ billions)。\n5.  **結論：** 根據提供的參考資料，台積電2025年第四季的淨營收為 1,046.09 億新台幣。\n6.  **格式化輸出：** 按照指示使用 Markdown 表格呈現結果。\n</think>\n\n| 指標 | 數值 (NT$ billions) | 資料來源 |\n| :--- | :--- | :--- |\n| 台積電 2025年第四季淨營收 (Net Revenue for 4Q25) | 1,046.09 | 參考資料區塊 (I. Revenue Analysis) |",
     "reference": "Net revenue was NT$1,046.09 billion"
   },
   {
@@ -148,43 +148,43 @@
     ],
     "retrieved_metadata": [
       {
-        "quarter": "Q4",
+        "market": "TW",
+        "ticker": "2330",
         "year": 2025,
-        "market": "TW",
-        "ticker": "2330",
-        "chunk_index": 29
-      },
-      {
-        "chunk_index": 62,
-        "quarter": "Q4",
-        "market": "TW",
-        "ticker": "2330",
-        "year": 2025
-      },
-      {
-        "year": 2025,
-        "market": "TW",
-        "ticker": "2330",
-        "quarter": "Q4",
-        "chunk_index": 25
-      },
-      {
-        "ticker": "2330",
-        "market": "TW",
-        "year": 2025,
-        "chunk_index": 9,
+        "chunk_index": 29,
         "quarter": "Q4"
       },
       {
-        "chunk_index": 37,
+        "ticker": "2330",
+        "quarter": "Q4",
+        "chunk_index": 62,
+        "market": "TW",
+        "year": 2025
+      },
+      {
+        "market": "TW",
+        "ticker": "2330",
+        "chunk_index": 25,
         "year": 2025,
+        "quarter": "Q4"
+      },
+      {
+        "year": 2025,
+        "chunk_index": 9,
         "quarter": "Q4",
         "ticker": "2330",
         "market": "TW"
+      },
+      {
+        "year": 2025,
+        "quarter": "Q4",
+        "market": "TW",
+        "chunk_index": 37,
+        "ticker": "2330"
       }
     ],
-    "response": "<think>\n1.  **分析請求：** 使用者要求查詢台積電 (2330.TW) 在 2025 年第三季的營收。\n2.  **檢索資料：** 我檢查了提供的參考資料中的「Revenue Analysis」表格。\n3.  **定位數據：** 表格中包含以下數據：\n    | (In NT$ billions) | 4Q25 | 3Q25 | 4Q24 | 2025 | 2024 |\n    | Net Revenue | 1,046.09 | 989.92 | 868.46 | 3,809.05 | 2,894.31 |\n4.  **對應結果：** 「3Q25」對應的「Net Revenue」即為 989.92 億新台幣。\n5.  **輸出生成：** 直接提供查找到的數據。\n</think>\n2025年第三季的營收（Net Revenue）為 **NT$989.92 億** (根據參考資料中的 3Q25 數據)。",
-    "reference": ""
+    "response": "<think>\n1.  **分析請求：** 使用者要求查詢台積電（2330.TW）的2025年第三季營收。\n2.  **檢索資料：** 檢查提供的參考資料中的表格數據。\n3.  **定位數據：** 參考資料中包含一個「Net Revenue」的比較表，時間軸包括 4Q25, 3Q25, 4Q24, 2025, 2024。\n4.  **對應結果：** 查找「3Q25」（2025年第三季）對應的 Net Revenue 數據。\n5.  **提取數值：** 3Q25 的 Net Revenue 為 989.92 (In NT$ billions)。\n6.  **輸出格式：** 直接提供提取的數據。\n</think>\n2330 2025年第三季營收為 **NT$989.92億**（根據參考資料中的 Net Revenue 數據）。",
+    "reference": "Net revenue was NT$989.92 billion in 3Q25."
   },
   {
     "user_input": "在季度現金流分析報告裡，TSMC 在2025年第四季的期末現金餘額?",
@@ -204,35 +204,35 @@
         "market": "TW"
       },
       {
-        "chunk_index": 44,
+        "market": "TW",
         "year": 2025,
         "quarter": "Q4",
         "ticker": "2330",
-        "market": "TW"
+        "chunk_index": 44
       },
       {
-        "year": 2025,
-        "ticker": "2330",
-        "market": "TW",
         "chunk_index": 60,
+        "ticker": "2330",
+        "year": 2025,
+        "market": "TW",
         "quarter": "Q4"
       },
       {
         "year": 2025,
+        "quarter": "Q4",
         "ticker": "2330",
         "market": "TW",
-        "quarter": "Q4",
         "chunk_index": 62
       },
       {
-        "year": 2025,
         "ticker": "2330",
-        "market": "TW",
+        "quarter": "Q4",
         "chunk_index": 56,
-        "quarter": "Q4"
+        "year": 2025,
+        "market": "TW"
       }
     ],
-    "response": "<think>\n1.  **分析請求：** 使用者要求獲取 TSMC 在 2025 年第四季的期末現金餘額。\n2.  **檢索資料：** 我需要掃描提供的參考資料中關於 2025 年第四季度（4Q25）的現金流或資產負債表數據。\n3.  **定位關鍵數據：**\n    *   在「III - 1. Liquidity Analysis (Balance Sheet Items) (In NT$ billions)」表格中，針對 4Q25 的「Cash & Marketable Securities」是 3,068.59。\n    *   在「VI. Recap of Recent Important Events & Announcements」的最後一組數據中，「Ending Cash Balance」在 4Q25 為 2,767.86。\n4.  **判斷最準確答案：** 「Ending Cash Balance」通常代表期末餘額，因此我將採用此數據作為期末現金餘額的回答。\n5.  **格式化輸出：** 根據指示，如果進行跨公司比較則使用表格，但此處是單一公司的數據提取，直接回答即可。\n</think>\nTSMC 在 2025 年第四季的期末現金餘額為 **NT$2,767.86 billion** (根據「Ending Cash Balance」數據)。",
+    "response": "<think>\n1.  **分析請求：** 使用者要求獲取TSMC在2025年第四季的期末現金餘額，並指定來源為「季度現金流分析報告」。\n2.  **檢索資料：** 我需要掃描提供的參考資料中所有與TSMC (2330.TW) 的財務數據。\n3.  **定位關鍵信息：** 仔細檢查「III - 1. Liquidity Analysis (Balance Sheet Items) (In NT$ billions)」表格，該表格提供了不同季度的資產負債表項目數據。\n4.  **提取數據：** 在該表格中，針對「Cash & Marketable Securities」（現金及可動性證券），2025年第四季（4Q25）的數值為 3,068.59。\n5.  **確認上下文：** 雖然資料中還有其他現金相關數據（如2025年底的總現金餘額 NT$2,767.86 billion），但根據問題要求「季度現金流分析報告」中的期末餘額，我選擇表格中直接對應4Q25的資產項目。\n6.  **格式化輸出：** 數據已找到，將以清晰的方式呈現。\n</think>\n在提供的參考資料中，TSMC在2025年第四季（4Q25）的期末現金餘額相關數據如下表所示（單位為新台幣十億元）：\n\n| 項目 | 金額 (NT$ billions) | 資料來源 |\n| :--- | :--- | :--- |\n| Cash & Marketable Securities (現金及可動性證券) | 3,068.59 | 參考資料區塊 |",
     "reference": "In end of 4Q2025 and quarterly cash flow analysis, ending cash balance was NT$2,767.86 billion."
   },
   {
@@ -247,41 +247,41 @@
     "retrieved_metadata": [
       {
         "quarter": "Q4",
-        "chunk_index": 53,
-        "year": 2025,
+        "market": "TW",
         "ticker": "2330",
+        "chunk_index": 53,
+        "year": 2025
+      },
+      {
+        "year": 2025,
+        "market": "TW",
+        "chunk_index": 61,
+        "quarter": "Q4",
+        "ticker": "2330"
+      },
+      {
+        "quarter": "Q4",
+        "ticker": "2330",
+        "chunk_index": 50,
+        "year": 2025,
         "market": "TW"
       },
       {
-        "chunk_index": 61,
-        "market": "TW",
-        "year": 2025,
+        "chunk_index": 56,
         "ticker": "2330",
-        "quarter": "Q4"
-      },
-      {
-        "market": "TW",
-        "chunk_index": 50,
         "quarter": "Q4",
-        "ticker": "2330",
+        "market": "TW",
         "year": 2025
       },
       {
-        "year": 2025,
+        "quarter": "Q4",
         "ticker": "2330",
         "market": "TW",
-        "quarter": "Q4",
-        "chunk_index": 56
-      },
-      {
-        "ticker": "2330",
-        "quarter": "Q4",
         "chunk_index": 60,
-        "market": "TW",
         "year": 2025
       }
     ],
-    "response": "<think>\n1.  **目標確認：** 使用者要求獲取「台積電2025年第四季現金部位變動金額」。\n2.  **資料檢索：** 仔細檢查提供的參考資料中的「IV - 1. Quarterly Cash Flow Analysis (In NT$ billions)」表格。\n3.  **定位欄位：** 尋找與「現金部位變動」相關的指標，即「Cash Position Net Changes」。\n4.  **定位時間點：** 查找 4Q25 的數據。\n5.  **提取數據：** 在該表格中，對應 4Q25 的「Cash Position Net Changes」為 $640.23$ (單位是 NT$ billions)。\n6.  **輸出生成：** 根據檢索到的信息回答問題。\n</think>\n在季度現金流分析報告中，台積電2025年第四季的現金部位變動金額是 **NT$640.23 billion** (基於參考資料中的「Cash Position Net Changes」數據)。",
+    "response": "<think>\n1.  **分析問題：** 使用者要求獲取台積電（2330.TW）在 2025 年第四季的「現金部位變動金額」。\n2.  **檢索參考資料：** 我需要檢查提供的「參考資料區塊」中關於季度現金流分析的表格。\n3.  **定位數據：** 在「IV - 1. Quarterly Cash Flow Analysis (In NT$ billions)」表格中，我尋找與現金部位變動相關的指標。該表格包含一列名「Cash Position Net Changes」（現金部位淨變動）。\n4.  **提取特定數據：** 查看 4Q25 的數據行：「Cash Position Net Changes」對應到「4Q25」的數值是 $640.23$。\n5.  **確定單位和上下文：** 該數值是以 NT$ billions 為單位。\n6.  **結論：** 台積電 2025 年第四季的現金部位變動金額為 NT$640.23 billion。\n</think>\n在季度現金流分析報告中，台積電 2025 年第四季的現金部位變動金額是 **NT$640.23 billion** (基於參考資料中的「Cash Position Net Changes」數據)。",
     "reference": "During the fourth quarter, cash position increased by NTD297.10 billion."
   },
   {
@@ -296,41 +296,41 @@
     "retrieved_metadata": [
       {
         "ticker": "2330",
+        "quarter": "Q4",
+        "market": "TW",
         "chunk_index": 25,
-        "year": 2025,
-        "market": "TW",
-        "quarter": "Q4"
+        "year": 2025
       },
       {
-        "quarter": "Q4",
         "chunk_index": 62,
-        "year": 2025,
-        "market": "TW",
-        "ticker": "2330"
-      },
-      {
-        "quarter": "Q4",
-        "chunk_index": 29,
-        "year": 2025,
-        "market": "TW",
-        "ticker": "2330"
-      },
-      {
-        "quarter": "Q4",
         "ticker": "2330",
         "year": 2025,
-        "chunk_index": 37,
+        "quarter": "Q4",
         "market": "TW"
       },
       {
-        "year": 2025,
+        "chunk_index": 29,
+        "market": "TW",
         "ticker": "2330",
         "quarter": "Q4",
+        "year": 2025
+      },
+      {
+        "quarter": "Q4",
+        "ticker": "2330",
+        "chunk_index": 37,
         "market": "TW",
-        "chunk_index": 50
+        "year": 2025
+      },
+      {
+        "quarter": "Q4",
+        "year": 2025,
+        "market": "TW",
+        "chunk_index": 50,
+        "ticker": "2330"
       }
     ],
-    "response": "<think>\n1.  **分析使用者要求：** 使用者要求獲取「台積電2025年第三季期末現金餘額」。\n2.  **檢索參考資料：** 我仔細檢查提供的參考資料區塊。該資料包含關於收入、費用、稅項以及部分現金流項目的數據（如4Q25, 3Q25等）。\n3.  **比對結果：** 參考資料中沒有提供任何關於「季度現金流分析報告」中的「期末現金餘額」的具體數字。\n4.  **結論：** 由於參考資料中未揭露所需資訊，我必須按照指示回答[財報未揭露]。\n</think>\n[財報未揭露]",
+    "response": "<think>\n1.  **分析使用者要求：** 使用者要求獲取「在季度現金流分析報告裡，台積電2025年第三季期末現金餘額」。\n2.  **檢索參考資料：** 我檢查了提供的參考資料區塊。該資料包含公司財務數據（如收入、費用、稅前收入、折舊攤銷等）以及季度現金流分析的摘要，但沒有提供總體「期末現金餘額」的數據。\n3.  **判斷結果：** 參考資料中未揭露所需的特定現金餘額資訊。\n4.  **生成回答：** 根據指示，如果資料未提及，應直接回答[財報未揭露]。\n</think>\n[財報未揭露]",
     "reference": "In end of 3Q2025 and quarterly cash flow analysis, ending cash balance was NT$2,470.76 billion."
   },
   {
@@ -344,42 +344,42 @@
     ],
     "retrieved_metadata": [
       {
-        "market": "TW",
-        "ticker": "2330",
         "year": 2025,
-        "chunk_index": 44,
-        "quarter": "Q4"
-      },
-      {
-        "ticker": "2330",
-        "year": 2025,
-        "chunk_index": 60,
-        "market": "TW",
-        "quarter": "Q4"
-      },
-      {
-        "chunk_index": 50,
-        "year": 2025,
-        "ticker": "2330",
         "quarter": "Q4",
+        "chunk_index": 44,
+        "ticker": "2330",
         "market": "TW"
       },
       {
-        "chunk_index": 53,
-        "market": "TW",
         "quarter": "Q4",
+        "chunk_index": 60,
         "year": 2025,
+        "market": "TW",
         "ticker": "2330"
       },
       {
-        "chunk_index": 61,
         "market": "TW",
-        "ticker": "2330",
         "quarter": "Q4",
+        "year": 2025,
+        "chunk_index": 50,
+        "ticker": "2330"
+      },
+      {
+        "ticker": "2330",
+        "chunk_index": 53,
+        "quarter": "Q4",
+        "market": "TW",
         "year": 2025
+      },
+      {
+        "chunk_index": 61,
+        "quarter": "Q4",
+        "ticker": "2330",
+        "year": 2025,
+        "market": "TW"
       }
     ],
-    "response": "<think>\n1.  **分析請求：** 使用者要求獲取TSMC在2024年第四季（4Q24）的期末現金餘額，並指出數據來源於「季度現金流分析報告」。\n2.  **檢索資料：** 檢查提供的參考資料區塊。\n3.  **定位數據：** 在「IV - 1. Quarterly Cash Flow Analysis (In NT$ billions)」表格中查找4Q24的結餘數據。\n    *   該表格的最後一行是「Ending Cash Balance」。\n    *   對應的數據為：4Q24 的 Ending Cash Balance 是 2,127.63。\n4.  **確認結果：** 數據已找到，單位為 NT$ billions。\n5.  **輸出生成：** 直接根據檢索到的信息回答問題。\n</think>\nTSMC 在2024年第四季的期末現金餘額為 **NT$2,127.63 billion** (依據參考資料中「Ending Cash Balance」欄位)。\n\n**資料來源：** 參考資料區塊中「IV - 1. Quarterly Cash Flow Analysis (In NT$ billions)」表格。",
+    "response": "<think>\n1.  **分析請求：** 使用者要求查詢TSMC在2024年第四季（4Q24）的期末現金餘額，特別是來自「季度現金流分析報告」。\n2.  **檢索資料：** 我需要檢查提供的參考資料中是否有關於季度現金流分析的數據。\n3.  **定位相關數據：** 在參考資料中，「IV - 1. Quarterly Cash Flow Analysis」部分包含一個名為「Ending Cash Balance」（期末現金餘額）的行，該表格提供了不同季度的結餘。\n4.  **提取特定數據：** 我查找 `4Q24` 對應的 `Ending Cash Balance`。\n    *   在該表格中：\n        *   4Q25 的 Ending Cash Balance 是 2,767.86 (NT$ billions)。\n        *   3Q25 的 Ending Cash Balance 是 2,470.76 (NT$ billions)。\n        *   **4Q24 的 Ending Cash Balance 是 2,127.63 (NT$ billions)。**\n5.  **結論：** 根據參考資料，TSMC在2024年第四季的期末現金餘額是 NT$2,127.63 十億。\n6.  **輸出格式化：** 按照要求，我將以清晰的文字形式回答。\n</think>\n在季度現金流分析報告中，TSMC 在2024年第四季（4Q24）的期末現金餘額為 **NT$2,127.63 十億** (基於「Ending Cash Balance」數據)。\n\n| 季度 | 期末現金餘額 (NT$ billions) | 資料來源 |\n| :--- | :-------------------------- | :------- |\n| 4Q24 | 2,127.63                    | IV - 1. Quarterly Cash Flow Analysis |",
     "reference": "In end of 4Q2024 and quarterly cash flow analysis, ending cash balance was NTD 2,127.63 billions."
   },
   {
@@ -394,41 +394,41 @@
     "retrieved_metadata": [
       {
         "quarter": "Q4",
-        "ticker": "2330",
-        "year": 2025,
         "chunk_index": 61,
+        "year": 2025,
+        "ticker": "2330",
         "market": "TW"
       },
       {
-        "year": 2025,
+        "ticker": "2330",
         "quarter": "Q4",
-        "market": "TW",
+        "year": 2025,
         "chunk_index": 60,
-        "ticker": "2330"
+        "market": "TW"
       },
       {
         "chunk_index": 62,
-        "ticker": "2330",
-        "year": 2025,
         "market": "TW",
+        "quarter": "Q4",
+        "ticker": "2330",
+        "year": 2025
+      },
+      {
+        "ticker": "2330",
+        "market": "TW",
+        "year": 2025,
+        "chunk_index": 50,
         "quarter": "Q4"
       },
       {
-        "chunk_index": 50,
+        "year": 2025,
         "market": "TW",
         "quarter": "Q4",
-        "year": 2025,
+        "chunk_index": 53,
         "ticker": "2330"
-      },
-      {
-        "year": 2025,
-        "quarter": "Q4",
-        "market": "TW",
-        "ticker": "2330",
-        "chunk_index": 53
       }
     ],
-    "response": "<think>\n1.  **分析請求：** 使用者要求查詢台積電 (TSMC) 在 2025 年第四季的自由現金流（增加或減少）。\n2.  **檢索資料：** 我需要檢查提供的參考資料中是否有關於 2025 年第四季自由現金流的數據。\n3.  **定位關鍵信息：** 在「Operating and Free Cash Flow」部分，資料明確指出：「Free cash flow increased by NT$229.22 billion to an inflow of NT$368.60 billion in 4Q25, mainly as the increase in operating cash flow outpaced the increase in capital expenditures.」\n4.  **確認數據：** 該敘述提供了 2025 年第四季的自由現金流是增加的，具體增長額為 NT$368.60 億。\n5.  **形成答案：** 根據檢索到的資訊，直接回答問題。\n</think>\nTSMC 在 2025 年第四季的自由現金流是**增加**的，增加了 **NT$368.60 億**（為流入）。\n\n資料來源：參考資料區塊中「Operating and Free Cash Flow」部分。",
+    "response": "<think>\n1.  **分析請求：** 使用者要求查詢 TSMC 在 2025 年第四季的自由現金流（增加或減少）。\n2.  **檢索資料：** 我需要檢查提供的參考資料中是否有關於 2025 年第四季 (4Q25) 的自由現金流數據。\n3.  **定位關鍵信息：** 在「Operating and Free Cash Flow」部分，資料明確指出：「Free cash flow increased by NT$229.22 billion to an inflow of NT$368.60 billion in 4Q25, mainly as the increase in operating cash flow outpaced the increase in capital expenditures.」\n4.  **總結答案：** 根據資料，TSMC 在 2025 年第四季實現了自由現金流的流入。\n5.  **格式化輸出：** 直接以清晰的語言回答。\n</think>\nTSMC 在 2025 年第四季（4Q25）的自由現金流是 **NT$368.60 billion 的流入**。\n\n資料指出，這主要是因為營運現金流的增加超過了資本支出的增加。",
     "reference": "Free cash flow increased by NT$229.22 billion in 4Q25"
   },
   {
@@ -442,42 +442,42 @@
     ],
     "retrieved_metadata": [
       {
-        "ticker": "2330",
-        "quarter": "Q4",
-        "market": "TW",
+        "year": 2025,
         "chunk_index": 20,
-        "year": 2025
-      },
-      {
-        "ticker": "2330",
-        "chunk_index": 22,
-        "quarter": "Q4",
         "market": "TW",
+        "quarter": "Q4",
+        "ticker": "2330"
+      },
+      {
+        "chunk_index": 22,
+        "ticker": "2330",
+        "market": "TW",
+        "quarter": "Q4",
         "year": 2025
       },
       {
-        "quarter": "Q4",
         "year": 2025,
-        "chunk_index": 16,
+        "market": "TW",
+        "quarter": "Q4",
         "ticker": "2330",
-        "market": "TW"
+        "chunk_index": 16
       },
       {
+        "quarter": "Q4",
+        "ticker": "2330",
+        "year": 2025,
         "chunk_index": 9,
-        "year": 2025,
-        "ticker": "2330",
-        "quarter": "Q4",
         "market": "TW"
       },
       {
-        "ticker": "2330",
-        "chunk_index": 29,
-        "year": 2025,
         "quarter": "Q4",
-        "market": "TW"
+        "year": 2025,
+        "market": "TW",
+        "chunk_index": 29,
+        "ticker": "2330"
       }
     ],
-    "response": "<think>\n1. **分析問題：** 使用者要求知道「3nm 製程收益佔台積電 2025年第四季營收比例」是多少。\n2. **檢索資料：** 我需要檢查提供的參考資料中是否有關於2025年第四季（4Q25）的技術細分收入數據。\n3. **定位信息：** 在【公司代號：2330.TW】下的「nue Analysis」部分，我找到以下相關敘述：\n    *   \"By technology, 3nm process technology contributed 28% of total wafer revenue in 4Q25 while 5nm and 7nm accounted for 35% and 14% respectively.\"\n4. **提取答案：** 根據上述信息，3nm製程技術在2025年第四季（4Q25）的總晶圓收入中佔了28%。\n5. **格式化輸出：** 直接提供計算結果。\n</think>\n3nm 製程收益佔台積電2025年第四季營收比例是 **28%**。\n\n資料來源：參考資料區塊 (nue Analysis)。",
+    "response": "<think>\n1.  **分析請求：** 使用者要求知道台積電在2025年第四季（4Q25），3nm製程的收益佔總晶圓收入的比例。\n2.  **檢索資料：** 我需要檢查提供的參考資料中是否有關於2025年第四季（4Q25）的技術細分營收數據。\n3.  **定位信息：** 在「nue Analysis」部分，我找到以下相關描述：\n    *   \"By technology, 3nm process technology contributed 28% of total wafer revenue in 4Q25 while 5nm and 7nm accounted for 35% and 14% respectively.\"\n4.  **提取答案：** 根據上述信息，3nm製程技術在2025年第四季貢獻了總晶圓收入的28%。\n5.  **最終確認：** 數據直接來自參考資料，無需進行額外計算或捏造。\n</think>\n3nm 製程收益佔台積電2025年第四季營收比例是 **28%**。\n\n資料來源：參考資料區塊 (nue Analysis)。",
     "reference": "3nm process technology contributed 28% of total wafer revenue in 4Q25 while 5nm and 7nm accounted for 35% and 14% respectively. "
   },
   {
@@ -491,42 +491,42 @@
     ],
     "retrieved_metadata": [
       {
+        "market": "TW",
+        "quarter": "Q4",
         "chunk_index": 20,
         "ticker": "2330",
-        "quarter": "Q4",
-        "market": "TW",
         "year": 2025
       },
       {
+        "ticker": "2330",
+        "market": "TW",
+        "quarter": "Q4",
         "chunk_index": 7,
-        "year": 2025,
-        "quarter": "Q4",
-        "ticker": "2330",
-        "market": "TW"
+        "year": 2025
       },
       {
-        "ticker": "2330",
         "quarter": "Q4",
-        "year": 2025,
         "chunk_index": 12,
-        "market": "TW"
+        "year": 2025,
+        "market": "TW",
+        "ticker": "2330"
       },
       {
+        "year": 2025,
         "quarter": "Q4",
         "market": "TW",
         "ticker": "2330",
-        "chunk_index": 8,
-        "year": 2025
+        "chunk_index": 8
       },
       {
         "chunk_index": 25,
-        "market": "TW",
-        "quarter": "Q4",
+        "ticker": "2330",
         "year": 2025,
-        "ticker": "2330"
+        "quarter": "Q4",
+        "market": "TW"
       }
     ],
-    "response": "<think>\n1. **分析請求：** 使用者要求知道「3nm 製程收益佔台積電 2024年第四季營收的比例」。\n2. **檢索資料：** 我需要檢查提供的參考資料中是否存在關於台積電（2330.TW）2024年第四季（4Q24）的營收細項，特別是針對「3nm 製程」的佔比。\n3. **審查結果：** 參考資料中提到：「By technology, 3nm process technology contributed 28% of total wafer revenue in 4Q25...」。這個數據是關於 **2025年第四季 (4Q25)** 的晶圓收入佔比，而不是使用者詢問的 **2024年第四季 (4Q24)**。\n4. **結論：** 參考資料中未揭露所需的時間點（2024年第四季）的具體數據。\n5. **執行輸出：** 根據指示，若資料未提及，則直接回答[財報未揭露]。\n</think>\n[財報未揭露]",
+    "response": "<think>\n1.  **分析請求：** 使用者要求計算「3nm 製程收益佔台積電 2024年第四季營收的比例」。\n2.  **檢索資料：** 我檢查了提供的參考資料區塊。\n3.  **比對結果：** 參考資料中提到了關於技術貢獻的數據，但這些數據是針對 2025 年第四季 (4Q25) 的「晶圓收入」(wafer revenue)，而非 2024 年第四季的「營收」(revenue)。\n    *   資料原文：「By technology, 3nm process technology contributed 28% of total wafer revenue in 4Q25...」\n4.  **結論：** 參考資料中未揭露「3nm 製程收益佔台積電 2024年第四季營收的比例」。\n5.  **執行輸出：** 根據指示，若資料未提及，則直接回答[財報未揭露]。\n</think>\n[財報未揭露]",
     "reference": "3nm process technology contributed 26% of total wafer revenue in 4Q24."
   },
   {
@@ -540,42 +540,42 @@
     ],
     "retrieved_metadata": [
       {
+        "ticker": "2330",
+        "year": 2025,
+        "chunk_index": 23,
+        "market": "TW",
+        "quarter": "Q4"
+      },
+      {
+        "chunk_index": 17,
         "year": 2025,
         "ticker": "2330",
-        "chunk_index": 23,
         "quarter": "Q4",
         "market": "TW"
       },
       {
-        "year": 2025,
         "quarter": "Q4",
+        "year": 2025,
         "market": "TW",
-        "chunk_index": 17,
+        "chunk_index": 16,
         "ticker": "2330"
       },
       {
-        "year": 2025,
-        "quarter": "Q4",
-        "chunk_index": 16,
-        "ticker": "2330",
-        "market": "TW"
-      },
-      {
-        "quarter": "Q4",
-        "ticker": "2330",
         "market": "TW",
         "chunk_index": 29,
-        "year": 2025
+        "year": 2025,
+        "ticker": "2330",
+        "quarter": "Q4"
       },
       {
-        "market": "TW",
-        "ticker": "2330",
         "year": 2025,
         "chunk_index": 25,
-        "quarter": "Q4"
+        "ticker": "2330",
+        "quarter": "Q4",
+        "market": "TW"
       }
     ],
-    "response": "<think>\n1.  **分析請求：** 使用者要求計算「3nm 製程收益佔台積電 2025年全年營收比例」。\n2.  **檢索參考資料：** 我仔細檢查了提供的參考資料區塊。\n3.  **數據比對：** 參考資料中提供了以下關於平台（Platform）的收入分佈數據：\n    *   High Performance Computing (HPC): 2025 (58%)\n    *   Smartphone: 2025 (29%)\n    *   Internet of Things (IoT): 2025 (5%)\n    *   Automotive: 2025 (5%)\n    *   Digital Consumer Electronics (DCE): 2025 (1%)\n    *   以及關於製程節點的數據，例如 `0.15/0.18um` 的收入比例。\n4.  **結論：** 參考資料中雖然提到了不同平台和部分製程規模的營收比例，但**沒有直接提供**將「3nm 製程收益」作為一個獨立類別的數據，因此無法根據現有資料計算出該比例。\n5.  **執行輸出要求：** 依照指示，若資料未提及，則回答[財報未揭露]。\n</think>\n[財報未揭露]",
+    "response": "<think>\n1.  **分析請求：** 使用者要求計算「3nm 製程收益佔台積電 2025年全年營收比例」。\n2.  **檢索資料：** 我需要檢查提供的參考資料中是否有關於晶圓製程世代（如3nm）與營收分佈的具體數據。\n3.  **審查結果：** 參考資料中提供了按「Platform」（HPC, Smartphone, IoT, Automotive, DCE）劃分的淨收入（Net Revenue）比例，以及部分製程節點（如0.15/0.18um）的數據，但**沒有直接提供**將特定製程世代（如3nm）收益佔總營收的百分比的明確對應關係。\n4.  **判斷結論：** 參考資料中未揭露所需計算的具體數據。\n5.  **執行輸出：** 根據指示，若資料未提及，則直接回答[財報未揭露]。\n</think>\n[財報未揭露]",
     "reference": "3nm process technology contributed 24% of total wafer revenue in 2025."
   },
   {
@@ -589,42 +589,42 @@
     ],
     "retrieved_metadata": [
       {
+        "quarter": "Q4",
         "chunk_index": 23,
-        "year": 2025,
-        "ticker": "2330",
-        "quarter": "Q4",
-        "market": "TW"
-      },
-      {
-        "chunk_index": 29,
-        "quarter": "Q4",
         "market": "TW",
         "ticker": "2330",
         "year": 2025
       },
       {
-        "year": 2025,
-        "market": "TW",
-        "quarter": "Q4",
         "ticker": "2330",
-        "chunk_index": 25
-      },
-      {
         "quarter": "Q4",
-        "ticker": "2330",
         "market": "TW",
         "year": 2025,
-        "chunk_index": 16
+        "chunk_index": 29
       },
       {
         "market": "TW",
-        "year": 2025,
-        "chunk_index": 9,
         "ticker": "2330",
+        "year": 2025,
+        "chunk_index": 25,
         "quarter": "Q4"
+      },
+      {
+        "ticker": "2330",
+        "quarter": "Q4",
+        "market": "TW",
+        "chunk_index": 16,
+        "year": 2025
+      },
+      {
+        "quarter": "Q4",
+        "ticker": "2330",
+        "market": "TW",
+        "year": 2025,
+        "chunk_index": 9
       }
     ],
-    "response": "<think>\n1.  **分析請求：** 使用者要求計算「3nm 製程收益佔台積電 2024年全年營收比例」。\n2.  **檢索參考資料：** 我仔細審閱提供的所有參考資料區塊。\n3.  **數據比對：** 參考資料中包含「Net Revenue by Platform」的數據，包括 HPC (51%)、Smartphone (35%)、IoT (6%)、Automotive (5%)、DCE (1%) 等。這些是按應用平台劃分的營收比例，但資料中**沒有明確指出**哪一個百分比對應於「3nm 製程」的收益佔比。\n4.  **結論：** 參考資料中未揭露關於不同晶圓製程世代（如3nm）的具體營收分佈數據。\n5.  **執行輸出要求：** 根據指示，若資料未提及，則直接回答[財報未揭露]。\n</think>\n[財報未揭露]",
+    "response": "<think>\n1.  **分析請求：** 使用者要求計算「3nm 製程收益佔台積電 2024年全年營收比例」。\n2.  **檢索參考資料：** 我仔細審閱提供的所有參考資料區塊。\n3.  **數據比對：**\n    *   參考資料中包含關於不同平台（HPC, Smartphone, IoT, Automotive, DCE等）的收入分佈，以及2024年的總體營收數據（例如Smartphone佔35%）。\n    *   參考資料中沒有提供將這些平台收入進一步細分為特定晶圓製程世代（如3nm、5nm等）的具體數據。\n    *   雖然有「Wafer Revenue by Technology」的表格，但該表格的欄位是季度數據（4Q24, 3Q24, 4Q24），且未明確標註哪一項對應於「3nm製程」。\n4.  **結論：** 參考資料中未揭露計算所需「3nm製程收益佔台積電 2024年全年營收比例」的具體數據。\n5.  **執行輸出要求：** 根據指示，若資料未提及，則直接回答[財報未揭露]。\n</think>\n[財報未揭露]",
     "reference": "3nm process technology contributed 18% of total wafer revenue in 2024."
   },
   {
@@ -638,42 +638,42 @@
     ],
     "retrieved_metadata": [
       {
-        "ticker": "2330",
-        "quarter": "Q4",
-        "market": "TW",
         "chunk_index": 62,
-        "year": 2025
+        "quarter": "Q4",
+        "ticker": "2330",
+        "year": 2025,
+        "market": "TW"
       },
       {
-        "market": "TW",
-        "year": 2025,
         "ticker": "2330",
+        "quarter": "Q4",
         "chunk_index": 29,
-        "quarter": "Q4"
+        "market": "TW",
+        "year": 2025
       },
       {
         "chunk_index": 25,
+        "market": "TW",
+        "year": 2025,
+        "quarter": "Q4",
+        "ticker": "2330"
+      },
+      {
         "year": 2025,
         "market": "TW",
         "ticker": "2330",
+        "chunk_index": 1,
         "quarter": "Q4"
       },
       {
         "quarter": "Q4",
-        "chunk_index": 1,
-        "market": "TW",
-        "ticker": "2330",
-        "year": 2025
-      },
-      {
         "chunk_index": 42,
         "ticker": "2330",
-        "market": "TW",
-        "quarter": "Q4",
-        "year": 2025
+        "year": 2025,
+        "market": "TW"
       }
     ],
-    "response": "<think>\n1.  **分析請求：** 使用者要求獲取 TSMC 在 2025 年第四季的銷貨成本 (Cost of Revenue)。\n2.  **檢索資料：** 我仔細檢查提供的參考資料區塊，尋找關於 TSMC 的財務數據，特別是「Cost of Revenue」。\n3.  **審查結果：** 參考資料中包含一個表格，其中有 Cost of Revenue 的標題，但後續的數據結構（如 Q25, 4Q24, QoQ, YoY, 2025, 2024）似乎是針對其他指標（如 EPS 或收入）的比較，並沒有直接提供 TSMC 在 2025 年第四季的具體銷貨成本金額。\n4.  **遵循指令：** 由於參考資料中未揭露該特定數據，我必須嚴格按照指示回答「[財報未揭露]」。\n</think>\n[財報未揭露]",
+    "response": "<think>\n1.  **分析請求：** 使用者要求獲取 TSMC 在 2025 年第四季的銷貨成本 (Cost of Revenue)。\n2.  **檢索資料：** 我檢查了提供的參考資料區塊。\n3.  **審查結果：** 參考資料中包含關於「Cost of Revenue」的標題，但後續的數據表格（包括 Q25, 4Q24 等欄位）均未提供具體的數值。雖然有其他財務數據，但沒有直接揭露 TSMC 2025 年第四季的銷貨成本。\n4.  **結論：** 由於參考資料中未揭露所需數據，我必須按照指示回答「[財報未揭露]」。\n</think>\n[財報未揭露]",
     "reference": "NTD 394.10 billions"
   },
   {
@@ -687,42 +687,42 @@
     ],
     "retrieved_metadata": [
       {
-        "ticker": "2330",
         "chunk_index": 29,
-        "quarter": "Q4",
-        "year": 2025,
-        "market": "TW"
-      },
-      {
-        "chunk_index": 34,
-        "year": 2025,
+        "market": "TW",
         "ticker": "2330",
         "quarter": "Q4",
-        "market": "TW"
+        "year": 2025
       },
       {
-        "year": 2025,
-        "chunk_index": 9,
-        "quarter": "Q4",
         "market": "TW",
+        "year": 2025,
+        "ticker": "2330",
+        "chunk_index": 34,
+        "quarter": "Q4"
+      },
+      {
+        "market": "TW",
+        "quarter": "Q4",
+        "chunk_index": 9,
+        "year": 2025,
         "ticker": "2330"
       },
       {
-        "year": 2025,
-        "quarter": "Q4",
+        "chunk_index": 62,
         "market": "TW",
         "ticker": "2330",
-        "chunk_index": 62
+        "year": 2025,
+        "quarter": "Q4"
       },
       {
-        "chunk_index": 7,
-        "quarter": "Q4",
-        "year": 2025,
         "ticker": "2330",
+        "chunk_index": 7,
+        "year": 2025,
+        "quarter": "Q4",
         "market": "TW"
       }
     ],
-    "response": "<think>\n1.  **分析請求：** 使用者要求查詢台積電 (2330.TW) 在 2025 年第三季的營收。\n2.  **檢索參考資料：** 我需要檢查提供的參考資料中是否有關於 2025 年第三季（3Q25）的營收數據。\n3.  **定位數據：**\n    *   在「I. Revenue Analysis」部分，有一個表格顯示了不同季度（4Q25, 3Q25, 4Q24）的晶圓收入 (Wafer Revenue)。\n    *   在「Quarter 2025」的文字描述中提到：「Net revenue was NT$1,046.09 billion, representing a 5.7% increase from NT$989.92 billion in 3Q25...」。這段描述涉及淨收入的比較。\n4.  **提取結果：** 參考資料中提供了季度晶圓收入的數據，但沒有單獨標註「營收」的總數。我將根據表格中的「Wafer Revenue by Technology」來呈現相關數據。\n5.  **格式化輸出：** 由於是單一公司查詢，我會使用 Markdown 表格呈現提取到的季度數據。\n</think>\n根據您提供的參考資料，以下是台積電 (2330.TW) 的部分營收分析數據：\n\n### 台積電 (2330.TW) 營收分析 (Wafer Revenue)\n\n| 指標 | 4Q25 | 3Q25 | 4Q24 | 資料來源 |\n| :--- | :--- | :--- | :--- | :--- |\n| Wafer Revenue by Technology | - | $1,046.09 billion (根據上下文推斷) | - | 參考資料區塊 |\n\n**額外資訊：**\n\n*   參考資料中提到：「Net revenue was NT$1,046.09 billion, representing a 5.7% increase from NT$989.92 billion in 3Q25...」。\n*   其他財務指標包括毛利率 (Gross margin)、營業利益率 (Operating margin) 等。",
+    "response": "<think>\n1.  **分析請求：** 使用者要求查詢台積電 (2330.TW) 在 2025 年第三季的營收。\n2.  **檢索資料：** 我仔細檢查提供的參考資料區塊，尋找關於「2025年第三季 (3Q25)」的營收數據。\n3.  **審查結果：** 參考資料中包含以下相關資訊：\n    *   在「Quarter 2025」部分提到：「Net revenue was NT$1,046.09 billion, representing a 5.7% increase from NT$989.92 billion in 3Q25...」\n    *   這段描述比較了 3Q25 和 4Q24 的數據，但沒有明確指出 $1,046.09 billion 是指哪個時間點的總營收（是年度還是季度的總和）。\n    *   資料中未直接提供「GG 2025年第三季營收」的單一數字。\n4.  **決策：** 由於參考資料中沒有明確揭露 2025 年第三季的具體營收數據，我必須嚴格遵守指示，無法捏造數據。\n</think>\n[財報未揭露]",
     "reference": "Net revenue was NT$989.92 billion in 3Q25."
   },
   {
@@ -736,42 +736,42 @@
     ],
     "retrieved_metadata": [
       {
-        "quarter": "Q4",
         "ticker": "2330",
-        "market": "TW",
         "year": 2025,
+        "market": "TW",
+        "quarter": "Q4",
         "chunk_index": 7
       },
       {
-        "year": 2025,
-        "quarter": "Q4",
         "ticker": "2330",
+        "quarter": "Q4",
         "chunk_index": 20,
-        "market": "TW"
-      },
-      {
-        "market": "TW",
         "year": 2025,
-        "chunk_index": 23,
-        "quarter": "Q4",
-        "ticker": "2330"
+        "market": "TW"
       },
       {
         "ticker": "2330",
-        "year": 2025,
-        "chunk_index": 8,
         "quarter": "Q4",
-        "market": "TW"
+        "year": 2025,
+        "market": "TW",
+        "chunk_index": 23
       },
       {
-        "market": "TW",
-        "chunk_index": 9,
-        "year": 2025,
+        "ticker": "2330",
         "quarter": "Q4",
-        "ticker": "2330"
+        "year": 2025,
+        "market": "TW",
+        "chunk_index": 8
+      },
+      {
+        "year": 2025,
+        "ticker": "2330",
+        "chunk_index": 9,
+        "quarter": "Q4",
+        "market": "TW"
       }
     ],
-    "response": "<think>\n1.  **分析問題：** 使用者要求計算台積電 (2330.TW) 2025年第四季 (Q4 2025) 相對於第三季 (Q3 2025) 的營收增長比例。\n2.  **檢索資料：** 我查閱了提供的參考資料區塊中的數據。\n3.  **定位關鍵信息：** 在「【公司代號：2330.TW】」部分，我找到以下相關敘述：\n    *   \"l Net revenue was NT$1,046.09 billion, representing a 5.7% increase from NT$989.92 billion in 3Q25 and a 20.5% increase from NT$868.46 billion in 4Q24.\"\n4.  **提取數據：** 這段描述明確指出，2025年第四季的淨收入 (NT$1,046.09 billion) 是相對於2025年第三季的淨收入 (NT$989.92 billion) 增長了 5.7%。\n5.  **形成答案：** 直接回答計算出的比例。\n</think>\nGG 2025年第四季對第三季營收增長比例是 **5.7%**。\n\n**資料來源：** 參考資料區塊中關於公司代號 2330.TW 的數據。",
+    "response": "<think>\n1.  **分析問題：** 使用者要求計算台積電 (2330.TW) 2025年第四季 (Q4 2025) 相對於第三季 (Q3 2025) 的營收增長比例。\n2.  **檢索資料：** 我檢查提供的參考資料區塊。\n3.  **定位關鍵數據：** 在「【公司代號：2330.TW】」部分，我找到以下相關敘述：\n    *   \"l Net revenue was NT$1,046.09 billion, representing a 5.7% increase from NT$989.92 billion in 3Q25 and a 20.5% increase from NT$868.46 billion in 4Q24.\"\n4.  **提取答案：** 這段敘述明確指出，2025年第四季的淨收入 (NT$1,046.09 billion) 是相對於2025年第三季的淨收入 (NT$989.92 billion) 增長了 5.7%。\n5.  **格式化輸出：** 根據指示，我將以 Markdown 表格呈現結果。\n</think>\n\n| 指標 | 數值 | 資料來源 |\n| :--- | :--- | :--- |\n| GG 2025年第四季對第三季營收增長比例 | 5.7% | 參考資料區塊 (Net revenue was NT$1,046.09 billion, representing a 5.7% increase from NT$989.92 billion in 3Q25) |",
     "reference": "Net revenue in 4Q25 was 5.4% increased from in 3Q25."
   },
   {
@@ -785,42 +785,42 @@
     ],
     "retrieved_metadata": [
       {
-        "market": "TW",
-        "chunk_index": 62,
         "ticker": "2330",
+        "chunk_index": 62,
         "year": 2025,
+        "market": "TW",
         "quarter": "Q4"
       },
       {
-        "market": "TW",
-        "year": 2025,
-        "quarter": "Q4",
         "ticker": "2330",
+        "year": 2025,
+        "market": "TW",
+        "quarter": "Q4",
         "chunk_index": 34
       },
       {
         "quarter": "Q4",
         "market": "TW",
+        "chunk_index": 61,
         "ticker": "2330",
-        "year": 2025,
-        "chunk_index": 61
+        "year": 2025
       },
       {
-        "quarter": "Q4",
-        "chunk_index": 25,
         "year": 2025,
+        "chunk_index": 25,
         "market": "TW",
+        "quarter": "Q4",
         "ticker": "2330"
       },
       {
         "market": "TW",
-        "chunk_index": 43,
+        "quarter": "Q4",
         "year": 2025,
         "ticker": "2330",
-        "quarter": "Q4"
+        "chunk_index": 43
       }
     ],
-    "response": "<think>\n1.  **分析請求：** 使用者要求查詢台積電 (2330.TW) 在 2025 年第四季和第三季的現金股利金額。\n2.  **檢索資料：** 我仔細檢查提供的參考資料區塊，尋找關於現金股利的資訊。\n3.  **發現關鍵信息：** 在「VI. Recap of Recent Important Events & Announcements」中，我找到以下相關條目：\n    > - l TSMC Board of Directors Approved NT$6.00 Cash Dividend for the Third Quarter of 2025 and Set March 17, 2026 as Ex-Dividend Date, March 23, 2026 as the Record Date and April 9, 2026 as the Distribution Date (2025/11/11)\n4.  **提取數據：** 這條資訊明確指出，董事會批准了 **NT$6.00 的現金股利**，適用於 **2025 年第三季 (Third Quarter of 2025)**。\n5.  **判斷缺失：** 參考資料中**未提及** 2025 年第四季的現金股利金額。\n6.  **結論：** 只能提供第三季的資訊，第四季的資訊必須標註為未揭露。\n</think>\n台積電 2025年第三季的現金股利金額為 NT$6.00。\n\n關於 2025 年第四季的現金股利金額，參考資料中未揭露。",
+    "response": "<think>\n1.  **分析請求：** 使用者要求獲取台積電 (2330.TW) 在 2025 年第四季和第三季的現金股利金額。\n2.  **檢索參考資料：** 我需要檢查提供的「參考資料區塊」中是否有關於現金股利的具體數據。\n3.  **掃描結果：** 在「VI. Recap of Recent Important Events & Announcements」部分，我找到以下相關條目：\n    > - l TSMC Board of Directors Approved NT$6.00 Cash Dividend for the Third Quarter of 2025 and Set March 17, 2026 as Ex-Dividend Date, March 23, 2026 as the Record Date and April 9, 2026 as the Distribution Date (2025/11/11)\n4.  **數據提取：** 這條記錄明確指出，董事會批准了 **NT$6.00 的現金股利**，適用於 **2025 年第三季 (Third Quarter of 2025)**。\n5.  **缺失信息判斷：** 參考資料中**未提及** 2025 年第四季的現金股利金額。\n6.  **結論生成：** 根據提供的資料，我只能提供第三季的資訊，而第四季的資訊在文本中未揭露。\n</think>\n根據提供的參考資料：\n\n*   **2025年第三季 (3Q25) 的現金股利金額：** 台積電董事會批准了 **NT$6.00** 的現金股利，適用於 2025 年第三季。\n*   **2025年第四季 (4Q25) 的現金股利金額：** [財報未揭露]",
     "reference": "Cash dividends in 4Q25 was NT$ 129.66 billions. Cash dividends in 3Q25 was NT$ 116.70 billions."
   },
   {
@@ -834,42 +834,42 @@
     ],
     "retrieved_metadata": [
       {
-        "year": 2025,
         "market": "TW",
+        "chunk_index": 9,
+        "year": 2025,
         "ticker": "2330",
-        "quarter": "Q4",
-        "chunk_index": 9
+        "quarter": "Q4"
       },
       {
         "quarter": "Q4",
-        "year": 2025,
+        "market": "TW",
         "chunk_index": 29,
-        "ticker": "2330",
-        "market": "TW"
+        "year": 2025,
+        "ticker": "2330"
       },
       {
-        "quarter": "Q4",
-        "ticker": "2330",
         "market": "TW",
+        "year": 2025,
+        "quarter": "Q4",
         "chunk_index": 25,
+        "ticker": "2330"
+      },
+      {
+        "market": "TW",
+        "ticker": "2330",
+        "chunk_index": 62,
+        "quarter": "Q4",
         "year": 2025
       },
       {
-        "year": 2025,
-        "market": "TW",
-        "quarter": "Q4",
         "ticker": "2330",
-        "chunk_index": 62
-      },
-      {
-        "year": 2025,
         "chunk_index": 23,
-        "market": "TW",
         "quarter": "Q4",
-        "ticker": "2330"
+        "year": 2025,
+        "market": "TW"
       }
     ],
-    "response": "<think>\n1.  **分析請求：** 使用者要求查詢「台積電 2025年第四季淨利率」。\n2.  **檢索參考資料：** 我需要仔細檢查提供的參考資料中是否有關於「2025年第四季 (4Q25)」的淨利率 (Net Profit Margin)。\n3.  **掃描參考資料內容：**\n    *   在摘要部分，資料提到：「Net profit margin was 45.1%, up 4.6 percentage points from 40.5% in 2024.」這看起來像是某個總體或年度的數據，但沒有明確標註是針對哪個季度。\n    *   在收入分析表格中，雖然有 `4Q25` 的收入數據，但沒有提供計算淨利率所需的利潤（Net Profit）數據。\n4.  **判斷結果：** 參考資料中未直接揭露「台積電 2025年第四季的淨利率」。\n5.  **執行輸出：** 根據指示，若資料未提及，則回答[財報未揭露]。\n</think>\n[財報未揭露]",
+    "response": "<think>\n1.  **分析請求：** 使用者要求查詢「台積電 2025年第四季淨利率」。\n2.  **檢索參考資料：** 我需要仔細檢查提供的參考資料中是否有關於「2025年第四季 (4Q25)」的「淨利率 (Net Profit Margin)」。\n3.  **掃描資料內容：** 參考資料中提到了以下數據：\n    *   \"Net profit margin was 45.1%, up 4.6 percentage points from 40.5% in 2024.\"\n    *   其他數據涉及總體營運或年度比較，但沒有明確區分到「2025年第四季」的淨利率。\n4.  **判斷與結論：** 參考資料中未直接揭露台積電 2025年第四季的淨利率數據。\n</think>\n[財報未揭露]",
     "reference": "Net profit margin in 4Q25 was 48.3%."
   },
   {
@@ -883,42 +883,42 @@
     ],
     "retrieved_metadata": [
       {
+        "year": 2025,
+        "market": "TW",
+        "quarter": "Q4",
+        "chunk_index": 9,
+        "ticker": "2330"
+      },
+      {
+        "ticker": "2330",
         "quarter": "Q4",
         "market": "TW",
-        "chunk_index": 9,
-        "ticker": "2330",
+        "chunk_index": 29,
         "year": 2025
       },
       {
         "quarter": "Q4",
-        "chunk_index": 29,
-        "market": "TW",
-        "year": 2025,
-        "ticker": "2330"
-      },
-      {
         "chunk_index": 23,
         "market": "TW",
-        "quarter": "Q4",
         "year": 2025,
         "ticker": "2330"
       },
       {
-        "market": "TW",
+        "ticker": "2330",
+        "chunk_index": 25,
+        "quarter": "Q4",
         "year": 2025,
+        "market": "TW"
+      },
+      {
+        "market": "TW",
         "quarter": "Q4",
         "ticker": "2330",
-        "chunk_index": 25
-      },
-      {
-        "quarter": "Q4",
-        "market": "TW",
         "year": 2025,
-        "chunk_index": 37,
-        "ticker": "2330"
+        "chunk_index": 37
       }
     ],
-    "response": "<think>\n1.  **分析請求：** 使用者要求獲取「台積電 2025年全年淨利率」。\n2.  **檢索資料：** 我檢查提供的參考資料區塊。\n3.  **定位關鍵數據：** 在參考資料中，我找到了以下相關信息：\n    *   \"Net profit margin was 45.1%, up 4.6 percentage points from 40.5% in 2024.\"\n4.  **比對與判斷：** 這個數據直接提供了淨利潤率 (Net profit margin)。雖然資料沒有明確標註「2025年全年」，但根據上下文，這是針對該時間段的財務表現。\n5.  **輸出結果：** 直接提取並呈現該數值。\n</think>\n台積電 2025年全年淨利率為 **45.1%** (相較於2024年的40.5%)。\n\n資料來源：參考資料區塊中記載的 \"Net profit margin was 45.1%, up 4.6 percentage points from 40.5% in 2024.\"",
+    "response": "<think>\n參考資料中明確提供了台積電 2025 年的淨利率資訊。我需要提取該數據並以正確的格式呈現。\n在參考資料中找到以下相關信息：\n- \"Net profit margin was 45.1%, up 4.6 percentage points from 40.5% in 2024.\"\n\n這表示 2025 年的淨利潤率是 45.1%。\n</think>\n台積電 2025年全年淨利率為 **45.1%**。\n\n（資料來源：參考資料區塊中「Net profit margin was 45.1%, up 4.6 percentage points from 40.5% in 2024.」）",
     "reference": "Net profit margin in 2025 was 45.1%."
   },
   {
@@ -933,41 +933,41 @@
     "retrieved_metadata": [
       {
         "market": "TW",
+        "year": 2025,
+        "ticker": "2330",
         "chunk_index": 62,
-        "year": 2025,
-        "quarter": "Q4",
-        "ticker": "2330"
+        "quarter": "Q4"
       },
       {
+        "year": 2025,
         "market": "TW",
+        "ticker": "2330",
         "chunk_index": 9,
-        "year": 2025,
-        "ticker": "2330",
         "quarter": "Q4"
-      },
-      {
-        "quarter": "Q4",
-        "year": 2025,
-        "chunk_index": 34,
-        "ticker": "2330",
-        "market": "TW"
       },
       {
         "ticker": "2330",
         "year": 2025,
         "market": "TW",
+        "quarter": "Q4",
+        "chunk_index": 34
+      },
+      {
+        "year": 2025,
+        "quarter": "Q4",
+        "ticker": "2330",
         "chunk_index": 20,
-        "quarter": "Q4"
+        "market": "TW"
       },
       {
         "quarter": "Q4",
         "ticker": "2330",
         "chunk_index": 29,
-        "market": "TW",
-        "year": 2025
+        "year": 2025,
+        "market": "TW"
       }
     ],
-    "response": "<think>\n1.  **分析請求：** 使用者要求獲取TSMC 2025年全年毛利率。\n2.  **檢索資料：** 我檢查了提供的參考資料區塊。\n3.  **結果判斷：** 在參考資料中，我找到了以下相關數據：\n    *   \"Gross margin was 59.9%, up 3.8 percentage points from 56.1% in 2024.\" (在「VI. Recap of Recent Important Events & Announcements」部分)\n4.  **比對要求：** 雖然資料中提到了毛利率（Gross margin），但沒有明確指出這是針對「2025年全年」。\n5.  **遵循指令：** 根據指示：「若資料未提及，請直接回答[財報未揭露]」，我必須嚴格依據提供的資訊。由於缺乏明確的2025年全年毛利率數據，我無法提供確定的答案。\n</think>\n[財報未揭露]",
+    "response": "<think>\n1.  **目標確認：** 使用者要求獲取TSMC 2025年全年毛利率。\n2.  **資料檢索：** 我檢查提供的參考資料區塊。\n3.  **關鍵資訊定位：** 在「VI. Recap of Recent Important Events & Announcements」部分，我找到以下相關數據：\n    *   \"Gross margin was 59.9%, up 3.8 percentage points from 56.1% in 2024.\"\n4.  **結果判斷：** 這條記錄明確提到了毛利率（Gross margin）為 59.9%。根據上下文，這應是參考資料所指的2025年的數據。\n5.  **輸出生成：** 直接提供檢索到的數據。\n</think>\nTSMC 2025年全年毛利率為 **59.9%** (相較於2024年的56.1%)。",
     "reference": "On a full year basis, gross margin was 59.9% in 2025."
   },
   {
@@ -981,42 +981,42 @@
     ],
     "retrieved_metadata": [
       {
+        "chunk_index": 9,
         "market": "TW",
-        "year": 2025,
         "quarter": "Q4",
-        "ticker": "2330",
-        "chunk_index": 9
+        "year": 2025,
+        "ticker": "2330"
       },
       {
         "market": "TW",
-        "quarter": "Q4",
+        "year": 2025,
         "ticker": "2330",
         "chunk_index": 62,
-        "year": 2025
-      },
-      {
-        "year": 2025,
-        "chunk_index": 39,
-        "market": "TW",
-        "ticker": "2330",
         "quarter": "Q4"
       },
       {
-        "quarter": "Q4",
         "ticker": "2330",
-        "market": "TW",
-        "chunk_index": 40,
-        "year": 2025
+        "year": 2025,
+        "chunk_index": 39,
+        "quarter": "Q4",
+        "market": "TW"
       },
       {
-        "quarter": "Q4",
-        "ticker": "2330",
-        "chunk_index": 7,
+        "year": 2025,
         "market": "TW",
-        "year": 2025
+        "quarter": "Q4",
+        "chunk_index": 40,
+        "ticker": "2330"
+      },
+      {
+        "market": "TW",
+        "quarter": "Q4",
+        "year": 2025,
+        "chunk_index": 7,
+        "ticker": "2330"
       }
     ],
-    "response": "<think>\n1.  **分析請求：** 使用者要求獲取TSMC 2024年全年毛利率。\n2.  **檢索資料：** 我需要檢查提供的參考資料中是否有關於TSMC 2024年毛利率的數據。\n3.  **定位關鍵信息：** 在「Gross Profit Analysis」部分，我找到以下相關敘述：\n    *   \"On a full year basis, gross margin was 59.9% in 2025, up 3.8 percentage points from 2024, mainly reflecting a higher capacity utilization rate and cost improvement efforts, partially offset by an unfavorable foreign exchange rate and margin dilution from overseas fabs.\"\n    *   這句話表明2025年的毛利率是59.9%，是相較於2024年的數據增加了3.8個百分點。\n4.  **計算結果：** 根據 $56.1\\% + 3.8\\% = 59.9\\%$ 的關係，TSMC 2024年的全年毛利率是 56.1%。\n5.  **輸出格式化：** 按照指示，我將以Markdown表格形式呈現結果。\n</think>\n| 公司 | 年份 | 毛利率 (Gross Margin) | 資料來源 |\n| :--- | :--- | :--- | :--- |\n| TSMC | 2024 | 56.1% | 參考資料區塊 |",
+    "response": "<think>\n1.  **分析請求：** 使用者要求查詢TSMC 2024年全年毛利率。\n2.  **檢索資料：** 我檢查了提供的參考資料區塊。\n3.  **比對結果：** 參考資料中提到：「On a full year basis, gross margin was 59.9% in 2025, up 3.8 percentage points from 2024...」。這段資訊是關於2025年的全年毛利率及其與2024年的比較，但**沒有直接提供TSMC 2024年全年毛利率的具體數值**。\n4.  **遵循指令：** 根據指示：「若資料未提及，請直接回答[財報未揭露]，嚴禁自行捏造數據。」\n5.  **結論：** 由於參考資料中未明確揭露TSMC 2024年全年毛利率，我必須以無法提供為準。\n</think>\n[財報未揭露]",
     "reference": "On a full year basis, gross margin was 56.1% in 2024."
   },
   {
@@ -1030,42 +1030,42 @@
     ],
     "retrieved_metadata": [
       {
-        "market": "TW",
         "ticker": "2330",
+        "market": "TW",
         "year": 2025,
         "chunk_index": 62,
         "quarter": "Q4"
       },
       {
-        "ticker": "2330",
-        "chunk_index": 23,
         "market": "TW",
+        "quarter": "Q4",
+        "chunk_index": 23,
+        "year": 2025,
+        "ticker": "2330"
+      },
+      {
+        "chunk_index": 16,
+        "quarter": "Q4",
+        "ticker": "2330",
+        "market": "TW",
+        "year": 2025
+      },
+      {
+        "market": "TW",
+        "chunk_index": 10,
+        "ticker": "2330",
         "quarter": "Q4",
         "year": 2025
       },
       {
         "year": 2025,
-        "chunk_index": 16,
         "ticker": "2330",
-        "quarter": "Q4",
-        "market": "TW"
-      },
-      {
-        "chunk_index": 10,
-        "year": 2025,
-        "market": "TW",
-        "quarter": "Q4",
-        "ticker": "2330"
-      },
-      {
-        "ticker": "2330",
-        "year": 2025,
-        "quarter": "Q4",
         "chunk_index": 25,
-        "market": "TW"
+        "market": "TW",
+        "quarter": "Q4"
       }
     ],
-    "response": "<think>\n1. **分析請求：** 使用者要求獲知 TSMC 2025 年全年營收中，來自 High Performance Computing (HPC) 的比例，並要求依照應用領域區分。\n2. **檢索資料：** 我查閱了提供的參考資料區塊。\n3. **定位相關數據：** 在「Net Revenue by Platform」部分，我找到了關於不同平台（應用領域）的營收比例數據，分別對應 2025 年和 2024 年。\n    *   2025 年 High Performance Computing 的佔比是 58%。\n    *   其他相關領域的數據如下：Smartphone (29%)、Internet of Things (5%)、Automotive (5%)、Digital Consumer Electronics (1%)、Others (未明確列出百分比，但總和應為100%)。\n4. **整理與輸出：** 根據找到的數據，我將以表格形式呈現 2025 年的應用領域區分比例。\n</think>\nTSMC 2025 年全年營收中，來自 High Performance Computing (HPC) 的比例是 **58%**。\n\n依照應用領域區分，根據參考資料提供的數據，TSMC 2025 年的淨收入（Net Revenue）按平台劃分的比例如下：\n\n| 應用領域 (Platform) | 2025 年營收比例 | 資料來源 |\n| :--- | :--- | :--- |\n| High Performance Computing (HPC) | 58% | 參考資料 |\n| Smartphone | 29% | 參考資料 |\n| Internet of Things (IoT) | 5% | 參考資料 |\n| Automotive | 5% | 參考資料 |\n| Digital Consumer Electronics | 1% | 參考資料 |\n| Others | (未明確列出百分比) | 參考資料 |",
+    "response": "<think>\n1. **分析請求：** 使用者要求獲知 TSMC 2025 年全年營收中，來自 High Performance Computing (HPC) 的百分比，並依照應用領域區分。\n2. **檢索資料：** 我檢查了提供的「參考資料區塊」。\n3. **定位數據：** 在該資料的第二部分（January 15, 2026），我找到了關於「Net Revenue by Platform」的數據：\n    *   High Performance Computing: 58% (2025)\n    *   Smartphone: 29% (2025)\n    *   Internet of Things: 5% (2025)\n    *   Automotive: 5% (2025)\n    *   Digital Consumer Electronics: 1% (2025)\n    *   Others: (未明確列出，但其他項目的總和應為100%)\n4. **整合與格式化：** 我將這些數據整理成Markdown表格，並標註資料來源。\n5. **輸出生成：** 根據檢索到的信息直接回答問題。\n</think>\nTSMC 2025年全年營收中，依照應用領域區分的比例如下：\n\n| 應用領域 (Platform) | 2025 年營收比例 | 資料來源 |\n| :--- | :--- | :--- |\n| High Performance Computing (HPC) | 58% | 參考資料 |\n| Smartphone | 29% | 參考資料 |\n| Internet of Things (IoT) | 5% | 參考資料 |\n| Automotive | 5% | 參考資料 |\n| Digital Consumer Electronics | 1% | 參考資料 |\n\n**備註：** 上述數據來源於您提供的「參考資料區塊」中關於「Net Revenue by Platform」的資訊。",
     "reference": "On a full year basis, net revenue from HPC was 58% by platform in 2025."
   },
   {
@@ -1079,42 +1079,42 @@
     ],
     "retrieved_metadata": [
       {
-        "ticker": "2330",
         "year": 2025,
-        "chunk_index": 16,
-        "quarter": "Q4",
-        "market": "TW"
-      },
-      {
+        "ticker": "2330",
         "market": "TW",
         "quarter": "Q4",
-        "ticker": "2330",
+        "chunk_index": 16
+      },
+      {
         "chunk_index": 12,
-        "year": 2025
-      },
-      {
-        "chunk_index": 7,
-        "market": "TW",
         "year": 2025,
         "quarter": "Q4",
+        "market": "TW",
         "ticker": "2330"
       },
       {
-        "chunk_index": 9,
-        "ticker": "2330",
+        "chunk_index": 7,
+        "year": 2025,
         "quarter": "Q4",
+        "ticker": "2330",
+        "market": "TW"
+      },
+      {
+        "chunk_index": 9,
+        "quarter": "Q4",
+        "ticker": "2330",
         "market": "TW",
         "year": 2025
       },
       {
+        "ticker": "2330",
         "chunk_index": 2,
         "market": "TW",
-        "ticker": "2330",
         "quarter": "Q4",
         "year": 2025
       }
     ],
-    "response": "<think>\n1.  **分析請求：** 使用者要求獲取 TSMC 2024 年全年營收中，來自 High Performance Computing (HPC) 的比例。\n2.  **檢索資料：** 我檢查提供的參考資料中的「Net Revenue by Platform」部分。\n3.  **定位數據：** 在該表格中，我找到針對不同時間段的平台收入分佈數據。\n    *   在「Net Revenue by Platform」表格中，針對 2024 年（4Q24）的數據顯示：High Performance Computing 為 51%。\n4.  **確認與輸出：** 根據參考資料，TSMC 在 2024 年的平台收入結構中，來自 High Performance Computing 的比例是 51%。\n</think>\n根據提供的參考資料，TSMC 2024 年全年營收比例來自 High Performance Computing 是 **51%**。\n\n（資料來源：參考資料區塊中「Net Revenue by Platform」表格，針對 2024 年數據）",
+    "response": "<think>\n1.  **分析請求：** 使用者要求查詢 TSMC 2024年全年營收中，來自 High Performance Computing (HPC) 的比例。\n2.  **檢索資料：** 我需要檢查提供的「參考資料區塊」以尋找關於平台收入（Net Revenue by Platform）的數據，特別是針對 2024 年的數據。\n3.  **定位數據：** 在參考資料中，我找到一個標題為 \"Net Revenue by Platform\" 的表格：\n\n    | Net Revenue by Platform | 2025 | 2024 |\n    | :--- | :--- | :--- |\n    | High Performance Computing | 58% | 51% |\n    | Smartphone | 29% | 35% |\n    | Internet of Things | 5% | 6% |\n    | Automotive | 5% | 5% |\n    | Digital Consumer Electronics | 1% | 1% |\n\n4.  **提取答案：** 對於 \"High Performance Computing\" 在 \"2024\" 的欄位，數據為 51%。\n\n5.  **格式化輸出：** 根據指示，我將以 Markdown 表格呈現結果並標註資料來源。\n</think>\nTSMC 2024年全年營收比例來自 High Performance Computing 的數據如下：\n\n| 平台 | 2024 年營收比例 | 資料來源 |\n| :--- | :--- | :--- |\n| High Performance Computing | 51% | 參考資料區塊 (Net Revenue by Platform 表格) |",
     "reference": "On a full year basis, net revenue from HPC was 51% by platform in 2024."
   },
   {
@@ -1128,42 +1128,42 @@
     ],
     "retrieved_metadata": [
       {
-        "quarter": "Q4",
+        "chunk_index": 14,
+        "year": 2025,
         "ticker": "2330",
-        "year": 2025,
-        "market": "TW",
-        "chunk_index": 14
-      },
-      {
-        "market": "TW",
-        "chunk_index": 23,
-        "year": 2025,
         "quarter": "Q4",
-        "ticker": "2330"
+        "market": "TW"
       },
       {
+        "chunk_index": 23,
+        "ticker": "2330",
+        "market": "TW",
+        "year": 2025,
+        "quarter": "Q4"
+      },
+      {
+        "ticker": "2330",
         "chunk_index": 17,
         "quarter": "Q4",
-        "market": "TW",
-        "ticker": "2330",
-        "year": 2025
+        "year": 2025,
+        "market": "TW"
       },
       {
         "chunk_index": 13,
         "market": "TW",
         "ticker": "2330",
-        "year": 2025,
-        "quarter": "Q4"
+        "quarter": "Q4",
+        "year": 2025
       },
       {
+        "chunk_index": 25,
         "quarter": "Q4",
-        "market": "TW",
         "year": 2025,
         "ticker": "2330",
-        "chunk_index": 25
+        "market": "TW"
       }
     ],
-    "response": "<think>\n1.  **分析請求：** 使用者要求獲取 TSMC 在 2025 年全年，營收中來自北美地區的比例。\n2.  **檢索資料：** 我需要檢查提供的「參考資料區塊」以找到關於 2025 年地理區域收入分佈的數據。\n3.  **定位關鍵信息：** 在參考資料中，我找到了以下敘述：\n    \"In 2025, revenue from customers based in North America accounted for 75% of total net revenue, while revenue from Asia Pacific, China, Japan, and EMEA (Europe, Middle East, and Africa) accounted for 9%, 9%, 4%, and 3% of total net revenue respectively.\"\n4.  **提取答案：** 這段文字明確指出，2025 年來自北美地區的營收佔總淨收入的比例是 75%。\n5.  **結論：** 直接根據參考資料提供數據。\n</think>\nTSMC 依照客戶來源地區分，2025年全年營收比例來自北美地區是 **75%**。\n\n（資料來源：參考資料區塊中敘述）",
+    "response": "<think>\n1. **分析請求：** 使用者要求獲取 TSMC 在 2025 年全年，營收中來自北美地區的比例。\n2. **檢索參考資料：** 我仔細檢查提供的「參考資料區塊」。\n3. **定位關鍵信息：** 在參考資料中有一段明確說明了 2025 年的地域收入分佈：\n    > \"In 2025, revenue from customers based in North America accounted for 75% of total net revenue, while revenue from Asia Pacific, China, Japan, and EMEA (Europe, Middle East, and Africa) accounted for 9%, 9%, 4%, and 3% of total net revenue respectively.\"\n    以及表格中的對應行：\n    > Net Revenue by Geography | 2025 | 2024\n    > North America | 74% | 76%\n    > Asia Pacific | 9% | 9%\n    > China | 9% | 8%\n    > Japan | 4% | 4%\n    > EMEA | (未直接給出2025的單獨百分比，但根據前一句的總和計算，其他地區加總為 $100\\% - 75\\% = 25\\%$。資料中也明確列出了北美為 75%。)\n4. **得出結論：** 參考資料直接提供了 2025 年來自北美地區的營收佔比。\n5. **格式化輸出：** 直接回答根據資料得出的數字，並標註來源。\n</think>\nTSMC 依照客戶來源地區分，2025年全年營收比例來自北美地區是 **75%**。\n\n**資料來源：** 參考資料區塊中明確指出：「In 2025, revenue from customers based in North America accounted for 75% of total net revenue」。",
     "reference": "In 2025, revenue from customers based in North America accounted for 75% of total net revenue."
   },
   {
@@ -1177,42 +1177,42 @@
     ],
     "retrieved_metadata": [
       {
-        "quarter": "Q4",
-        "market": "TW",
         "chunk_index": 29,
+        "market": "TW",
         "year": 2025,
+        "ticker": "2330",
+        "quarter": "Q4"
+      },
+      {
+        "year": 2025,
+        "chunk_index": 23,
+        "ticker": "2330",
+        "market": "TW",
+        "quarter": "Q4"
+      },
+      {
+        "market": "TW",
+        "quarter": "Q4",
+        "ticker": "2330",
+        "chunk_index": 62,
+        "year": 2025
+      },
+      {
+        "quarter": "Q4",
+        "chunk_index": 25,
+        "year": 2025,
+        "market": "TW",
         "ticker": "2330"
       },
       {
         "year": 2025,
-        "ticker": "2330",
         "quarter": "Q4",
-        "market": "TW",
-        "chunk_index": 23
-      },
-      {
-        "ticker": "2330",
-        "year": 2025,
-        "market": "TW",
-        "quarter": "Q4",
-        "chunk_index": 62
-      },
-      {
-        "ticker": "2330",
-        "market": "TW",
-        "year": 2025,
-        "quarter": "Q4",
-        "chunk_index": 25
-      },
-      {
         "chunk_index": 9,
-        "quarter": "Q4",
         "market": "TW",
-        "year": 2025,
         "ticker": "2330"
       }
     ],
-    "response": "<think>\n1.  **分析請求：** 使用者要求獲取台積電（2330.TW）2025年第四季的營業淨來源金額。\n2.  **檢索資料：** 仔細檢查提供的參考資料區塊。\n3.  **定位數據：** 在參考資料中找到包含時間序列數據的表格部分。該表格標註了「Net Revenue」（淨收入）。\n4.  **提取目標值：** 查找對應 4Q25 的數據。\n    *   表格內容如下：\n        | (In NT$ billions) | 4Q25 | 3Q25 | 4Q24 | 2025 | 2024 |\n        |---|---|---|---|---|---|\n        | Net Revenue | 1,046.09 | 989.92 | 868.46 | 3,809.05 | 2,894.31 |\n5.  **確定答案：** 4Q25 的 Net Revenue 為 1,046.09 億新台幣。\n6.  **輸出結果：** 直接根據資料回答。\n</think>\n台積電2025年第四季的營業淨來源金額（Net Revenue）是 **NT$1,046.09 億** (基於參考資料中的 4Q25 數據)。",
+    "response": "<think>\n1.  **分析請求：** 使用者要求獲取「台積電2025年第四季營業淨來源金額」。\n2.  **檢索資料：** 我檢查提供的參考資料區塊，尋找關於「Net Revenue」（營業淨來源金額）的數據。\n3.  **定位數據：** 在參考資料中，我找到一個包含季度和年份的表格：\n\n    | (In NT$ billions) | 4Q25 | 3Q25 | 4Q24 | 2025 | 2024 |\n    | :--- | :--- | :--- | :--- | :--- | :--- |\n    | Net Revenue | 1,046.09 | 989.92 | 868.46 | 3,809.05 | 2,894.31 |\n\n4.  **提取結果：** 對應「4Q25」（2025年第四季）的 Net Revenue 是 1,046.09 (單位為 NT$ billions)。\n5.  **輸出結論：** 直接根據資料回答。\n</think>\n台積電2025年第四季的營業淨來源金額是 **1,046.09 億新台幣** (NT$ billions)。\n\n*資料來源：參考資料區塊中「Net Revenue」表格。*",
     "reference": "During the fourth quarter, net cash generated from operating activities totaled NT$725.51 billion."
   },
   {
@@ -1226,42 +1226,42 @@
     ],
     "retrieved_metadata": [
       {
-        "quarter": "Q4",
         "market": "TW",
-        "chunk_index": 29,
+        "quarter": "Q4",
+        "year": 2025,
         "ticker": "2330",
-        "year": 2025
+        "chunk_index": 29
+      },
+      {
+        "quarter": "Q4",
+        "year": 2025,
+        "ticker": "2330",
+        "market": "TW",
+        "chunk_index": 25
       },
       {
         "ticker": "2330",
-        "market": "TW",
-        "quarter": "Q4",
-        "chunk_index": 25,
-        "year": 2025
-      },
-      {
         "market": "TW",
         "chunk_index": 23,
         "year": 2025,
-        "quarter": "Q4",
-        "ticker": "2330"
+        "quarter": "Q4"
       },
       {
-        "market": "TW",
         "chunk_index": 9,
-        "year": 2025,
         "quarter": "Q4",
+        "year": 2025,
+        "market": "TW",
         "ticker": "2330"
       },
       {
-        "chunk_index": 14,
-        "quarter": "Q4",
-        "ticker": "2330",
         "market": "TW",
-        "year": 2025
+        "chunk_index": 14,
+        "year": 2025,
+        "ticker": "2330",
+        "quarter": "Q4"
       }
     ],
-    "response": "<think>\n1.  **分析請求：** 使用者要求獲取「台積電2025年全年投資淨來源金額」。\n2.  **檢索資料：** 我仔細檢查提供的所有參考資料區塊。\n3.  **比對結果：** 參考資料中包含關於營收、成本、利潤率、EPS以及部分收入結構的數據，但**完全沒有**提及「投資淨來源金額」的相關資訊。\n4.  **決策：** 由於參考資料中未揭露此特定數據，我必須按照指示回答[財報未揭露]。\n</think>\n[財報未揭露]",
+    "response": "<think>\n1.  **分析請求：** 使用者詢問的是「台積電2025年全年投資淨來源金額」。\n2.  **檢索資料：** 我仔細檢查提供的參考資料區塊。該資料主要包含關於2024年和2025年的營收、成本、研發支出、利潤率以及部分收入細分（如晶圓收入按技術劃分）。\n3.  **比對結果：** 參考資料中**沒有**提及任何關於「投資淨來源金額」的數據。\n4.  **結論：** 由於參考資料中未揭露所需資訊，我必須按照指示回答[財報未揭露]。\n</think>\n[財報未揭露]",
     "reference": "On a full year basis, Net cash used in investing activities was NT$1,144.39 billion"
   },
   {
@@ -1275,42 +1275,42 @@
     ],
     "retrieved_metadata": [
       {
-        "ticker": "2330",
-        "quarter": "Q4",
         "market": "TW",
         "chunk_index": 61,
+        "ticker": "2330",
+        "quarter": "Q4",
         "year": 2025
       },
       {
+        "market": "TW",
+        "quarter": "Q4",
         "chunk_index": 62,
         "ticker": "2330",
-        "market": "TW",
+        "year": 2025
+      },
+      {
+        "chunk_index": 34,
+        "ticker": "2330",
+        "quarter": "Q4",
         "year": 2025,
+        "market": "TW"
+      },
+      {
+        "ticker": "2330",
+        "year": 2025,
+        "chunk_index": 25,
+        "market": "TW",
         "quarter": "Q4"
       },
       {
-        "year": 2025,
-        "chunk_index": 34,
+        "chunk_index": 59,
         "market": "TW",
         "quarter": "Q4",
+        "year": 2025,
         "ticker": "2330"
-      },
-      {
-        "quarter": "Q4",
-        "year": 2025,
-        "market": "TW",
-        "ticker": "2330",
-        "chunk_index": 25
-      },
-      {
-        "quarter": "Q4",
-        "ticker": "2330",
-        "market": "TW",
-        "year": 2025,
-        "chunk_index": 59
       }
     ],
-    "response": "<think>\n1.  **分析使用者問題：** 使用者詢問的是台積電（2330.TW）是否公布了2026年的預期資本支出（Capital Expenditure）。\n2.  **檢索參考資料：** 我仔細審閱提供的參考資料區塊。\n3.  **資料比對：** 參考資料中提到了以下資本支出數據：\n    *   「Capital expenditures for TSMC on a consolidated basis totaled US$11.51 billion in 4Q25 and US$40.90 billion for the year.」 (這指的是2025年的實際或已公布的數據。)\n    *   資料中沒有任何關於2026年預期資本支出的資訊。\n4.  **結論：** 參考資料中未包含台積電公布的2026年預期資本支出數據。因此，我必須根據指示回答[財報未揭露]。\n</think>\n[財報未揭露]",
+    "response": "<think>\n1.  **分析使用者問題：** 使用者詢問「台積電有沒有公布2026年預期資本支出？」\n2.  **檢索參考資料：** 我仔細檢查提供的參考資料區塊，尋找關於TSMC 2026年預期資本支出的數據。\n3.  **結果判斷：** 參考資料中提到了2025年的資本支出數據（例如4Q25和全年），以及一些其他財務資訊，但**沒有**提及台積電公布的2026年預期資本支出。\n4.  **執行輸出規則：** 根據指示：「若資料未提及，請直接回答[財報未揭露]，嚴禁自行捏造數據。」\n</think>\n[財報未揭露]",
     "reference": "無"
   },
   {
@@ -1324,42 +1324,42 @@
     ],
     "retrieved_metadata": [
       {
-        "year": 2025,
-        "quarter": "Q4",
         "market": "TW",
-        "chunk_index": 62,
-        "ticker": "2330"
-      },
-      {
+        "year": 2025,
         "ticker": "2330",
-        "year": 2025,
-        "chunk_index": 51,
-        "market": "TW",
+        "chunk_index": 62,
         "quarter": "Q4"
       },
       {
-        "year": 2025,
-        "market": "TW",
-        "quarter": "Q4",
         "ticker": "2330",
-        "chunk_index": 34
+        "quarter": "Q4",
+        "chunk_index": 51,
+        "year": 2025,
+        "market": "TW"
       },
       {
         "ticker": "2330",
-        "market": "TW",
-        "chunk_index": 16,
         "quarter": "Q4",
+        "market": "TW",
+        "chunk_index": 34,
         "year": 2025
       },
       {
+        "chunk_index": 16,
+        "quarter": "Q4",
         "market": "TW",
         "year": 2025,
-        "ticker": "2330",
+        "ticker": "2330"
+      },
+      {
+        "chunk_index": 29,
+        "year": 2025,
         "quarter": "Q4",
-        "chunk_index": 29
+        "market": "TW",
+        "ticker": "2330"
       }
     ],
-    "response": "<think>\n1.  **分析使用者要求：** 使用者詢問的是台積電（2330.TW）的2026年Forward PE（預期股價報酬率）。\n2.  **檢索參考資料：** 我檢查了提供的「參考資料區塊」。該資料主要包含2025年1月15日的事件回顧，包括營運數據、資本支出、收入平台分佈等。\n3.  **比對結果：** 參考資料中**完全沒有**提及任何關於2026年的Forward PE資訊或相關的財務預測。\n4.  **遵循指令：** 根據指示：「若資料未提及，請直接回答[財報未揭露]，嚴禁自行捏造數據。」\n5.  **結論：** 由於參考資料中沒有提供此類資訊，我必須直接回答為「[財報未揭露]」。\n</think>\n[財報未揭露]",
+    "response": "<think>\n1.  **分析使用者要求：** 使用者詢問「台積電有沒有公布2026年 forward PE?」\n2.  **檢索參考資料：** 我需要檢查提供的參考資料區塊，以查找關於台積電（2330.TW）的任何財務預測或Forward PE數據。\n3.  **審閱結果：** 參考資料僅包含2025年1月15日的事件摘要、營運數據（如收入、資本支出、研發等）以及不同平台的收入佔比。資料中**完全沒有**提及任何關於2026年的Forward PE資訊。\n4.  **得出結論：** 由於參考資料中未揭露所需資訊，我必須按照指示回答「[財報未揭露]」。\n</think>\n[財報未揭露]",
     "reference": "無"
   },
   {
@@ -1373,42 +1373,42 @@
     ],
     "retrieved_metadata": [
       {
-        "market": "TW",
-        "chunk_index": 62,
         "ticker": "2330",
         "quarter": "Q4",
-        "year": 2025
+        "market": "TW",
+        "year": 2025,
+        "chunk_index": 62
       },
       {
-        "year": 2025,
+        "quarter": "Q4",
+        "market": "TW",
         "ticker": "2330",
         "chunk_index": 16,
-        "market": "TW",
-        "quarter": "Q4"
-      },
-      {
-        "quarter": "Q4",
-        "chunk_index": 17,
-        "market": "TW",
-        "ticker": "2330",
         "year": 2025
       },
       {
-        "quarter": "Q4",
-        "chunk_index": 23,
-        "ticker": "2330",
         "year": 2025,
-        "market": "TW"
-      },
-      {
         "quarter": "Q4",
         "market": "TW",
-        "chunk_index": 9,
-        "year": 2025,
+        "chunk_index": 17,
         "ticker": "2330"
+      },
+      {
+        "year": 2025,
+        "ticker": "2330",
+        "market": "TW",
+        "quarter": "Q4",
+        "chunk_index": 23
+      },
+      {
+        "chunk_index": 9,
+        "market": "TW",
+        "year": 2025,
+        "ticker": "2330",
+        "quarter": "Q4"
       }
     ],
-    "response": "<think>\n1.  **分析使用者要求：** 使用者詢問「台積電對於2026年產業景氣展望是?」。\n2.  **檢索參考資料：** 我仔細檢查提供的所有參考資料區塊。\n3.  **審查結果：** 參考資料主要包含2025年的重要事件回顧、收入分析（按技術和地理區域）、以及2025年的財務數據（如毛利率、營運利潤等）。資料中**未提及**台積電對2026年產業景氣的具體展望。\n4.  **遵循指令：** 根據指示：「若資料未提及，請直接回答[財報未揭露]，嚴禁自行捏造數據。」\n5.  **生成回答。**\n</think>\n[財報未揭露]",
+    "response": "<think>\n1. **分析問題：** 使用者詢問「台積電對於2026年產業景氣展望是?」。\n2. **檢索資料：** 我檢查了提供的參考資料區塊。該資料主要包含2025年1月15日的營收分析、財務數據以及2024年與2025年的比較，但其中**沒有**提及台積電對2026年產業景氣的具體展望或預測。\n3. **遵循指令：** 根據指示：「若資料未提及，請直接回答[財報未揭露]」。\n4. **結論：** 由於參考資料中未包含此類展望資訊，我必須直接告知資料缺失。\n</think>\n[財報未揭露]",
     "reference": "無"
   },
   {
@@ -1434,70 +1434,70 @@
         "market": "TW"
       },
       {
-        "quarter": "Q4",
-        "chunk_index": 8,
         "market": "TW",
+        "quarter": "Q4",
+        "year": 2025,
         "ticker": "2330",
-        "year": 2025
+        "chunk_index": 8
       },
       {
         "year": 2025,
+        "chunk_index": 7,
         "quarter": "Q4",
         "market": "TW",
-        "chunk_index": 7,
         "ticker": "2330"
       },
       {
-        "ticker": "2330",
         "year": 2025,
+        "ticker": "2330",
         "quarter": "Q4",
-        "chunk_index": 34,
+        "market": "TW",
+        "chunk_index": 34
+      },
+      {
+        "quarter": "Q4",
+        "chunk_index": 43,
+        "year": 2025,
+        "ticker": "2330",
         "market": "TW"
       },
       {
-        "market": "TW",
+        "chunk_index": 4,
         "year": 2025,
-        "ticker": "2330",
-        "chunk_index": 43,
-        "quarter": "Q4"
-      },
-      {
         "quarter": "Q4",
         "ticker": "2454",
-        "chunk_index": 4,
-        "market": "TW",
-        "year": 2025
+        "market": "TW"
       },
       {
-        "quarter": "Q4",
+        "ticker": "2454",
         "year": 2025,
-        "chunk_index": 0,
         "market": "TW",
-        "ticker": "2454"
+        "quarter": "Q4",
+        "chunk_index": 0
       },
       {
         "quarter": "Q4",
         "chunk_index": 1,
-        "year": 2025,
         "market": "TW",
-        "ticker": "2454"
+        "ticker": "2454",
+        "year": 2025
       },
       {
-        "quarter": "Q4",
-        "year": 2025,
         "chunk_index": 12,
+        "year": 2025,
+        "quarter": "Q4",
         "ticker": "2454",
         "market": "TW"
       },
       {
+        "market": "TW",
         "ticker": "2454",
         "year": 2025,
-        "quarter": "Q4",
-        "market": "TW",
-        "chunk_index": 5
+        "chunk_index": 5,
+        "quarter": "Q4"
       }
     ],
-    "response": "<think>\n1.  **分析請求：** 使用者要求比較台積電 (2330.TW) 和聯發科 (2454.TW) 在 2025 年第四季的毛利金額。\n2.  **檢索台積電 (2330.TW) 數據：**\n    *   參考資料中提供了關於 TSMC 的財務資訊，包括 2025 年的季度數據。\n    *   在「Quarter 2025」部分，提到：Gross margin was 62.3%，2.8 percentage points higher than 3Q25 and 3.3 percentage points higher than 4Q24。這提供了毛利率百分比，但沒有直接提供 2025 Q4 的毛利**金額**。\n3.  **檢索聯發科 (2454.TW) 數據：**\n    *   在「CONSOLIDATED STATEMENTS OF COMPREHENSIVE INCOME For the Fourth quarter of year 2025 Unit: Millions of New Taiwan dollars Sequential Comparison」表格中，我找到以下數據：\n        *   4Q 2025 的 Gross profit (毛利) 為 69,281 百萬新台幣。\n4.  **比較與總結：** 由於參考資料中僅為聯發科提供了 2025 年第四季的毛利金額，而對於台積電則未提供具體的毛利金額數據，因此無法進行直接的兩公司毛利金額對比。我將以表格形式呈現可得的數據。\n</think>\n根據您提供的參考資料，我整理了台積電和聯發科在 2025 年第四季的相關財務數據。\n\n**請注意：** 參考資料中僅為聯發科提供了 2025 年第四季的毛利金額（以百萬新台幣計），而對於台積電，資料未直接揭露該季的毛利金額。\n\n### 台積電與聯發科 2025 年第四季毛利比較\n\n| 公司代號 | 項目 | 金額 (NT$ 百萬) | 資料來源 |\n| :--- | :--- | :--- | :--- |\n| 2330.TW (台積電) | 2025 Q4 毛利金額 | [財報未揭露] | 參考資料 |\n| 2454.TW (聯發科) | 2025 Q4 毛利金額 | 69,281 | 參考資料 |",
+    "response": "<think>\n1.  **分析請求：** 使用者要求獲取台積電 (2330.TW) 和聯發科 (2454.TW) 在 2025 年第四季的毛利金額。\n2.  **檢索資料（台積電 2330.TW）：** 參考資料中提供了 2025 年的總體營收和毛利率信息，但未明確提供 2025 年第四季的具體毛利金額。\n3.  **檢索資料（聯發科 2454.TW）：** 參考資料在「CONSOLIDATED STATEMENTS OF COMPREHENSIVE INCOME For the Fourth quarter of year 2025」部分提供了 4Q2025 的「Gross profit」（毛利）金額，為 69,281 百萬新台幣。\n4.  **結論：** 雖然聯發科的資料中包含了 4Q2025 的毛利（Gross profit），但對於台積電，參考資料中未揭露該特定季度數據。因此，無法提供兩家公司的同步毛利金額。\n5.  **執行輸出：** 根據指示，若資料未提及或無法獲取，則回答[財報未揭露]。\n</think>\n台積電和聯發科 2025 年第四季的毛利金額：[財報未揭露]",
     "reference": "TSMC's Gross Profit in 4Q25 was NT$651.99 billion. MTK's Gross Profit in 4Q25 was NT$69,281 million."
   },
   {
@@ -1511,42 +1511,42 @@
     ],
     "retrieved_metadata": [
       {
-        "quarter": "Q4",
-        "year": 2025,
-        "chunk_index": 0,
-        "market": "TW",
-        "ticker": "2454"
-      },
-      {
         "ticker": "2454",
+        "year": 2025,
         "quarter": "Q4",
-        "chunk_index": 4,
         "market": "TW",
-        "year": 2025
+        "chunk_index": 0
       },
       {
+        "quarter": "Q4",
+        "market": "TW",
+        "year": 2025,
+        "ticker": "2454",
+        "chunk_index": 4
+      },
+      {
+        "year": 2025,
+        "quarter": "Q4",
         "ticker": "2454",
         "chunk_index": 7,
-        "market": "TW",
-        "year": 2025,
-        "quarter": "Q4"
-      },
-      {
-        "chunk_index": 12,
-        "year": 2025,
-        "quarter": "Q4",
-        "market": "TW",
-        "ticker": "2454"
+        "market": "TW"
       },
       {
         "ticker": "2454",
-        "market": "TW",
-        "year": 2025,
         "quarter": "Q4",
-        "chunk_index": 1
+        "year": 2025,
+        "market": "TW",
+        "chunk_index": 12
+      },
+      {
+        "market": "TW",
+        "chunk_index": 1,
+        "quarter": "Q4",
+        "year": 2025,
+        "ticker": "2454"
       }
     ],
-    "response": "<think>\n1.  **目標確認：** 使用者要求獲取聯發科 (2454.TW) 2025年第四季的營收。\n2.  **資料定位：** 我檢查了提供的參考資料區塊。在「CONSOLIDATED STATEMENTS OF COMPREHENSIVE INCOME For the Fourth quarter of year 2025 Unit: Millions of New Taiwan dollars Sequential Comparison」部分，我找到了相關數據。\n3.  **數據提取：** 在該表格中，「Net Sales」（淨銷售額）的「4Q 2025」欄位對應的值是 150,188。\n4.  **格式化輸出：** 我將提取的數據以清晰的方式呈現。\n</think>\n聯發科2025年第四季的營收（Net Sales）為 **150,188 百萬新台幣**。\n\n資料來源：參考資料區塊中「CONSOLIDATED STATEMENTS OF COMPREHENSIVE INCOME For the Fourth quarter of year 2025 Unit: Millions of New Taiwan dollars Sequential Comparison」。",
+    "response": "<think>\n1.  **目標確認：** 使用者要求獲取聯發科 (2454.TW) 2025年第四季的營收。\n2.  **資料檢索：** 我檢查了提供的參考資料區塊。\n3.  **定位數據：** 在「CONSOLIDATED STATEMENTS OF COMPREHENSIVE INCOME For the Fourth quarter of year 2025 Unit: Millions of New Taiwan dollars Sequential Comparison」部分，我找到了相關數據。\n    *   項目為 Net Sales (淨銷售額)。\n    *   4Q 2025 的 Net Sales 為 150,188 百萬元新台幣。\n4.  **輸出生成：** 直接根據找到的資料回答問題。\n</think>\n聯發科2025年第四季的營收（淨銷售額）為 **150,188 百萬元新台幣** (Millions of New Taiwan dollars)。",
     "reference": "聯發科2025年第四季營收是 NT$150,188 百萬元"
   },
   {
@@ -1567,35 +1567,35 @@
         "year": 2025
       },
       {
-        "market": "TW",
-        "quarter": "Q4",
-        "year": 2025,
         "ticker": "2454",
+        "year": 2025,
+        "quarter": "Q4",
+        "market": "TW",
         "chunk_index": 7
       },
       {
-        "year": 2025,
         "chunk_index": 0,
-        "market": "TW",
+        "year": 2025,
+        "quarter": "Q4",
         "ticker": "2454",
+        "market": "TW"
+      },
+      {
+        "chunk_index": 12,
+        "ticker": "2454",
+        "year": 2025,
+        "market": "TW",
         "quarter": "Q4"
       },
       {
-        "ticker": "2454",
-        "chunk_index": 12,
-        "quarter": "Q4",
         "market": "TW",
-        "year": 2025
-      },
-      {
         "quarter": "Q4",
+        "year": 2025,
         "ticker": "2454",
-        "market": "TW",
-        "chunk_index": 1,
-        "year": 2025
+        "chunk_index": 1
       }
     ],
-    "response": "<think>\n1.  **分析請求：** 使用者要求查詢MTK（公司代號：2454.TW）在2025年第四季的營收數據。\n2.  **檢索資料：** 檢查提供的參考資料中是否有關於2025年第四季的營收資訊。\n3.  **定位數據：** 在「CONSOLIDATED STATEMENTS OF COMPREHENSIVE INCOME」下的「Yearly Comparison」表格中，查找「4Q 2025」的「Net Sales」（淨銷售額）。\n4.  **提取結果：** 根據資料，MTK在2025年第四季的淨銷售額為 150,188 百萬新台幣。\n5.  **輸出格式化：** 按照要求，直接提供檢索到的數據。\n</think>\nMTK在2025年第四季的營收（Net Sales）為 **150,188 百萬新台幣**。\n\n（資料來源：參考資料區塊中「CONSOLIDATED STATEMENTS OF COMPREHENSIVE INCOME」表格，4Q 2025數據。）",
+    "response": "<think>\n1.  **分析請求：** 使用者要求查詢美光（MTK，代號2454.TW）在2025年第四季的營收。\n2.  **檢索資料：** 檢查提供的參考資料區塊。\n3.  **定位數據：** 在「CONSOLIDATED STATEMENTS OF COMPREHENSIVE INCOME」下的「Yearly Comparison」部分，我找到了關於2025年第四季（4Q 2025）的數據。\n    *   項目為 Net Sales (淨銷售額)。\n    *   4Q 2025 的 Net Sales 為 150,188 百萬新台幣。\n4.  **輸出結果：** 直接根據找到的資料回答問題。\n</think>\nMTK（公司代號：2454.TW）的2025年第四季營收（Net Sales）為 **150,188 百萬新台幣**。\n\n此數據來自參考資料中的「CONSOLIDATED STATEMENTS OF COMPREHENSIVE INCOME」部分，標註為 4Q 2025 的數據。",
     "reference": "MTK2025年第四季營收是 NT$150,188 百萬元"
   },
   {
@@ -1609,42 +1609,42 @@
     ],
     "retrieved_metadata": [
       {
+        "chunk_index": 4,
         "market": "TW",
-        "year": 2025,
         "ticker": "2454",
         "quarter": "Q4",
-        "chunk_index": 4
+        "year": 2025
       },
       {
-        "ticker": "2454",
-        "chunk_index": 7,
-        "year": 2025,
         "market": "TW",
+        "chunk_index": 7,
+        "ticker": "2454",
+        "year": 2025,
         "quarter": "Q4"
       },
       {
-        "year": 2025,
-        "market": "TW",
+        "quarter": "Q4",
+        "chunk_index": 0,
         "ticker": "2454",
-        "quarter": "Q4",
-        "chunk_index": 0
+        "year": 2025,
+        "market": "TW"
       },
       {
-        "quarter": "Q4",
-        "market": "TW",
+        "ticker": "2454",
         "chunk_index": 12,
+        "market": "TW",
         "year": 2025,
-        "ticker": "2454"
+        "quarter": "Q4"
       },
       {
-        "year": 2025,
-        "chunk_index": 1,
         "quarter": "Q4",
+        "chunk_index": 1,
+        "year": 2025,
         "market": "TW",
         "ticker": "2454"
       }
     ],
-    "response": "<think>\n1.  **分析請求：** 使用者要求獲取「發哥 2025年第三季營收」。\n2.  **檢索資料：** 檢查提供的參考資料中關於 2454.TW (聯發科) 的季度數據。\n3.  **定位數據：** 在「CONSOLIDATED STATEMENTS OF COMPREHENSIVE INCOME For the Fourth quarter of year 2025 Unit: Millions of New Taiwan dollars Sequential Comparison」表格中，我找到以下相關數據：\n    *   Net Sales (淨銷售額)\n    *   4Q 2025 (2025年第四季)\n    *   3Q 2025 (2025年第三季)\n4.  **提取結果：** 對應 3Q 2025 的 Net Sales 為 142,097 百萬新台幣。\n5.  **輸出生成：** 直接根據檢索到的數據回答問題。\n</think>\n發哥（聯發科）2025年第三季的營收（Net Sales）為 **142,097 百萬新台幣**。\n\n資料來源：參考資料區塊中「CONSOLIDATED STATEMENTS OF COMPREHENSIVE INCOME For the Fourth quarter of year 2025 Unit: Millions of New Taiwan dollars Sequential Comparison」表格。",
+    "response": "<think>\n1.  **分析請求：** 使用者要求獲取「發哥」（聯發科，代號 2454.TW）在「2025年第三季」的營收數據。\n2.  **檢索資料：** 我檢查了提供的參考資料區塊。\n3.  **定位數據：** 在「CONSOLIDATED STATEMENTS OF COMPREHENSIVE INCOME」部分，我找到了季度比較數據：\n    *   Net Sales (營收) 的比較欄位中包含「3Q 2025」。\n4.  **提取結果：** 對應「3Q 2025」的「Net Sales」數據為 142,097 百萬新台幣。\n5.  **輸出格式化：** 根據指示，我將以清晰的方式呈現提取到的數據。\n</think>\n發哥（聯發科）2025年第三季營收為 **142,097 百萬新台幣** (依據參考資料中的「CONSOLIDATED STATEMENTS OF COMPREHENSIVE INCOME」)。",
     "reference": "聯發科2025年第三季營收是 142,097 百萬元"
   },
   {
@@ -1658,42 +1658,42 @@
     ],
     "retrieved_metadata": [
       {
+        "quarter": "Q4",
         "ticker": "2454",
         "chunk_index": 8,
         "market": "TW",
-        "year": 2025,
-        "quarter": "Q4"
+        "year": 2025
       },
       {
         "year": 2025,
         "chunk_index": 6,
-        "quarter": "Q4",
         "ticker": "2454",
+        "market": "TW",
+        "quarter": "Q4"
+      },
+      {
+        "ticker": "2454",
+        "chunk_index": 7,
+        "year": 2025,
+        "quarter": "Q4",
         "market": "TW"
       },
       {
+        "market": "TW",
+        "year": 2025,
+        "chunk_index": 1,
+        "quarter": "Q4",
+        "ticker": "2454"
+      },
+      {
         "quarter": "Q4",
         "year": 2025,
         "ticker": "2454",
-        "market": "TW",
-        "chunk_index": 7
-      },
-      {
-        "quarter": "Q4",
-        "year": 2025,
-        "chunk_index": 1,
-        "market": "TW",
-        "ticker": "2454"
-      },
-      {
         "chunk_index": 9,
-        "market": "TW",
-        "year": 2025,
-        "quarter": "Q4",
-        "ticker": "2454"
+        "market": "TW"
       }
     ],
-    "response": "<think>\n1.  **目標確認：** 使用者要求獲取聯發科 (MTK, 2454.TW) 在 2025 年第四季的每股盈餘 (EPS)。\n2.  **資料檢索：** 我檢查提供的「參考資料區塊」。\n3.  **分析結果：** 參考資料中包含關於聯發科（2454.TW）的資產負債表細項以及部分損益數據，其中提到了「Basic Earnings Per Share (NTD) 66.16 66.92」，但這些數據的時間點和具體是哪一季的資訊並未明確指出是 2025 年第四季的 EPS。\n4.  **結論：** 參考資料中沒有揭露 MTK 在 2025 年第四季的每股盈餘數據。\n5.  **執行輸出規則：** 根據指示，若資料未提及，應直接回答 [財報未揭露]。\n</think>\n[財報未揭露]",
+    "response": "<think>\n1.  **分析請求：** 使用者要求獲取聯發科 (MTK) 在 2025 年第四季的每股盈餘 (EPS)。\n2.  **檢索參考資料：** 我檢查了提供的「參考資料區塊」。\n3.  **數據比對：** 參考資料中包含以下關於每股盈餘的資訊：\n    *   `Basic Earnings Per Share (NTD) 66.16 66.92 Note1: Sums may not equal totals due to rounding.`\n    *   這部分數據並未明確標註是針對「2025年第四季」。它看起來像是年度或期末的總結數據。\n4.  **結論：** 參考資料中沒有提供 MTK 在 2025 年第四季的具體每股盈餘數據。\n5.  **輸出生成：** 根據指示，如果資料未提及，則直接回答 [財報未揭露]。\n</think>\n[財報未揭露]",
     "reference": "MTK 2025年第四季基本每股盈餘是 14.39 元"
   },
   {
@@ -1707,42 +1707,42 @@
     ],
     "retrieved_metadata": [
       {
+        "ticker": "2454",
+        "quarter": "Q4",
+        "year": 2025,
         "chunk_index": 17,
-        "quarter": "Q4",
-        "year": 2025,
-        "market": "TW",
-        "ticker": "2454"
-      },
-      {
-        "chunk_index": 12,
-        "ticker": "2454",
-        "year": 2025,
-        "quarter": "Q4",
         "market": "TW"
       },
       {
+        "year": 2025,
+        "market": "TW",
+        "ticker": "2454",
+        "quarter": "Q4",
+        "chunk_index": 12
+      },
+      {
         "ticker": "2454",
         "market": "TW",
         "quarter": "Q4",
-        "chunk_index": 7,
-        "year": 2025
+        "year": 2025,
+        "chunk_index": 7
       },
       {
-        "quarter": "Q4",
-        "ticker": "2454",
-        "year": 2025,
+        "market": "TW",
         "chunk_index": 13,
-        "market": "TW"
+        "year": 2025,
+        "ticker": "2454",
+        "quarter": "Q4"
       },
       {
-        "ticker": "2454",
         "market": "TW",
         "year": 2025,
-        "chunk_index": 0,
-        "quarter": "Q4"
+        "quarter": "Q4",
+        "ticker": "2454",
+        "chunk_index": 0
       }
     ],
-    "response": "<think>\n1.  **分析請求：** 使用者要求獲取聯發科 (2454.TW) 在年度合併現金流量表中 2025 年的現金部位變動金額。\n2.  **檢索資料：** 我檢查了提供的參考資料區塊。該資料包含「CONSOLIDATED STATEMENTS OF CASH FLOWS」和「CONSOLIDATED BALANCE SHEETS」，數據單位為新台幣百萬元 (Millions of New Taiwan dollars)。\n3.  **定位關鍵數據：** 在「CONSOLIDATED STATEMENTS OF CASH FLOWS」部分，我找到以下相關項目：\n    *   `Net increase in cash and cash equivalents`: 2025 年為 31,594。\n4.  **確認適用性：** 雖然參考資料標註的是「MEDIATEK INC. AND SUBSIDIARIES」，但數據直接提供了所需資訊，因此我將依據此數據回答。\n5.  **結論：** 聯發科（或其集團）2025 年現金部位變動金額為 31,594 百萬元新台幣。\n</think>\n在年度合併現金流量表中，聯發科 (2454.TW) 2025 年的現金部位變動金額是 **31,594** 百萬元新台幣。\n\n（資料來源：參考資料區塊中「CONSOLIDATED STATEMENTS OF CASH FLOWS」下的「Net increase in cash and cash equivalents」項目。）",
+    "response": "<think>\n1.  **分析請求：** 使用者要求獲取聯發科 (2454.TW) 在年度合併現金流量表中，2025年的現金部位變動金額。\n2.  **檢索資料：** 我需要查閱提供的「參考資料區塊」，特別是關於「CONSOLIDATED STATEMENTS OF CASH FLOWS」。\n3.  **定位數據：** 掃描現金流量表部分，尋找與現金及等價物（Cash and cash equivalents）變動相關的項目。\n    *   在該部分，我找到了「Net increase in cash and cash equivalents」（現金及等價物的淨增加額）。\n4.  **提取結果：** 參考資料顯示：\n    *   2025年的「Net increase in cash and cash equivalents」是 31,594 (單位：百萬元新台幣)。\n5.  **格式化輸出：** 根據指示，我將以 Markdown 表格形式呈現結果。\n</think>\n\n| 公司代號 | 年度 | 現金部位變動金額 (Millions of NTD) | 資料來源 |\n| :--- | :--- | :--- | :--- |\n| 2454.TW | 2025 | 31,594 | 參考資料區塊 (Net increase in cash and cash equivalents) |",
     "reference": "聯發科2025年本期現金及約當現金增加數是新台幣 31,594 百萬元"
   },
   {
@@ -1756,42 +1756,42 @@
     ],
     "retrieved_metadata": [
       {
-        "chunk_index": 17,
         "year": 2025,
-        "ticker": "2454",
         "quarter": "Q4",
+        "ticker": "2454",
+        "chunk_index": 17,
         "market": "TW"
       },
       {
-        "year": 2025,
-        "market": "TW",
         "ticker": "2454",
+        "market": "TW",
         "chunk_index": 12,
-        "quarter": "Q4"
+        "quarter": "Q4",
+        "year": 2025
       },
       {
         "chunk_index": 7,
-        "year": 2025,
         "quarter": "Q4",
-        "ticker": "2454",
-        "market": "TW"
+        "year": 2025,
+        "market": "TW",
+        "ticker": "2454"
       },
       {
         "year": 2025,
+        "chunk_index": 0,
         "ticker": "2454",
         "market": "TW",
-        "chunk_index": 0,
         "quarter": "Q4"
       },
       {
-        "chunk_index": 13,
+        "quarter": "Q4",
         "year": 2025,
         "ticker": "2454",
-        "quarter": "Q4",
-        "market": "TW"
+        "market": "TW",
+        "chunk_index": 13
       }
     ],
-    "response": "<think>\n1.  **分析請求：** 使用者要求獲取「聯發科 (2454.TW)」在「年度合併現金流量表」中「2024年現金部位變動金額」。\n2.  **檢索資料：** 仔細審閱提供的參考資料區塊，尋找與現金流和現金及等價物相關的數據。\n3.  **定位關鍵數據：** 在「CONSOLIDATED BALANCE SHEETS」部分，我找到了關於「Cash and cash equivalents」（現金及等價物）的數據：\n    *   2025年期末：235,290 百萬新台幣\n    *   2024年期末：203,696 百萬新台幣\n4.  **計算變動：** 現金部位變動金額 = 期末餘額 (2024) - 期初餘額 (2024)。\n    *   變動金額 = 203,696 - 165,396 = 38,300。\n5.  **交叉驗證：** 在現金流量表部分，有「Net increase in cash and cash equivalents」這一行顯示了 `31,594||38,300`。根據計算結果，38,300 符合2024年的變動金額。\n6.  **格式化輸出：** 根據指示，進行跨公司比較時使用Markdown表格，但此處是單一公司的數據提取，直接回答即可。\n</think>\n聯發科2024年現金部位變動金額是 **38,300** 百萬新台幣。\n\n（資料來源：參考資料區塊中「CONSOLIDATED BALANCE SHEETS」及「Cash flows used in financing activities」相關數據計算得出。）",
+    "response": "<think>\n1.  **分析請求：** 使用者要求獲取聯發科 (2454.TW) 在年度合併現金流量表中「2024年現金部位變動金額」。\n2.  **檢索資料：** 檢查提供的參考資料區塊，特別是關於現金流量表（Cash Flows）的部分。\n3.  **定位關鍵數據：** 在「CONSOLIDATED STATEMENTS OF CASH FLOWS」部分，我找到以下相關行：\n    *   `Cash flows used in financing activities`: (87,675) | (90,119)\n    *   `Net increase in cash and cash equivalents`: 31,594 | 38,300\n4.  **判斷對應關係：** 「Net increase in cash and cash equivalents」代表現金及等價物的淨增加額。在提供的數據中，2024年的變動金額是 38,300 (單位：百萬新台幣)。\n5.  **確認時間範圍：** 該數據是針對「For the years ended December 31, 2025 and 2024」。因此，2024年的變動金額對應的是2024年期內。\n6.  **格式化輸出：** 根據指示，我將以表格形式呈現結果。\n</think>\n\n| 公司代號 | 年份 | 現金部位變動金額 (百萬新台幣) | 資料來源 |\n| :--- | :--- | :--- | :--- |\n| 2454.TW | 2024 | 38,300 | 參考資料區塊：Cash flows used in financing activities |",
     "reference": "聯發科2024年本期現金及約當現金增加數是新台幣 38,300 百萬元"
   },
   {
@@ -1806,41 +1806,41 @@
     "retrieved_metadata": [
       {
         "market": "TW",
-        "quarter": "Q4",
         "chunk_index": 12,
         "year": 2025,
+        "quarter": "Q4",
         "ticker": "2454"
       },
       {
-        "market": "TW",
-        "quarter": "Q4",
-        "year": 2025,
         "ticker": "2454",
+        "year": 2025,
+        "quarter": "Q4",
+        "market": "TW",
         "chunk_index": 17
       },
       {
-        "chunk_index": 7,
         "quarter": "Q4",
-        "ticker": "2454",
         "market": "TW",
+        "chunk_index": 7,
+        "ticker": "2454",
         "year": 2025
       },
       {
-        "ticker": "2454",
         "year": 2025,
         "market": "TW",
+        "quarter": "Q4",
         "chunk_index": 0,
-        "quarter": "Q4"
+        "ticker": "2454"
       },
       {
-        "chunk_index": 4,
-        "ticker": "2454",
         "year": 2025,
+        "quarter": "Q4",
+        "ticker": "2454",
         "market": "TW",
-        "quarter": "Q4"
+        "chunk_index": 4
       }
     ],
-    "response": "<think>\n1.  **分析請求：** 使用者要求獲取聯發科 (2454.TW) 在 2024 年年度合併現金流量表的期末現金餘額。\n2.  **檢索資料：** 檢查提供的參考資料區塊中關於「CONSOLIDATED STATEMENTS OF CASH FLOWS」的部分。\n3.  **定位數據：** 查找與「Cash and cash equivalents at the end of the period」相關的數據，並確定對應 2024 年的數值。\n4.  **提取結果：** 在參考資料中，針對 2025 年和 2024 年的比較，我找到以下數據點：\n    *   `Cash and cash equivalents at the end of the period|235,290||203,696|` (這表示 2025 年是 235,290 百萬新台幣，2024 年是 203,696 百萬新台幣)。\n5.  **結論：** 聯發科在 2024 年的期末現金餘額為 203,696 百萬新台幣。\n6.  **格式化輸出：** 根據指示，將結果以清晰的方式呈現。\n</think>\n聯發科在 2024 年年度合併現金流量表中的期末現金餘額為 **203,696 百萬新台幣** (Millions of New Taiwan dollars)。",
+    "response": "<think>\n1.  **分析請求：** 使用者要求獲取聯發科（2454.TW）在2024年的年度合併現金流量表中的期末現金餘額。\n2.  **檢索資料：** 檢查提供的參考資料區塊中關於「CONSOLIDATED STATEMENTS OF CASH FLOWS」的部分。\n3.  **定位數據：** 在該表格中，我尋找與「Cash and cash equivalents at the end of the period」（期末現金及等價物）相關的數據，並篩選出2024年的欄位。\n4.  **提取結果：** 參考資料中顯示：\n    *   `Cash and cash equivalents at the end of the period` for 2024 是 203,696 (Millions of New Taiwan dollars)。\n5.  **結論：** 根據提供的參考資料，聯發科在2024年的期末現金餘額為 203,696 百萬元新台幣。\n</think>\n聯發科在2024年的期末現金餘額為 **203,696 百萬元新台幣** (依據年度合併現金流量表)。",
     "reference": "聯發科在2024年的期末現金及約當現金餘額是新台幣 203,696 百萬元"
   },
   {
@@ -1856,40 +1856,40 @@
       {
         "ticker": "2454",
         "quarter": "Q4",
+        "chunk_index": 7,
         "market": "TW",
-        "year": 2025,
-        "chunk_index": 7
+        "year": 2025
       },
       {
-        "ticker": "2454",
-        "quarter": "Q4",
-        "year": 2025,
         "chunk_index": 12,
-        "market": "TW"
-      },
-      {
-        "year": 2025,
         "market": "TW",
-        "ticker": "2454",
-        "chunk_index": 4,
-        "quarter": "Q4"
-      },
-      {
         "quarter": "Q4",
-        "year": 2025,
         "ticker": "2454",
-        "chunk_index": 0,
-        "market": "TW"
+        "year": 2025
       },
       {
-        "year": 2025,
         "market": "TW",
-        "chunk_index": 13,
+        "year": 2025,
+        "chunk_index": 4,
+        "quarter": "Q4",
+        "ticker": "2454"
+      },
+      {
+        "chunk_index": 0,
+        "market": "TW",
         "ticker": "2454",
-        "quarter": "Q4"
+        "quarter": "Q4",
+        "year": 2025
+      },
+      {
+        "chunk_index": 13,
+        "market": "TW",
+        "ticker": "2454",
+        "quarter": "Q4",
+        "year": 2025
       }
     ],
-    "response": "<think>\n1.  **目標確認：** 使用者要求計算美光（MTK，代號 2454.TW）在2025年的自由現金流餘額 (Free Cash Flow, FCF)。\n2.  **FCF定義：** 自由現金流通常計算公式為：營運現金流 - 資本支出 (Capex)。\n3.  **資料檢索：** 我檢查了提供的參考資料，該資料來自2025年和2024年的「CONSOLIDATED STATEMENTS OF CASH FLOWS」。\n    *   **營運現金流 (Net cash flows from operating activities):** 2025年為 162,793 百萬新台幣。\n    *   **投資活動現金流 (Cash flows from investing activities):** 資料列出了涉及金融資產的交易，但沒有明確提供總體的資本支出 (Capex) 數據。\n4.  **計算可行性評估：** 由於參考資料中缺少計算自由現金流所需的「資本支出 (Capex)」數據，因此無法根據現有資訊精確計算出2025年的自由現金流餘額。\n5.  **最終判斷：** 必須依據指示，如果資料未提及或無法計算，則直接回答[財報未揭露]。\n</think>\n[財報未揭露]",
+    "response": "<think>\n1.  **分析請求：** 使用者要求計算美光（MTK，代號 2454.TW）在2025年的自由現金流餘額 (Free Cash Flow, FCF)。\n2.  **定義FCF：** 自由現金流通常定義為「營運現金流」減去「資本支出 (Capital Expenditures, Capex)」。\n3.  **檢索參考資料：** 我檢查了提供的參考資料，該資料來自2025年和2024年的綜合財務報表中的現金流量表。\n4.  **數據提取：**\n    *   **2025年營運現金流 (Net cash flows from operating activities):** 162,793 百萬新台幣。\n    *   **2025年投資活動現金流 (Cash flows from investing activities):** 包含資產收購和處置的現金流，但缺少明確的「資本支出 (Capex)」數據。\n5.  **計算可行性評估：** 由於參考資料中未提供用於計算自由現金流的關鍵數據（即資本支出 Capex），因此無法精確計算出2025年的自由現金流餘額。\n6.  **遵循指令：** 根據指示：「若資料未提及，請直接回答[財報未揭露]，嚴禁自行捏造數據。」\n</think>\n[財報未揭露]",
     "reference": "聯發科在2025年的自由現金流餘額是新台幣125,039 百萬元，由營業活動之淨現金流入 162,793 百萬元 加 投資活動之淨現金流出 負 37,754 百萬元，得出"
   },
   {
@@ -1903,42 +1903,42 @@
     ],
     "retrieved_metadata": [
       {
-        "chunk_index": 4,
-        "year": 2025,
-        "market": "TW",
+        "ticker": "2454",
         "quarter": "Q4",
-        "ticker": "2454"
+        "market": "TW",
+        "year": 2025,
+        "chunk_index": 4
       },
       {
         "year": 2025,
+        "ticker": "2454",
         "chunk_index": 12,
         "market": "TW",
-        "quarter": "Q4",
-        "ticker": "2454"
-      },
-      {
-        "year": 2025,
-        "chunk_index": 7,
-        "ticker": "2454",
-        "quarter": "Q4",
-        "market": "TW"
-      },
-      {
-        "year": 2025,
-        "market": "TW",
-        "chunk_index": 1,
-        "ticker": "2454",
         "quarter": "Q4"
       },
       {
-        "chunk_index": 5,
+        "market": "TW",
+        "ticker": "2454",
         "quarter": "Q4",
+        "chunk_index": 7,
+        "year": 2025
+      },
+      {
         "year": 2025,
         "market": "TW",
-        "ticker": "2454"
+        "ticker": "2454",
+        "chunk_index": 1,
+        "quarter": "Q4"
+      },
+      {
+        "ticker": "2454",
+        "quarter": "Q4",
+        "year": 2025,
+        "chunk_index": 5,
+        "market": "TW"
       }
     ],
-    "response": "<think>\n1.  **分析請求：** 使用者要求查詢聯發科 (2454.TW) 在 2025 年第四季的銷貨成本。\n2.  **檢索資料：** 我檢查了提供的參考資料區塊。該資料提供了截至 2025 年 12 月 31 日和 2024 年 12 月 31 日的年度財務數據（如收入、毛利、營業成本等）。\n3.  **比對結果：** 參考資料中**未揭露** 2025 年第四季的詳細財務數據，因此無法直接提供該時期的銷貨成本。\n4.  **決策：** 根據指示，若資料未提及或無法獲取，應回答「[財報未揭露]」。\n</think>\n[財報未揭露]",
+    "response": "<think>\n1.  **分析請求：** 使用者要求獲取聯發科 (2454.TW) 在 2025 年第四季的銷貨成本 (Cost of Goods Sold, COGS)。\n2.  **檢索資料：** 我檢查了提供的參考資料區塊。該資料包含截至 2025 年 12 月 31 日和 2024 年 12 月 31 日的年度財務數據（如銷售額、毛利、資產負債表等）。\n3.  **比對結果：** 參考資料中提供了「Net Sales」（淨銷售額）和「Gross profit」（毛利），但**沒有直接提供「銷貨成本 (Cost of Goods Sold)」的具體數據**。此外，提供的數據是年度結算數據，無法推導出特定季度（2025年第四季）的細項成本。\n4.  **判斷結論：** 由於參考資料中未揭露所需資訊，我必須按照指示回答[財報未揭露]。\n</think>\n[財報未揭露]",
     "reference": "2454 的營業成本是 NT$80,907 百萬元"
   },
   {
@@ -1952,42 +1952,42 @@
     ],
     "retrieved_metadata": [
       {
-        "year": 2025,
-        "chunk_index": 0,
         "quarter": "Q4",
+        "market": "TW",
+        "chunk_index": 0,
         "ticker": "2454",
+        "year": 2025
+      },
+      {
+        "market": "TW",
+        "quarter": "Q4",
+        "chunk_index": 4,
+        "year": 2025,
+        "ticker": "2454"
+      },
+      {
+        "market": "TW",
+        "ticker": "2454",
+        "chunk_index": 7,
+        "quarter": "Q4",
+        "year": 2025
+      },
+      {
+        "ticker": "2454",
+        "quarter": "Q4",
+        "year": 2025,
+        "chunk_index": 1,
         "market": "TW"
       },
       {
         "ticker": "2454",
-        "chunk_index": 4,
-        "quarter": "Q4",
         "market": "TW",
+        "chunk_index": 8,
+        "quarter": "Q4",
         "year": 2025
-      },
-      {
-        "quarter": "Q4",
-        "market": "TW",
-        "chunk_index": 7,
-        "ticker": "2454",
-        "year": 2025
-      },
-      {
-        "ticker": "2454",
-        "market": "TW",
-        "year": 2025,
-        "chunk_index": 1,
-        "quarter": "Q4"
-      },
-      {
-        "ticker": "2454",
-        "year": 2025,
-        "market": "TW",
-        "quarter": "Q4",
-        "chunk_index": 8
       }
     ],
-    "response": "<think>\n1.  **分析請求：** 使用者要求計算聯發科 (MTK) 在 2025 年第四季相對於第三季的營收增長比例。\n2.  **檢索資料：** 檢查提供的參考資料中關於「Net Sales」（淨銷售額）的比較數據。\n3.  **定位關鍵數據：** 在「CONSOLIDATED STATEMENTS OF COMPREHENSIVE INCOME」表格中，查找 4Q 2025 和 3Q 2025 的營收數據以及它們之間的比較。\n    *   找到 \"Net Sales\" 行下的 \"4Q 2025\" 和 \"3Q 2025\" 欄位。\n    *   觀察到 \"QoQ%\" 欄位提供了季對季的增長百分比。\n4.  **提取結果：** 參考資料中顯示，4Q 2025 的 Net Sales 是 150,188 百萬新台幣，3Q 2025 的 Net Sales 是 142,097 百萬新台幣，兩者之間的 QoQ% 為 5.7%。\n5.  **結論：** 直接回答提取到的數據。\n</think>\nMTK 2025年第四季對第三季營收增長比例是 **5.7%**。\n\n（資料來源：參考資料區塊中「CONSOLIDATED STATEMENTS OF COMPREHENSIVE INCOME」表格的 QoQ% 欄位）",
+    "response": "<think>\n1.  **分析請求：** 使用者要求計算聯發科 (MTK, 2454.TW) 在 2025 年第四季 (4Q 2025) 相對於第三季 (3Q 2025) 的營收增長比例。\n2.  **檢索資料：** 檢查提供的參考資料中關於「Net Sales」的季度比較數據。\n3.  **定位數據：** 在「CONSOLIDATED STATEMENTS OF COMPREHENSIVE INCOME」表格中，找到 \"Net Sales\" 的部分：\n    *   4Q 2025 Net Sales: 150,188 (Millions of New Taiwan dollars)\n    *   3Q 2025 Net Sales: 142,097 (Millions of New Taiwan dollars)\n    *   QoQ% (4Q 2025 對 3Q 2025 的增長比例): 5.7%\n4.  **確認計算：** 資料中直接提供了這個比率。\n5.  **結論：** 直接使用資料中的數據回答問題。\n</think>\nMTK 2025年第四季對第三季營收增長比例是 **5.7%**。\n\n（資料來源：參考資料區塊中「Net Sales」的季度比較數據，標註為 QoQ%）",
     "reference": "聯發科的第四季營業收入QoQ增長比例是5.7%"
   },
   {
@@ -2001,42 +2001,42 @@
     ],
     "retrieved_metadata": [
       {
+        "chunk_index": 12,
+        "ticker": "2454",
+        "year": 2025,
+        "market": "TW",
+        "quarter": "Q4"
+      },
+      {
+        "ticker": "2454",
         "year": 2025,
         "quarter": "Q4",
+        "market": "TW",
+        "chunk_index": 0
+      },
+      {
+        "chunk_index": 7,
+        "quarter": "Q4",
+        "year": 2025,
         "ticker": "2454",
-        "chunk_index": 12,
         "market": "TW"
       },
       {
-        "ticker": "2454",
-        "chunk_index": 0,
-        "quarter": "Q4",
-        "market": "TW",
-        "year": 2025
-      },
-      {
-        "market": "TW",
-        "quarter": "Q4",
-        "ticker": "2454",
         "year": 2025,
-        "chunk_index": 7
-      },
-      {
         "market": "TW",
-        "quarter": "Q4",
+        "chunk_index": 4,
         "ticker": "2454",
-        "year": 2025,
-        "chunk_index": 4
+        "quarter": "Q4"
       },
       {
         "year": 2025,
+        "market": "TW",
+        "quarter": "Q4",
         "chunk_index": 14,
-        "quarter": "Q4",
-        "market": "TW",
         "ticker": "2454"
       }
     ],
-    "response": "<think>\n1.  **分析請求：** 使用者要求獲取聯發科 2025年第四季的淨利率。\n2.  **檢索資料：** 我檢查了提供的參考資料區塊，該區塊包含聯發科（2454.TW）的現金流量表、綜合損益表和資產負債表數據。\n3.  **判斷計算基礎：** 淨利率的計算公式是「淨利潤 / 淨銷售額」。\n4.  **資料比對：** 在參考資料中，雖然提供了 4Q 2025 的「Net Sales」（淨銷售額）為 150,188 百萬新台幣，但沒有提供計算淨利潤所需的「Net Income」（淨利潤）數據。\n5.  **結論：** 由於參考資料中未揭露聯發科 2025年第四季的淨利潤數據，因此無法計算其淨利率。\n6.  **執行輸出：** 根據指示，若資料未提及或無法計算，應直接回答[財報未揭露]。\n</think>\n[財報未揭露]",
+    "response": "<think>\n1.  **分析請求：** 使用者要求獲取「聯發科 2025年第四季的淨利率」。\n2.  **檢索資料：** 我需要檢查提供的參考資料中是否存在關於聯發科（2454.TW）2025年第四季的淨利潤或相關數據，以便計算淨利率。\n3.  **審查參考資料內容：** 參考資料包含「CONSOLIDATED STATEMENTS OF CASH FLOWS」和「CONSOLIDATED STATEMENTS OF COMPREHENSIVE INCOME For the Fourth quarter of year 2025」。\n    *   在「CONSOLIDATED STATEMENTS OF COMPREHENSIVE INCOME」部分，我找到了4Q 2025的銷售額（Net Sales）、營運成本（Operating costs）和毛利（Gross profit）等數據。\n    *   資料中**沒有直接提供**計算淨利率所需的「淨利潤」（Net Income）或「稅前利潤」（Profit before tax）的最終數字。\n4.  **判斷結果：** 由於參考資料中未揭露2025年第四季的淨利率數據，因此我無法根據提供的資訊回答問題。\n</think>\n[財報未揭露]",
     "reference": "聯發科的2025年第四季淨利率是 15.36%，由本期淨利 23,074 除以 營業收入 150,188 百萬元計算得出"
   },
   {
@@ -2050,42 +2050,42 @@
     ],
     "retrieved_metadata": [
       {
-        "ticker": "2454",
-        "year": 2025,
         "quarter": "Q4",
+        "chunk_index": 0,
         "market": "TW",
-        "chunk_index": 0
+        "ticker": "2454",
+        "year": 2025
       },
       {
         "chunk_index": 12,
-        "year": 2025,
-        "market": "TW",
-        "quarter": "Q4",
-        "ticker": "2454"
-      },
-      {
         "ticker": "2454",
-        "quarter": "Q4",
-        "chunk_index": 7,
-        "year": 2025,
-        "market": "TW"
-      },
-      {
         "market": "TW",
-        "chunk_index": 4,
-        "ticker": "2454",
         "quarter": "Q4",
         "year": 2025
       },
       {
-        "chunk_index": 14,
         "ticker": "2454",
-        "quarter": "Q4",
+        "chunk_index": 7,
         "year": 2025,
-        "market": "TW"
+        "market": "TW",
+        "quarter": "Q4"
+      },
+      {
+        "market": "TW",
+        "year": 2025,
+        "chunk_index": 4,
+        "quarter": "Q4",
+        "ticker": "2454"
+      },
+      {
+        "year": 2025,
+        "chunk_index": 14,
+        "market": "TW",
+        "quarter": "Q4",
+        "ticker": "2454"
       }
     ],
-    "response": "<think>\n1.  **目標確認：** 計算聯發科 (2454.TW) 2025 年全年淨利率。\n2.  **公式確認：** 淨利率 = (淨利潤 / 營業收入) * 100%。\n3.  **資料檢索：** 我檢查了提供的參考資料區塊。該區塊提供了聯發科 2025 年的季度比較數據、現金流量表數據以及資產負債表數據，其中包含部分損益細項（如 Net Sales, Operating income 等）。\n4.  **計算可行性分析：** 雖然有部分收入和成本數據，但缺少計算全年總結淨利潤所需的最終損益報表數據（例如，2025 年全年總的稅後淨利潤或總營業收入）。\n5.  **結論：** 根據現有參考資料，無法計算聯發科 2025 年的全年淨利率。\n</think>\n[財報未揭露]",
+    "response": "<think>\n1.  **目標確認：** 計算聯發科 (2454.TW) 2025年全年淨利率。\n2.  **公式確認：** 淨利率 = (淨利潤 / 營業收入) * 100%。\n3.  **資料檢索：** 我檢查提供的參考資料區塊。該區塊主要包含 2025 年第四季度的比較數據、現金流量表和資產負債表數據。\n4.  **數據分析：** 參考資料中**未提供**聯發科 2025 年的「全年」損益表或總結的淨利潤及營業收入數據，因此無法計算 2025 年全年淨利率。\n5.  **結論：** 必須根據指示，如果資料未提及，則回答[財報未揭露]。\n</think>\n聯發科 2025年全年淨利率是[財報未揭露]。",
     "reference": "聯發科的2025年全年淨利率是17.8%"
   },
   {
@@ -2099,42 +2099,42 @@
     ],
     "retrieved_metadata": [
       {
-        "year": 2025,
-        "quarter": "Q4",
-        "market": "TW",
         "chunk_index": 0,
-        "ticker": "2454"
-      },
-      {
         "market": "TW",
-        "quarter": "Q4",
-        "ticker": "2454",
-        "chunk_index": 7,
-        "year": 2025
-      },
-      {
-        "chunk_index": 4,
         "ticker": "2454",
         "year": 2025,
-        "market": "TW",
         "quarter": "Q4"
       },
       {
-        "chunk_index": 12,
+        "year": 2025,
+        "quarter": "Q4",
+        "market": "TW",
+        "ticker": "2454",
+        "chunk_index": 7
+      },
+      {
         "quarter": "Q4",
         "ticker": "2454",
         "year": 2025,
-        "market": "TW"
+        "market": "TW",
+        "chunk_index": 4
       },
       {
         "market": "TW",
-        "ticker": "2454",
-        "chunk_index": 8,
+        "year": 2025,
         "quarter": "Q4",
+        "ticker": "2454",
+        "chunk_index": 12
+      },
+      {
+        "quarter": "Q4",
+        "chunk_index": 8,
+        "market": "TW",
+        "ticker": "2454",
         "year": 2025
       }
     ],
-    "response": "<think>\n1.  **目標確認：** 計算聯發科 (MTK, 2454.TW) 2025 年的全年毛利率。\n2.  **數據定位：** 參考資料中提供了「CONSOLIDATED STATEMENTS OF INCOME For the years ended December 31, 2025 and 2024 Unit: Millions of New Taiwan dollars YoY%」部分，其中包含年度數據。\n    *   2025 年 Net Sales (淨銷售額): 595,966 百萬新台幣\n    *   2025 年 Gross profit (毛利): 283,080 百萬新台幣\n    *   資料中已直接標註了 YoY% 為 47.5%。\n3.  **計算驗證（若需要）：** 毛利率 = (Gross profit / Net Sales) $\\times 100\\%$\n    *   $(283,080 / 595,966) \\times 100\\% \\approx 47.5\\%$\n4.  **結論：** 根據提供的年度數據，2025 年的毛利率為 47.5%。\n</think>\nMTK (聯發科) 2025 年全年毛利率為 **47.5%**。\n\n此數據來源於參考資料中「CONSOLIDATED STATEMENTS OF INCOME For the years ended December 31, 2025 and 2024」部分提供的年度比較數據。\n\n| 指標 | 2025 年 (百萬新台幣) |\n| :--- | :--- |\n| Net Sales (淨銷售額) | 595,966 |\n| Gross profit (毛利) | 283,080 |\n| **毛利率 (YoY%)** | **47.5%** |\n| *資料來源* | *參考資料區塊* |",
+    "response": "<think>\n1.  **目標確認：** 計算聯發科 (MTK, 2454.TW) 在 2025 年的全年毛利率。\n2.  **數據定位：** 參考資料中包含「CONSOLIDATED STATEMENTS OF INCOME For the years ended December 31, 2025 and 2024 Unit: Millions of New Taiwan dollars YoY%」。\n    *   Net Sales (淨銷售額) for 2025: 595,966 百萬新台幣。\n    *   Gross profit (毛利) for 2025: 283,080 百萬新台幣。\n3.  **計算：** 毛利率 = (毛利 / 淨銷售額) * 100%。\n    *   毛利率 = (283,080 / 595,966) * 100%\n4.  **結果得出：** 計算結果約為 47.41%。\n5.  **格式化輸出：** 按照要求使用 Markdown 表格呈現。\n</think>\n\n| 公司代號 | 年份 | 淨銷售額 (Millions NTD) | 毛利 (Millions NTD) | 毛利率 (%) | 資料來源 |\n| :--- | :--- | :--- | :--- | :--- | :--- |\n| 2454.TW | 2025 | 595,966 | 283,080 | 47.41% | 參考資料：CONSOLIDATED STATEMENTS OF INCOME (2025) |\n\n根據提供的參考資料，聯發科 (MTK) 在 2025 年的全年毛利率計算如下：\n\n**計算過程：**\n$$\\text{毛利率} = \\left( \\frac{\\text{Gross profit}}{\\text{Net Sales}} \\right) \\times 100\\%$$\n$$\\text{毛利率} = \\left( \\frac{283,080 \\text{ 百萬新台幣}}{595,966 \\text{ 百萬新台幣}} \\right) \\times 100\\% \\approx 47.41\\%$$\n\n**結果：**\nMTK 2025年全年毛利率約為 **47.41%**。\n\n**資料來源：** 參考資料區塊中「CONSOLIDATED STATEMENTS OF INCOME For the years ended December 31, 2025 and 2024 Unit: Millions of New Taiwan dollars YoY%」。",
     "reference": "MTK 2025年全年毛利率是 47.5%"
   },
   {
@@ -2148,42 +2148,42 @@
     ],
     "retrieved_metadata": [
       {
-        "market": "TW",
-        "year": 2025,
+        "quarter": "Q4",
         "chunk_index": 0,
-        "quarter": "Q4",
-        "ticker": "2454"
+        "market": "TW",
+        "ticker": "2454",
+        "year": 2025
       },
       {
-        "quarter": "Q4",
-        "ticker": "2454",
-        "market": "TW",
         "chunk_index": 7,
-        "year": 2025
-      },
-      {
-        "chunk_index": 12,
         "ticker": "2454",
         "market": "TW",
-        "quarter": "Q4",
-        "year": 2025
+        "year": 2025,
+        "quarter": "Q4"
       },
       {
+        "market": "TW",
         "ticker": "2454",
         "year": 2025,
         "quarter": "Q4",
+        "chunk_index": 12
+      },
+      {
+        "quarter": "Q4",
+        "chunk_index": 4,
         "market": "TW",
-        "chunk_index": 4
+        "ticker": "2454",
+        "year": 2025
       },
       {
         "year": 2025,
+        "quarter": "Q4",
         "ticker": "2454",
         "chunk_index": 6,
-        "quarter": "Q4",
         "market": "TW"
       }
     ],
-    "response": "<think>\n1.  **目標確認：** 使用者要求計算聯發科 (MTK, 2454.TW) 2024 年的全年毛利率。\n2.  **資料檢索：** 我需要從提供的參考資料中尋找 2024 年的「Net Sales」（銷售收入）和「Gross profit」（毛利）。\n3.  **定位數據：** 在參考資料的「COME」區塊中，我找到以下與 2024 年相關的數據（假設這些數據是針對年度總結）：\n    *   Net Sales (2024): 530,586 (Millions of New Taiwan dollars)\n    *   Gross profit (2024): 263,386 (Millions of New Taiwan dollars)\n4.  **計算毛利率：** 毛利率的計算公式為 (Gross Profit / Net Sales) * 100%。\n    *   毛利率 = (263,386 / 530,586) * 100%\n    *   計算結果 $\\approx 49.63\\%$\n5.  **輸出格式化：** 根據指示，進行跨公司比較時使用 Markdown 表格，但此處僅針對單一公司計算，直接提供結果。\n</think>\nMTK 2024年全年毛利率約為 **49.63%**。\n\n**計算依據：**\n\n根據參考資料中「COME」區塊的數據進行計算：\n\n*   2024 年淨銷售額 (Net Sales): 530,586 百萬新台幣\n*   2024 年毛利 (Gross profit): 263,386 百萬新台幣\n\n$$\\text{毛利率} = \\left( \\frac{\\text{毛利}}{\\text{淨銷售額}} \\right) \\times 100\\%$$\n$$\\text{毛利率} = \\left( \\frac{263,386}{530,586} \\right) \\times 100\\% \\approx 49.63\\%$$",
+    "response": "<think>\n1.  **目標確認：** 使用者要求計算聯發科 (MTK, 2454.TW) 2024 年的全年毛利率。\n2.  **資料檢索：** 檢查參考資料中是否有 2024 年的年度銷售額 (Net Sales) 和毛利 (Gross profit)。\n3.  **定位數據：** 在「CONSOLIDATED STATEMENTS OF CASH FLOWS For the years ended December 31, 2025 and 2024 Unit: Millions of New Taiwan dollars」部分，我找到以下 2024 年數據：\n    *   Net Sales (2024): 530,586\n    *   Gross profit (2024): 263,386\n4.  **計算毛利率：** 毛利率 = (Gross profit / Net Sales) * 100%\n    *   毛利率 = (263,386 / 530,586) * 100%\n    *   計算結果 $\\approx$ 49.6%\n5.  **資料驗證：** 參考資料中已提供該年度的 YoY% 為 7.5%，這與計算結果是吻合的（基於提供的年度數據）。\n6.  **輸出生成：** 根據計算結果，回答使用者問題。\n</think>\nMTK 2024年全年毛利率為 **49.6%**。\n\n**資料來源：**\n*   參考資料區塊中「CONSOLIDATED STATEMENTS OF CASH FLOWS For the years ended December 31, 2025 and 2024 Unit: Millions of New Taiwan dollars」中的 2024 年數據。",
     "reference": "MTK 2024年全年毛利率是 49.6%"
   },
   {
@@ -2197,42 +2197,42 @@
     ],
     "retrieved_metadata": [
       {
-        "ticker": "2454",
-        "quarter": "Q4",
         "year": 2025,
+        "ticker": "2454",
         "chunk_index": 4,
-        "market": "TW"
+        "market": "TW",
+        "quarter": "Q4"
       },
       {
         "chunk_index": 7,
-        "market": "TW",
-        "year": 2025,
-        "quarter": "Q4",
-        "ticker": "2454"
-      },
-      {
-        "chunk_index": 0,
-        "year": 2025,
         "quarter": "Q4",
         "market": "TW",
-        "ticker": "2454"
-      },
-      {
-        "quarter": "Q4",
         "ticker": "2454",
-        "market": "TW",
-        "chunk_index": 12,
         "year": 2025
       },
       {
+        "quarter": "Q4",
         "ticker": "2454",
+        "year": 2025,
         "market": "TW",
+        "chunk_index": 0
+      },
+      {
+        "quarter": "Q4",
+        "ticker": "2454",
+        "chunk_index": 12,
+        "market": "TW",
+        "year": 2025
+      },
+      {
         "year": 2025,
         "chunk_index": 8,
+        "ticker": "2454",
+        "market": "TW",
         "quarter": "Q4"
       }
     ],
-    "response": "<think>\n1.  **分析請求：** 使用者要求獲取 MTK (2454.TW) 在 2025 年的「全年營業淨來源金額」（Net Sales）。\n2.  **檢索資料：** 我需要檢查提供的參考資料中是否有關於 2025 年或 2024 年的「Net Sales」數據。\n3.  **定位數據：** 在【公司代號：2454.TW】的「CONSOLIDATED STATEMENTS OF COMPREHENSIVE INCOME」部分，我找到以下數據行：\n    `|Net Sales|595,966||100.0%||530,586||100.0%||12.3%|`\n    根據上下文判斷，這組數據對應於 2025 年和 2024 年的年度比較。\n4.  **提取結果：** 2025 年的 Net Sales 為 595,966 百萬新台幣 (Millions of New Taiwan dollars)。\n5.  **格式化輸出：** 根據指示，我將以清晰的方式回答。\n</think>\nMTK 2025 年全年營業淨來源金額為 595,966 百萬新台幣。\n\n**資料來源：** 【公司代號：2454.TW】參考資料區塊中「CONSOLIDATED STATEMENTS OF COMPREHENSIVE INCOME」部分。",
+    "response": "<think>\n1.  **分析請求：** 使用者要求獲取 MTK (2454.TW) 在 2025 年的「全年營業淨來源金額」（Net Sales）。\n2.  **檢索資料：** 我檢查提供的參考資料區塊。\n3.  **定位數據：** 在【公司代號：2454.TW】下的第一部分表格中，有以下數據：\n    | Net Sales | 595,966 | | 100.0% | 530,586 | 100.0% | 12.3% |\n    這部分資料的說明是 \"For the years ended December 31, 2025 and 2024\"。\n4.  **確定答案：** 595,966 代表截至 2025 年底的淨銷售額（Net Sales）。\n5.  **格式化輸出：** 根據要求，我將結果以清晰的方式呈現。\n</think>\nMTK 2025 年全年營業淨來源金額為 **595,966 百萬新台幣** (基於參考資料中截至 2025 年底的數據)。",
     "reference": "聯發科2025年全年營業活動之淨現金流入是新台幣162,793 百萬元"
   },
   {
@@ -2246,42 +2246,42 @@
     ],
     "retrieved_metadata": [
       {
-        "chunk_index": 7,
-        "ticker": "2454",
         "quarter": "Q4",
+        "ticker": "2454",
+        "chunk_index": 7,
         "market": "TW",
         "year": 2025
       },
       {
-        "chunk_index": 0,
-        "market": "TW",
-        "quarter": "Q4",
         "year": 2025,
+        "market": "TW",
+        "chunk_index": 0,
+        "quarter": "Q4",
         "ticker": "2454"
       },
       {
         "chunk_index": 4,
         "quarter": "Q4",
-        "ticker": "2454",
         "year": 2025,
+        "ticker": "2454",
         "market": "TW"
       },
       {
-        "chunk_index": 12,
         "market": "TW",
-        "quarter": "Q4",
         "year": 2025,
+        "quarter": "Q4",
+        "chunk_index": 12,
         "ticker": "2454"
       },
       {
         "market": "TW",
         "quarter": "Q4",
-        "ticker": "2454",
+        "chunk_index": 8,
         "year": 2025,
-        "chunk_index": 8
+        "ticker": "2454"
       }
     ],
-    "response": "<think>\n1.  **分析請求：** 使用者要求獲取 MTK 2025 年全年「投資淨來源金額」。\n2.  **檢索資料：** 我檢查了提供的參考資料，該資料是關於 MEDIATEK INC. AND SUBSIDIARIES (2454.TW) 的財務數據（包含資產負債表和現金流量表）。\n3.  **定位資訊：** 我在「CONSOLIDATED STATEMENTS OF CASH FLOWS」部分查找「Cash flows from investing activities」（投資活動現金流）的總結或相關項目。\n4.  **結果判斷：** 參考資料中雖然列出了資產變動（如Funds and investments, Property, plant and equipment等），但沒有直接提供「投資淨來源金額」這一單一指標。\n5.  **最終結論：** 根據現有參考資料，無法計算或找到所要求的具體數據。\n</think>\n[財報未揭露]",
+    "response": "<think>\n1.  **分析請求：** 使用者要求查詢 MTK 2025 年全年投資淨來源金額。\n2.  **檢索資料：** 我檢查了提供的參考資料，該資料包含 Mediatek Inc. (2454.TW) 的資產負債表和現金流量表數據（截至 2025 年 12 月 31 日及 2024 年）。\n3.  **定位資訊：** 我在「CONSOLIDATED STATEMENTS OF CASH FLOWS」部分查找「Cash flows from investing activities」（投資活動現金流）的總結數字。\n4.  **結果判斷：** 參考資料中列出了營運活動和投資活動的細項，但沒有提供「投資活動」的總計或淨來源金額。\n5.  **結論：** 由於參考資料中未揭露所需的具體數據，我必須按照指示回答[財報未揭露]。\n</think>\n[財報未揭露]",
     "reference": "聯發科2025年全年投資活動之淨現金流出是新台幣37,754 百萬元"
   },
   {
@@ -2295,42 +2295,42 @@
     ],
     "retrieved_metadata": [
       {
+        "chunk_index": 5,
+        "year": 2025,
+        "market": "TW",
+        "ticker": "2454",
+        "quarter": "Q4"
+      },
+      {
+        "year": 2025,
+        "quarter": "Q4",
+        "market": "TW",
+        "ticker": "2454",
+        "chunk_index": 1
+      },
+      {
         "ticker": "2454",
         "quarter": "Q4",
-        "year": 2025,
-        "market": "TW",
-        "chunk_index": 5
-      },
-      {
-        "market": "TW",
-        "chunk_index": 1,
-        "quarter": "Q4",
-        "year": 2025,
-        "ticker": "2454"
-      },
-      {
-        "year": 2025,
         "chunk_index": 4,
-        "ticker": "2454",
-        "market": "TW",
-        "quarter": "Q4"
-      },
-      {
-        "market": "TW",
         "year": 2025,
-        "ticker": "2454",
+        "market": "TW"
+      },
+      {
         "chunk_index": 12,
+        "market": "TW",
+        "ticker": "2454",
+        "year": 2025,
         "quarter": "Q4"
       },
       {
-        "chunk_index": 7,
+        "ticker": "2454",
+        "market": "TW",
         "year": 2025,
         "quarter": "Q4",
-        "ticker": "2454",
-        "market": "TW"
+        "chunk_index": 7
       }
     ],
-    "response": "<think>\n1.  **分析請求：** 使用者要求獲取聯發科 (2454.TW) 在 2025 年第四季和第三季的營業費用金額。\n2.  **檢索參考資料：** 我仔細檢查提供的「參考資料區塊」。\n3.  **結果判斷：** 參考資料中提供的是聯發科 2025 年和 2024 年的年度總體財務數據（例如 Total operating expenses、Operating income 等），以及部分分項明細，但**沒有**提供 2025 年第四季 (Q4) 和第三季 (Q3) 的詳細營業費用分期數據。\n4.  **結論：** 由於參考資料中未揭露所需的季度細項資訊，我必須按照指示回答「[財報未揭露]」。\n</think>\n[財報未揭露]",
+    "response": "<think>\n1.  **分析請求：** 使用者要求獲取聯發科 (2454.TW) 在 2025 年第四季 (Q4) 和第三季 (Q3) 的營業費用金額。\n2.  **檢索參考資料：** 我檢查了提供的「參考資料區塊」。\n3.  **比對結果：** 參考資料中的數據是針對「截至 2025 年 12 月 31 日和 2024 年的年度」總結數據，例如「Total operating expenses」（營業費用總額為 179,610 百萬新台幣）。\n4.  **判斷缺失資訊：** 參考資料中**未包含** 2025 年第四季和第三季的詳細分期財務數據。\n5.  **執行回答規則：** 根據指示：「若資料未提及，請直接回答[財報未揭露]」。\n</think>\n[財報未揭露]",
     "reference": "聯發科 2025年第四季的營業費用金額是新台幣 47,431 百萬元，第三季的營業費用是 43,924 百萬元"
   },
   {
@@ -2344,42 +2344,42 @@
     ],
     "retrieved_metadata": [
       {
-        "quarter": "Q4",
-        "chunk_index": 4,
-        "market": "TW",
         "ticker": "2454",
+        "chunk_index": 4,
+        "quarter": "Q4",
+        "market": "TW",
         "year": 2025
       },
       {
+        "market": "TW",
         "ticker": "2454",
         "quarter": "Q4",
-        "year": 2025,
         "chunk_index": 12,
-        "market": "TW"
+        "year": 2025
+      },
+      {
+        "quarter": "Q4",
+        "ticker": "2454",
+        "market": "TW",
+        "year": 2025,
+        "chunk_index": 7
       },
       {
         "year": 2025,
-        "quarter": "Q4",
-        "market": "TW",
-        "chunk_index": 7,
-        "ticker": "2454"
-      },
-      {
         "market": "TW",
         "ticker": "2454",
         "chunk_index": 1,
-        "quarter": "Q4",
-        "year": 2025
+        "quarter": "Q4"
       },
       {
-        "quarter": "Q4",
         "market": "TW",
-        "chunk_index": 0,
         "year": 2025,
+        "quarter": "Q4",
+        "chunk_index": 0,
         "ticker": "2454"
       }
     ],
-    "response": "<think>\n1.  **分析請求：** 使用者要求獲取聯發科 (MTK) 2025年第四季和2024年第四季的營業費用 (Operating costs)。\n2.  **檢索資料：** 我需要檢查提供的參考資料中是否有直接對應的季度數據。\n3.  **定位數據源：** 在參考資料中，我找到了「CONSOLIDATED STATEMENTS OF COMPREHENSIVE INCOME」部分，其中包含 4Q 2025 和 4Q 2024 的比較數據。\n4.  **提取數據：** 該表格中明確列出了「Operating costs」的數值。\n    *   4Q 2025 Operating costs: (80,907) 百萬新台幣\n    *   4Q 2024 Operating costs: (71,042) 百萬新台幣\n5.  **格式化輸出：** 根據指示，我將使用 Markdown 表格呈現數據，並標註資料來源。\n</think>\n\n| 年份 | 季度 | 營業費用 (Millions of New Taiwan dollars) | 資料來源 |\n| :--- | :--- | :--- | :--- |\n| 2025 | 第四季 (4Q 2025) | (80,907) | 參考資料區塊 |\n| 2024 | 第四季 (4Q 2024) | (71,042) | 參考資料區塊 |",
+    "response": "<think>\n1.  **理解請求：** 使用者要求獲取聯發科 (MTK) 2025年第四季和2024年第四季的營業費用 (Operating costs)。\n2.  **檢索資料：** 我需要檢查提供的參考資料中是否有直接對應「2025年第四季」和「2024年第四季」的「營業費用」。\n3.  **定位數據：** 在參考資料的表格中，我找到了標題為 \"CONSOLIDATED STATEMENTS OF COMPREHENSIVE INCOME For the Fourth quarter of year 2025 Unit: Millions of New Taiwan dollars Sequential Comparison\" 的部分。\n4.  **提取數據：**\n    *   4Q 2025 Operating costs: (80,907)\n    *   4Q 2024 Operating costs: (71,042)\n5.  **格式化輸出：** 根據指示，我將使用 Markdown 表格呈現這些數據。\n</think>\n\n| 年份 | 第四季度營業費用 (Millions of New Taiwan dollars) | 資料來源 |\n| :--- | :--- | :--- |\n| 2025年第四季 | (80,907) | 參考資料區塊 |\n| 2024年第四季 | (71,042) | 參考資料區塊 |",
     "reference": "聯發科 2025年第四季的營業費用金額是新台幣 47,431 百萬元，2024年第四季的營業費用是 45,589 百萬元"
   },
   {
@@ -2393,42 +2393,42 @@
     ],
     "retrieved_metadata": [
       {
-        "ticker": "2454",
+        "year": 2025,
         "chunk_index": 7,
-        "year": 2025,
-        "quarter": "Q4",
-        "market": "TW"
+        "market": "TW",
+        "ticker": "2454",
+        "quarter": "Q4"
       },
       {
         "year": 2025,
-        "quarter": "Q4",
         "ticker": "2454",
         "market": "TW",
-        "chunk_index": 8
+        "chunk_index": 8,
+        "quarter": "Q4"
       },
       {
+        "chunk_index": 9,
         "ticker": "2454",
-        "year": 2025,
         "quarter": "Q4",
         "market": "TW",
-        "chunk_index": 9
+        "year": 2025
       },
       {
-        "year": 2025,
         "chunk_index": 0,
         "quarter": "Q4",
-        "ticker": "2454",
-        "market": "TW"
+        "year": 2025,
+        "market": "TW",
+        "ticker": "2454"
       },
       {
-        "ticker": "2454",
-        "market": "TW",
-        "year": 2025,
         "chunk_index": 4,
+        "market": "TW",
+        "ticker": "2454",
+        "year": 2025,
         "quarter": "Q4"
       }
     ],
-    "response": "<think>\n1.  **目標確認：** 計算聯發科 (2454.TW) 在合併資產負債表中的「2025年全年存貨比例佔資產總計」。\n2.  **資料定位：** 參考資料提供了截至2025年12月31日的合併資產負債表數據（Unit: Millions of New Taiwan dollars）。\n    *   查找「Inventories」（存貨）：在2025年 (As of December 31, 2025) 的數據為 67,235 百萬新台幣。\n    *   查找「Total assets」（資產總計）：在2025年 (As of December 31, 2025) 的數據為 743,785 百萬新台幣。\n3.  **計算執行：** 存貨佔資產總計的比例 = (存貨金額 / 資產總計金額) $\\times 100\\%$\n    *   比例 = $(67,235 / 743,785) \\times 100\\%$\n    *   計算結果約為 $9.02\\%$。\n4.  **輸出格式化：** 由於是單一公司數據，直接回答計算結果。\n</think>\n在合併資產負債表（截至2025年12月31日）中，聯發科 (2454.TW) 的存貨佔資產總計的比例約為 **9.02%**。\n\n**計算細項：**\n\n*   **存貨 (Inventories, 2025)：** 67,235 百萬新台幣\n*   **資產總計 (Total assets, 2025)：** 743,785 百萬新台幣\n*   **比例計算：** $(67,235 / 743,785) \\times 100\\% \\approx 9.02\\%$",
+    "response": "<think>\n1.  **目標確認：** 計算聯發科 (2454.TW) 在合併資產負債表中的存貨佔資產總計的百分比，針對 2025 年。\n2.  **數據檢索：** 查閱參考資料中關於「CONSOLIDATED BALANCE SHEETS As of December 31, 2025」的部分。\n    *   存貨 (Inventories) 的數值為：67,235 (單位：Millions of New Taiwan dollars)。\n    *   資產總計 (Total assets) 的數值為：743,785 (單位：Millions of New Taiwan dollars)。\n3.  **計算執行：** 存貨佔資產總計的比例 = (存貨 / 資產總計) $\\times 100\\%$\n    *   計算：$(67,235 / 743,785) \\times 100\\%$\n    *   結果約為 $9.03\\%$。\n4.  **結論：** 根據提供的期末資產負債表數據，MTK 2025 年的存貨佔資產總計約為 9.03%。\n</think>\n在合併資產負債表（截至 2025 年 12 月 31 日）中，聯發科 (2454.TW) 的存貨比例佔資產總計約為 **9.03%**。\n\n**計算細項：**\n\n*   **存貨 (Inventories):** 67,235 百萬新台幣\n*   **資產總計 (Total assets):** 743,785 百萬新台幣\n*   **比例計算：** $(67,235 / 743,785) \\times 100\\% \\approx 9.03\\%$\n\n**資料來源：** 參考資料區塊中「CONSOLIDATED BALANCE SHEETS As of December 31, 2025」的數據。",
     "reference": "MTK 2025年存貨佔資產總計比例是9.0%"
   },
   {
@@ -2442,32 +2442,32 @@
     ],
     "retrieved_metadata": [
       {
+        "market": "TW",
         "year": 2025,
-        "quarter": "Q4",
         "chunk_index": 7,
-        "market": "TW",
-        "ticker": "2454"
+        "ticker": "2454",
+        "quarter": "Q4"
       },
       {
         "ticker": "2454",
-        "year": 2025,
         "quarter": "Q4",
-        "chunk_index": 9,
-        "market": "TW"
+        "market": "TW",
+        "year": 2025,
+        "chunk_index": 9
       },
       {
+        "chunk_index": 8,
+        "quarter": "Q4",
+        "market": "TW",
+        "ticker": "2454",
+        "year": 2025
+      },
+      {
+        "year": 2025,
         "market": "TW",
         "quarter": "Q4",
-        "year": 2025,
-        "ticker": "2454",
-        "chunk_index": 8
-      },
-      {
-        "quarter": "Q4",
-        "year": 2025,
         "chunk_index": 10,
-        "ticker": "2454",
-        "market": "TW"
+        "ticker": "2454"
       },
       {
         "chunk_index": 14,
@@ -2477,7 +2477,7 @@
         "quarter": "Q4"
       }
     ],
-    "response": "<think>\n1.  **目標確認：** 計算聯發科 (2454.TW) 在合併資產負債表中的 2024 年全年存貨佔資產總計的百分比。\n2.  **數據提取：** 參考資料提供了 2024 年的合併資產負債表數據（單位：百萬新台幣）。\n    *   查找「Inventories」（存貨）在 2024 年的數值：58,414 (Millions of New Taiwan dollars)。\n    *   查找「Total assets」（資產總計）在 2024 年的數值：743,785 (Millions of New Taiwan dollars)。\n3.  **計算執行：** 存貨佔資產總計的比例 = (存貨金額 / 資產總計金額) $\\times 100\\%$\n    *   計算： $(58,414 / 743,785) \\times 100\\%$\n4.  **結果得出：** $58,414 \\div 743,785 \\approx 0.0785$。轉換為百分比即約 $7.85\\%$。\n5.  **格式化輸出：** 按照要求使用 Markdown 表格呈現計算過程和最終結果。\n</think>\n\n| 項目 | 金額 (百萬新台幣) | 資料來源 |\n| :--- | :--- | :--- |\n| 2024 年存貨 (Inventories) | 58,414 | 參考資料 |\n| 2024 年資產總計 (Total assets) | 743,785 | 參考資料 |\n| **計算** | $(58,414 / 743,785) \\times 100\\%$ | - |\n| **存貨佔資產總計比例** | **約 7.85%** | - |\n\n根據提供的聯發科 (2454.TW) 合併資產負債表數據，在 2024 年全年，存貨佔資產總計的比例約為 **7.85%**。",
+    "response": "<think>\n1.  **目標確認：** 計算聯發科 (2454.TW) 在合併資產負債表中的 2024 年全年存貨佔資產總計的百分比。\n2.  **數據定位：** 參考資料提供了 2024 年的合併資產負債表數據（單位：百萬新台幣）。\n    *   查找「Inventories」（存貨）在 2024 年的數值：58,414。\n    *   查找「Total assets」（資產總計）在 2024 年的數值：743,785。\n3.  **計算執行：** 比例 = (存貨 / 資產總計) $\\times 100\\%$\n    *   比例 = $(58,414 / 743,785) \\times 100\\%$\n    *   計算結果約為 $7.86\\%$。\n4.  **格式化輸出：** 按照要求使用 Markdown 表格呈現計算過程和結果，並標註資料來源。\n</think>\n\n| 指標 | 2024 年數值 (百萬新台幣) | 備註 | 資料來源 |\n| :--- | :--- | :--- | :--- |\n| 存貨 (Inventories) | 58,414 | 合併資產負債表數據 | 參考資料區塊 |\n| 資產總計 (Total assets) | 743,785 | 合併資產負債表數據 | 參考資料區塊 |\n| **存貨佔資產總計比例** | **7.86%** | $(58,414 / 743,785) \\times 100\\%$ | 計算自參考資料 |\n\n根據提供的聯發科 (2454.TW) 合併資產負債表數據，在 2024 年全年，存貨佔資產總計的比例約為 **7.86%**。",
     "reference": "MTK 2025年存貨佔資產總計比例是8.4%"
   },
   {
@@ -2491,42 +2491,42 @@
     ],
     "retrieved_metadata": [
       {
-        "market": "TW",
-        "ticker": "2454",
         "quarter": "Q4",
-        "year": 2025,
-        "chunk_index": 7
-      },
-      {
+        "chunk_index": 7,
         "ticker": "2454",
-        "chunk_index": 0,
-        "quarter": "Q4",
         "year": 2025,
         "market": "TW"
       },
       {
-        "chunk_index": 12,
         "market": "TW",
-        "year": 2025,
         "quarter": "Q4",
-        "ticker": "2454"
+        "year": 2025,
+        "ticker": "2454",
+        "chunk_index": 0
       },
       {
-        "ticker": "2454",
-        "chunk_index": 14,
-        "quarter": "Q4",
         "market": "TW",
+        "quarter": "Q4",
+        "chunk_index": 12,
+        "ticker": "2454",
         "year": 2025
       },
       {
-        "chunk_index": 4,
-        "quarter": "Q4",
+        "chunk_index": 14,
         "market": "TW",
         "year": 2025,
-        "ticker": "2454"
+        "ticker": "2454",
+        "quarter": "Q4"
+      },
+      {
+        "chunk_index": 4,
+        "year": 2025,
+        "market": "TW",
+        "ticker": "2454",
+        "quarter": "Q4"
       }
     ],
-    "response": "<think>\n1.  **分析使用者請求：** 使用者詢問「聯發科有沒有公布2026年預期資本支出？」\n2.  **檢索參考資料：** 我需要檢查提供的參考資料中是否包含聯發科（2454.TW）關於2026年資本支出的任何資訊。\n3.  **審查參考資料內容：** 參考資料僅包含公司截至2025年12月31日和2024年的財務數據、2025年第四季的損益表以及現金流量表。資料中未提及任何關於2026年的預期資本支出。\n4.  **形成回答：** 由於參考資料中沒有這項資訊，我必須根據指示回答。\n</think>\n[財報未揭露]",
+    "response": "<think>\n1.  **分析請求：** 使用者要求查詢聯發科（2454.TW）是否公布了2026年的預期資本支出（Capital Expenditure）。\n2.  **檢索資料：** 我檢查提供的所有參考資料區塊。這些資料包含公司截至2025年12月31日和2024年的財務數據、2025年第四季的損益表以及現金流量表等。\n3.  **比對結果：** 參考資料中並未包含任何關於聯發科2026年預期資本支出的資訊。\n4.  **決策：** 由於參考資料中沒有揭露此類資訊，我必須嚴格按照指示回答[財報未揭露]。\n</think>\n聯發科沒有在提供的參考資料中公布2026年的預期資本支出。",
     "reference": "本項無資訊"
   },
   {
@@ -2541,41 +2541,41 @@
     "retrieved_metadata": [
       {
         "chunk_index": 7,
-        "market": "TW",
-        "year": 2025,
         "quarter": "Q4",
-        "ticker": "2454"
-      },
-      {
-        "quarter": "Q4",
-        "market": "TW",
         "year": 2025,
-        "chunk_index": 4,
-        "ticker": "2454"
-      },
-      {
         "ticker": "2454",
+        "market": "TW"
+      },
+      {
+        "quarter": "Q4",
         "market": "TW",
+        "chunk_index": 4,
+        "year": 2025,
+        "ticker": "2454"
+      },
+      {
         "chunk_index": 12,
         "quarter": "Q4",
-        "year": 2025
+        "year": 2025,
+        "market": "TW",
+        "ticker": "2454"
       },
       {
         "market": "TW",
-        "ticker": "2454",
         "year": 2025,
-        "chunk_index": 0,
-        "quarter": "Q4"
+        "quarter": "Q4",
+        "ticker": "2454",
+        "chunk_index": 0
       },
       {
-        "ticker": "2454",
+        "market": "TW",
         "chunk_index": 8,
-        "year": 2025,
-        "market": "TW",
-        "quarter": "Q4"
+        "quarter": "Q4",
+        "ticker": "2454",
+        "year": 2025
       }
     ],
-    "response": "<think>\n1.  **分析請求：** 使用者詢問的是MTK（美光科技）是否公布了2026年的Forward PE（預期股價報酬率）。\n2.  **檢索資料：** 我檢查了提供的所有參考資料區塊。該資料僅包含台灣公司代號2454.TW的2024年和2025年的財務數據（資產負債表、現金流量表及部分損益表比較）。\n3.  **結果判斷：** 參考資料中完全沒有提及MTK2026年的Forward PE資訊。\n4.  **結論：** 根據指示，由於參考資料中未揭露此資訊，我必須直接回答[財報未揭露]。\n</think>\n[財報未揭露]",
+    "response": "<think>\n1.  **分析請求：** 使用者詢問的是MTK（美光科技）是否公布了2026年的Forward PE（預期股價報酬率/市盈率）。\n2.  **檢索資料：** 我檢查提供的所有參考資料。該資料僅包含台灣證券交易所代號為2454.TW的財務數據，包括截至2025年12月31日和2024年的資產負債表、現金流量表以及2025年第四季度與第三季度的綜合損益表比較。\n3.  **比對結果：** 參考資料中完全沒有提及MTK 2026年的Forward PE或其他任何未來的預測數據。\n4.  **結論：** 根據提供的資訊，無法回答該問題。\n</think>\n[財報未揭露]",
     "reference": "本項無資訊"
   },
   {
@@ -2589,42 +2589,42 @@
     ],
     "retrieved_metadata": [
       {
-        "ticker": "2454",
         "chunk_index": 12,
+        "quarter": "Q4",
         "year": 2025,
-        "quarter": "Q4",
-        "market": "TW"
-      },
-      {
-        "quarter": "Q4",
-        "ticker": "2454",
         "market": "TW",
-        "chunk_index": 4,
-        "year": 2025
+        "ticker": "2454"
       },
       {
-        "year": 2025,
         "quarter": "Q4",
+        "market": "TW",
+        "year": 2025,
+        "ticker": "2454",
+        "chunk_index": 4
+      },
+      {
+        "market": "TW",
+        "quarter": "Q4",
+        "year": 2025,
         "chunk_index": 0,
-        "market": "TW",
         "ticker": "2454"
       },
       {
-        "ticker": "2454",
         "market": "TW",
-        "chunk_index": 7,
-        "quarter": "Q4",
-        "year": 2025
-      },
-      {
-        "chunk_index": 8,
         "year": 2025,
         "quarter": "Q4",
-        "market": "TW",
+        "chunk_index": 7,
         "ticker": "2454"
+      },
+      {
+        "market": "TW",
+        "chunk_index": 8,
+        "ticker": "2454",
+        "quarter": "Q4",
+        "year": 2025
       }
     ],
-    "response": "<think>\n1.  **分析使用者要求：** 使用者詢問股票代號 2454（MEDIATEK INC. AND SUBSIDIARIES）對於 2026 年的產業景氣展望。\n2.  **檢索參考資料：** 我檢查了提供的所有參考資料區塊。該資料包含的是 2024 年和 2025 年的財務數據（現金流量表、損益表、資產負債表）。\n3.  **判斷資訊是否足夠：** 參考資料中**沒有**包含任何關於 2026 年產業景氣的展望、預測或分析。\n4.  **執行指令：** 根據指示：「若資料未提及，請直接回答[財報未揭露]」，我必須直接回答此結果。\n</think>\n[財報未揭露]",
+    "response": "<think>\n1.  **分析使用者要求：** 使用者詢問股票代號 2454（MEDIATEK INC. AND SUBSIDIARIES）對於 2026 年的產業景氣展望。\n2.  **檢索參考資料：** 我檢查了提供的「參考資料區塊」。該資料包含的是公司 2024 年和 2025 年的財務報表數據（現金流量表、綜合損益表、資產負債表）。\n3.  **判斷資訊是否滿足要求：** 參考資料中**沒有**包含任何關於 2454 對 2026 年產業景氣的展望、預測或分析。\n4.  **執行輸出指令：** 根據指示：「若資料未提及，請直接回答[財報未揭露]」。\n</think>\n[財報未揭露]",
     "reference": "本項無資訊"
   }
 ]
