@@ -368,30 +368,48 @@ def print_summary(
     faithfulness_df: pd.DataFrame,
     reference_df: pd.DataFrame | None,
 ):
-  print("\n======================================")
+
+  print("\n========================================")
   print("RAGAS Evaluation Summary")
-  print("=======================================")
+  print("========================================")
 
-  metric_columns = [
-    "faithfulness",
-    "factual_correctness",
-    "context_recall",
-  ]
+  if (
+    faithfulness_df is not None
+    and "faithfulness"
+    in faithfulness_df.columns
+  ):
 
-  for df in [faithfulness_df, reference_df]:
+    score = (
+      faithfulness_df["faithfulness"]
+      .dropna()
+      .mean()
+    )
 
-    if df is None:
-      continue
+    print(
+      f"{'faithfulness':25s}: "
+      f"{score:.4f}"
+    )
 
-    for column in metric_columns:
-      if column in df.columns:
+  if reference_df is not None:
 
-        score = df[column].mean()
+    for column in [
+      "factual_correctness",
+      "context_recall",
+    ]:
 
-        print(
-          f"{column:25s}: "
-          f"{score:.4f}"
+      if column in reference_df.columns:
+
+        valid_scores = (
+          reference_df[column]
+          .dropna()
         )
+
+        if not valid_scores.empty:
+
+          print(
+              f"{column:25s}: "
+              f"{valid_scores.mean():.4f}"
+          )
 
 
 
