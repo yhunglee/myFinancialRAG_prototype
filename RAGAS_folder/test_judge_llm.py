@@ -8,28 +8,29 @@ client = OpenAI(
 )
 
 
-# MODEL_NAME = "gemma-4-e2b-it"
+MODEL_NAME = "qwen3.5-9b"
 
-# response = client.chat.completions.create(
-#   model=MODEL_NAME,
-#   messages=[
-#     {
-#         "role": "system",
-#         "content": "你是一名財務資料問答系統的評估員。"
-#     },
-#     {
-#         "role": "user",
-#         "content": "台積電第四季營收是 1000 億。這句話是財務事實陳述嗎？"
-#     }
-#   ],
-#   temperature=0,
-# )
+response = client.chat.completions.create(
+  model=MODEL_NAME,
+  messages=[
+    {
+        "role": "system",
+        "content": "你是一名財務資料問答系統的評估員。"
+    },
+    {
+        "role": "user",
+        "content": "台積電第四季營收是 1000 億。這句話是財務事實陳述嗎？"
+    }
+  ],
+  temperature=0,
+)
 
-# print(response.choices[0].message.content)
+print(response.choices[0].message.content)
 
-models = client.models.list()
 
-print("LM Studio models:")
-for model in models.data:
-  print(model.id)
+# models = client.models.list()
+
+# print("LM Studio models:")
+# for model in models.data:
+#   print(model.id)
 
