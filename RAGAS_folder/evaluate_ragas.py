@@ -14,6 +14,8 @@ from ragas.metrics.collections import (
   FactualCorrectness,
   ContextRecall,
 )
+import math
+import instructor
 
 
 # ========================================
@@ -79,16 +81,36 @@ def normalize_samples(data: list[dict]) -> list[dict]:
 
   for index, item in enumerate(data):
 
-    sample = {
-      "user_input": item["user_input"],
-      "retrieved_contexts": item["retrieved_contexts"],
-      "response": remove_think_block(
-        item["response"]
-      ),
-      "reference": item.get("reference", "")
-    }
+    cleaned_response = remove_think_block(
+      item["response"]
+    )
 
-    samples.append(sample)
+    if not cleaned_response:
+      print(
+        f"WARNING sample {index}: "
+        f"response became empty after cleaning"
+      )
+      print(
+        "question:",
+        item["user_input"],
+      )
+
+      sample = {
+        "user_input": item["user_input"],
+        "retrieved_contexts":
+          item["retrieved_contexts"],
+
+        "response":
+          cleaned_response,
+
+        "reference":
+          item.get(
+            "reference",
+            "",
+          ).strip(),
+      }
+
+      samples.append(sample)
 
   return samples
 
@@ -110,6 +132,12 @@ def create_judge_llm():
   judge_llm = llm_factory(
     model=JUDGE_MODEL,
     client=client,
+
+    
+    # LM Studio / local OpenAI-compatible backend
+    # 優先讓 Instructor 使用 Markdown JSON，
+    # 避免依賴 OpenAI 原生 response_format。
+    mode=instructor.Mode.MD_JSON,
   )
 
   return judge_llm
@@ -152,17 +180,25 @@ def evaluate_faithfulness(
           retrieved_contexts=sample["retrieved_contexts"],
       )
 
+      print("    result type =", type(result))
+      print("    result      =", result)
+      print("    result.value=", result.value)
+
       score = float(result.value)
 
-      reason = getattr(
-          result,
-          "reason",
-          None,
-      )
-
-      print(
-          f"    score = {score:.4f}"
-      )
+      if math.isnan(score):
+          print("    WARNING: Faithfulness returned NaN")
+          print("    response length =", len(sample["response"]))
+          print(
+              "    retrieved_contexts count =",
+              len(sample["retrieved_contexts"]),
+          )
+          print(
+              "    response preview =",
+              repr(sample["response"][:300]),
+          )
+      else:
+          print(f"    score = {score:.4f}")
 
     except Exception as e:
 
@@ -379,16 +415,21 @@ def print_summary(
     in faithfulness_df.columns
   ):
 
-    score = (
+    valid_scores = (
       faithfulness_df["faithfulness"]
       .dropna()
-      .mean()
     )
 
-    print(
-      f"{'faithfulness':25s}: "
-      f"{score:.4f}"
-    )
+    if valid_scores.empty:
+      print(
+        f"{'faithfulness':25s}: "
+        "NO VALID SCORES"
+      )
+    else:
+      print(
+        f"{'faithfulness':25s}: "
+        f"{valid_scores.mean():.4f}"
+      )
 
   if reference_df is not None:
 
