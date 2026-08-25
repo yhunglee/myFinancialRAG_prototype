@@ -124,37 +124,74 @@ def evaluate_faithfulness(
     samples: list[dict],
     judge_llm,
 ):
-  print("\n==================================")
-  print("Evaluatiing Faithfulness")
-  print("====================================")
 
-  dataset = EvaluationDataset.from_list(samples)
+  print("\n========================================")
+  print("Evaluating Faithfulness")
+  print("========================================")
 
-  # RAGAS 0.4：
-  # metric 建立時直接指定 Judge LLM
-  faithfulness_metric = Faithfulness(
-    llm=judge_llm
+  metric = Faithfulness(
+      llm=judge_llm
   )
 
-  result = evaluate(
-    dataset=dataset,
-    metrics=[
-      faithfulness_metric,
-    ],
+  rows = []
 
-    # Local LLM 先不要同時使用太多 request
-    batch_size=1,
+  total = len(samples)
 
-    raise_exceptions=False,
-    show_progress=True,
-  )
+  for index, sample in enumerate(samples, start=1):
 
-  df = result.to_pandas()
+    print(
+        f"\n[{index}/{total}] "
+        f"Faithfulness: {sample['user_input']}"
+    )
+
+    try:
+
+      result = metric.score(
+          user_input=sample["user_input"],
+          response=sample["response"],
+          retrieved_contexts=sample["retrieved_contexts"],
+      )
+
+      score = float(result.value)
+
+      reason = getattr(
+          result,
+          "reason",
+          None,
+      )
+
+      print(
+          f"    score = {score:.4f}"
+      )
+
+    except Exception as e:
+
+      print(
+          f"    ERROR: {type(e).__name__}: {e}"
+      )
+
+      score = None
+      reason = str(e)
+
+    row = {
+      "user_input": sample["user_input"],
+      "response": sample["response"],
+      "reference": sample.get(
+          "reference",
+          "",
+      ),
+      "faithfulness": score,
+      "faithfulness_reason": reason,
+    }
+
+    rows.append(row)
+
+  df = pd.DataFrame(rows)
 
   df.to_csv(
-    OUTPUT_ALL,
-    index=False,
-    encoding="utf-8-sig"
+      OUTPUT_ALL,
+      index=False,
+      encoding="utf-8-sig",
   )
 
   return df
@@ -168,59 +205,160 @@ def evaluate_reference_metrics(
     samples: list[dict],
     judge_llm,
 ):
+
   reference_samples = [
-    sample
-    for sample in samples
-    if sample["reference"]
+      sample
+      for sample in samples
+      if sample.get("reference", "").strip()
   ]
 
   print(
-    f"\nSamples with reference: "
-    f"{len(reference_samples)} / {len(samples)}"
+      f"\nSamples with reference: "
+      f"{len(reference_samples)} / {len(samples)}"
   )
 
   if not reference_samples:
-    print("No samples contain reference answers.")
-    return None
+      print(
+          "No samples contain reference answers."
+      )
+      return None
 
-  dataset = EvaluationDataset.from_list(
-    reference_samples
+  print("\n========================================")
+  print("Evaluating Reference Metrics")
+  print("========================================")
+
+  factual_metric = FactualCorrectness(
+      llm=judge_llm
   )
 
-  print("\n===================================")
-  print("Evaluating reference-based metrics")
-  print("====================================")
-
-  # RAGAS 0.4：
-  # metric 建立時直接指定 Judge LLM
-  factual_correct_metric = FactualCorrectness(
-    llm=judge_llm
-  )
   context_recall_metric = ContextRecall(
-    llm=judge_llm,
+      llm=judge_llm
   )
 
-  result = evaluate(
-    dataset=dataset,
-    metrics=[
-      factual_correct_metric,
-      context_recall_metric,
-    ],
-    batch_size=1,
-    raise_exceptions=False,
-    show_progress=True,
-  )
+  rows = []
 
-  df = result.to_pandas()
+  total = len(reference_samples)
+
+  for index, sample in enumerate(
+      reference_samples,
+      start=1,
+  ):
+
+    print(
+        f"\n[{index}/{total}] "
+        f"{sample['user_input']}"
+    )
+
+    # ------------------------------------
+    # Factual Correctness
+    # ------------------------------------
+
+    try:
+
+      factual_result = factual_metric.score(
+          response=sample["response"],
+          reference=sample["reference"],
+      )
+
+      factual_score = float(
+          factual_result.value
+      )
+
+      factual_reason = getattr(
+          factual_result,
+          "reason",
+          None,
+      )
+
+      print(
+          f"    factual_correctness "
+          f"= {factual_score:.4f}"
+      )
+
+    except Exception as e:
+
+      print(
+          f"    FactualCorrectness ERROR: "
+          f"{type(e).__name__}: {e}"
+      )
+
+      factual_score = None
+      factual_reason = str(e)
+
+    # ------------------------------------
+    # Context Recall
+    # ------------------------------------
+
+    try:
+
+      recall_result = (
+          context_recall_metric.score(
+              user_input=sample["user_input"],
+              retrieved_contexts=(
+                  sample["retrieved_contexts"]
+              ),
+              reference=sample["reference"],
+          )
+      )
+
+      recall_score = float(
+          recall_result.value
+      )
+
+      recall_reason = getattr(
+          recall_result,
+          "reason",
+          None,
+      )
+
+      print(
+          f"    context_recall "
+          f"= {recall_score:.4f}"
+      )
+
+    except Exception as e:
+
+      print(
+          f"    ContextRecall ERROR: "
+          f"{type(e).__name__}: {e}"
+      )
+
+      recall_score = None
+      recall_reason = str(e)
+
+    # ------------------------------------
+    # Save row
+    # ------------------------------------
+
+    row = {
+      "user_input": sample["user_input"],
+      "response": sample["response"],
+      "reference": sample["reference"],
+
+      "factual_correctness":
+          factual_score,
+
+      "factual_correctness_reason":
+          factual_reason,
+
+      "context_recall":
+          recall_score,
+
+      "context_recall_reason":
+          recall_reason,
+    }
+
+    rows.append(row)
+
+  df = pd.DataFrame(rows)
 
   df.to_csv(
-    OUTPUT_REFERENCE,
-    index=False,
-    encoding="utf-8-sig",
+      OUTPUT_REFERENCE,
+      index=False,
+      encoding="utf-8-sig",
   )
 
   return df
-
 
 # ===========================================
 # Summary
