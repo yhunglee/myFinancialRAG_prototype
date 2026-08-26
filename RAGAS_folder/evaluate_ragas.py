@@ -195,8 +195,7 @@ def evaluate_faithfulness(
             f"Faithfulness: {sample['user_input']}"
         )
 
-        # 每一筆 sample 都先初始化，
-        # 避免 try 成功時 reason 尚未宣告
+        # 每一筆 sample 都先初始化評分與錯誤狀態
         score = None
         error = None
 
