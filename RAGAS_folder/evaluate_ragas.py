@@ -96,22 +96,22 @@ def normalize_samples(data: list[dict]) -> list[dict]:
         item["user_input"],
       )
 
-  sample = {
-    "user_input": item["user_input"],
-    "retrieved_contexts":
-      item["retrieved_contexts"],
+    sample = {
+      "user_input": item["user_input"],
+      "retrieved_contexts":
+        item["retrieved_contexts"],
 
-    "response":
-      cleaned_response,
+      "response":
+        cleaned_response,
 
-    "reference":
-      item.get(
-        "reference",
-        "",
-      ).strip(),
-  }
+      "reference":
+        item.get(
+          "reference",
+          "",
+        ).strip(),
+    }
 
-  samples.append(sample)
+    samples.append(sample)
 
   return samples
 
@@ -568,9 +568,15 @@ def print_summary(
 
 def main():
 
+  print("evaluate_ragas.py =", Path(__file__).resolve())
+  print("INPUT_FILE        =", INPUT_FILE.resolve())
+  print("INPUT exists      =", INPUT_FILE.exists())
+
   raw_data = load_intermediate_dataset()
+  print("raw_data count    =", len(raw_data))
 
   samples = normalize_samples(raw_data)
+  print("samples count     =", len(samples))
 
   judge_llm = create_judge_llm()
 
