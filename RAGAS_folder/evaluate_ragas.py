@@ -155,12 +155,12 @@ def create_judge_llm():
 
     # RAGAS 預設只有 1024，
     # 增加 Judge structured output 空間
-    max_tokens=4096,
     # 注意：
     # Qwen Judge 的 thinking 模式目前由 LM Studio
     # Developer -> Inference 設定控制。
     # 必須停用 thinking，否則 RAGAS 的 structured output
     # 容易因 reasoning 消耗大量 output tokens 而被截斷。
+    max_tokens=4096,
   )
 
   return judge_llm
@@ -208,22 +208,6 @@ def evaluate_faithfulness(
             )
 
             # ----------------------------------------
-            # Debug：觀察 RAGAS 實際回傳內容
-            # ----------------------------------------
-            print(
-                "    result type =",
-                type(result),
-            )
-            print(
-                "    result      =",
-                result,
-            )
-            print(
-                "    result.value=",
-                result.value,
-            )
-
-            # ----------------------------------------
             # Score
             # ----------------------------------------
             score = float(result.value)
@@ -231,9 +215,9 @@ def evaluate_faithfulness(
             # 某些 metric result 可能有 reason，
             # 沒有則回傳 None
             reason = getattr(
-                result,
-                "reason",
-                None,
+              result,
+              "reason",
+              None,
             )
 
             # ----------------------------------------
@@ -241,52 +225,16 @@ def evaluate_faithfulness(
             # ----------------------------------------
             if math.isnan(score):
 
-                print(
-                    "    WARNING: "
-                    "Faithfulness returned NaN"
-                )
-
-                print(
-                    "    response length =",
-                    len(sample["response"]),
-                )
-
-                print(
-                    "    retrieved_contexts count =",
-                    len(
-                        sample["retrieved_contexts"]
-                    ),
-                )
-
-                print(
-                    "    response preview =",
-                    repr(
-                        sample["response"][:300]
-                    ),
-                )
-
-                # 額外檢查 contexts
-                for context_index, context in enumerate(
-                    sample["retrieved_contexts"],
-                    start=1,
-                ):
-
-                    print(
-                        f"    context "
-                        f"{context_index} length =",
-                        len(context),
-                    )
-
-                    print(
-                        f"    context "
-                        f"{context_index} preview =",
-                        repr(context[:200]),
-                    )
+              score = None
+              print(
+                "    WARNING: "
+                "Faithfulness returned NaN"
+              )
 
             else:
-                print(
-                    f"    score = {score:.4f}"
-                )
+              print(
+                f"    score = {score:.4f}"
+              )
 
         except Exception as e:
 
@@ -323,14 +271,8 @@ def evaluate_faithfulness(
 
         rows.append(row)
 
-    # ----------------------------------------
-    # Convert to DataFrame
-    # ----------------------------------------
     df = pd.DataFrame(rows)
 
-    # ----------------------------------------
-    # Save CSV
-    # ----------------------------------------
     df.to_csv(
         OUTPUT_ALL,
         index=False,
@@ -568,15 +510,15 @@ def print_summary(
 
 def main():
 
-  print("evaluate_ragas.py =", Path(__file__).resolve())
-  print("INPUT_FILE        =", INPUT_FILE.resolve())
-  print("INPUT exists      =", INPUT_FILE.exists())
-
   raw_data = load_intermediate_dataset()
-  print("raw_data count    =", len(raw_data))
 
   samples = normalize_samples(raw_data)
-  print("samples count     =", len(samples))
+
+  if len(samples) != len(raw_data):
+    raise ValueError(
+        "Dataset normalization changed sample count: "
+        f"{len(raw_data)} -> {len(samples)}"
+    )
 
   judge_llm = create_judge_llm()
 
