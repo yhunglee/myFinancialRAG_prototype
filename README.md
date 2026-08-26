@@ -32,6 +32,7 @@
 5. Idempotent Upsert, 做在向量資料庫索引 Market-stockTicker-year-quarter-idx
 6. 知識庫和對話歷史的資料隔離，使用向量資料庫 ChromaDB 和記憶體
 7. 對話介面 GUI
+8. RAGAS assessment pipeline, Faithfulness, FactualCorrectness, ContextRecall, 裁判模型 `qwen3.5-9b`
 
 
 ### 程式碼特點:    
@@ -46,6 +47,7 @@
 3. entity_normalizer.py
 4. rag6_practice.py
 5. test_financial_rag.py
+6. RAGAS_folder/evaluate_ragas.py
 
 ### 不含:   
 1. Agentic RAG
@@ -65,6 +67,15 @@
 3. 目前僅有台積電和聯發科的 25Q4 季報。
 4. RAGAS 0.43 官方版的執行時有問題，所以降級0.41版，執行一堆問題。
 5. LM Studio 陪著 RAGAS 裁判模型執行時，必須停用 Qwen3.5 的 enable_thinking，不然一直 out of max_tokens。
+6. RAGAS 評估總結
+```plaintext 
+========================================
+RAGAS Evaluation Summary
+========================================
+faithfulness             : 0.5338
+factual_correctness      : 0.2112
+context_recall           : 0.6587
+```
 
 ## 已知問題
 1. 每位使用者的訊息沒有完全隔離。暫時不處理。
