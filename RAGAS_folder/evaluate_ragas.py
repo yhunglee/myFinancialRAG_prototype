@@ -572,13 +572,6 @@ def main():
 
   samples = normalize_samples(raw_data)
 
-  # debug mode. TODO: remove 
-  samples = samples[:3]
-  print(
-    f"DEBUG mode: evaluating only "
-    f"{len(samples)} samples."
-  )
-
   judge_llm = create_judge_llm()
 
   faithfulness_df = evaluate_faithfulness(
