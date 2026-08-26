@@ -198,7 +198,7 @@ def evaluate_faithfulness(
         # 每一筆 sample 都先初始化，
         # 避免 try 成功時 reason 尚未宣告
         score = None
-        reason = None
+        error = None
 
         try:
             result = metric.score(
@@ -207,25 +207,14 @@ def evaluate_faithfulness(
                 retrieved_contexts=sample["retrieved_contexts"],
             )
 
-            # ----------------------------------------
-            # Score
-            # ----------------------------------------
             score = float(result.value)
 
-            # 某些 metric result 可能有 reason，
-            # 沒有則回傳 None
-            reason = getattr(
-              result,
-              "reason",
-              None,
-            )
-
-            # ----------------------------------------
-            # NaN 檢查
-            # ----------------------------------------
+            # 檢查 NAN
             if math.isnan(score):
 
               score = None
+              error = "Faithfulness returned NaN"
+
               print(
                 "    WARNING: "
                 "Faithfulness returned NaN"
@@ -244,7 +233,9 @@ def evaluate_faithfulness(
             )
 
             score = None
-            reason = str(e)
+            error = (
+                f"{type(e).__name__}: {e}"
+            )
 
         # ----------------------------------------
         # Save result
@@ -265,8 +256,8 @@ def evaluate_faithfulness(
             "faithfulness":
                 score,
 
-            "faithfulness_reason":
-                reason,
+            "faithfulness_error":
+                error,
         }
 
         rows.append(row)
@@ -339,6 +330,9 @@ def evaluate_reference_metrics(
     # Factual Correctness
     # ------------------------------------
 
+    factual_score = None
+    factual_error = None
+
     try:
 
       factual_result = factual_metric.score(
@@ -348,12 +342,6 @@ def evaluate_reference_metrics(
 
       factual_score = float(
           factual_result.value
-      )
-
-      factual_reason = getattr(
-          factual_result,
-          "reason",
-          None,
       )
 
       print(
@@ -369,11 +357,16 @@ def evaluate_reference_metrics(
       )
 
       factual_score = None
-      factual_reason = str(e)
+      factual_error = (
+          f"{type(e).__name__}: {e}"
+      )
 
     # ------------------------------------
     # Context Recall
     # ------------------------------------
+
+    recall_score = None
+    recall_error = None
 
     try:
 
@@ -391,12 +384,6 @@ def evaluate_reference_metrics(
           recall_result.value
       )
 
-      recall_reason = getattr(
-          recall_result,
-          "reason",
-          None,
-      )
-
       print(
           f"    context_recall "
           f"= {recall_score:.4f}"
@@ -410,7 +397,9 @@ def evaluate_reference_metrics(
       )
 
       recall_score = None
-      recall_reason = str(e)
+      recall_error = (
+          f"{type(e).__name__}: {e}"
+      )
 
     # ------------------------------------
     # Save row
@@ -424,14 +413,14 @@ def evaluate_reference_metrics(
       "factual_correctness":
           factual_score,
 
-      "factual_correctness_reason":
-          factual_reason,
+      "factual_correctness_error":
+          factual_error,
 
       "context_recall":
           recall_score,
 
-      "context_recall_reason":
-          recall_reason,
+      "context_recall_error":
+          recall_error,
     }
 
     rows.append(row)
