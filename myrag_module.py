@@ -384,8 +384,6 @@ class FinancialRAGService:
     )
 
     full_answer = ''
-    has_yielded_think_start = False
-    has_yielded_think_end = False
 
     async for chunk in response:
       # 避免 chunk.choices 為空的極端 API 邊界狀況
