@@ -8,10 +8,6 @@ class RAGEvent:
   type: Literal[
     "reasoning",
     "answer",
-    "retrieval",
-    "tool_call",
-    "tool_result",
-    "error",
   ]
 
   content: str
