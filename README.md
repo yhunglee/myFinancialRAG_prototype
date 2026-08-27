@@ -47,7 +47,8 @@
 3. entity_normalizer.py
 4. rag6_practice.py
 5. test_financial_rag.py
-6. RAGAS_folder/evaluate_ragas.py
+6. RAGAS_folder/ragas_generate_dataset.py
+7. RAGAS_folder/evaluate_ragas.py
 
 ### 不含:   
 1. Agentic RAG

@@ -1,8 +1,8 @@
 import json
 from myrag_module import FinancialRAGService
 
-INPUT_FILE = "./RAGAS_folder/base_dataset.json"
-OUTPUT_FILE = "./RAGAS_folder/ragas_intermediate_dataset.json"
+INPUT_FILE = "./base_dataset.json"
+OUTPUT_FILE = "./ragas_intermediate_dataset.json"
 
 
 
