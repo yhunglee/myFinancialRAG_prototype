@@ -67,14 +67,23 @@
 3. 目前僅有台積電和聯發科的 25Q4 季報。
 4. RAGAS 0.43 官方版的執行時有問題，所以降級0.41版，執行一堆問題。
 5. LM Studio 陪著 RAGAS 裁判模型執行時，必須停用 Qwen3.5 的 enable_thinking，不然一直 out of max_tokens。
-6. RAGAS 評估總結
+6. RAGAS 評估總結(top_k = 5, 10)
 ```plaintext 
+top_k = 5
 ========================================
 RAGAS Evaluation Summary
 ========================================
 faithfulness             : 0.5338
 factual_correctness      : 0.2112
 context_recall           : 0.6587
+----------------------------------------
+top_k = 10
+========================================
+RAGAS Evaluation Summary
+========================================
+faithfulness             : 0.5894
+factual_correctness      : 0.2142
+context_recall           : 0.7320
 ```
 
 ## 已知問題

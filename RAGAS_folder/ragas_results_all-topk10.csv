@@ -1,0 +1,152 @@
+﻿user_input,response,reference,faithfulness,faithfulness_error
+比較發哥和 GG 2025年第四季營收,"根據您提供的參考資料，以下是發哥（聯發科）和 GG（台積電）在 2025 年第四季的營收比較：
+
+| 公司 | 期間 | 營收 (新台幣百萬) | 資料來源 |
+| :--- | :--- | :--- | :--- |
+| 聯發科 (2454.TW) | 2025 Q4 | 150,188 | 參考資料區塊 |
+| 台積電 (2330.TW) | 2025 Q4 | 1,046,090 (總淨收入) | 參考資料區塊 |
+
+**說明：**
+
+*   **聯發科 (2454.TW)：** 根據參考資料，其 2025 年第四季的淨銷售額（Net Sales）為 **150,188 百萬新台幣**。
+*   **台積電 (2330.TW)：** 參考資料中提供了 2025 年第四季的總淨收入為 **NT$1,046.09 billion**（即 1,046,090 百萬新台幣）。
+
+請注意，兩家公司提供的數據粒度不同，聯發科提供的是單一季度的詳細營收數據，而台積電提供的是該季度總收入的彙總數據。","MTK2025年第四季營收是 NT$150,188 百萬元, TSMC2025年第四季營收是 NT$1,046.09 billion",1.0,
+台積電2025年第四季營收,"台積電2025年第四季的淨營收（Net Revenue）為 **1,046.09 億新台幣** (NT$ billions)。","Net revenue was NT$1,046.09 billion",1.0,
+2330 2025年第三季營收,2025年第三季的營收（Net Revenue）為 NT$989.92 億。,Net revenue was NT$989.92 billion in 3Q25.,1.0,
+在季度現金流分析報告裡，TSMC 在2025年第四季的期末現金餘額?,"在季度現金流分析報告中，TSMC 在2025年第四季的期末現金餘額為 **NT$2,767.86 億**。","In end of 4Q2025 and quarterly cash flow analysis, ending cash balance was NT$2,767.86 billion.",1.0,
+在季度現金流分析報告裡，台積電2025年第四季現金部位變動金額是?,在季度現金流分析報告中，台積電2025年第四季的現金部位變動金額是 **NT$640.23 億** (來自 IV - 1. Quarterly Cash Flow Analysis 表格)。,"During the fourth quarter, cash position increased by NTD297.10 billion.",1.0,
+在季度現金流分析報告裡，台積電2025年第三季期末現金餘額是?,[財報未揭露],"In end of 3Q2025 and quarterly cash flow analysis, ending cash balance was NT$2,470.76 billion.",0.0,
+在季度現金流分析報告裡，TSMC 在2024年第四季的期末現金餘額?,"TSMC 在 2024 年第四季的期末現金餘額為 NT$2,127.63 billion。
+
+**資料來源：** 參考資料區塊中「IV - 1. Quarterly Cash Flow Analysis (In NT$ billions)」表格。","In end of 4Q2024 and quarterly cash flow analysis, ending cash balance was NTD 2,127.63 billions.",1.0,
+TSMC 在2025年第四季的增加或減少自由現金流餘額?,"TSMC 在 2025 年第四季的自由現金流為 **NT$368.60 billion**（流入）。
+
+此結果是基於參考資料中「Operating and Free Cash Flow」部分提供的數據。",Free cash flow increased by NT$229.22 billion in 4Q25,1.0,
+3nm 製程收益佔台積電 2025年第四季營收比例是幾%?,"3nm 製程收益佔台積電2025年第四季營收（晶圓收入）的比例是 **28%**。
+
+資料來源：參考資料區塊中「Revenue Analysis」部分。",3nm process technology contributed 28% of total wafer revenue in 4Q25 while 5nm and 7nm accounted for 35% and 14% respectively.,1.0,
+3nm 製程收益佔台積電 2024年第四季營收比例是幾%?,"台積電在 2024年第四季（4Q24）的晶圓收入中，3nm 的比例是 **26%**。
+
+*資料來源：參考資料區塊中「I. Revenue Analysis」表格 (Wafer Revenue by Technology, 4Q24)*",3nm process technology contributed 26% of total wafer revenue in 4Q24.,0.6666666666666666,
+依照晶圓製程世代，3nm 製程收益佔台積電 2025年全年營收比例是幾%?,[財報未揭露],3nm process technology contributed 24% of total wafer revenue in 2025.,0.0,
+依照晶圓製程世代，3nm 製程收益佔台積電 2024年全年營收比例是幾%?,[財報未揭露],3nm process technology contributed 18% of total wafer revenue in 2024.,0.0,
+TSMC 在2025年第四季的銷貨成本是?,[財報未揭露],NTD 394.10 billions,0.0,
+GG 2025年第三季營收是?,"| 公司代號 | 時間點 | 營收 (Net Revenue) | 資料來源 |
+| :--- | :--- | :--- | :--- |
+| 2330.TW (台積電) | 2025年第三季 (3Q25) | 989.92 億新台幣 (NT$ billions) | 參考資料區塊 |",Net revenue was NT$989.92 billion in 3Q25.,0.0,
+GG 2025年第四季對第三季營收增長比例是?,"GG 2025年第四季對第三季營收增長比例是 **5.7%**。
+
+（資料來源：參考資料區塊中關於 Net revenue 的描述）",Net revenue in 4Q25 was 5.4% increased from in 3Q25.,1.0,
+台積電 2025年第四季和第三季的現金股利金額是?,"根據提供的參考資料：
+
+*   **2025年第三季 (3Q25) 現金股利金額：** NT$6.00
+*   **2025年第四季 (4Q25) 現金股利金額：** [財報未揭露]",Cash dividends in 4Q25 was NT$ 129.66 billions. Cash dividends in 3Q25 was NT$ 116.70 billions.,0.5,
+台積電 2025年第四季淨利率是?,[財報未揭露],Net profit margin in 4Q25 was 48.3%.,0.0,
+台積電 2025年全年淨利率是?,[財報未揭露],Net profit margin in 2025 was 45.1%.,0.0,
+TSMC 2025年全年毛利率是?,TSMC 2025年的毛利率（Gross margin）為 **59.9%**，相較於2024年的56.1%，增長了3.8個百分點。,"On a full year basis, gross margin was 59.9% in 2025.",1.0,
+TSMC 2024年全年毛利率是?,TSMC 2024年全年毛利率是 56.1%。,"On a full year basis, gross margin was 56.1% in 2024.",1.0,
+TSMC 2025年全年營收比例來自 High performance computing是幾%? 如果依照應用領域區分。,"根據提供的參考資料，TSMC 在特定時間點的營收按應用領域區分如下：
+
+| 應用領域 (Platform) | 2025 年佔比 | 資料來源 |
+| :--- | :--- | :--- |
+| High Performance Computing (HPC) | 55% | 參考資料 |
+| Smartphone | 32% | 參考資料 |
+| Internet of Things (IoT) | 5% | 參考資料 |
+| Automotive | 5% | 參考資料 |
+| Digital Consumer Electronics (DCE) | 1% | 參考資料 |
+| Others | 2% | 參考資料 |
+
+**總結：** 根據參考資料，TSMC 在該時間點的淨收入中，來自 **High Performance Computing (HPC)** 的比例為 **55%**。","On a full year basis, net revenue from HPC was 58% by platform in 2025.",1.0,
+TSMC 2024年全年營收比例來自 High performance computing是幾%?,"TSMC 2024年全年營收比例來自 High performance computing 是 **51%**。（資料來源：參考資料區塊中 ""Net Revenue by Platform"" 表格）","On a full year basis, net revenue from HPC was 51% by platform in 2024.",1.0,
+TSMC 依照客戶來源地區分，2025年全年營收比例來自北美地區是幾%?,"TSMC 依照客戶來源地區分，2025年全年營收比例來自北美地區為 **75%**。
+
+**資料來源：** 參考資料區塊中明確指出：「In 2025, revenue from customers based in North America accounted for 75% of total net revenue...」","In 2025, revenue from customers based in North America accounted for 75% of total net revenue.",1.0,
+台積電2025年第四季營業淨來源金額是?,"台積電2025年第四季的營業淨來源金額為 **NT$2,274.98 億** (基於參考資料中的 Net Operating Sources/(Uses) 數據，對應 4Q25)。","During the fourth quarter, net cash generated from operating activities totaled NT$725.51 billion.",1.0,
+台積電2025年全年投資淨來源金額是?,[財報未揭露],"On a full year basis, Net cash used in investing activities was NT$1,144.39 billion",0.0,
+台積電有沒有公布2026年預期資本支出?,[財報未揭露],無,0.0,
+台積電有沒有公布2026年 forwarded PE?,台積電目前在提供的參考資料中**沒有**公布2026年的Forward PE資訊。,無,1.0,
+台積電對於2026年產業景氣展望是?,[財報未揭露],無,0.0,
+台積電和聯發科 2025 年第四季的毛利金額?,"| 公司代號 | 期間 | 毛利金額/比率 | 資料來源 |
+| :--- | :--- | :--- | :--- |
+| 台積電 (2330.TW) | 2025 年第四季 | 62.3% | 參考資料 (Page 1, Quarter 2025) |
+| 聯發科 (2454.TW) | 2025 年第四季 | 3.4% | 參考資料 (Q4 2025 季度比較表) |","TSMC's Gross Profit in 4Q25 was NT$651.99 billion. MTK's Gross Profit in 4Q25 was NT$69,281 million.",0.5,
+聯發科2025年第四季營收,"聯發科（2454.TW）2025年第四季的營收（Net Sales）為 **150,188 百萬新台幣**。","聯發科2025年第四季營收是 NT$150,188 百萬元",0.6666666666666666,
+MTK的2025年第四季營收,"MTK在2025年第四季的營收（Net Sales）為 **150,188 百萬新台幣**。","MTK2025年第四季營收是 NT$150,188 百萬元",1.0,
+發哥 2025年第三季營收,"發哥（聯發科，2454.TW）2025年第三季的營收為 **142,097 百萬元新台幣**。
+
+資料來源：參考資料區塊中「CONSOLIDATED STATEMENTS OF COMPREHENSIVE INCOME For the Fourth quarter of year 2025 Unit: Millions of New Taiwan dollars Sequential Comparison」。","聯發科2025年第三季營收是 142,097 百萬元",0.7142857142857143,
+MTK 在2025年第四季的每股盈餘是?,"MTK 在2025年第四季的每股盈餘是 **14.39 NTD**。
+
+（資料來源：參考資料區塊中「Yearly Comparison」表格，4Q 2025 數據）",MTK 2025年第四季基本每股盈餘是 14.39 元,0.6666666666666666,
+在年度合併現金流量表裡，聯發科2025年現金部位變動金額是?,[財報未揭露],"聯發科2025年本期現金及約當現金增加數是新台幣 31,594 百萬元",0.0,
+在年度合併現金流量表裡，聯發科2024年現金部位變動金額是?,[財報未揭露],"聯發科2024年本期現金及約當現金增加數是新台幣 38,300 百萬元",0.0,
+在年度合併現金流量表裡，聯發科在2024年的期末現金餘額?,"聯發科在 2024 年的期末現金餘額為 **203,696 百萬新台幣**。
+
+（資料來源：參考資料區塊中「CONSOLIDATED BALANCE SHEETS As of December 31, 2025 and 2024」部分）","聯發科在2024年的期末現金及約當現金餘額是新台幣 203,696 百萬元",1.0,
+MTK 在2025年的自由現金流餘額?,[財報未揭露],"聯發科在2025年的自由現金流餘額是新台幣125,039 百萬元，由營業活動之淨現金流入 162,793 百萬元 加 投資活動之淨現金流出 負 37,754 百萬元，得出",0.0,
+2454 在2025年第四季的銷貨成本是?,[財報未揭露],"2454 的營業成本是 NT$80,907 百萬元",0.0,
+MTK 2025年第四季對第三季營收增長比例是?,MTK 2025年第四季對第三季營收增長比例是 5.7%。,聯發科的第四季營業收入QoQ增長比例是5.7%,1.0,
+聯發科 2025年第四季淨利率是?,"聯發科 2025年第四季的淨利率約為 **70.80%**。
+
+**計算依據：**
+
+*   **淨銷售額 (Net Sales)**: 150,188 百萬新台幣
+*   **歸屬於母公司所有者的淨利潤 (Net income attributable to Owners of the parent)**: 106,387 百萬新台幣
+
+$$\text{淨利率} = \left( \frac{\text{淨利潤}}{\text{淨銷售額}} \right) \times 100\% = \left( \frac{106,387}{150,188} \right) \times 100\% \approx 70.80\%$$","聯發科的2025年第四季淨利率是 15.36%，由本期淨利 23,074 除以 營業收入 150,188 百萬元計算得出",0.6,
+聯發科 2025年全年淨利率是?,[財報未揭露],聯發科的2025年全年淨利率是17.8%,0.0,
+MTK 2025年全年毛利率是?,"MTK 2025年全年毛利率是 **47.5%**。
+
+（計算依據參考資料中提供的 2025 年年度數據：淨銷售額為 595,966 百萬新台幣，毛利為 283,080 百萬新台幣。）",MTK 2025年全年毛利率是 47.5%,1.0,
+MTK 2024年全年毛利率是?,"| 指標 | 2024 年數據 (單位：百萬新台幣) | 資料來源 |
+| :--- | :--- | :--- |
+| 淨銷售額 (Net Sales) | 530,586 | 參考資料 (COME For the years ended December 31, 2025 and 2024) |
+| 毛利 (Gross profit) | 263,386 | 參考資料 (COME For the years ended December 31, 2025 and 2024) |
+| **毛利率** | **49.64%** | 計算自參考資料 |
+
+根據提供的參考資料，聯發科 (MTK) 2024 年的毛利率計算如下：
+
+$$\text{毛利率} = \left( \frac{\text{Gross profit}}{\text{Net Sales}} \right) \times 100\%$$
+
+| 指標 | 2024 年數據 (單位：百萬新台幣) | 資料來源 |
+| :--- | :--- | :--- |
+| 淨銷售額 (Net Sales) | 530,586 | 參考資料 (COME For the years ended December 31, 2025 and 2024) |
+| 毛利 (Gross profit) | 263,386 | 參考資料 (COME For the years ended December 31, 2025 and 2024) |
+| **毛利率** | **49.64%** | 計算自參考資料 |",MTK 2024年全年毛利率是 49.6%,1.0,
+MTK2025年全年營業淨來源金額是?,"MTK 2025 年全年營業淨來源金額為 595,966 百萬新台幣。","聯發科2025年全年營業活動之淨現金流入是新台幣162,793 百萬元",0.0,
+MTK2025年全年投資淨來源金額是?,"根據提供的參考資料，MTK 2025 年的投資相關現金流資訊如下：
+
+| 項目 | 金額 (百萬新台幣) | 備註 |
+| :--- | :--- | :--- |
+| 現金流出/流入投資活動 (Cash flows from investing activities) | 4,391 | 來自2025年的數據 |","聯發科2025年全年投資活動之淨現金流出是新台幣37,754 百萬元",0.3333333333333333,
+聯發科 2025年第四季和第三季的營業費用金額是?,[財報未揭露],"聯發科 2025年第四季的營業費用金額是新台幣 47,431 百萬元，第三季的營業費用是 43,924 百萬元",0.0,
+MTK 2025年第四季和2024年第四季的營業費用,"| 年份 | 營業費用 (Millions of New Taiwan dollars) | 資料來源 |
+| :--- | :--- | :--- |
+| 2025年第四季 | (80,907) | 參考資料 |
+| 2024年第四季 | (71,042) | 參考資料 |","聯發科 2025年第四季的營業費用金額是新台幣 47,431 百萬元，2024年第四季的營業費用是 45,589 百萬元",1.0,
+在合併資產負債表裡，MTK 2025年全年存貨比例佔資產總計是幾%?,"在合併資產負債表裡，聯發科 (2454.TW) 在 2025 年的存貨比例佔資產總計約為 **9.03%**。
+
+**計算細項：**
+
+| 項目 | 金額 (百萬 NTD) |
+| :--- | :--- |
+| 2025 年存貨 (Inventories) | 67,235 |
+| 2025 年資產總計 (Total assets) | 743,785 |
+
+$$\text{存貨佔資產總計比例} = \left( \frac{67,235}{743,785} \right) \times 100\% \approx 9.03\%$$
+
+*資料來源：參考資料區塊中「CONSOLIDATED BALANCE SHEETS As of December 31, 2025」*",MTK 2025年存貨佔資產總計比例是9.0%,1.0,
+在合併資產負債表裡，MTK 2024年全年存貨比例佔資產總計是幾%?,"在合併資產負債表裡，MTK 2024年全年存貨比例佔資產總計約為 **8.37%**。
+
+**計算依據：**
+
+*   **2024 年存貨 (Inventories):** 58,414 百萬新台幣
+*   **2024 年資產總計 (Total assets):** 697,868 百萬新台幣
+
+$$\text{比例} = \left( \frac{\text{存貨}}{\text{資產總計}} \right) \times 100\% = \left( \frac{58,414}{697,868} \right) \times 100\% \approx 8.37\%$$
+
+*資料來源：參考資料區塊中「CONSOLIDATED BALANCE SHEETS As of December 31, 2025 and 2024」表格。*",MTK 2025年存貨佔資產總計比例是8.4%,1.0,
+聯發科有沒有公布2026年預期資本支出?,聯發科並未在提供的參考資料中公布2026年的預期資本支出資訊。,本項無資訊,1.0,
+MTK有沒有公布2026年 forwarded PE?,[財報未揭露],本項無資訊,1.0,
+2454對於2026年產業景氣展望是?,財報未揭露,本項無資訊,0.0,
