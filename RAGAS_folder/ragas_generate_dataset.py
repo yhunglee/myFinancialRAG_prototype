@@ -1,8 +1,15 @@
 import json
+
+import sys, os
+# 1. 自動將父資料夾加入搜尋路徑（解決 myrag_module 的導入問題）
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from myrag_module import FinancialRAGService
 
-INPUT_FILE = "./base_dataset.json"
-OUTPUT_FILE = "./ragas_intermediate_dataset.json"
+# 2. 自動修正 JSON 檔案的讀取路徑（解決 FileNotFoundError）
+CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
+
+INPUT_FILE = os.path.join(CURRENT_DIR, "base_dataset.json")
+OUTPUT_FILE = os.path.join(CURRENT_DIR, "ragas_intermediate_dataset.json")
 
 
 
