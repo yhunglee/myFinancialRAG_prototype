@@ -8,7 +8,7 @@ import json
 import re
 from entity_normalizer import StockEntityNormalizer
 from typing import AsyncGenerator, TypeAlias
-from RAGEvent import RAGEvent
+from rag_event import RAGEvent
 
 RetrievedContexts: TypeAlias = dict[str, list[str]]
 RetrievedMetadata: TypeAlias = dict[str, list[dict]]
