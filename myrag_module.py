@@ -8,6 +8,7 @@ import json
 import re
 from entity_normalizer import StockEntityNormalizer
 from typing import AsyncGenerator, TypeAlias
+from RAGEvent import RAGEvent
 
 RetrievedContexts: TypeAlias = dict[str, list[str]]
 RetrievedMetadata: TypeAlias = dict[str, list[dict]]
@@ -345,7 +346,6 @@ class FinancialRAGService:
       "你是一名專業的台美股財報分析助理。請嚴格依據提供的參考資料與對話歷史回答。"
       "若進行跨公司比較，請務必使用 Markdown 表格對齊數據，並標註資料來源。"
       "若資料未提及，請直接回答[財報未揭露]，嚴禁自行捏造數據。"
-      "在回答前，請務必將你的思考與檢索過程包覆在 <think> 與 </think> 標籤之中。" # TODO: can be commented for deepseek or qwen model
     )
     user_content = (f"""
       [實體解析]
@@ -369,7 +369,7 @@ class FinancialRAGService:
     messages.append({"role": "user", "content": user_content})
     return messages, retrieved_contexts, retrieved_metadata
 
-  async def rag_chat_stream(self, user_query: str, top_k: int = 5 , where_filter: dict | None = None) -> AsyncGenerator[str, None] :
+  async def rag_chat_stream(self, user_query: str, top_k: int = 5 , where_filter: dict | None = None) -> AsyncGenerator[RAGEvent, None] :
     """(串流回應版)核心問答流程：問題改寫 -> 向量檢索 -> 增強生成 -> 更新記憶
         第二階段: 檢索與生成"""
     # 利用 to_thread 將耗時的同步前處理丟到背景執行，釋放 Event Loop
@@ -394,35 +394,26 @@ class FinancialRAGService:
           
       delta = chunk.choices[0].delta
       
-      # 1. 攔截原生支援的推理欄位 (reasoning_content)
+      # 攔截原生支援的推理欄位 (reasoning_content)
       reasoning_token = getattr(delta, "reasoning_content", None)
       if reasoning_token:
-        # 如果是第一個推理 token，幫它補上前端需要的 <think> 標籤開始
-        if not has_yielded_think_start:
-            yield "<think>\n"
-            full_answer += "<think>\n"
-            has_yielded_think_start = True
-        
-        yield reasoning_token
-        full_answer += reasoning_token
-        continue
+        yield RAGEvent(
+          type="reasoning",
+          content=reasoning_token,
+        )
 
-      # 2. 當推理結束，準備輸出正式 content 時，補上標籤結束
-      if has_yielded_think_start and not has_yielded_think_end:
-          yield "\n</think>\n"
-          full_answer += "\n</think>\n"
-          has_yielded_think_end = True
-
-      # 3. 攔截標準的正式回答
-      token = delta.content
-      if token:
-        full_answer += token
-        yield token
-
-    # 確保串流意外結束時，標籤依然有完美閉合
-    if has_yielded_think_start and not has_yielded_think_end:
-        yield "\n</think>\n"
-        full_answer += "\n</think>\n"
+      # 攔截回答內容
+      content_token = getattr(
+        delta,
+        "content",
+        None
+      )
+      if content_token:
+        full_answer += content_token
+        yield RAGEvent(
+          type="answer",
+          content=content_token
+        )
 
     # 更新對話歷史
     self._update_message_history(user_query, full_answer)
