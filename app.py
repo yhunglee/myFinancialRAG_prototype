@@ -34,11 +34,13 @@ async def main(message: cl.Message):
       if not msg:
         msg = cl.Message(content="", parent_id=think_step.id)
         await msg.send()
-      else:
-        await msg.stream_token(event.content)
+      
+      await msg.stream_token(event.content)
 
   await think_step.update()
-  await msg.update()
+
+  if msg:
+    await msg.update()
   
 
 
