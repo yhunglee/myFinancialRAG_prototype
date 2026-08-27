@@ -183,7 +183,7 @@ class FinancialRAGService:
   def retrieve(
       self,
       search_query: str,
-      top_k: int = 2,
+      top_k: int = 5,
       where_filter: dict | None = None
   ) -> tuple[list[str], list[dict]]:
     """執行純向量搜尋(支援選擇性 Metadata Filtering)"""
