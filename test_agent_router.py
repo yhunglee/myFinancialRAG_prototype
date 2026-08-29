@@ -30,6 +30,7 @@ def main():
     print(f'question: {state["question"]}')
     print("Router result:")
     print(result)
+    print('=======')
 
 
 if __name__ == '__main__':
