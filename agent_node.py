@@ -69,7 +69,7 @@ def intent_router(state: FinancialResearchState) -> dict:
   confidence:
   0 到 1 之間，表示你對 intent 判斷的信心。
   """
-  response = client.beta.chat.completions.parse(
+  response = client.chat.completions.parse(
     model="local-model",
     messages=[
       {
