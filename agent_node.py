@@ -104,7 +104,6 @@ class ResearchTask(BaseModel):
   """
   小問題(工作項目)
   """
-  task_id: str
   company: str | None
   period: str | None
   topic: str
@@ -209,11 +208,19 @@ def research_planner(state):
   if plan is None:
     raise ValueError("research_planner failed to generate ResearchPlan")
 
+  research_plan = []
+
+  for index, task in enumerate(plan.tasks, start=1):
+
+    """
+    Notice: Structured Output 階段，暫時驗證 LLM 輸出
+    等進到 LangGraph State 後再改成 Python dict
+    """
+    task_dict = task.model_dump()
+    task_dict["task_id"] = f"task_{index}"
+    research_plan.append(task_dict)
+
   return {
-    "research_plan": [
-      task.model_dump() # Notice: Structured Output 階段，暫時驗證 LLM 輸出
-      # 等進到 LangGraph State 後再改成 Python dict
-      for task in plan.tasks
-    ],
+    "research_plan": research_plan,
     "current_task": 0,
   }
