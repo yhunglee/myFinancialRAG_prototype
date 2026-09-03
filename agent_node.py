@@ -135,3 +135,85 @@ class EvidenceCheckResult(BaseModel):
   missing_topics: list[str]
   weak_evidence: list[str]
   retry_required: bool
+
+
+def research_planner(state):
+  """
+  根據 intent_router 的結果，
+  將研究問題拆成可以交給 RAG executor 執行的 ResearchTask。
+  """
+
+  question = state["question"]
+  intent = state["intent"]
+  companies = state["companies"]
+  periods = state["periods"]
+
+  system_prompt = """
+  You are a research planner for a financial-report RAG system.
+
+  Your job is to convert a user's financial research question
+  into small, independent retrieval tasks that can be
+  executed by a RAG system.
+
+  Rules:
+
+  1. Each task must represent ONE retrieval objective.
+  2. Each task should normally contain only ONE company.
+  3. Each task should normally contain only ONE reporting period.
+  4. The query must be standalone and understandable without conversation history.
+  5. Only create tasks that can be answered from company financial reports.
+  6. Do not answer the user's question.
+  7. Do not invent companies, reporting periods, or financial facts.
+  8. Use only companies and periods supplied by the router when they are available.
+  9. For company comparisons, retrieve evidence for each company separately.
+  10. Do not create a separate comparison task. Comparison will be performed later by the report writer.
+  11. Keep the plan as small as possible while still answering the research goal.
+  """
+
+  user_prompt = f"""
+  Original question:
+  {question}
+
+  Router result:
+
+  intent:
+  {intent}
+
+  companies:
+  {companies}
+
+  periods:
+  {periods}
+
+  Create the research plan.
+  """
+
+  completion = client.chat.completions.parse(
+    model=MODEL_NAME,
+    messages=[
+      {
+        "role": "system",
+        "content": system_prompt,
+      },
+      {
+        "role": "user",
+        "content": user_prompt,
+      }
+    ],
+    response_format=ResearchPlan,
+    temperature=0,
+  )
+
+  plan = completion.choices[0].message.parsed
+
+  if plan is None:
+    raise ValueError("research_planner failed to generate ResearchPlan")
+
+  return {
+    "research_plan": [
+      task.model_dump() # Notice: Structured Output 階段，暫時驗證 LLM 輸出
+      # 等進到 LangGraph State 後再改成 Python dict
+      for task in plan.tasks
+    ],
+    "current_task": 0,
+  }
