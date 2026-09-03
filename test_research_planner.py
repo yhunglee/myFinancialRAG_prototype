@@ -20,5 +20,5 @@ def main():
   result = research_planner(state)
   print(result)
 
-if __name__ == 'main':
+if __name__ == '__main__':
   main()
