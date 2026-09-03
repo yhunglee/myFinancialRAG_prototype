@@ -153,6 +153,15 @@ def research_planner(state):
   Your job is to convert a user's financial research question
   into small, independent retrieval tasks that can be
   executed by a RAG system.
+  
+  The "topic" field must be a short financial topic or metric,
+  not an instruction or sentence.
+  Examples:
+  "營收"
+  "毛利率"
+  "營業利益"
+  "EPS"
+  "資本支出"
 
   Rules:
 
