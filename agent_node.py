@@ -4,6 +4,12 @@ from pydantic import BaseModel
 from agent_state import FinancialResearchState
 from openai import OpenAI
 
+client = OpenAI(
+  base_url="http://localhost:1234/v1",
+  api_key="lm-studio"
+)
+
+MODEL_NAME = 'local_model'
 
 class RouterResult(BaseModel):
   """
@@ -33,10 +39,7 @@ def intent_router(state: FinancialResearchState) -> dict:
 
   question = state["question"]
 
-  client = OpenAI(
-    base_url="http://localhost:1234/v1",
-    api_key="lm-studio"
-  )
+  
 
   system_prompt = """
   你是一個金融研究問題路由器。
@@ -70,7 +73,7 @@ def intent_router(state: FinancialResearchState) -> dict:
   0 到 1 之間，表示你對 intent 判斷的信心。
   """
   response = client.chat.completions.parse(
-    model="local-model",
+    model=MODEL_NAME,
     messages=[
       {
         "role": "system",
