@@ -245,6 +245,37 @@ class FinancialRAGService:
 
     return answer, retrieved_contexts, retrieved_metadata
 
+  def rag_task(
+      self,
+      user_query: str,
+      top_k: int = 5,
+      where_filter: dict | None = None
+  ) -> tuple[str, RetrievedContexts, RetrievedMetadata]:
+    """
+    Agentiic RAG 專用的單一研究任務執行介面
+    
+    與 rag_chat() 的主要差異:
+    - 執行完整 RAG retrieval + generation
+    - 不更新 chat_history
+    - 避免不同 ResearchTask 互相汙染 context
+    """
+
+    messages, retrieved_contexts, retrieved_metadata = self._rag_core(
+      user_query=user_query,
+      top_k=top_k,
+      where_filter=where_filter,
+    )
+
+    response = self.llm_client.chat.completions.create(
+      model=self.llm_model,
+      messages=messages,
+      temperature=0.1
+    )
+
+    answer = response.choices[0].message.content.strip()
+
+    return answer, retrieved_contexts, retrieved_metadata
+
   def _update_message_history(self, user_query, answer):
     """更新記憶體裡的對話歷史"""
     
