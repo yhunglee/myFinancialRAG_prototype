@@ -255,6 +255,18 @@ def research_planner(state):
     "current_task": 0,
   }
 
+def build_sources(metadata_list: list[dict]) -> list[dict]:
+  return [
+    {
+      "ticker": metadata.get("ticker"),
+      "market": metadata.get("market"),
+      "year": metadata.get("year"),
+      "quarter": metadata.get("quarter"),
+      "chunk_index": metadata.get("chunk_index"),
+    }
+    for metadata in metadata_list
+  ]
+
 def rag_executor(state: FinancialResearchState):
   """
   依序執行 research_planner 產生的 ResearchTask，
@@ -288,16 +300,7 @@ def rag_executor(state: FinancialResearchState):
 
     # Notice: MVP 階段直接從 metadata 建立 sources
     # 後續 Chainlit UI 可以再做專門的 source formatter
-    sources = [
-      {
-        "ticker": metadata.get("ticker"),
-        "market": metadata.get("market"),
-        "year": metadata.get("year"),
-        "quarter": metadata.get("quarter"),
-        "chunk_index": metadata.get("chunk_index"),
-      }
-      for metadata in metadata_list
-    ]
+    sources = build_sources(metadata_list)
 
     task_evidence = Evidence(
       task_id=task["task_id"],
