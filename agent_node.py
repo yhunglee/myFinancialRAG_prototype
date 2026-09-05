@@ -121,10 +121,14 @@ class Evidence(BaseModel):
   小問題和檢索資訊
   """
   task_id: str
+  company: str
+  period: str
   query: str
   answer: str
-  retrieved_contexts: list[str]
-  sources: list[dict]
+
+  retrieved_contexts: list[str] # 實際送進 LLM 的文字內容，後續做 RAGAS、faithfulness 或 evidence checking 很有用
+  metadata: list[dict] # 向量資料庫檢索結果的原始 metadata，例如 ticker、year、quarter、page、source_file 等
+  sources: list[dict] # 整理後要給 UI 或最終回答顯示的引用來源，例如檔名、頁碼、公司、季度、文件標題
 
 class EvidenceCheckResult(BaseModel):
   """
