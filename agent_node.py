@@ -134,8 +134,18 @@ class Evidence(BaseModel):
   answer: str
 
   retrieved_contexts: list[str] # 實際送進 LLM 的文字內容，後續做 RAGAS、faithfulness 或 evidence checking 很有用
-  metadata: list[dict] # 向量資料庫檢索結果的原始 metadata，例如 ticker、year、quarter、page、source_file 等
-  sources: list[dict] # 整理後要給 UI 或最終回答顯示的引用來源，例如檔名、頁碼、公司、季度、文件標題
+
+  """
+  向量資料庫檢索結果的原始 metadata，例如 ticker、year、quarter 等,
+  backend / debug / evaluation 用
+  """
+  metadata: list[dict] 
+
+  """
+  # 從 metadata 整理後要給 UI 或最終回答顯示的引用來源，例如檔名、公司、季度、文件標題
+  Chainlit / report_writer / citation UI 用
+  """
+  sources: list[dict] 
 
 class EvidenceCheckResult(BaseModel):
   """
@@ -280,11 +290,11 @@ def rag_executor(state: FinancialResearchState):
     # 後續 Chainlit UI 可以再做專門的 source formatter
     sources = [
       {
-        "source_file": metadata.get("source_file"),
-        "page": metadata.get("page"),
         "ticker": metadata.get("ticker"),
+        "market": metadata.get("market"),
         "year": metadata.get("year"),
         "quarter": metadata.get("quarter"),
+        "chunk_index": metadata.get("chunk_index"),
       }
       for metadata in metadata_list
     ]
