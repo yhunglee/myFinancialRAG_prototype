@@ -1,8 +1,10 @@
 from __future__ import annotations
 from typing import Literal
 from pydantic import BaseModel
-from agent_state import FinancialResearchState
 from openai import OpenAI
+
+from agent_state import FinancialResearchState
+from myrag_module import FinancialRAGService
 
 client = OpenAI(
   base_url="http://localhost:1234/v1",
@@ -10,6 +12,11 @@ client = OpenAI(
 )
 
 MODEL_NAME = 'local_model'
+
+rag_service = FinancialRAGService(
+  db_path="./chroma_db",
+  collection_name="financial_reports",
+)
 
 class RouterResult(BaseModel):
   """
