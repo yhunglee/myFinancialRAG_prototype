@@ -237,3 +237,27 @@ def research_planner(state):
     "research_plan": research_plan,
     "current_task": 0,
   }
+
+def rag_executor(state: AgentState):
+  evidence = []
+
+  for task in state["research_plan"]:
+
+    result = _rag_core(task["query"])
+
+    evidence.append(
+      {
+        "task_id": task["task_id"],
+        "company": task["company"],
+        "period": task["period"],
+        "query": task["query"],
+        "answer": result.answer,
+        "retrieved_contexts": result.retrieved_contexts,
+        "metadata": result.metadata,
+      }
+    )
+
+  return {
+    "evidence": evidence,
+    "current_task": len(state["research_plan"])
+  }
