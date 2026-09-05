@@ -125,11 +125,11 @@ class ResearchPlan(BaseModel):
 
 class Evidence(BaseModel):
   """
-  小問題和檢索資訊
+  單一 ResearchTask 執行後取得的研究證據。
   """
   task_id: str
-  company: str
-  period: str
+  company: str | None
+  period: str | None
   query: str
   answer: str
 
