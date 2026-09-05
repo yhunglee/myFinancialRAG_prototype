@@ -238,7 +238,7 @@ def research_planner(state):
     "current_task": 0,
   }
 
-def rag_executor(state: AgentState):
+def rag_executor(state: FinancialResearchState):
   evidence = []
 
   for task in state["research_plan"]:
