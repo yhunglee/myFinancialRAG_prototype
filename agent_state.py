@@ -21,6 +21,8 @@ class FinancialResearchState(TypedDict):
   # Evidence_checker 使用
   sufficient: bool
   missing_information: list[str]
+  weak_evidence: list[str]
+  retry_required: bool
 
   # report_writer 輸出
   final_answer: str
