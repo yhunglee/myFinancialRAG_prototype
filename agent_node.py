@@ -246,22 +246,62 @@ def research_planner(state):
   }
 
 def rag_executor(state: FinancialResearchState):
-  evidence = []
+  """
+  依序執行 research_planner 產生的 ResearchTask，
+  並將每個任務的 RAG 結果整理成 Evidence。
+  """
+
+  evidence: list[dict] = []
 
   for task in state["research_plan"]:
 
-    result = _rag_core(task["query"])
+    answer, retrieved_contexts, retrieved_metadata = rag_service._rag_core(
+      user_query=task["query"],
+      top_k=5,
+    )
+
+    # _rag_core() 回傳 dict[str, list[str]]
+    # Evidence 使用 list[str]，所以要攤平成單一 list
+    context_list = [
+      context
+      for contexts in retrieved_contexts.values()
+      for context in contexts
+    ]
+
+    # _rag_core() 回傳 dict[str, list[str]]
+    # Evidence 使用 list[str]，所以要攤平成單一 list
+    metadata_list = [
+      metadata
+      for metadatas in retrieved_metadata.values()
+      for metadata in metadatas
+    ]
+
+    # Notice: MVP 階段直接從 metadata 建立 sources
+    # 後續 Chainlit UI 可以再做專門的 source formatter
+    sources = [
+      {
+        "source_file": metadata.get("source_file"),
+        "page": metadata.get("page"),
+        "ticker": metadata.get("ticker"),
+        "year": metadata.get("year"),
+        "quarter": metadata.get("quarter"),
+      }
+      for metadata in metadata_list
+    ]
+
+    task_evidence = Evidence(
+      task_id=task["task_id"],
+      company=task.get("company"),
+      period=task.get("period"),
+      query=task.get("query"),
+      answer=answer,
+      retrieved_contexts=context_list,
+      metadata=metadata_list,
+      sources=sources
+    )
 
     evidence.append(
-      {
-        "task_id": task["task_id"],
-        "company": task["company"],
-        "period": task["period"],
-        "query": task["query"],
-        "answer": result.answer,
-        "retrieved_contexts": result.retrieved_contexts,
-        "metadata": result.metadata,
-      }
+      task_evidence.model_dump()
     )
 
   return {
