@@ -35,3 +35,11 @@ def main():
       }
     ],
   }
+
+  result = evidence_checker(state)
+
+  print("Evidence Check Result:")
+  print(result)
+
+if __name__ == "__main__":
+  main()
