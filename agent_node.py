@@ -150,12 +150,17 @@ class Evidence(BaseModel):
 
 class EvidenceCheckResult(BaseModel):
   """
-  Evidence 檢查結果
+  LLM 對 Evidence 的語意檢查結果。
+
+  注意:
+  failure_type 與 next_action 不由 LLM 決定，
+  而是由 evidence_checker() 使用 Python 規則決定。
+
   """
   sufficient: bool
   missing_topics: list[str]
   weak_evidence: list[str]
-  retry_required: bool
+
 
 
 def research_planner(state):
@@ -500,7 +505,6 @@ def evidence_checker(state: FinancialResearchState) -> dict:
     sufficient
     missing_information
     weak_evidence
-    retry_required
 
   """
 
@@ -514,7 +518,6 @@ def evidence_checker(state: FinancialResearchState) -> dict:
       "sufficient": False,
       "missing_information": ["No evidence was retrieved."],
       "weak_evidence": [],
-      "retry_required": True,
     }
 
   # ---------------------------------
@@ -535,7 +538,6 @@ def evidence_checker(state: FinancialResearchState) -> dict:
       "sufficient": False,
       "missing_information": [],
       "weak_evidence": numeric_issues,
-      "retry_required": True,
     }
 
   # ----------------------------------
@@ -592,29 +594,24 @@ def evidence_checker(state: FinancialResearchState) -> dict:
      are covered and the available evidence is adequate to
      answer the original question.
 
-  8. Set retry_required=true when additional retrieval is needed
-     because information is missing or existing evidence is too weak.
+  8. missing_topics and weak_evidence should be concise and specific.
 
-  9. Set retry_required=false when the evidence is sufficient. 
-
-  10. missing_topics and weak_evidence should be concise and specific.
-
-  11. Do not perform the final comparison.
+  9. Do not perform the final comparison.
       Do not write the final financial report.
 
-  12. Compare the generated answer against retrieved_contexts.
+  10. Compare the generated answer against retrieved_contexts.
 
-  13. Treat numerical inconsistencies as weak evidence, including:
+  11. Treat numerical inconsistencies as weak evidence, including:
       - incorrect values
       - incorrect units
       - incorrect periods
       - incorrect company attribution
       - unsupported calculations or conversions
 
-  14. If retrieved_contexts contain sufficient evidence but the generated answer
+  12. If retrieved_contexts contain sufficient evidence but the generated answer
       misrepresents that evidence, classify the issue as weak_evidence.
 
-  15. Do not classify an answer-evidence inconsistency as missing_topics
+  13. Do not classify an answer-evidence inconsistency as missing_topics
       when the required source information is already present. 
   """
 
@@ -658,5 +655,4 @@ def evidence_checker(state: FinancialResearchState) -> dict:
     "sufficient": check_result.sufficient,
     "missing_information": check_result.missing_topics,
     "weak_evidence": check_result.weak_evidence,
-    "retry_required": check_result.retry_required,
   }

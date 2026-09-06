@@ -1,5 +1,5 @@
 from __future__ import annotations
-from typing import TypedDict
+from typing import Literal, TypedDict
 
 class FinancialResearchState(TypedDict):
   # 使用者原始問題
@@ -22,7 +22,20 @@ class FinancialResearchState(TypedDict):
   sufficient: bool
   missing_information: list[str]
   weak_evidence: list[str]
-  retry_required: bool
+  unsupported_answer: list[str]
+
+  failure_type: Literal[
+    "none",
+    "missing_evidence",
+    "weak_evidence",
+    "answer_not_supported"
+  ]
+  
+  next_action: Literal[
+    "proceed",
+    "retrieve_again",
+    "regenerate_answer"
+  ]
 
   # report_writer 輸出
   final_answer: str
