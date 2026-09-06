@@ -321,3 +321,117 @@ def rag_executor(state: FinancialResearchState):
     "evidence": evidence,
     "current_task": len(state["research_plan"])
   }
+
+def evidence_checker(state: FinancialResearchState) -> dict:
+  """
+  檢查 rag_executor 取得的 evidence，
+  判斷目前資料是否足以完成原始研究問題。
+
+  Node Input:
+    question
+    research_plan
+    evidence
+
+  Node Output:
+    sufficient
+    missing_information
+    weak_evidence
+    retry_required
+
+  """
+
+  question = state["question"]
+  research_plan = state["research_plan"]
+  evidence = state["evidence"]
+
+  # 沒有任何 evidence 時，不需要浪費一次 LLM call
+  if not evidence:
+    return {
+      "sufficient": False,
+      "missing_information": ["No evidence was retrieved."],
+      "weak_evidence": [],
+      "retry_required": True,
+    }
+
+  system_prompt = """
+  You are an evidence checker for a financial-report RAG system.
+
+  Your job is NOT to answer the user's financial question.
+
+  Your job is to determine whether the retrieved evidence is sufficient
+  to answer the original research question.
+
+  Evaluate ONLY the supplied research plan and evidence.
+  Do not use outside knowledge.
+  Do not invent financial facts.
+
+  Rules:
+
+  1. Check whether every necessary research task has supporting evidence.
+
+  2. Evidence is considered useful only when the retrieved
+     contexts contain information relevant to that task.
+
+  3. An answer alone is not enough.
+     The answer should be supported by its retrieved context.
+  
+  4. For company comparisons, evidence for every required company
+     must be available.
+
+  5. For multi-period questions, evidence for every required period
+     must be available.
+
+  6. If important information is missing, set sufficient to false.
+
+  7. missing_topics should describe what information is still required.
+
+  8. weak_evidence should identify evidence that exists but is imcomplete,
+  ambiguous, irrelevant, or poorly supported by retrieved contexts.
+
+  9. retry_required should be true when additional retrieval is needed.
+
+  10. Do not perform the final comparison or write the final report.
+  """
+
+  user_prompt = f"""
+  Original question:
+  {question}
+
+  Research plan:
+  {research_plan}
+
+  Retrieved evidence:
+  {evidence}
+
+  Determine whether the evidence is sufficient to answer the original question.
+  """
+
+  completion = client.chat.completions.parse(
+    model=MODEL_NAME,
+    messages=[
+      {
+        "role": "system",
+        "content": system_prompt,
+      },
+      {
+        "role": "user",
+        "content": user_prompt,
+      }
+    ],
+    response_format=EvidenceCheckResult,
+    temperature=0,
+  )
+
+  check_result = completion.choices[0].message.parsed
+
+  if check_result is None:
+    raise ValueError(
+      "evidence_checker failed to generate EvidenceCheckResult"
+    )
+
+  return {
+    "sufficient": check_result.sufficient,
+    "missing_information": check_result.missing_topics,
+    "weak_evidence": check_result.weak_evidence,
+    "retry_required": check_result.retry_required,
+  }
