@@ -10,6 +10,10 @@ from agent_node import (
   evidence_checker,
 )
 
+
+MAX_REGENERATION_ATTEMPTS = 2
+
+
 def route_after_evidence_check(
     state: FinancialResearchState,
 ) -> str:
@@ -35,6 +39,7 @@ def build_agent_graph():
   graph.add_edge("intent_router", "research_planner")
   graph.add_edge("research_planner", "rag_executor")
   graph.add_edge("rag_executor", "evidence_checker")
+  graph.add_edge("answer_regenerator", "evidence_checker")
 
   # Evidence conditional routing
   graph.add_conditional_edges(
@@ -43,7 +48,7 @@ def build_agent_graph():
     {
       "proceed": END,
       "retrieve_again": END,
-      "regenerate_answer": END,
+      "regenerate_answer": "answer_regenerator",
     }
   )
 
