@@ -690,3 +690,15 @@ def evidence_checker(state: FinancialResearchState) -> dict:
     "failure_type": failure_type,
     "next_action": next_action
   }
+
+def regenerate_answer(state: FinancialResearchState) -> dict:
+
+  evidence = state["evidence"]
+
+  """
+  TODO:
+  對需要修復的 evidence，使用 retrieved_contexts 重新生成 answer
+  """
+  return {
+    "evidence": regenerate_evidence
+  }
