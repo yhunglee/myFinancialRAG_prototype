@@ -33,17 +33,17 @@ def main():
         ],
         "metadata": [],
       },
-      {
-        "task_id": "task_2",
-        "company": "聯發科",
-        "period": "2025Q4",
-        "query": "聯發科 2025年第四季營收",
-        "answer": "聯發科 2025 年第四季營收為NT$150,188 百萬元",
-        "retrieved_contexts": [
-            "聯發科2025年第四季營收是 NT$150,188 百萬元"
-        ],
-        "metadata": [],
-      }
+      # {
+      #   "task_id": "task_2",
+      #   "company": "聯發科",
+      #   "period": "2025Q4",
+      #   "query": "聯發科 2025年第四季營收",
+      #   "answer": "聯發科 2025 年第四季營收為NT$150,188 百萬元",
+      #   "retrieved_contexts": [
+      #       "聯發科2025年第四季營收是 NT$150,188 百萬元"
+      #   ],
+      #   "metadata": [],
+      # }
     ],
   }
 
@@ -178,8 +178,8 @@ def test_correct_answer():
   print(result)
 
 if __name__ == "__main__":
-  # main()
+  main()
 
-  # test_answer_not_supported()
+  test_answer_not_supported()
   
   test_correct_answer()
