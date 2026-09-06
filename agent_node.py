@@ -155,7 +155,6 @@ class EvidenceCheckResult(BaseModel):
   sufficient: bool
   missing_topics: list[str]
   weak_evidence: list[str]
-  unsupported_answer: list[str]
   retry_required: bool
 
 
@@ -479,7 +478,7 @@ def check_financial_unit_consistency(
     if not matched:
       issues.append(
         (
-          f"Answer financial value"
+          f"Answer financial value "
           f"{answer_value['raw_value']} {answer_value['unit']} "
           f"is not consistent with the retrieved evidence."
         )
@@ -534,7 +533,7 @@ def evidence_checker(state: FinancialResearchState) -> dict:
   if numeric_issues:
     return {
       "sufficient": False,
-      "mission_information": [],
+      "missing_information": [],
       "weak_evidence": numeric_issues,
       "retry_required": True,
     }
