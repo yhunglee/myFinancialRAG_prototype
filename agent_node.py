@@ -428,22 +428,6 @@ def evidence_checker(state: FinancialResearchState) -> dict:
       - incorrect periods
       - incorrect company attribution
       - unsupported calculations or conversions
-      
-      When comparing numerical claims, you MUST verify both
-      the numeric value and its unit.
-
-      Perform unit conversion when necessary before deciding
-      whether two financial values are equivalent.
-
-      For New Taiwan dollar units:
-      - 1 billion = 10 億
-      - 1 億 = 100 million
-      - 1 billion = 1,000 million
-
-      Example:
-      NT$1,046.09 billion is equivalent to NT$10,460.9 億.
-      Therefore, an answer stating NT$1,046.09 億 is NOT supported by
-      a context stating NT$1,046.09 billion.
 
   14. If retrieved_contexts contain sufficient evidence but the generated answer
       misrepresents that evidence, classify the issue as weak_evidence.
