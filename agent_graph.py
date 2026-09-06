@@ -18,13 +18,7 @@ def route_after_evidence_check(
   決定下一個執行方向。
   """
 
-  if state["sufficient"]:
-    return "proceed"
-
-  if state["retry_required"]:
-    return "retry"
-
-  return "stop"
+  return state["next_action"]
 
 def build_agent_graph():
   graph = StateGraph(
@@ -48,8 +42,8 @@ def build_agent_graph():
     route_after_evidence_check,
     {
       "proceed": END,
-      "retry": END,
-      "stop": END,
+      "retrieve_again": END,
+      "regenerate_answer": END,
     }
   )
 
