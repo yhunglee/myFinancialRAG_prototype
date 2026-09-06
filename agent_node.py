@@ -518,6 +518,9 @@ def evidence_checker(state: FinancialResearchState) -> dict:
       "sufficient": False,
       "missing_information": ["No evidence was retrieved."],
       "weak_evidence": [],
+      "unsupported_answer": [],
+      "failure_type": "missing_evidence",
+      "next_action": "retrieve_again"
     }
 
   # ---------------------------------
@@ -537,7 +540,10 @@ def evidence_checker(state: FinancialResearchState) -> dict:
     return {
       "sufficient": False,
       "missing_information": [],
-      "weak_evidence": numeric_issues,
+      "weak_evidence": [],
+      "unsupported_answer": numeric_issues,
+      "failure_type": "answer_not_supported",
+      "next_action": "regenerate_answer"
     }
 
   # ----------------------------------
@@ -651,8 +657,36 @@ def evidence_checker(state: FinancialResearchState) -> dict:
       "evidence_checker failed to generate EvidenceCheckResult"
     )
 
+  # ------------------------------
+  # 根據 Evidence 檢查結果決定下一步
+  # ------------------------------
+
+  if check_result.missing_topics:
+    failure_type = 'missing_evidence'
+    next_action = "retrieve_again"
+
+  elif check_result.weak_evidence:
+    failure_type = "weak_evidence"
+    next_action = "retrieve_again"
+
+  elif check_result.sufficient:
+    failure_type = "none"
+    next_action = "proceed"
+
+  else:
+
+    # 防止 LLM 出現: 
+    # sufficient = False, 
+    # 但 missing_topics/ weak_evidence 都是空的
+    failure_type = 'weak_evidence'
+    next_action = "retrieve_again"
+
+
   return {
     "sufficient": check_result.sufficient,
     "missing_information": check_result.missing_topics,
     "weak_evidence": check_result.weak_evidence,
+    "unsupported_answer": [],
+    "failure_type": failure_type,
+    "next_action": next_action
   }
