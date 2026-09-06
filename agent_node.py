@@ -154,6 +154,7 @@ class EvidenceCheckResult(BaseModel):
   sufficient: bool
   missing_topics: list[str]
   weak_evidence: list[str]
+  unsupported_answer: list[str]
   retry_required: bool
 
 
@@ -321,6 +322,12 @@ def rag_executor(state: FinancialResearchState):
     "evidence": evidence,
     "current_task": len(state["research_plan"])
   }
+
+def check_financial_unit_consistency(
+  answer: str,
+  retrieved_contexts: list[str],
+) -> list[str]:
+  pass
 
 def evidence_checker(state: FinancialResearchState) -> dict:
   """
