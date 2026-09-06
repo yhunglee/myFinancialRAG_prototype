@@ -30,12 +30,15 @@ class FinancialResearchState(TypedDict):
     "weak_evidence",
     "answer_not_supported"
   ]
-  
+
   next_action: Literal[
     "proceed",
     "retrieve_again",
     "regenerate_answer"
   ]
+
+  # answer_regenerator 使用
+  regeneration_count: int
 
   # report_writer 輸出
   final_answer: str
