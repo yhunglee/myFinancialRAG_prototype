@@ -161,6 +161,12 @@ class EvidenceCheckResult(BaseModel):
   missing_topics: list[str]
   weak_evidence: list[str]
 
+class RegeneratedAnswer(BaseModel):
+  """
+  根據既有 retrieved_contexts 重新產生的回答
+  """
+  answer: str
+  
 
 
 def research_planner(state):
