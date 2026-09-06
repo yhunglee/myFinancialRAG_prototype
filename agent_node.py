@@ -411,7 +411,22 @@ def evidence_checker(state: FinancialResearchState) -> dict:
   10. missing_topics and weak_evidence should be concise and specific.
 
   11. Do not perform the final comparison.
-      Do not write the final financial report.   
+      Do not write the final financial report.
+
+  12. Compare the generated answer against retrieved_contexts.
+
+  13. Treat numerical inconsistencies as weak evidence, including:
+      - incorrect values
+      - incorrect units
+      - incorrect periods
+      - incorrect company attribution
+      - unsupported calculations or conversions
+
+  14. If retrieved_contexts contain sufficient evidence but the generated answer
+      misrepresents that evidence, classify the issue as weak_evidence.
+
+  15. Do not classify an answer-evidence inconsistency as missing_topics
+      when the required source information is already present. 
   """
 
   user_prompt = f"""
