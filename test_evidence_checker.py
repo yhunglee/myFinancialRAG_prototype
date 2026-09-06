@@ -115,7 +115,71 @@ def test_answer_not_supported():
   print("Answer consistency test:")
   print(result)
 
+def test_correct_answer():
+
+  state = {
+    "question": "Retrieve the revenue for 台積電 in 2025Q4.",
+
+    "research_plan": [
+      {
+        "task_id": "task_1",
+        "company": "台積電",
+        "period": "2025Q4",
+        "topic": "營收",
+        "query": "Retrieve the revenue for 台積電 in 2025Q4.",
+      }
+    ],
+
+    "evidence": [
+      {
+        "task_id": "task_1",
+        "company": "台積電",
+        "period": "2025Q4",
+        "query": "Retrieve the revenue for 台積電 in 2025Q4.",
+
+        # 故意寫錯單位
+        "answer": "台積電 2025 年第四季營收為新台幣 10,460.9 億元。",
+
+        # context 明確寫 billion
+        "retrieved_contexts": [
+            """
+            (In NT$ billions)
+            Net Revenue | 4Q25
+            1,046.09
+            """
+        ],
+
+        "metadata": [
+          {
+            "ticker": "2330",
+            "market": "TW",
+            "year": 2025,
+            "quarter": "Q4",
+            "chunk_index": 25,
+          }
+        ],
+
+        "sources": [
+          {
+            "ticker": "2330",
+            "market": "TW",
+            "year": 2025,
+            "quarter": "Q4",
+            "chunk_index": 25,
+          }
+        ],
+      }
+    ],
+  }
+
+  result = evidence_checker(state)
+
+  print("Answer consistency test:")
+  print(result)
+
 if __name__ == "__main__":
   # main()
 
-  test_answer_not_supported()
+  # test_answer_not_supported()
+  
+  test_correct_answer()
