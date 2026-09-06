@@ -361,36 +361,57 @@ def evidence_checker(state: FinancialResearchState) -> dict:
   Your job is to determine whether the retrieved evidence is sufficient
   to answer the original research question.
 
-  Evaluate ONLY the supplied research plan and evidence.
+  Evaluate ONLY the supplied research plan and retrieved evidence.
   Do not use outside knowledge.
   Do not invent financial facts.
 
-  Rules:
+  Definitions:
+  - missing_topics:
+    Information required by the research plan but completely absent
+    from the retrieved evidence.
 
-  1. Check whether every necessary research task has supporting evidence.
+  - weak_evidence:
+    Evidence exists for a required topic, but the evidence
+    is incomplete, ambiguous, irrelevant, internally inconsistent, or insufficiently supported by the retrieved contexts.
 
-  2. Evidence is considered useful only when the retrieved
-     contexts contain information relevant to that task.
+  Important:
+  A completely missing topic belongs ONLY in missing_topics.
+  Do NOT also report the same issue in weak_evidence.
 
-  3. An answer alone is not enough.
-     The answer should be supported by its retrieved context.
+  Evaluation rules:
+
+  1. Check whether every required research task has corresponding evidence.
+
+  2. For company comparisons, every required company must have evidence.
+
+  3. For multi-period questions, every required period must have evidence.
+
+  4. An answer alone is not sufficient.
+     The answer must be supported by relevant retrieved_contexts.
   
-  4. For company comparisons, evidence for every required company
-     must be available.
+  5. If no evidence exists for a required task:
+    - add the missing information to missing_topics
+    - do NOT add it to weak_evidence
+  
+  6. If evidence exists but is incomplete, ambiguous,
+     irrelevant, contradictory, or poorly supported:
+    - add the issue to weak_evidence
+    - do NOT classify it as missing_topics unless the requried
+      information is actually absent
 
-  5. For multi-period questions, evidence for every required period
-     must be available.
+  7. Set sufficient=true only when all required research tasks
+     are covered and the available evidence is adequate to
+     answer the original question.
 
-  6. If important information is missing, set sufficient to false.
+  8. Set retry_required=true when additional retrieval is needed
+     because information is missing or existing evidence is too weak.
 
-  7. missing_topics should describe what information is still required.
+  9. Set retry_required=false when the evidence is sufficient. 
 
-  8. weak_evidence should identify evidence that exists but is imcomplete,
-  ambiguous, irrelevant, or poorly supported by retrieved contexts.
+  10. missing_topics and weak_evidence should be concise and specific.
 
-  9. retry_required should be true when additional retrieval is needed.
-
-  10. Do not perform the final comparison or write the final report.
+  11. Do not perform the final comparison.
+      Do not write the final financial report.   
   """
 
   user_prompt = f"""
@@ -403,7 +424,7 @@ def evidence_checker(state: FinancialResearchState) -> dict:
   Retrieved evidence:
   {evidence}
 
-  Determine whether the evidence is sufficient to answer the original question.
+  Determine whether the retrieved evidence is sufficient to complete the original research question.
   """
 
   completion = client.chat.completions.parse(
