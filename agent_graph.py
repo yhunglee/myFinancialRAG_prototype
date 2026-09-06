@@ -10,6 +10,22 @@ from agent_node import (
   evidence_checker,
 )
 
+def route_after_evidence_check(
+    state: FinancialResearchState,
+) -> str:
+  """
+  根據 evidence_checker 的結果，
+  決定下一個執行方向。
+  """
+
+  if state["sufficient"]:
+    return "proceed"
+
+  if state["retry_required"]:
+    return "retry"
+
+  return "stop"
+
 def build_agent_graph():
   graph = StateGraph(
     FinancialResearchState
@@ -25,6 +41,16 @@ def build_agent_graph():
   graph.add_edge("intent_router", "research_planner")
   graph.add_edge("research_planner", "rag_executor")
   graph.add_edge("rag_executor", "evidence_checker")
-  graph.add_edge("evidence_checker", END)
+
+  # Evidence conditional routing
+  graph.add_conditional_edges(
+    "evidence_checker",
+    route_after_evidence_check,
+    {
+      "proceed": END,
+      "retry": END,
+      "stop": END,
+    }
+  )
 
   return graph.compile()
