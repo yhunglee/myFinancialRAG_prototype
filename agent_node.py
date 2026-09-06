@@ -5,6 +5,7 @@ from openai import OpenAI
 
 from agent_state import FinancialResearchState
 from myrag_module import FinancialRAGService
+import re
 
 client = OpenAI(
   base_url="http://localhost:1234/v1",
@@ -327,7 +328,164 @@ def check_financial_unit_consistency(
   answer: str,
   retrieved_contexts: list[str],
 ) -> list[str]:
-  pass
+  """
+  檢查 answer 與 retrieved contexts 中的財務數值單位是否明顯不一致
+
+  第一版只處理:
+  - billion
+  - million
+  - 億
+  - 百萬
+
+  統一轉換成 million 後比較。
+  """
+  issues = []
+
+  context_text = "\n".join(retrieved_contexts)
+
+  # -------------
+  # 解析 answer
+  # -------------
+
+  answer_patterns = [
+    # 例如: 1,046.09 億
+    (
+      r"([\d,]+(?:\.\d+)?)\s*億",
+      100.0, # 1 億 = 100 million
+      "億",
+    ),
+
+    # 例如: 150, 188 百萬
+    (
+      r"([\d,]+(?:\.\d+)?)\s*百萬",
+      1.0,
+      "百萬"
+    ),
+
+    # 例如: 1,046.09 billion
+    (
+      r"([\d,]+(?:\.\d+)?)\s*billion",
+      1000.0,
+      "billion",
+    ),
+
+    #3 例如: 150,188 million
+    (
+      r"([\d,]+(?:\.\d+)?)\s*million",
+      1.0,
+      "million",
+    ),
+  ]
+
+  answer_values = []
+
+  for pattern, multiplier, unit in answer_patterns:
+    matches = re.findall(
+      pattern,
+      answer,
+      flags=re.IGNORECASE,
+    )
+
+    for match in matches:
+      value = float(match.replace(",", ""))
+
+      answer_values.append(
+        {
+          "raw_value": value,
+          "unit": unit,
+          "normalized": value * multiplier,
+        }
+      )
+
+
+  # ----------------------------
+  # 解析 retrieved contexts
+  # ----------------------------
+
+  context_values = []
+
+  # 特別處理:
+  # (In NT$ billions)
+  # Net Revenue | 1,046.09
+
+  if re.search(
+    r"NT\$\s*billions?",
+    context_text,
+    flags=re.IGNORECASE,
+  ):
+    numbers = re.findall(
+      r"([\d,]+(?:\.\d+)?)",
+      context_text,
+    )
+
+    for number in numbers:
+      value = float(number.replace(",", ""))
+
+      context_values.append(
+        {
+          "raw_value": value,
+          "unit": "billion",
+          "normalized": value * 1000.0,
+        }
+      )
+
+  if re.search(
+    r"millions?\s+of\s+New\s+Taiwan\s+dollars",
+    context_text,
+    flags=re.IGNORECASE,
+  ):
+    numbers = re.findall(
+      r"([\d,]+(?:\.\d+)?)",
+      context_text,
+    )
+
+    for number in numbers:
+      value = float(number.replace(",", ""))
+
+      context_values.append(
+        {
+          "raw_value": value,
+          "unit": "million",
+          "normalized": value,
+        }
+      )
+
+  # ---------------------------
+  # 第一版 consistency check
+  # ---------------------------
+
+  if not answer_values or not context_values:
+    return issues
+
+  for answer_value in answer_values:
+    matched = False
+    for context_value in context_values:
+
+      # normalized 全部以 million 表示
+      difference = abs(
+        answer_value["normalized"]
+        - context_value["normalized"]
+      )
+
+      tolerance = max(
+        abs(context_value["normalized"]) * 0.001,
+        0.01,
+      )
+
+      if difference <= tolerance:
+        matched = True
+        break
+
+    if not matched:
+      issues.append(
+        (
+          f"Answer financial value"
+          f"{answer_value['raw_value']} {answer_value['unit']} "
+          f"is not consistent with the retrieved evidence."
+        )
+      )
+  return issues
+
 
 def evidence_checker(state: FinancialResearchState) -> dict:
   """
@@ -359,6 +517,31 @@ def evidence_checker(state: FinancialResearchState) -> dict:
       "weak_evidence": [],
       "retry_required": True,
     }
+
+  # ---------------------------------
+  # Layer 1: deterministic validation
+  # ---------------------------------
+  numeric_issues = []
+
+  for item in evidence:
+    issues = check_financial_unit_consistency(
+      answer=item["answer"],
+      retrieved_contexts=item["retrieved_contexts"]
+    )
+
+    numeric_issues.extend(issues)
+
+  if numeric_issues:
+    return {
+      "sufficient": False,
+      "mission_information": [],
+      "weak_evidence": numeric_issues,
+      "retry_required": True,
+    }
+
+  # ----------------------------------
+  # Layer 2: LLM semantic validation
+  # ----------------------------------
 
   system_prompt = """
   You are an evidence checker for a financial-report RAG system.
