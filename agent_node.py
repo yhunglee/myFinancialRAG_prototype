@@ -424,12 +424,17 @@ def check_financial_unit_consistency(
     flags=re.IGNORECASE,
   ):
     numbers = re.findall(
-      r"([\d,]+(?:\.\d+)?)",
+      r"\d+(?:,\d{3})*(?:\.\d+)?",
       context_text,
     )
 
     for number in numbers:
-      value = float(number.replace(",", ""))
+      cleaned_number = number.replace(",", "").strip()
+
+      if not cleaned_number:
+        continue
+
+      value = float(cleaned_number)
 
       context_values.append(
         {
