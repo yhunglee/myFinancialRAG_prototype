@@ -790,7 +790,7 @@ def answer_regenerator(state: FinancialResearchState) -> dict:
       messages=[
         {
           "role": "system",
-          "conetnt": system_prompt,
+          "content": system_prompt,
         },
         {
           "role": "user",
@@ -820,7 +820,7 @@ def answer_regenerator(state: FinancialResearchState) -> dict:
   return {
     "evidence": regenerated_evidence,
     "regeneration_count": state.get(
-      "regenerationn_count",
+      "regeneration_count",
       0,
     ) + 1,
     "unsupported_answer": []
