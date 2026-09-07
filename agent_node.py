@@ -369,21 +369,21 @@ def check_financial_unit_consistency(
 
     # 例如: 150, 188 百萬
     (
-      r"({FINANCIAL_NUMBER_PATTERN})\s*百萬",
+      rf"({FINANCIAL_NUMBER_PATTERN})\s*百萬",
       1.0,
       "百萬"
     ),
 
     # 例如: 1,046.09 billion
     (
-      r"({FINANCIAL_NUMBER_PATTERN})\s*billion",
+      rf"({FINANCIAL_NUMBER_PATTERN})\s*billion",
       1000.0,
       "billion",
     ),
 
     #3 例如: 150,188 million
     (
-      r"({FINANCIAL_NUMBER_PATTERN})\s*million",
+      rf"({FINANCIAL_NUMBER_PATTERN})\s*million",
       1.0,
       "million",
     ),
