@@ -7,6 +7,8 @@ from agent_state import FinancialResearchState
 from myrag_module import FinancialRAGService
 import re
 
+FINANCIAL_NUMBER_PATTERN = r"\d+(?:,\d{3})*(?:\.\d+)?"
+
 client = OpenAI(
   base_url="http://localhost:1234/v1",
   api_key="lm-studio"
@@ -360,28 +362,28 @@ def check_financial_unit_consistency(
   answer_patterns = [
     # 例如: 1,046.09 億
     (
-      r"([\d,]+(?:\.\d+)?)\s*億",
+      rf"({FINANCIAL_NUMBER_PATTERN})\s*億",
       100.0, # 1 億 = 100 million
       "億",
     ),
 
     # 例如: 150, 188 百萬
     (
-      r"([\d,]+(?:\.\d+)?)\s*百萬",
+      r"({FINANCIAL_NUMBER_PATTERN})\s*百萬",
       1.0,
       "百萬"
     ),
 
     # 例如: 1,046.09 billion
     (
-      r"([\d,]+(?:\.\d+)?)\s*billion",
+      r"({FINANCIAL_NUMBER_PATTERN})\s*billion",
       1000.0,
       "billion",
     ),
 
     #3 例如: 150,188 million
     (
-      r"([\d,]+(?:\.\d+)?)\s*million",
+      r"({FINANCIAL_NUMBER_PATTERN})\s*million",
       1.0,
       "million",
     ),
@@ -397,7 +399,13 @@ def check_financial_unit_consistency(
     )
 
     for match in matches:
-      value = float(match.replace(",", ""))
+
+      cleaned_number = number.replace(",", "").strip()
+
+      if not cleaned_number:
+        continue
+
+      value = float(cleaned_number)
 
       answer_values.append(
         {
@@ -424,7 +432,7 @@ def check_financial_unit_consistency(
     flags=re.IGNORECASE,
   ):
     numbers = re.findall(
-      r"\d+(?:,\d{3})*(?:\.\d+)?",
+      FINANCIAL_NUMBER_PATTERN,
       context_text,
     )
 
@@ -450,12 +458,16 @@ def check_financial_unit_consistency(
     flags=re.IGNORECASE,
   ):
     numbers = re.findall(
-      r"([\d,]+(?:\.\d+)?)",
+      FINANCIAL_NUMBER_PATTERN,
       context_text,
     )
 
     for number in numbers:
-      value = float(number.replace(",", ""))
+      cleaned_number = number.replace(",", "").strip()
+      if not cleaned_number:
+        continue
+
+      value = float(cleaned_number)
 
       context_values.append(
         {
