@@ -400,7 +400,7 @@ def check_financial_unit_consistency(
 
     for match in matches:
 
-      cleaned_number = number.replace(",", "").strip()
+      cleaned_number = match.replace(",", "").strip()
 
       if not cleaned_number:
         continue
