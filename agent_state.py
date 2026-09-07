@@ -40,5 +40,8 @@ class FinancialResearchState(TypedDict):
   # answer_regenerator 使用
   regeneration_count: int
 
+  # retrieval_again 使用
+  retrieval_count: int
+
   # report_writer 輸出
   final_answer: str
