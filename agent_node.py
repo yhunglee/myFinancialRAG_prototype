@@ -166,7 +166,7 @@ class RegeneratedAnswer(BaseModel):
   根據既有 retrieved_contexts 重新產生的回答
   """
   answer: str
-  
+
 
 
 def research_planner(state):
@@ -697,14 +697,114 @@ def evidence_checker(state: FinancialResearchState) -> dict:
     "next_action": next_action
   }
 
-def regenerate_answer(state: FinancialResearchState) -> dict:
+def answer_regenerator(state: FinancialResearchState) -> dict:
+  """
+  對 answer_not_supported 的 evidence 重新產生回答
+
+  注意:
+  - 不重新執行 retrieval
+  - 只使用既有 retrieved_contexts
+  - 只重新產生 answer 與 retrieved evidence
+    明顯不一致的 Evidence
+  """
 
   evidence = state["evidence"]
+  regenerated_evidence = []
 
-  """
-  TODO:
-  對需要修復的 evidence，使用 retrieved_contexts 重新生成 answer
-  """
+  for item in evidence:
+
+    # 再次確認這筆 Evidence 是否真的存在
+    # answer / retrieved_contexts 的財務數值不一致
+    issues = check_financial_unit_consistency(
+      answer=item["answer"],
+      retrieved_contexts=item["retrieved_contexts"],
+    )
+
+    # 這筆 Evidence 沒問題，不需要浪費 LLM call
+    if not issues:
+      regenerated_evidence.append(item)
+      continue
+
+    system_prompt = """
+    You are an answer regeneration component for a financial-report RAG system.
+
+    Your task is to regenerate the answer using ONLY
+    the supplied retrieved contexts.
+
+    Rules:
+
+    1. Do not use outside knowledge.
+    2. Do not invent financial facts.
+    3. Do not perform a new retrieval.
+    4. Every financial number in the answer must be
+       directly supported by the retrieved contexts.
+    5. Preserve the financial unit used by the source
+       whenever possible.
+    6. Do not convert financial units unless necessary.
+    7. If a conversion is necessary, make sure the
+       converted number is mathematically correct.
+    8. Make sure the company and reporting period
+       match the supplied query and evidence.
+    9. Keep the answer concise.
+    10. If the retrieved contexts do not contain enough
+        information to answer the query, explicitly say
+        the the available evidence is insufficient. 
+    """
+
+    user_prompt = f"""
+    Query:
+    {item["query"]}
+
+    Previous answer:
+    {item["answer"]}
+
+    Detected consistency issues:
+    {issues}
+
+    Retrieved contexts:
+    {item["retrieved_contexts"]}
+
+    Regenerate the answer so that it is faithfully
+    supported by the retrieved contexts.
+    """
+
+    completion = client.chat.completions.parse(
+      model=MODEL_NAME,
+      messages=[
+        {
+          "role": "system",
+          "conetnt": system_prompt,
+        },
+        {
+          "role": "user",
+          "content": user_prompt
+        }
+      ],
+      response_format=RegeneratedAnswer,
+      temperature=0,
+    )
+
+    result = completion.choices[0].message.parsed
+
+    if result is None:
+      raise ValueError(
+        "answer_regenerator failed to generate RegeneratedAnswer"
+      )
+
+    """
+    不改 retrieved_contexts / metadata /sources , 
+    只替換 answer
+    """
+    updated_item = item.copy()
+    updated_item["answer"] = result.answer
+
+    regenerated_evidence.append(updated_item)
+
   return {
-    "evidence": regenerate_evidence
+    "evidence": regenerated_evidence,
+    "regeneration_count": state.get(
+      "regenerationn_count",
+      0,
+    ) + 1,
+    "unsupported_answer": []
   }
