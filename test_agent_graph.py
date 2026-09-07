@@ -16,6 +16,11 @@ def main():
     "evidence": [],
     "sufficient": False,
     "missing_information": [],
+    "weak_evidence": [],
+    "unsupported_answer": [],
+    "failure_type": "none",
+    "next_action": "proceed",
+    "regeneration_count": 0,
     "final_answer": "",
   }
 
