@@ -36,6 +36,91 @@ class RouterResult(BaseModel):
   periods: list[str]
   confidence: float
 
+def contextualize_question(
+  state: FinancialResearchState,
+) -> dict:
+  question = state["question"]
+  chat_history = state.get(
+    "chat_history",
+    []
+  )
+
+  """
+  第一輪沒有對話歷史，
+  不需要浪費一次 LLM
+  """
+  if not chat_history:
+    return {
+      "standalone_question": question
+    }
+
+  system_prompt = """
+  You are a conversation contextualization component for 
+  a financial research assistant.
+
+  Your task is to rewrite the user's current question
+  into a standalone question that can be understood without
+  seeing the previous conversation.
+
+  Rules:
+
+  1. Use the conversation history only to resolve context.
+  2. Preserve the user's current intent.
+  3. Resolve references such as:
+     - 他們
+     - 那家公司
+     - 上一季
+     - 前面提到的公司
+     - the two companies
+     - that company
+     - previous quarter
+  4. Do not answer the question.
+  5. Do not add financial facts that are not present 
+     in the conversation.
+  6. Do not invent companies, periods, metrics or values.
+  7. If the current question is already standalone,
+     preserve its meaning without unnecessary changes.
+  8. Return only the rewritten standalone question.
+  """
+
+  user_prompt = f"""
+  Conversation history:
+  {chat_history}
+
+  Current question:
+  {question}
+
+  Rewrite the current question into a standalone question.  
+  """
+
+  completion = client.chat.completions.parse(
+    model=MODEL_NAME,
+    messages=[
+      {
+        "role": "system",
+        "content": system_prompt,
+      },
+      {
+        "role": "user",
+        "content": user_prompt,
+      },
+    ],
+    response_format=ContextualizedQuestion,
+    temperature=0,
+  )
+
+  result = completion.choices[0].message.parsed
+
+  if result is None:
+    raise ValueError(
+      "contextualize_question failed to generate "
+      "ContextualizedQuestion"
+    )
+
+  return {
+    "standalone_question": result.standalone_question,
+  }
+
 def intent_router(state: FinancialResearchState) -> dict:
   """
   判斷使用者問題屬於哪一種金融研究意圖。
@@ -174,6 +259,9 @@ class ReportResult(BaseModel):
   report_writer 產生的最終研究回答
   """
   final_answer: str
+
+class ContextualizedQuestion(BaseModel):
+  standalone_question: str
 
 def research_planner(state):
   """
