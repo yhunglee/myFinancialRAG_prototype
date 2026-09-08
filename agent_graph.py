@@ -7,6 +7,7 @@ from agent_node import (
   contextualize_question,
   intent_router,
   research_planner,
+  evidence_reuse_checker,
   rag_executor,
   evidence_checker,
   answer_regenerator,
@@ -72,6 +73,7 @@ def build_agent_graph():
   graph.add_node("contextualize_question", contextualize_question)
   graph.add_node("intent_router", intent_router)
   graph.add_node("research_planner", research_planner)
+  graph.add_node("evidence_reuse_checker", evidence_reuse_checker)
   graph.add_node("rag_executor", rag_executor)
   graph.add_node("evidence_checker", evidence_checker)
   graph.add_node("answer_regenerator", answer_regenerator)

@@ -1139,3 +1139,96 @@ def report_writer(state: FinancialResearchState) -> dict:
     "final_answer": result.final_answer,
   }
 
+def evidence_reuse_checker(
+  state: FinancialResearchState,
+) -> dict:
+  """
+  判斷上一輪已驗證的 evidence
+  是否組已支援目前這一輪的 research_plan。
+
+  第一版策略:
+  - 不使用 LLM
+  - 比對 company / period
+  - topic 暫時使用 query 關鍵字做簡單比對
+  - 只有全部 research tasks 都找到對應 evidence 時才 reuse
+
+  """
+
+  research_plan = state.get(
+    "research_plan",
+    []
+  )
+
+  previous_evidence = state.get(
+    "previous_validated_evidence",
+    []
+  )
+
+  # 沒有上一輪 evidence ，直接走 retrieval
+  if not previous_evidence:
+    return {
+      "reuse_evidence": False,
+    }
+
+  # 沒有 research plan ，也不應直接 reuse
+  if not research_plan:
+    return {
+      "reuse_evidence": False,
+    }
+
+  reusable_evidence = []
+
+  for task in research_plan:
+
+    task_company = task.get("company")
+    task_period = task.get("period")
+    task_topic = task.get("topic", "").strip().lower()
+
+    matched_item = None
+
+    for item in previous_evidence:
+
+      evidence_company = item.get("company")
+      evidence_period = item.get("period")
+
+      # company 必須一致
+      if task_company != evidence_company:
+        continue
+
+      # period 必須一致
+      if task_period != evidence_period:
+        continue
+
+      evidence_query = (
+        item.get("query", "")
+        .strip()
+        .lower()
+      )
+
+      """
+      第一版:
+      topic 必須能在上一輪 query 中找到
+      """
+      if task_topic and task_topic not in evidence_query:
+        continue
+
+      matched_item = item
+      break
+
+    """
+    只要有一個 task 找不到，
+    就不能 reuse 整批 evidence
+    """
+    if matched_item is None:
+      return {
+        "reuse_evidence": False,
+      }
+
+    reusable_evidence.append(
+      matched_item
+    )
+
+  return {
+    "reuse_evidence": True,
+    "evidence": reusable_evidence
+  }
