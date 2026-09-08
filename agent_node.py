@@ -132,7 +132,7 @@ def intent_router(state: FinancialResearchState) -> dict:
     更新 intent / companies / periods / router_confidence
   """
 
-  question = state["standalone_quesetion"]
+  question = state["standalone_question"]
 
   
 
