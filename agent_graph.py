@@ -13,6 +13,7 @@ from agent_node import (
 
 
 MAX_REGENERATION_ATTEMPTS = 2
+MAX_RETRIEVAL_ATTEMPS = 2
 
 
 def route_after_evidence_check(
