@@ -62,6 +62,29 @@ def contextualize_question(
   into a standalone question that can be understood without
   seeing the previous conversation.
 
+  When the current question changes only part of the previous
+  research request, preserve all unchanged constraints from
+  the conversation history.
+
+  Important research constraints include:
+  - company
+  - reporting period
+  - financial metric or topic
+  - comparison or calculation intent
+
+  Only change a constraint when the current question explicitly
+  change it.
+
+  Example:
+  Previous question:
+  Compare TSMC and MediaTek revenue in 2025Q4.
+
+  Current question:
+  那只看聯發科呢?
+
+  Standalone question:
+  What was MediaTek's revenue in 2025Q4?
+
   Rules:
 
   1. Use the conversation history only to resolve context.
@@ -82,6 +105,7 @@ def contextualize_question(
      preserve its meaning without unnecessary changes.
   8. Return only the rewritten standalone question.
   """
+  # TODO: 以後再移除 prompts 的 workaround 例子
 
   user_prompt = f"""
   Conversation history:
