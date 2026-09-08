@@ -19,7 +19,7 @@ def create_initial_state(
     "question": question,
 
     "standalone_question": "",
-    
+
     "chat_history": chat_history,
 
     # intent_router
@@ -70,8 +70,13 @@ async def on_chat_start():
 @cl.on_message
 async def main(message: cl.Message):
 
+  chat_history = cl.user_session.get(
+    "chat_history"
+  ) or []
+
   initial_state = create_initial_state(
-     message.content,
+    question=message.content,
+    chat_history=chat_history,
   )
 
   """
@@ -79,18 +84,30 @@ async def main(message: cl.Message):
   所以放到 thread 執行，避免 blocking Chainlit event loop
   """
   result = await asyncio.to_thread(
-     agent_graph.invoke,
-     initial_state,
+    agent_graph.invoke,
+    initial_state,
   )
 
-  final_answer = result.get(
-     "final_answer",
-     "",
-  )
+  final_answer = result.get["final_answer"]
 
   await cl.Message(
-     final_answer
+    content=final_answer,
   ).send()
+
+  chat_history.append({
+    "role": "user",
+    "content": message.content,
+  })
+
+  chat_history.append({
+    "role": "assistant",
+    "content": final_answer,
+  })
+
+  cl.user_session.set(
+    "chat_history",
+    chat_history
+  )
 
 
 @cl.on_stop
