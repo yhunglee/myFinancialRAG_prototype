@@ -5,18 +5,44 @@ Chainlit 的主要檔案
 """
 import chainlit as cl
 
-from myrag_module import FinancialRAGService
+import asyncio
 
+from agent_graph import build_agent_graph
 
-rag_service = FinancialRAGService(
-  db_path='./chroma_db',
-  collection_name="financial_reports"
-)
+agent_graph = build_agent_graph()
 
-@cl.on_chat_start
-def on_chat_start():
-  print("A new chat session has started!")
-  rag_service.clean_history()
+def create_initial_state(question: str) -> dict:
+  return {
+    "question": question,
+
+    # intent_router
+    "intent": "",
+    "companies": [],
+    "periods": [],
+    "router_confidence": 0.0,
+
+    # research_planner
+    "research_plan": [],
+
+    # rag_executor
+    "current_task": 0,
+    "evidence": [],
+
+    # evidence_checker
+    "sufficient": False,
+    "missing_information": [],
+    "weak_evidence": [],
+    "unsupported_answer": [],
+    "failure_type": "none",
+    "next_action": "proceed",
+
+    # retry loop
+    "regeneration_count": 0,
+    "retrieval_count": 0,
+
+    # report_writer
+    "final_answer": "",
+  }
 
 @cl.on_message
 async def main(message: cl.Message):
