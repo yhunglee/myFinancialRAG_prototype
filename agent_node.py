@@ -1456,6 +1456,11 @@ def report_writer(state: FinancialResearchState) -> dict:
   question = state["standalone_question"]
   evidence = state["evidence"]
 
+  calculation_results = state.get(
+    "calculation_results",
+    []
+  )
+
   system_prompt = """
   You are a financial research report writer for a RAG system.
 
@@ -1474,11 +1479,11 @@ def report_writer(state: FinancialResearchState) -> dict:
      comparison using the evidence for each company.
   8. For comparison questions, do not merely list the values.
      Explicitly state which company has the higher value.
-  9. When necessary for comparison, convert financial values
-     to the same unit before calculating differences or ratios.
-  10. Any unit conversion or calculation must be mathematically correct.
-  11. When comparing numerical values, include the difference
-      or ratio when it helps answer the question.
+  9. Do not independently perform financial calculations
+     when a calculation result is supplied.
+  10. When calculation results are supplied,
+      use those results as the authoritative calcualted values.
+  11. Do not change or recompute supplied calculation results.
   12. Use financial terminology carefully.
       Do not translate "Net Revenue" as "淨收入".
       Use "營收" or "淨營收" instead.
@@ -1496,6 +1501,9 @@ def report_writer(state: FinancialResearchState) -> dict:
 
   Validated evidence:
   {evidence}
+
+  Validated calculation results:
+  {calculation_results}
   
   Write the final answer.
   """
