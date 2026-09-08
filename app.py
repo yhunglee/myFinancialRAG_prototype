@@ -58,26 +58,35 @@ async def on_chat_start():
 @cl.on_message
 async def main(message: cl.Message):
 
-  # 一開始就建立並發送思考過程
-  think_step = cl.Step(name="AI 財報推理過程", type="run")
-  await think_step.send()
+  initial_state = create_initial_state(
+     message.content,
+  )
 
-  msg = None
-  async for event in rag_service.rag_chat_stream(message.content):
-    if event.type == "reasoning":
-        await think_step.stream_token(event.content)
+  """
+  Notice: 因為 LangGraph invoke() 是同步工作，
+  所以放到 thread 執行，避免 blocking Chainlit event loop
+  """
+  result = await asyncio.to_thread(
+     agent_graph.invoke,
+     initial_state,
+  )
 
-    if event.type == "answer":
-      if not msg:
-        msg = cl.Message(content="", parent_id=think_step.id)
-        await msg.send()
-      
-      await msg.stream_token(event.content)
+  final_answer = result.get(
+     "final_answer",
+     "",
+  )
 
-  await think_step.update()
+  if not final_answer:
+     final_answer = (
+        "Agentic RAG 無法產生最終回答。\n\n"
+        f"failure_type: {result.get('failure_type')}\n"
+        f"missing_information: "
+        f"{result.get('missing_information')}\n"
+     )
 
-  if msg:
-    await msg.update()
+  await cl.Message(
+     final_answer
+  ).send()
 
 
 @cl.on_stop
