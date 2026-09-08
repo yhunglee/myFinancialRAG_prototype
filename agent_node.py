@@ -1139,5 +1139,3 @@ def report_writer(state: FinancialResearchState) -> dict:
     "final_answer": result.final_answer,
   }
 
-def evidence_reuse_checker(state: FinancialResearchState) -> bool:
-  return state.get("reuse_evidence")
