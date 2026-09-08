@@ -54,6 +54,11 @@ def contextualize_question(
       "standalone_question": question
     }
 
+  print(
+    "[對話上下文] Standalone question:",
+    result.standalone_question,
+  ) # debug
+
   system_prompt = """
   You are a conversation contextualization component for 
   a financial research assistant.
