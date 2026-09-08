@@ -12,6 +12,7 @@ agent_graph = build_agent_graph()
 def create_initial_state(
     question: str,
     chat_history: list[dict],
+    previous_validated_evidence: list,
   ) -> dict:
   return {
     "question": question,
@@ -28,6 +29,9 @@ def create_initial_state(
 
     # research_planner
     "research_plan": [],
+
+    # 存放是否要重複使用先前的 evidence
+    "previous_validated_evidence": previous_validated_evidence,
 
     # rag_executor
     "current_task": 0,
@@ -206,9 +210,15 @@ async def main(message: cl.Message):
     "chat_history"
   ) or []
 
+  previous_validated_evidence = cl.user_session.get(
+    "previous_validated_evidence",
+  ) or []
+
+
   initial_state = create_initial_state(
     question=message.content,
     chat_history=chat_history,
+    previous_validated_evidence=previous_validated_evidence
   )
 
   final_state = dict(initial_state)

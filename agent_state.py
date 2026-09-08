@@ -14,7 +14,7 @@ class FinancialResearchState(TypedDict):
   # 目前 Chainlit session 的歷史對話
   chat_history: list[dict]
 
-  
+
   # intent_router 輸出
   intent: str
   companies: list[str]
@@ -23,10 +23,14 @@ class FinancialResearchState(TypedDict):
 
   # research_planner 輸出
   research_plan: list
+
+  # 存放是否要重複使用先前的 evidence
+  previous_validated_evidences: list
   
   # rag_executer 使用
   current_task: int
   evidence: list
+
 
   # Evidence_checker 使用
   sufficient: bool
