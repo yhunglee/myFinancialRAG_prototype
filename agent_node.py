@@ -5,6 +5,7 @@ from openai import OpenAI
 
 from agent_state import FinancialResearchState
 from myrag_module import FinancialRAGService
+from entity_normalizer import StockEntityNormalizer
 import re
 
 FINANCIAL_NUMBER_PATTERN = r"\d+(?:,\d{3})*(?:\.\d+)?"
@@ -20,6 +21,8 @@ rag_service = FinancialRAGService(
   db_path="./chroma_db",
   collection_name="financial_reports",
 )
+
+entity_normalizer = StockEntityNormalizer()
 
 class RouterResult(BaseModel):
   """
