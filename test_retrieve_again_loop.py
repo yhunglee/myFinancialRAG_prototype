@@ -37,7 +37,7 @@ def build_test_graph():
     route_after_evidence_check,
     {
       "proceed": END,
-      "retrieve_again": retrieve_again,
+      "retrieve_again": "retrieve_again",
       "regenerate_answer": END,
       "stop": END,
     }
