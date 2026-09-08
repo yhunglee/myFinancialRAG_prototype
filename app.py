@@ -44,6 +44,17 @@ def create_initial_state(question: str) -> dict:
     "final_answer": "",
   }
 
+@cl.on_chat_start
+async def on_chat_start():
+
+  await cl.Message(
+    content=(
+      "Financial Agentic RAG 已啟動。\n\n"
+      "你可以詢問財報資訊，例如:\n"
+      "`比較台積電和聯發科 2025 年第四季營收`"
+    )
+  ).send()
+
 @cl.on_message
 async def main(message: cl.Message):
 
