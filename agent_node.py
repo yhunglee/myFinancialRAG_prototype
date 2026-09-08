@@ -897,3 +897,75 @@ def answer_regenerator(state: FinancialResearchState) -> dict:
   }
 
 
+def report_writer(state: FinancialResearchState) -> dict:
+  """
+  將已通過 evidence_checker 驗證的 Evidence
+  整合成最終回答
+  
+  注意:
+  - 不執行 retrieval
+  - 不修改 evidence
+  - 不使用外部知識
+  - 只使用已驗證 Evidence
+  """
+
+  question = state["question"]
+  evidence = state["evidence"]
+
+  system_prompt = """
+  You are a financial research report writer for a RAG system.
+
+  Your job is to answer the user's original question
+  using ONLY the supplied validated evidence.
+
+  Rules:
+
+  1. Use only the supplied evidence.
+  2. Do not use outside knowledge.
+  3. Do not invent financial facts.
+  4. Every financial number must be supported by the evidence.
+  5. Preserve the financial units used by the evidence whenever possible.
+  6. Make sure company names and reporting periods are correct.
+  7. If the question compares multiple companies, perform the
+     comparison using the evidence for each company.
+  8. Do not claim information that is not present in the evidence.
+  9. Keep the answer concise and suitable for a financial research response.
+  10. Answer the original question directly.
+  """
+
+  user_prompt = f"""
+  Original question:
+  {question}
+
+  Validated evidence:
+  {evidence}
+  
+  Write the final answer.
+  """
+
+  completion = client.chat.completions.parse(
+    model=MODEL_NAME,
+    messages=[
+      {
+        "role": "system",
+        "content": system_prompt
+      },
+      {
+        "role": "user",
+        "content": user_prompt
+      }
+    ],
+    response_format=ReportResult,
+    temperature=0,
+  )
+
+  result = completion.choices[0].message.parsed
+
+  if result is None:
+    raise ValueError(
+      "report_writer failed to generate ReportResult"
+    )
+
+  return {
+    "final_answer": result.final_answer,
+  }
