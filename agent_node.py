@@ -318,20 +318,21 @@ class CalculationPlan(BaseModel):
 
 
 def normalize_financial_value_to_million(
-  value: float,
+  value: float | Decimal,
   unit: str,
-) -> float:
+) -> Decimal:
 
+  value_decimal = Decimal(str(value))
   normalized_unit = unit.strip().lower()
 
   if normalized_unit in {"million", "百萬"}:
-    return value
+    return value_decimal
 
   if normalized_unit == 'billion':
-    return value * 1000.0
+    return value_decimal * Decimal('1000')
 
   if normalized_unit == "億":
-    return value * 100.0
+    return value_decimal * Decimal('100')
 
   raise ValueError(
     f"Unsupported financial unit: {unit}"
@@ -474,7 +475,7 @@ def calculator(
     )
 
     difference = abs(
-      Decimal(str(value_a)) - Decimal(str(value_b))
+      value_a - value_b
     )
 
     result =  {
