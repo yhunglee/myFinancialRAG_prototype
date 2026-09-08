@@ -905,6 +905,37 @@ def answer_regenerator(state: FinancialResearchState) -> dict:
   }
 
 
+def failure_report_writer(state: FinancialResearchState) -> dict:
+
+  failure_type = state["failure_type"]
+
+  if failure_type == 'answer_not_supported':
+    final_answer = (
+      "目前產生的財務數值無法通過證據一致性驗證"
+      "且已達到自動修正次數上限，因此本次不提供未經驗證的財務結論。"
+    )
+
+  elif failure_type == 'missing_evidence':
+    final_answer = (
+      "目前找到的資料不足以完整回答這個問題，"
+      "且已達到重新檢索次數上限"
+    )
+
+  elif failure_type == 'weak_evidence':
+    final_answer = (
+      "目前取得的證據不足以可靠支持完整結論，"
+      "且已達到重新檢索次數上限。"
+    )
+
+  else: 
+    final_answer = (
+      "本次研究流程無法產生通過驗證的最終回答。"
+    )
+
+  return {
+    "final_answer": final_answer,
+  }
+
 def report_writer(state: FinancialResearchState) -> dict:
   """
   將已通過 evidence_checker 驗證的 Evidence
