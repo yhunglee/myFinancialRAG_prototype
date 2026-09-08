@@ -73,59 +73,16 @@ def main():
     "current_task": 1,
 
     # ------------------------------
-    # 故意製造錯誤答案
+    # 故意製造[沒有 Evidence] 的狀態
     #
-    # source:
-    #   NT$ 1,046.09 billion
-    #
-    # wrong answer:
-    #   1,046.09 億
-    #
-    # 1 billion = 10 億
-    # 所以這個答案單位轉換錯誤
+    # Evidence_checker() 看到空 evidence 
+    # 應該會:
+    # failure_type = missing_evidence
+    # next_action = retrieve_again
+    # 
+    # 然後 Graph 執行 retrieve_again()
     # ------------------------------
     "evidence": [
-      {
-        "task_id": "task_1",
-
-        "company": "TSMC",
-
-        "period": "2025Q4",
-
-        "query": "Retrieve the revenue for TSMC in Q4 2025.",
-
-        "answer": "TSMC Q4 2025 revenue was 1,046.09 億元。",
-
-        "retrieved_contexts": [
-          """
-          TSMC Fourth Quarter 2025 Results
-
-          (In NT$ billions)
-
-          Net Revenue | 1,046.09
-          """
-        ],
-
-        "metadata": [
-          {
-            "ticker": "2330",
-            "market": "TW",
-            "year": 2025,
-            "quarter": "Q4",
-            "chunk_index": 0,
-          }
-        ],
-
-        "sources": [
-          {
-            "ticker": "2330",
-            "market": "TW",
-            "year": 2025,
-            "quarter": "Q4",
-            "chunk_index": 0,
-          }
-        ],
-      }
     ],
 
     "sufficient": False,
