@@ -123,7 +123,7 @@ def format_step_output(
 
     if node_name == "retrieve_again":
       lines.append(
-        f"Retrieve count: ",
+        f"Retrieve count: "
         f"{update.get('retrieval_count', 0)}"
       )
 
@@ -240,7 +240,7 @@ async def main(message: cl.Message):
       ) as step:
 
         step.input = node_name
-        
+
         step.output = format_step_output(
           node_name=node_name,
           update=update,
