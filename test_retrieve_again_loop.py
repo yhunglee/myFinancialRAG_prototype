@@ -98,7 +98,7 @@ def main():
   result = graph.invoke(initial_state)
 
   print("\n========================")
-  print("Final Graph Reshult")
+  print("Final Graph Result")
   print("==========================")
   
   print(
