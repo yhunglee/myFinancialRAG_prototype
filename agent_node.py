@@ -2,6 +2,7 @@ from __future__ import annotations
 from typing import Literal
 from pydantic import BaseModel
 from openai import OpenAI
+from decimal import Decimal, getcontext
 
 from agent_state import FinancialResearchState
 from myrag_module import FinancialRAGService
@@ -23,6 +24,8 @@ rag_service = FinancialRAGService(
 )
 
 entity_normalizer = StockEntityNormalizer()
+
+getcontext().prec = 6
 
 class RouterResult(BaseModel):
   """
@@ -471,7 +474,7 @@ def calculator(
     )
 
     difference = abs(
-      value_a - value_b
+      Decimal(str(value_a)) - Decimal(str(value_b))
     )
 
     result =  {
@@ -1089,12 +1092,12 @@ def check_financial_unit_consistency(
 
       # normalized 全部以 million 表示
       difference = abs(
-        answer_value["normalized"]
-        - context_value["normalized"]
+        Decimal(str(answer_value["normalized"]))
+        - Decimal(str(context_value["normalized"]))
       )
 
       tolerance = max(
-        abs(context_value["normalized"]) * 0.001,
+        abs(Decimal(str(context_value["normalized"]))) * 0.001,
         0.01,
       )
 
