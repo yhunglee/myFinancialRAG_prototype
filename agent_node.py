@@ -938,7 +938,7 @@ def report_writer(state: FinancialResearchState) -> dict:
      comparison using the evidence for each company.
   8. For comparison questions, do not merely list the values.
      Explicitly state which company has the higher value.
-  9. Wehen necessary for comparison, convert financial values
+  9. When necessary for comparison, convert financial values
      to the same unit before calculating differences or ratios.
   10. Any unit conversion or calculation must be mathematically correct.
   11. When comparing numerical values, include the difference
