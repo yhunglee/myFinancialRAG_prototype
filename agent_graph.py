@@ -4,6 +4,7 @@ from langgraph.graph import StateGraph, START, END
 
 from agent_state import FinancialResearchState
 from agent_node import (
+  contextualize_question,
   intent_router,
   research_planner,
   rag_executor,
@@ -57,6 +58,7 @@ def build_agent_graph():
     FinancialResearchState
   )
 
+  graph.add_node("contextualize_question", contextualize_question)
   graph.add_node("intent_router", intent_router)
   graph.add_node("research_planner", research_planner)
   graph.add_node("rag_executor", rag_executor)
@@ -67,7 +69,8 @@ def build_agent_graph():
   graph.add_node("failure_report_writer", failure_report_writer)
 
   # 定義執行流程
-  graph.add_edge(START, "intent_router")
+  graph.add_edge(START, "contextualize_question")
+  graph.add_edge("contextualize_question", "intent_router")
   graph.add_edge("intent_router", "research_planner")
   graph.add_edge("research_planner", "rag_executor")
   graph.add_edge("rag_executor", "evidence_checker")
