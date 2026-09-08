@@ -92,6 +92,7 @@ def main():
     "failure_type": "none",
     "next_action": "proceed",
     "regeneration_count": 0,
+    "retrieval_count": 0,
     "final_answer": ""
   }
 
