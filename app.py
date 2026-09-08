@@ -78,12 +78,7 @@ async def main(message: cl.Message):
 
   if msg:
     await msg.update()
-  
 
-
-@cl.on_chat_end
-def on_chat_end():
-  rag_service.clean_history()
 
 @cl.on_stop
 def on_stop():
