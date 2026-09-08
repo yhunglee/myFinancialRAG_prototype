@@ -293,6 +293,208 @@ class ReportResult(BaseModel):
   """
   final_answer: str
 
+class CalculationOperand(BaseModel):
+  label: str
+  value: float
+  unit: Literal[
+    "million",
+    "billion",
+    "百萬",
+    "億"
+  ]
+
+class CalculationPlan(BaseModel):
+  calculation_required: bool
+
+  operation: Literal[
+    "none",
+    "difference",
+  ]
+
+  operands: list[CalculationOperand]
+
+
+def normalize_financial_value_to_million(
+  value: float,
+  unit: str,
+) -> float:
+
+  normalized_unit = unit.strip().lower()
+
+  if normalized_unit == "million":
+    return value
+
+  if normalized_unit == 'billion':
+    return value * 1000
+
+  if normalized_unit == "百萬":
+    return value
+
+  if normalized_unit == "億":
+    return value * 100
+
+  raise ValueError(
+    f"Unsupported financial unit: {unit}"
+  )
+
+def calculator(
+  state: FinancialResearchState,
+) -> dict:
+  """
+  根據已驗證的 evidence，
+  判斷使用者問題是否需要進行 deterministic calculation。
+
+  MVP 第一版只支援:
+  - difference
+
+  LLM 只負責:
+  - 判斷是否需要計算
+  - 找出 operands
+  
+  Python 負責:
+  - 單位正規劃
+  - 實際數學計算
+
+  """
+
+  question = state["standalone_question"]
+  evidence = state["evidence"]
+
+  system_prompt = """
+  You are a calculation planner for a financial research system.
+
+  Your job is NOT to perform arithmetic.
+
+  Your job is to determine whether the user's question requires
+  a numerical calculation using the supplied validated evidence.
+
+  Currently supported calculation:
+
+  - difference
+
+  Use operation="difference" when the user asks questions such as:
+
+  - 差多少
+  - 相差多少
+  - difference between
+  - how much higher
+  - how much lower
+
+  Rules:
+
+  1. Use ONLY the supplied validated evidence.
+  2. Do not use outside knowledge.
+  3. Do not invent financial numbers.
+  4. Preserve the numerical value exactly as stated in evidence.
+  5. Preseve its financial unit.
+  6. For difference, return exactly two operands.
+  7. Do NOT calculate the result yourself.
+  8. If no supported calculation is required:
+     - calculation_required=false
+     - operation="none"
+     - operands=[]
+  """
+
+  user_prompt = f"""
+  User question:
+  {question}
+
+  Validated evidence:
+  {evidence}
+
+  Determine whether a supported calculation is required.
+  """
+
+  completion = client.chat.completions.parse(
+    model=MODEL_NAME,
+    messages=[
+      {
+        "role": "system",
+        "content": system_prompt,
+      },
+      {
+        "role": "user",
+        "content": user_prompt,
+      }
+    ],
+    response_format=CalculationPlan,
+    temperature=0,
+  )
+
+  plan = completion.choices[0].message.parsed
+
+  if plan is None:
+    raise ValueError(
+      "calculator failed to generate CalculationPlan"
+    )
+
+  # 不需要計算
+  if not plan.calculation_required:
+    return {
+      "calculation_required": False,
+      "calculation_results": []
+    }
+
+  if plan.operation == 'difference':
+
+    if len(plan.operands) != 2:
+      raise ValueError(
+        "difference calculation requires exactly two operands"
+      )
+
+    operand_a = plan.operands[0]
+    operand_b = plan.operands[1]
+
+    value_a  = normalize_financial_value_to_million(
+      operand_a.value,
+      operand_a.unit,
+    )
+
+    value_b = normalize_financial_value_to_million(
+      operand_b.value,
+      operand_b.unit,
+    )
+
+    difference = abs(
+      value_a - value_b
+    )
+
+    result =  {
+      "operation": "difference",
+      "operand_a": {
+        "label": operand_a.label,
+        "value": operand_a.value,
+        "unit": operand_a.unit,
+        "normalized_value": value_a,
+        "normalized_unit": "million",
+      },
+
+      "operand_b": {
+        "label": operand_b.label,
+        "value": operand_b.value,
+        "unit": operand_b.unit,
+        "normalized_value": value_b,
+        "normalized_unit": "million",
+      },
+      "result": difference,
+      "unit": "million"
+    }
+
+    print(
+      "[Calculator] difference:",
+      result,
+    )
+
+    return {
+      "calculation_required": True,
+      "calculation_results": [result],
+    }
+
+  return {
+    "calculation_required": False,
+    "calculation_results": [],
+  }
+
 class ContextualizedQuestion(BaseModel):
   standalone_question: str
 
