@@ -336,6 +336,72 @@ def rag_executor(state: FinancialResearchState):
     "current_task": len(state["research_plan"])
   }
 
+def retrieve_again(state: FinancialResearchState) -> dict:
+  """
+  當 evidence_checker 判斷目前 Evidence
+  缺失或品質不足時，重新執行 retrieval。
+
+  第一版策略:
+  - 不修改 research_plan
+  - 不修改 query
+  - 增加 top_k
+  - 使用新的 retrieval 結果取代原 evidence
+  """
+
+  evidence: list[dict] = []
+
+  retrieval_count = state.get(
+    "retrieval_count",
+    0,
+  )
+
+  """
+  第一次 retry 使用 top_k = 10
+  第二次 retry 使用 top_k = 15
+  """
+  top_k = 10 + retrieval_count * 5
+
+  for task in state["research_plan"]:
+
+    answer, retrieved_contexts, retrieved_metadata = rag_service.rag_task(
+      user_query=task["query"],
+      top_k=top_k,
+    )
+
+    context_list = [
+      context
+      for contexts in retrieved_contexts.values()
+      for context in contexts
+    ]
+
+    metadata_list = [
+      metadata
+      for metadatas in retrieved_metadata.values()
+      for metadata in metadatas
+    ]
+
+    sources = build_sources(metadata_list)
+
+    task_evidence = Evidence(
+      task_id=task["task_id"],
+      company=task.get("company"),
+      period=task.get("period"),
+      query=task.get("query"),
+      answer=answer,
+      retrieved_contexts=context_list,
+      metadata=metadata_list,
+      sources=sources,
+    )
+
+    evidence.append(
+      task_evidence.model_dump(),
+    )
+
+  return {
+    "evidence": evidence,
+    "retrieval_count": retrieval_count + 1,
+  }
+
 def check_financial_unit_consistency(
   answer: str,
   retrieved_contexts: list[str],
@@ -825,3 +891,5 @@ def answer_regenerator(state: FinancialResearchState) -> dict:
     ) + 1,
     "unsupported_answer": []
   }
+
+
