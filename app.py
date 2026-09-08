@@ -213,38 +213,83 @@ async def main(message: cl.Message):
 
   final_state = dict(initial_state)
 
-  async for chunk in agent_graph.astream(
+  """
+  紀錄目前正在執行中的 Chainlit Step。
+
+  key:
+    LangGraph event 的 run_id
+
+  value:
+    對應的 Chainlit Step
+  """
+  active_steps = {}
+
+  async for event in agent_graph.astream_events(
     initial_state,
-    stream_mode="updates"
+    version="v2",
+    include_names=list(STEP_NAMES.keys())
   ):
-    for node_name, update in chunk.items():
 
-      if not isinstance(update, dict):
-        continue
+    event_type = event["event"]
+    node_name = event["name"]
+    run_id = event["run_id"]
 
-      """
-      將每個 node 回傳的 state update
-      合併回目前完整 state
-      """
-      final_state.update(update)
+    """
+    Node 開始執行
+    """
+    if event_type == 'on_chain_start':
 
       step_name = STEP_NAMES.get(
         node_name,
         node_name,
       )
 
-      async with cl.Step(
+      step = cl.Step(
         name=step_name,
         type="tool",
         default_open=False,
-      ) as step:
+      )
 
-        step.input = node_name
+      step.input = node_name
+      step.output = "Running..."
 
-        step.output = format_step_output(
-          node_name=node_name,
-          update=update,
-        )
+      await step.send()
+
+      active_steps[run_id] = step
+      continue
+
+    """
+    Node 執行完成
+    """
+    if event_type == 'on_chain_end':
+
+      update = event.get(
+        "data",
+        {}
+      ).get(
+        "output",
+        {}
+      )
+
+      if not isinstance(update, dict):
+        continue
+
+      final_state.update(update)
+
+      step = active_steps.pop(
+        run_id,
+        None,
+      )
+
+      if step is None:
+        continue
+
+      step.output = format_step_output(
+        node_name=node_name,
+        update=update,
+      )
+
+      await step.update()
 
   final_answer = final_state["final_answer"]
 
