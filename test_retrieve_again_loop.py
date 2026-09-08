@@ -98,6 +98,16 @@ def main():
 
   result = graph.invoke(initial_state)
 
+  assert result["retrieval_count"] == 1, (
+    "retrieve_again node was not executed exactly once."
+  )
+
+  assert len(result["evidence"]) > 0, (
+    "retrieve_again did not product any evidence."
+  )
+
+  print("\n[PASS] retrieve_again loop executed successfully.")
+
   print("\n========================")
   print("Final Graph Result")
   print("==========================")
