@@ -349,7 +349,7 @@ def calculator(
   - 找出 operands
   
   Python 負責:
-  - 單位正規劃
+  - 單位正規化
   - 實際數學計算
 
   """
