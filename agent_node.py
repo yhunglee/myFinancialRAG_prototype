@@ -360,18 +360,16 @@ def calculator(
   system_prompt = """
   You are a calculation planner for a financial research system.
 
-  Your job is NOT to perform arithmetic.
+  Determine whether the user's question requires a supported
+  numerical calculation using ONLY the supplied validated evidence.
 
-  Your job is to determine whether the user's question requires
-  a numerical calculation using the supplied validated evidence.
-
-  Currently supported calculation:
-
+  Currently supported operation:
   - difference
 
-  Use operation="difference" when the user explicitly asks for a numerical difference between two values.
+  Use operation="difference" ONLY when the user explicitly asks
+  for the numerical difference between two values.
 
-  Examples that REQUIRE difference:
+  Requires difference:
   - 差多少
   - 相差多少
   - 差額是多少
@@ -379,34 +377,26 @@ def calculator(
   - how much higher
   - how much lower
 
-  Examples that DO NOT require calculation:
+  Does NOT require calculation:
   - 比較台積電和聯發科營收
   - 哪家營收比較高
   - 誰比較高
   - compare TSMC and MediaTek revenue
   - which company has higher revenue
 
-  A comparison question does NOT automatically require arithmetic.
-
-  If the user only asks for a comparison and does not explicitly
-  ask for a numerical difference:
-  - calculation_required=false
-  - operation="none"
-  - operands=[]
-
   Rules:
 
-  1. Use ONLY the supplied validated evidence.
-  2. Do not use outside knowledge.
-  3. Do not invent financial numbers.
-  4. Preserve the numerical value exactly as stated in evidence.
-  5. Preseve its financial unit.
+  1. A comparison does not automatically require arithmetic.
+  2. Use only the supplied validated evidence.
+  3. Do not use outside knowledge or invent financial values.
+  4. Preserve each operand's value and unit exactly as stated
+    in the evidence.
+  5. Do not perform the arithmetic yourself.
   6. For difference, return exactly two operands.
-  7. Do NOT calculate the result yourself.
-  8. If no supported calculation is required:
-     - calculation_required=false
-     - operation="none"
-     - operands=[]
+  7. If no supported calculation is required, return:
+    - calculation_required=false
+    - operation="none"
+    - operands=[]
   """
 
   user_prompt = f"""
@@ -438,14 +428,14 @@ def calculator(
   plan = completion.choices[0].message.parsed
 
   if plan is None:
-    print(
-      "[Calculator Plan]",
-      plan.model_dump(),
-    ) # debug
-    
     raise ValueError(
       "calculator failed to generate CalculationPlan"
     )
+
+  print(
+    "[Calculator Plan]",
+    plan.model_dump(),
+  ) # debug
 
   # 不需要計算
   if not plan.calculation_required:
