@@ -12,6 +12,7 @@ from agent_node import (
   evidence_checker,
   answer_regenerator,
   retrieve_again,
+  calculator,
   report_writer,
   failure_report_writer,
 )
@@ -78,6 +79,7 @@ def build_agent_graph():
   graph.add_node("evidence_checker", evidence_checker)
   graph.add_node("answer_regenerator", answer_regenerator)
   graph.add_node("retrieve_again", retrieve_again)
+  graph.add_node("calculator", calculator)
   graph.add_node("report_writer", report_writer)
   graph.add_node("failure_report_writer", failure_report_writer)
 
@@ -93,7 +95,7 @@ def build_agent_graph():
     "evidence_checker",
     route_after_evidence_check,
     {
-      "proceed": "report_writer",
+      "proceed": "calculator",
       "retrieve_again": "retrieve_again",
 
       "regenerate_answer": "answer_regenerator",
@@ -107,7 +109,7 @@ def build_agent_graph():
     "evidence_reuse_checker",
     router_after_evidence_reuse_check,
     {
-      "reuse": "report_writer",
+      "reuse": "calculator",
       "retrieve": "rag_executor"
     }
   )
@@ -119,6 +121,8 @@ def build_agent_graph():
   graph.add_edge("answer_regenerator", "evidence_checker")
 
   graph.add_edge("retrieve_again", "evidence_checker")
+
+  graph.add_edge("calculator", "report_writer")
 
   graph.add_edge("report_writer", END)
 
