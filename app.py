@@ -31,6 +31,7 @@ def create_initial_state(
     "research_plan": [],
 
     # 存放是否要重複使用先前的 evidence
+    "reuse_evidence": False,
     "previous_validated_evidence": previous_validated_evidence,
 
     # rag_executor

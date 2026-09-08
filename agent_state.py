@@ -26,6 +26,7 @@ class FinancialResearchState(TypedDict):
 
   # 存放是否要重複使用先前的 evidence
   previous_validated_evidences: list
+  reuse_evidence: bool
   
   # rag_executer 使用
   current_task: int
