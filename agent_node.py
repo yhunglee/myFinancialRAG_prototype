@@ -852,6 +852,13 @@ def answer_regenerator(state: FinancialResearchState) -> dict:
     Retrieved contexts:
     {item["retrieved_contexts"]}
 
+    The previous answer FAILED validation.
+
+    Correct every detected consistency issue.
+
+    When a source explicitly states a financial unit,
+    copy that unit exactly instead of translating it.
+
     Regenerate the answer so that it is faithfully
     supported by the retrieved contexts.
     """
