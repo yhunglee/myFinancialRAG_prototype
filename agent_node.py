@@ -132,7 +132,7 @@ def intent_router(state: FinancialResearchState) -> dict:
     更新 intent / companies / periods / router_confidence
   """
 
-  question = state["question"]
+  question = state["standalone_quesetion"]
 
   
 
@@ -269,7 +269,7 @@ def research_planner(state):
   將研究問題拆成可以交給 RAG executor 執行的 ResearchTask。
   """
 
-  question = state["question"]
+  question = state["standalone_quesion"]
   intent = state["intent"]
   companies = state["companies"]
   periods = state["periods"]
@@ -689,7 +689,7 @@ def evidence_checker(state: FinancialResearchState) -> dict:
 
   """
 
-  question = state["question"]
+  question = state["standalone_quesion"]
   research_plan = state["research_plan"]
   evidence = state["evidence"]
 
@@ -1036,7 +1036,7 @@ def report_writer(state: FinancialResearchState) -> dict:
   - 只使用已驗證 Evidence
   """
 
-  question = state["question"]
+  question = state["standalone_quesion"]
   evidence = state["evidence"]
 
   system_prompt = """
