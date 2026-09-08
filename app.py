@@ -213,6 +213,15 @@ async def main(message: cl.Message):
 
   final_state = dict(initial_state)
 
+  parent_step = cl.Step(
+    name="Agent Research Process",
+    type="tool",
+    default_open=False,
+  )
+
+  parent_step.output = "Running..."
+  await parent_step.send()
+
   """
   紀錄目前正在執行中的 Chainlit Step。
 
@@ -247,6 +256,7 @@ async def main(message: cl.Message):
       step = cl.Step(
         name=step_name,
         type="tool",
+        parent_id=parent_step.id,
         default_open=False,
       )
 
@@ -290,6 +300,9 @@ async def main(message: cl.Message):
       )
 
       await step.update()
+
+  parent_step.output = "Research process completed."
+  await parent_step.update()
 
   final_answer = final_state["final_answer"]
 
