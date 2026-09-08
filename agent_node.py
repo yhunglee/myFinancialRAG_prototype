@@ -936,10 +936,23 @@ def report_writer(state: FinancialResearchState) -> dict:
   6. Make sure company names and reporting periods are correct.
   7. If the question compares multiple companies, perform the
      comparison using the evidence for each company.
-  8. Do not claim information that is not present in the evidence.
-  9. Keep the answer concise and suitable for a financial research response.
-  10. Answer the original question directly.
+  8. For comparison questions, do not merely list the values.
+     Explicitly state which company has the higher value.
+  9. Wehen necessary for comparison, convert financial values
+     to the same unit before calculating differences or ratios.
+  10. Any unit conversion or calculation must be mathematically correct.
+  11. When comparing numerical values, include the difference
+      or ratio when it helps answer the question.
+  12. Use financial terminology carefully.
+      Do not translate "Net Revenue" as "淨收入".
+      Use "營收" or "淨營收" instead.
+  13. Do not claim information that is not present in the evidence.
+  14. Keep the answer concise and suitable for a financial research response.
+  15. Answer the original question directly.
   """
+  # ==========
+  # Notice: 第11 和12點是 MVP/Demo 階段暫時解，之後再用更好方式解
+  # ==========
 
   user_prompt = f"""
   Original question:
