@@ -53,6 +53,17 @@ def route_after_evidence_check(
 
   return next_action
 
+def router_after_evidence_reuse_check(
+  state: FinancialResearchState,
+)-> str:
+  reuse_evidence = state.get('reuse_evidence')
+
+  if reuse_evidence is True:
+    return "reuse"
+
+  return "retrieve"
+
+
 def build_agent_graph():
   graph = StateGraph(
     FinancialResearchState
@@ -72,7 +83,7 @@ def build_agent_graph():
   graph.add_edge(START, "contextualize_question")
   graph.add_edge("contextualize_question", "intent_router")
   graph.add_edge("intent_router", "research_planner")
-  graph.add_edge("research_planner", "rag_executor")
+  graph.add_edge("research_planner", "evidence_reuse_checker")
   graph.add_edge("rag_executor", "evidence_checker")
 
   # Evidence conditional routing
@@ -87,6 +98,15 @@ def build_agent_graph():
 
       # regeneration 超過次數限制
       "stop": "failure_report_writer"
+    }
+  )
+
+  graph.add_conditional_edges(
+    "evidence_reuse_checker",
+    router_after_evidence_reuse_check,
+    {
+      "reuse": "report_writer",
+      "retrieve": "rag_executor"
     }
   )
 
