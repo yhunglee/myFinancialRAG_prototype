@@ -321,17 +321,14 @@ def normalize_financial_value_to_million(
 
   normalized_unit = unit.strip().lower()
 
-  if normalized_unit == "million":
+  if normalized_unit in {"million", "百萬"}:
     return value
 
   if normalized_unit == 'billion':
-    return value * 1000
-
-  if normalized_unit == "百萬":
-    return value
+    return value * 1000.0
 
   if normalized_unit == "億":
-    return value * 100
+    return value * 100.0
 
   raise ValueError(
     f"Unsupported financial unit: {unit}"
@@ -986,7 +983,10 @@ def check_financial_unit_consistency(
         {
           "raw_value": value,
           "unit": unit,
-          "normalized": value * multiplier,
+          "normalized": normalize_financial_value_to_million(
+            value,
+            unit
+          ),
         }
       )
 
@@ -1023,7 +1023,10 @@ def check_financial_unit_consistency(
         {
           "raw_value": value,
           "unit": "billion",
-          "normalized": value * 1000.0,
+          "normalized": normalize_financial_value_to_million(
+            value, 
+            "billion"
+          ),
         }
       )
 
@@ -1048,7 +1051,10 @@ def check_financial_unit_consistency(
         {
           "raw_value": value,
           "unit": "million",
-          "normalized": value,
+          "normalized": normalize_financial_value_to_million(
+            value,
+            "million"
+          ),
         }
       )
 
