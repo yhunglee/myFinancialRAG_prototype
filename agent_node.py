@@ -369,13 +369,30 @@ def calculator(
 
   - difference
 
-  Use operation="difference" when the user asks questions such as:
+  Use operation="difference" when the user explicitly asks for a numerical difference between two values.
 
+  Examples that REQUIRE difference:
   - 差多少
   - 相差多少
+  - 差額是多少
   - difference between
   - how much higher
   - how much lower
+
+  Examples that DO NOT require calculation:
+  - 比較台積電和聯發科營收
+  - 哪家營收比較高
+  - 誰比較高
+  - compare TSMC and MediaTek revenue
+  - which company has higher revenue
+
+  A comparison question does NOT automatically require arithmetic.
+
+  If the user only asks for a comparison and does not explicitly
+  ask for a numerical difference:
+  - calculation_required=false
+  - operation="none"
+  - operands=[]
 
   Rules:
 
@@ -421,6 +438,11 @@ def calculator(
   plan = completion.choices[0].message.parsed
 
   if plan is None:
+    print(
+      "[Calculator Plan]",
+      plan.model_dump(),
+    ) # debug
+    
     raise ValueError(
       "calculator failed to generate CalculationPlan"
     )
@@ -435,9 +457,15 @@ def calculator(
   if plan.operation == 'difference':
 
     if len(plan.operands) != 2:
-      raise ValueError(
-        "difference calculation requires exactly two operands"
+      print(
+        "[Calculator] SKIP:"
+        "difference requires exactly two operands, "
+        f"but received {len(plan.operands)}."
       )
+      return {
+        "calculation_required": False,
+        "calculation_results": []
+      }
 
     operand_a = plan.operands[0]
     operand_b = plan.operands[1]
