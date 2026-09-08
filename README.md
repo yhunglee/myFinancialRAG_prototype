@@ -246,6 +246,7 @@ chainlit run app.py -w
 6. LangChain
 7. 在 report_writer 的之前階段，做金融術語 normalization 元件， 以及供 LLM 呼叫 ratio function ，用於比較多間公司的數字資訊。 
 8. Contextualize_question 階段，判斷是否能用手上的 Evidence 直接回答使用者問題
+9. 驗測 multi-hop questions 的回應品質
 
 ## 系統需求
 
