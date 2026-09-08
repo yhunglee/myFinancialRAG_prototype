@@ -682,6 +682,16 @@ def evidence_reuse_checker(
 
     matched_item = None
 
+    print(
+      "[Evidence Reuse] Task:",
+      {
+        "company": task_company,
+        "period": task_period,
+        "topic": task_topic,
+      }
+    ) # debug
+
+
     for item in previous_evidence:
 
       evidence_company = normalize_company_for_reuse(
@@ -694,6 +704,15 @@ def evidence_reuse_checker(
       evidence_topic = normalize_topic_for_reuse(
         item.get("topic")
       )
+
+      print(
+        "[Evidence Reuse] Candidate:",
+        {
+          "company": evidence_company,
+          "period": evidence_period,
+          "topic": evidence_topic,
+        }
+      ) # debug
 
       # company 必須一致
       if task_company != evidence_company:
