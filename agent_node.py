@@ -1097,8 +1097,8 @@ def check_financial_unit_consistency(
       )
 
       tolerance = max(
-        abs(Decimal(str(context_value["normalized"]))) * 0.001,
-        0.01,
+        abs(Decimal(str(context_value["normalized"]))) * Decimal('0.001'),
+        Decimal('0.01'),
       )
 
       if difference <= tolerance:
