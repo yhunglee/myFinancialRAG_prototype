@@ -9,11 +9,12 @@ from agent_node import (
   rag_executor,
   evidence_checker,
   answer_regenerator,
+  retrieve_again,
 )
 
 
 MAX_REGENERATION_ATTEMPTS = 2
-MAX_RETRIEVAL_ATTEMPS = 2
+MAX_RETRIEVAL_ATTEMPTS = 2
 
 
 def route_after_evidence_check(
@@ -36,6 +37,15 @@ def route_after_evidence_check(
     )
 
     if regeneration_count >= MAX_REGENERATION_ATTEMPTS:
+      return "stop"
+
+  if next_action == 'retrieve_again':
+    retrieval_count = state.get(
+      "retrieval_count",
+      0,
+    )
+
+    if retrieval_count >= MAX_RETRIEVAL_ATTEMPTS:
       return "stop"
 
   return next_action
