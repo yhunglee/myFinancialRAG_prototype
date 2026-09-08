@@ -11,9 +11,16 @@ from agent_graph import build_agent_graph
 
 agent_graph = build_agent_graph()
 
-def create_initial_state(question: str) -> dict:
+def create_initial_state(
+    question: str,
+    chat_history: list[dict],
+  ) -> dict:
   return {
     "question": question,
+
+    "standalone_question": "",
+    
+    "chat_history": chat_history,
 
     # intent_router
     "intent": "",
