@@ -354,7 +354,7 @@ async def main(message: cl.Message):
     chat_history
   )
 
-  if final_state.get("sufficient") is True:
+  if final_state.get("sufficient") is True or final_state.get("reuse_evidence") is True:
     cl.user_session.set(
       "previous_validated_evidence",
       final_state.get("evidence", [])
