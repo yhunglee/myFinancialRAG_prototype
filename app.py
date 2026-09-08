@@ -47,6 +47,11 @@ def create_initial_state(question: str) -> dict:
 @cl.on_chat_start
 async def on_chat_start():
 
+  cl.user_session.set(
+     "chat_history",
+     [],
+  )
+
   await cl.Message(
     content=(
       "Financial Agentic RAG 已啟動。\n\n"
