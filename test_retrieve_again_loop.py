@@ -103,7 +103,7 @@ def main():
   )
 
   assert len(result["evidence"]) > 0, (
-    "retrieve_again did not product any evidence."
+    "retrieve_again did not produce any evidence."
   )
 
   print("\n[PASS] retrieve_again loop executed successfully.")
