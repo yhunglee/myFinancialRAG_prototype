@@ -247,6 +247,7 @@ class Evidence(BaseModel):
   task_id: str
   company: str | None
   period: str | None
+  topic: str
   query: str
   answer: str
 
@@ -441,6 +442,7 @@ def rag_executor(state: FinancialResearchState):
       task_id=task["task_id"],
       company=task.get("company"),
       period=task.get("period"),
+      topic=task.get("topic"),
       query=task.get("query"),
       answer=answer,
       retrieved_contexts=context_list,
