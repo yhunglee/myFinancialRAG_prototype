@@ -76,14 +76,6 @@ async def main(message: cl.Message):
      "",
   )
 
-  if not final_answer:
-     final_answer = (
-        "Agentic RAG 無法產生最終回答。\n\n"
-        f"failure_type: {result.get('failure_type')}\n"
-        f"missing_information: "
-        f"{result.get('missing_information')}\n"
-     )
-
   await cl.Message(
      final_answer
   ).send()

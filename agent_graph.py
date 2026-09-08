@@ -11,6 +11,7 @@ from agent_node import (
   answer_regenerator,
   retrieve_again,
   report_writer,
+  failure_report_writer,
 )
 
 
@@ -63,6 +64,7 @@ def build_agent_graph():
   graph.add_node("answer_regenerator", answer_regenerator)
   graph.add_node("retrieve_again", retrieve_again)
   graph.add_node("report_writer", report_writer)
+  graph.add_node("failure_report_writer", failure_report_writer)
 
   # 定義執行流程
   graph.add_edge(START, "intent_router")
@@ -81,7 +83,7 @@ def build_agent_graph():
       "regenerate_answer": "answer_regenerator",
 
       # regeneration 超過次數限制
-      "stop": END
+      "stop": "failure_report_writer"
     }
   )
 
@@ -94,5 +96,7 @@ def build_agent_graph():
   graph.add_edge("retrieve_again", "evidence_checker")
 
   graph.add_edge("report_writer", END)
+
+  graph.add_edge("failure_report_writer", END)
 
   return graph.compile()
