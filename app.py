@@ -88,7 +88,7 @@ async def main(message: cl.Message):
     initial_state,
   )
 
-  final_answer = result.get["final_answer"]
+  final_answer = result["final_answer"]
 
   await cl.Message(
     content=final_answer,
