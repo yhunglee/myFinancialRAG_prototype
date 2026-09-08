@@ -431,8 +431,12 @@ def evidence_reuse_checker(
       "reuse_evidence": False,
     }
 
-  reusable_evidence = []
+  reusable_evidence: list[dict] = []
 
+  """
+  每一個 task 都必須找到
+  對應的 validated evidence
+  """
   for task in research_plan:
 
     task_company = task.get("company")
@@ -461,7 +465,7 @@ def evidence_reuse_checker(
       )
 
       """
-      第一版:
+      MVP版:
       topic 必須能在上一輪 query 中找到
       """
       if task_topic and task_topic not in evidence_query:
@@ -475,6 +479,14 @@ def evidence_reuse_checker(
     就不能 reuse 整批 evidence
     """
     if matched_item is None:
+      print(
+        "[Evidence Reuse] MISS: ",
+        {
+          "company": task_company,
+          "period": task_period,
+          "topic": task_topic
+        }
+      )
       return {
         "reuse_evidence": False,
       }
@@ -483,10 +495,63 @@ def evidence_reuse_checker(
       matched_item
     )
 
+  """
+  全部 ResearchTask 都命中
+  """
+  print(
+    "[Evidence Reuse] HIT: ",
+    len(reusable_evidence),
+    " evidence items reused."
+  )
+  
   return {
     "reuse_evidence": True,
     "evidence": reusable_evidence
   }
+
+
+def normalize_company_for_reuse(
+  company: str | None,
+) -> str | None:
+  """
+  將公司名稱、股票帶號、別名統一成 canonical ticker，
+  供 evidence reuse matching 使用。
+  
+  例如: 
+  台積電 / TSMC / 2330 -> 2330.TW
+  聯發科 / MediaTek / 2454 -> 2454.TW
+  """
+
+  if not company:
+    return None
+
+  normalized = entity_normalizer.normalize(
+    company
+  )
+
+  if normalized:
+    return normalized["canonical_ticker"]
+
+  """
+  normalizer 找不到時，
+  MVP 階段先退回簡單字串標準化
+  """
+
+  return company.strip.lower()
+
+def normalize_topic_for_reuse(
+  topic: str | None,
+) -> str:
+  """
+  MVP 階段先做簡單字串標準化。
+  後續可以再升級做金融術語 canonicalization
+  """
+
+  if not topic:
+    return ""
+
+  return topic.strip().lower()
+
 
 
 
