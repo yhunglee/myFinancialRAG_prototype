@@ -211,9 +211,42 @@ async def main(message: cl.Message):
     chat_history=chat_history,
   )
 
-  async for chunk in agent_graph.astream():
+  final_state = dict(initial_state)
 
-  final_answer = result["final_answer"]
+  async for chunk in agent_graph.astream(
+    initial_state,
+    stream_mode="updates"
+  ):
+    for node_name, update in chunk.items():
+
+      if not isinstance(update, dict):
+        continue
+
+      """
+      將每個 node 回傳的 state update
+      合併回目前完整 state
+      """
+      final_state.update(update)
+
+      step_name = STEP_NAMES.get(
+        node_name,
+        node_name,
+      )
+
+      async with cl.Step(
+        name=step_name,
+        type="tool",
+        default_open=False,
+      ) as step:
+
+        step.input = node_name
+        
+        step.output = format_step_output(
+          node_name=node_name,
+          update=update,
+        )
+
+  final_answer = final_state["final_answer"]
 
   await cl.Message(
     content=final_answer,
