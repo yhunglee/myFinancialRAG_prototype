@@ -421,12 +421,21 @@ def evidence_reuse_checker(
 
   # 沒有上一輪 evidence ，直接走 retrieval
   if not previous_evidence:
+    print(
+      "[Evidence Reuse] MISS: "
+      "no previous validated evidence"
+    )
+
     return {
       "reuse_evidence": False,
     }
 
   # 沒有 research plan ，也不應直接 reuse
   if not research_plan:
+    print(
+      "[Evidence Reuse] MISS: "
+      "no research plan"
+    )
     return {
       "reuse_evidence": False,
     }
@@ -439,16 +448,32 @@ def evidence_reuse_checker(
   """
   for task in research_plan:
 
-    task_company = task.get("company")
-    task_period = task.get("period")
-    task_topic = task.get("topic", "").strip().lower()
+    task_company = normalize_company_for_reuse(
+      task.get("company")
+    )
+
+    task_period = (
+      task.get("period") or ""
+    ).strip().upper()
+
+    task_topic = normalize_topic_for_reuse(
+      task.get("topic")
+    )
 
     matched_item = None
 
     for item in previous_evidence:
 
-      evidence_company = item.get("company")
-      evidence_period = item.get("period")
+      evidence_company = normalize_company_for_reuse(
+        item.get("company")
+      )
+      evidence_period = (
+        item.get("period") or ""
+      ).strip().upper()
+
+      evidence_topic = normalize_topic_for_reuse(
+        item.get("topic")
+      )
 
       # company 必須一致
       if task_company != evidence_company:
@@ -458,17 +483,11 @@ def evidence_reuse_checker(
       if task_period != evidence_period:
         continue
 
-      evidence_query = (
-        item.get("query", "")
-        .strip()
-        .lower()
-      )
-
       """
       MVP版:
       topic 必須能在上一輪 query 中找到
       """
-      if task_topic and task_topic not in evidence_query:
+      if task_topic != evidence_topic:
         continue
 
       matched_item = item
@@ -537,7 +556,7 @@ def normalize_company_for_reuse(
   MVP 階段先退回簡單字串標準化
   """
 
-  return company.strip.lower()
+  return company.strip().lower()
 
 def normalize_topic_for_reuse(
   topic: str | None,
