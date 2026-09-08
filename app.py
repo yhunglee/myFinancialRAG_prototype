@@ -50,6 +50,10 @@ def create_initial_state(
     "regeneration_count": 0,
     "retrieval_count": 0,
 
+    # calculator
+    "calculation_required": False,
+    "calculation_results": [],
+
     # report_writer
     "final_answer": "",
   }
@@ -64,6 +68,7 @@ STEP_NAMES = {
   "evidence_checker": "Checking Evidence",
   "retrieve_again": "Retrieving Additional Evidence",
   "answer_regenerator": "Regenerating Answer",
+  "calculator": "Calculating Result",
   "report_writer": "Writing Report",
   "failure_report_writer": "Writing Failure Report"   
 }
@@ -194,6 +199,36 @@ def format_step_output(
       f"{update.get('regeneration_count', 0)}\n\n"
       f"Updated evidence items: {len(evidence)}"
     )
+
+  if node_name == 'calculator':
+    calculation_required = update.get(
+      "calculation_required",
+      False,
+    )
+
+    calculation_results = update.get(
+      "calculation_results",
+      []
+    )
+
+    if not calculation_required:
+      return "No calculation required."
+
+    if not calculation_results:
+      return "Calculation required, but no result was produced."
+
+    lines = []
+
+    for result in calculation_results:
+      lines.append(
+        "\n".join([
+          f"Operation: {result.get('operation')}",
+          f"Result: {result.get('result')}",
+          f"Unit: {result.get('unit')}",
+        ])
+      )
+
+    return "\n\n".join(lines)
 
   if node_name in {
     "report_writer",
