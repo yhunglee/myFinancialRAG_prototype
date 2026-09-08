@@ -354,6 +354,7 @@ async def main(message: cl.Message):
     chat_history
   )
 
+  # 1. 這一輪剛取得，而且通過驗證 or 2. 這一輪沒有 retrieval ，是 reuse
   if final_state.get("sufficient") is True or final_state.get("reuse_evidence") is True:
     cl.user_session.set(
       "previous_validated_evidence",
