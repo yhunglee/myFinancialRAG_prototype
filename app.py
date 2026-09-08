@@ -59,6 +59,7 @@ STEP_NAMES = {
   "contextualize_question": "Resolving Conversation Context",
   "intent_router": "Understanding Question",
   "research_planner": "Planning Research",
+  "evidence_reuse_checker": "Checking Reusable Evidence",
   "rag_executor": "Retrieving Evidence",
   "evidence_checker": "Checking Evidence",
   "retrieve_again": "Retrieving Additional Evidence",
@@ -112,6 +113,23 @@ def format_step_output(
       )
 
     return "\n\n".join(lines)
+
+  if node_name == "evidence_reuse_checker":
+
+    reuse_evidence = update.get(
+      "reuse_evidence",
+      False,
+    )
+
+    evidence = update.get(
+      "evidence",
+      []
+    )
+
+    return (
+      f"Reuse evidence: {reuse_evidence}\n\n"
+      f"Reusable evidence items: {len(evidence)}"
+    )
 
   if node_name in {
     "rag_executor",
