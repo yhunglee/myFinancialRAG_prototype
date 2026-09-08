@@ -58,5 +58,10 @@ class FinancialResearchState(TypedDict):
   # retrieval_again 使用
   retrieval_count: int
 
+  # calculator 使用
+  calculation_required: bool
+  calculation_results: list[dict]
+
   # report_writer 輸出
   final_answer: str
+
