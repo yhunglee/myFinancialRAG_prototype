@@ -169,7 +169,11 @@ class RegeneratedAnswer(BaseModel):
   """
   answer: str
 
-
+class ReportResult(BaseModel):
+  """
+  report_writer 產生的最終研究回答
+  """
+  final_answer: str
 
 def research_planner(state):
   """
