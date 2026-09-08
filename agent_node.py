@@ -825,17 +825,18 @@ def answer_regenerator(state: FinancialResearchState) -> dict:
     3. Do not perform a new retrieval.
     4. Every financial number in the answer must be
        directly supported by the retrieved contexts.
-    5. Preserve the financial unit used by the source
-       whenever possible.
-    6. Do not convert financial units unless necessary.
-    7. If a conversion is necessary, make sure the
-       converted number is mathematically correct.
-    8. Make sure the company and reporting period
-       match the supplied query and evidence.
-    9. Keep the answer concise.
-    10. If the retrieved contexts do not contain enough
-        information to answer the query, explicitly say
-        the the available evidence is insufficient. 
+    5. Preserve the EXACT financial unit used by the source.
+    6. Do NOT translate or convert financial units unless explicitly required.
+    7. If the source says "billion", keep "billion".
+    8. If the source says "million", keep "million".
+    9. Never change "billion" into "億" without mathematically
+       converting the numerical value.
+    10. Make sure the company and reporting period
+        match the supplied query and evidence.
+    11. Keep the answer concise.
+    12. If the retrieved contexts do not contain enough
+        information to answer the query, explicitly state
+        that the available evidence is insufficient. 
     """
 
     user_prompt = f"""
