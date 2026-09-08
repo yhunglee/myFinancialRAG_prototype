@@ -244,6 +244,7 @@ chainlit run app.py -w
 4. Hybrid search，包含 BM25 與 re-ranking
 5. LlamaIndex
 6. LangChain
+7. 在 report_writer 的之前階段，做金融術語 normalization 元件， 以及供 LLM 呼叫 ratio function ，用於比較多間公司的數字資訊。 
 
 ## 系統需求
 
