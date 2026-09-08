@@ -325,6 +325,12 @@ async def main(message: cl.Message):
     chat_history
   )
 
+  if final_state.get("sufficient") is True:
+    cl.user_session.set(
+      "previous_validated_evidence",
+      final_state.get("evidence", [])
+    )
+
 
 @cl.on_stop
 def on_stop():
