@@ -2,9 +2,19 @@ from __future__ import annotations
 from typing import Literal, TypedDict
 
 class FinancialResearchState(TypedDict):
-  # 使用者原始問題
+  # 使用者這一輪輸入的原始問題
   question: str
 
+  """
+  將對話上下文補齊後，
+  可以獨立理解的完整問題
+  """
+  standalone_question: str
+
+  # 目前 Chainlit session 的歷史對話
+  chat_history: list[dict]
+
+  
   # intent_router 輸出
   intent: str
   companies: list[str]
