@@ -10,6 +10,7 @@ from agent_node import (
   evidence_checker,
   answer_regenerator,
   retrieve_again,
+  report_writer,
 )
 
 
@@ -61,6 +62,7 @@ def build_agent_graph():
   graph.add_node("evidence_checker", evidence_checker)
   graph.add_node("answer_regenerator", answer_regenerator)
   graph.add_node("retrieve_again", retrieve_again)
+  graph.add_node("report_writer", report_writer)
 
   # 定義執行流程
   graph.add_edge(START, "intent_router")
@@ -73,7 +75,7 @@ def build_agent_graph():
     "evidence_checker",
     route_after_evidence_check,
     {
-      "proceed": END,
+      "proceed": "report_writer",
       "retrieve_again": "retrieve_again",
 
       "regenerate_answer": "answer_regenerator",
@@ -90,5 +92,7 @@ def build_agent_graph():
   graph.add_edge("answer_regenerator", "evidence_checker")
 
   graph.add_edge("retrieve_again", "evidence_checker")
+
+  graph.add_edge("report_writer", END)
 
   return graph.compile()
