@@ -25,7 +25,7 @@ class FinancialResearchState(TypedDict):
   research_plan: list
 
   # 存放是否要重複使用先前的 evidence
-  previous_validated_evidences: list
+  previous_validated_evidence: list
   reuse_evidence: bool
   
   # rag_executer 使用
