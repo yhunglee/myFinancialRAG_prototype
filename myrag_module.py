@@ -249,31 +249,192 @@ class FinancialRAGService:
     self,
     task: dict,
     top_k: int = 5,
-  ):
+  ) -> tuple[RetrievedContexts, RetrievedMetadata]:
+    """
+    Agentic RAG 專用 retrieval fast path。
+
+    ResearchTask 已經由 research_planner() 完成:
+    - 指代消解
+    - company
+    - period
+    - topic
+    - standalone query
+
+    因此這裡不再執行
+    - rewrite_query()
+    - decompose_query()
+
+    只負責:
+    1. 驗證 ResearchTask
+    2. company canonicalization
+    3. period -> metadata filter
+    4. vector retrieval
+    """
+
+    if not isinstance(task, dict):
+      raise TypeError(
+        "task must be a dict generated from ResearchTask"
+      )
+
+    # -----------------------------
+    # 1. 驗證 query
+    # -----------------------------
+
+    search_query = (
+      task.get("query") or ""
+    ).strip()
+
+    if not search_query:
+      raise ValueError(
+        "ResearchTask missing query"
+      )
+
+    
     company = task.get("company")
-    period = task.get("period") # TODO: 暫時沒用到?
-    search_query = task["query"]
+    period = (
+      task.get("period") or ""
+    ).strip().upper()
+    
+    filter_conditions: list[dict] = []
 
-    company_meta = self.normalizer.normalize(company)
+    # retrieval result 的 label
+    
+    # ----------------------------
+    # 2. Company normalization
+    # ----------------------------
 
-    if company_meta:
-      ticker = company_meta["canonical_ticker"]
-      db_ticker = self._adapt_ticker_for_db(ticker)
+    if company:
+      company_text = str(company).strip()
+
+      normalized_company = (
+        self.normalizer.normalize(
+          company_text
+        )
+      )
+
+      if normalized_company is None:
+        raise ValueError(
+          f"Unable to normalize company: "
+          f"{company_text}"
+        )
+
+      canonical_ticker = (
+        normalized_company["canonical_ticker"]
+      )
+
+      db_ticker = (
+        self._adapt_ticker_for_db(
+          canonical_ticker
+        )
+      )
+
+      if db_ticker:
+        filter_conditions.append(
+          {
+            "ticker": db_ticker,
+          }
+        )
+
+      label = canonical_ticker
+
+
+    # -------------------------------
+    # 3. Period normalization
+    # 
+    # 支援:
+    # 2025Q4
+    # 2025 Q4
+    # 2025-Q4
+    # 2025
+    # -------------------------------
+    if period:
+      period_match = re.fullmatch(
+        r"(\d{4})(?:[\s-]*Q([1-4]))?",
+        period,
+        flags=re.IGNORECASE,
+      )
+
+      if period_match is None:
+        raise ValueError(
+          f"Unsupported period format: ",
+          f"{period}"
+        )
+
+
+      year = int(
+        period_match.group(1)
+      )
+
+      quarter_number = (
+        period_match.group(2)
+      )
+
+      filter_conditions.append(
+        {
+          "year": year,
+        }
+      )
+
+      if quarter_number:
+        filter_conditions.append(
+          {
+            "quarter": f"Q{quarter_number}"
+          }
+        )
+
+
+
+    # ------------------------------
+    # 4. 組合 Chroma where filter
+    # ------------------------------
+
+    if not filter_conditions:
+      where_filter = None
+
+    elif len(filter_conditions) == 1:
+
+      where_filter = (
+        filter_conditions[0]
+      )
+
     else:
-      db_ticker = None
-
-    where_filter = None
-
-    if db_ticker:
       where_filter = {
-        "ticker": db_ticker,
+        "$and": filter_conditions
       }
 
-    return self.retrieve(
+    print(
+      "[Agentic RAG] Fast retrieval:",
+      {
+        "query": search_query,
+        "company": company,
+        "period": period,
+        "where": where_filter,
+      }
+    )
+
+    # ----------------------
+    # 5. Vector retrieval
+    # ----------------------
+
+    docs, metadatas = self.retrieve(
       search_query=search_query,
       top_k=top_k,
       where_filter=where_filter,
     )
+
+    retrieved_contexts = {
+      label: docs
+    }
+
+    retrieved_metadata = {
+      label: metadatas,
+    }
+
+    return {
+      retrieved_contexts,
+      retrieved_metadata
+    }
+
     
   def rag_task(
       self,
