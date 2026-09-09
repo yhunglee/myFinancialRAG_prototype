@@ -902,10 +902,10 @@ def retrieve_again(state: FinancialResearchState) -> dict:
   )
 
   """
-  第一次 retry 使用 top_k = 10
-  第二次 retry 使用 top_k = 15
+  第一次 retry 使用 top_k = 8
+  第二次 retry 使用 top_k = 10
   """
-  top_k = 10 + retrieval_count * 5
+  top_k = 8 + retrieval_count * 2
 
   for task in state["research_plan"]:
 
