@@ -298,6 +298,7 @@ class FinancialRAGService:
     filter_conditions: list[dict] = []
 
     # retrieval result 的 label
+    label = "通用資料"
     
     # ----------------------------
     # 2. Company normalization
@@ -356,7 +357,7 @@ class FinancialRAGService:
 
       if period_match is None:
         raise ValueError(
-          f"Unsupported period format: ",
+          f"Unsupported period format: "
           f"{period}"
         )
 
@@ -430,10 +431,10 @@ class FinancialRAGService:
       label: metadatas,
     }
 
-    return {
+    return (
       retrieved_contexts,
       retrieved_metadata
-    }
+    )
 
     
   def rag_task(
