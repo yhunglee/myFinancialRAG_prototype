@@ -245,6 +245,36 @@ class FinancialRAGService:
 
     return answer, retrieved_contexts, retrieved_metadata
 
+  def _prepare_task_retrieval(
+    self,
+    task: dict,
+    top_k: int = 5,
+  ):
+    company = task.get("company")
+    period = task.get("period") # TODO: 暫時沒用到?
+    search_query = task["query"]
+
+    company_meta = self.normalizer.normalize(company)
+
+    if company_meta:
+      ticker = company_meta["canonical_ticker"]
+      db_ticker = self._adapt_ticker_for_db(ticker)
+    else:
+      db_ticker = None
+
+    where_filter = None
+
+    if db_ticker:
+      where_filter = {
+        "ticker": db_ticker,
+      }
+
+    return self.retrieve(
+      search_query=search_query,
+      top_k=top_k,
+      where_filter=where_filter,
+    )
+    
   def rag_task(
       self,
       user_query: str,
