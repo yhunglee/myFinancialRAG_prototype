@@ -1195,6 +1195,33 @@ def evidence_checker(state: FinancialResearchState) -> dict:
   # Layer 2: LLM semantic validation
   # ----------------------------------
 
+  checker_evidence = []
+
+  for item in evidence:
+    checker_evidence.append(
+      {
+        "task_id": item.get("task_id"),
+        "company": item.get("company"),
+        "period": item.get("period"),
+        "topic": item.get("topic"),
+        "answer": item.get("answer"),
+        "retrieved_contexts": item.get(
+          "retrieved_contexts",
+          []
+        ),
+      }
+    )
+
+  checker_plan = [
+    {
+      "task_id": task.get("task_id"),
+      "company": task.get("company"),
+      "period": task.get("period"),
+      "topic": task.get("topic"),
+      "query": task.get("query"),
+    } for task in research_plan
+  ]
+
   system_prompt = """
   You are an evidence checker for a financial-report RAG system.
 
@@ -1271,10 +1298,10 @@ def evidence_checker(state: FinancialResearchState) -> dict:
   {question}
 
   Research plan:
-  {research_plan}
+  {checker_plan}
 
   Retrieved evidence:
-  {evidence}
+  {checker_evidence}
 
   Determine whether the retrieved evidence is sufficient to complete the original research question.
   """
