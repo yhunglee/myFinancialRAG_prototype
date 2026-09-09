@@ -437,25 +437,150 @@ class FinancialRAGService:
 
     
   def rag_task(
-      self,
-      user_query: str,
-      top_k: int = 5,
-      where_filter: dict | None = None
+    self,
+    task: dict,
+    top_k: int = 5,
   ) -> tuple[str, RetrievedContexts, RetrievedMetadata]:
     """
     Agentiic RAG 專用的單一研究任務執行介面
     
-    與 rag_chat() 的主要差異:
-    - 執行完整 RAG retrieval + generation
-    - 不更新 chat_history
-    - 避免不同 ResearchTask 互相汙染 context
+    Fast Path:
+      ResearchTask
+      -> deterministic validation
+      -> metadata filtering
+      -> vector retrieval
+      -> answer generation
+
+    不執行:
+      rewrite_query()
+      decompose_query()
+
+    因為這些問題理解工作已經由:
+      contextualize_question()
+      intent_router()
+      research_planner()
+
+    在上游完成。
+
+    如果 ResearchTask 結構異常，
+    才 fallback 到既有 _rag_core()
     """
 
-    messages, retrieved_contexts, retrieved_metadata = self._rag_core(
-      user_query=user_query,
-      top_k=top_k,
-      where_filter=where_filter,
-    )
+    if not isinstance(task, dict):
+      raise TypeError(
+        "rag_task() expects a ResearchTask dict"
+      )
+
+    query = (
+      task.get("query") or ""
+    ).strip()
+
+    if not query:
+      raise ValueError(
+        "ResearchTask missing query"
+      )
+
+    company = task.get("company")
+    period = task.get("period")
+    topic = task.get("topic")
+
+    # ==========================
+    # Fast Path
+    # ==========================
+
+    try:
+      (
+        retrieved_contexts,
+        retrieved_metadata,
+      ) = self._prepare_task_retrieval(
+        task=task,
+        top_k=top_k,
+      )
+
+      context_text = (
+        self.build_compared_results(
+          retrieved_contexts
+        )
+      )
+
+      """
+      Agentic task 已經是 atomic retrieval task，
+      因此不需要 chat_history、
+      rewrite result 或再次 entity decomposition。
+      """
+      system_prompt = (
+        "你是一名專業的台美股財報研究助理。"
+        "請嚴格依據提供的參考資料回答研究任務。"
+        "不得使用參考資料以外的金融數據。"
+        "若財報資料沒有提供問題所需要的資訊，"
+        "請直接回答「財報未揭露」。"
+        "請保留原始財務數值的單位與期間，"
+        "不要自行變更單位或推測缺失數據。"
+      )
+
+      user_content = f"""
+      [研究任務]
+      公司:
+      {company or "未指定"}
+
+      期間:
+      {period or "未指定"}
+
+      主題:
+      {topic or "未指定"}
+
+      查詢:
+      {query}
+
+      [參考資料]
+
+      {context_text}
+
+      請依據以上參考資料回答研究任務。
+      """
+
+      messages: RAGMessages = [
+        {
+          "role": "system",
+          "content": system_prompt,
+        },
+        {
+          "role": "user",
+          "content": user_content,
+        }
+      ]
+
+      print(
+        "[Agentic RAG] Using fast task path"
+      )
+
+    # ====================
+    # Legacy fallback
+    # ====================
+    except (ValueError, TypeError) as e:
+
+      print(
+        "[Agentic RAG] Fast path unavailable:"
+        f" {e}"
+      )
+
+      print(
+        "[Agentic RAG] "
+        "Fallback to legacy _rag_core()"
+      )
+
+      (
+        messages, retrieved_contexts, retrieved_metadata
+      ) = self._rag_core(
+        user_query=query,
+        top_k=top_k,
+        where_filter=None,
+      )
+      
+
+    """
+    Answer generation
+    """
 
     response = self.llm_client.chat.completions.create(
       model=self.llm_model,
@@ -465,7 +590,16 @@ class FinancialRAGService:
 
     answer = response.choices[0].message.content.strip()
 
-    return answer, retrieved_contexts, retrieved_metadata
+    """
+    注意:
+    Agentic ResearchTask 不更新 chat_history，
+    避免多個 ResearchTask 互相汙染。
+    """
+    return (
+      answer,
+      retrieved_contexts,
+      retrieved_metadata,
+    )
 
   def _update_message_history(self, user_query, answer):
     """更新記憶體裡的對話歷史"""
