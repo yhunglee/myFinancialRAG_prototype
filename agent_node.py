@@ -837,7 +837,7 @@ def rag_executor(state: FinancialResearchState):
   for task in state["research_plan"]:
 
     answer, retrieved_contexts, retrieved_metadata = rag_service.rag_task(
-      user_query=task["query"],
+      task=task,
       top_k=5,
     )
 
@@ -910,7 +910,7 @@ def retrieve_again(state: FinancialResearchState) -> dict:
   for task in state["research_plan"]:
 
     answer, retrieved_contexts, retrieved_metadata = rag_service.rag_task(
-      user_query=task["query"],
+      task=task,
       top_k=top_k,
     )
 
