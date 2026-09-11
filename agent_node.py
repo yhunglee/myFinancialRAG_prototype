@@ -901,7 +901,7 @@ async def rag_executor(state: FinancialResearchState):
     "current_task": len(state["research_plan"])
   }
 
-def retrieve_again(state: FinancialResearchState) -> dict:
+async def retrieve_again(state: FinancialResearchState) -> dict:
   """
   當 evidence_checker 判斷目前 Evidence
   缺失或品質不足時，重新執行 retrieval。
@@ -912,8 +912,6 @@ def retrieve_again(state: FinancialResearchState) -> dict:
   - 增加 top_k
   - 使用新的 retrieval 結果取代原 evidence
   """
-
-  evidence: list[dict] = []
 
   retrieval_count = state.get(
     "retrieval_count",
@@ -926,42 +924,17 @@ def retrieve_again(state: FinancialResearchState) -> dict:
   """
   top_k = 8 + retrieval_count * 2
 
-  for task in state["research_plan"]:
-
-    answer, retrieved_contexts, retrieved_metadata = rag_service.rag_task(
+  tasks = [
+    execute_research_task(
       task=task,
       top_k=top_k,
     )
+    for task in state["research_plan"]
+  ]
 
-    context_list = [
-      context
-      for contexts in retrieved_contexts.values()
-      for context in contexts
-    ]
-
-    metadata_list = [
-      metadata
-      for metadatas in retrieved_metadata.values()
-      for metadata in metadatas
-    ]
-
-    sources = build_sources(metadata_list)
-
-    task_evidence = Evidence(
-      task_id=task["task_id"],
-      company=task.get("company"),
-      period=task.get("period"),
-      topic=task.get("topic", ""),
-      query=task.get("query"),
-      answer=answer,
-      retrieved_contexts=context_list,
-      metadata=metadata_list,
-      sources=sources,
-    )
-
-    evidence.append(
-      task_evidence.model_dump(),
-    )
+  evidence = await asyncio.gather(
+    *tasks
+  )
 
   return {
     "evidence": evidence,
