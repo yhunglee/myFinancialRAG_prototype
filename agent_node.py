@@ -901,7 +901,7 @@ async def rag_executor(state: FinancialResearchState):
   並將每個任務的 RAG 結果整理成 Evidence。
   """
 
-  tasks = [
+  coroutines = [
     execute_research_task(
       task=task,
       top_k=5,
@@ -910,7 +910,7 @@ async def rag_executor(state: FinancialResearchState):
   ]
 
   evidence = await asyncio.gather(
-    *tasks
+    *coroutines
   )
 
   return {
@@ -941,7 +941,7 @@ async def retrieve_again(state: FinancialResearchState) -> dict:
   """
   top_k = 8 + retrieval_count * 2
 
-  tasks = [
+  coroutines = [
     execute_research_task(
       task=task,
       top_k=top_k,
@@ -950,7 +950,7 @@ async def retrieve_again(state: FinancialResearchState) -> dict:
   ]
 
   evidence = await asyncio.gather(
-    *tasks
+    *coroutines
   )
 
   return {
