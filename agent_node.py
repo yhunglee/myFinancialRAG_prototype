@@ -28,6 +28,11 @@ entity_normalizer = StockEntityNormalizer()
 
 getcontext().prec = 6
 
+MAX_CONCURRENT_RESEARCH_TASKS = 2
+research_semaphore = asyncio.Semaphore(
+  MAX_CONCURRENT_RESEARCH_TASKS,
+)
+
 class RouterResult(BaseModel):
   """
   自然語言問題, 轉成程式可以理解的決策
@@ -837,45 +842,57 @@ async def execute_research_task(
   避免 block async event loop。
   """
 
-  (
-    answer,
-    retrieved_contexts,
-    retrieve_metadata,
-  ) = await asyncio.to_thread(
-    rag_service.rag_task,
-    task,
-    top_k
-  )
+  async with research_semaphore:
 
-  context_list = [
-    context
-    for contexts in retrieved_contexts.values()
-    for context in contexts
-  ]
+    print(
+      "[Parallel Research] START:",
+      task["task_id"],
+    )
 
-  metadata_list = [
-    metadata
-    for metadatas in retrieved_contexts.values()
-    for metadata in metadatas
-  ]
+    (
+      answer,
+      retrieved_contexts,
+      retrieved_metadata,
+    ) = await asyncio.to_thread(
+      rag_service.rag_task,
+      task,
+      top_k
+    )
 
-  sources = build_sources(
-    metadata_list
-  )
+    context_list = [
+      context
+      for contexts in retrieved_contexts.values()
+      for context in contexts
+    ]
 
-  task_evidence = Evidence(
-    task_id=task["task_id"],
-    company=task.get("company"),
-    period=task.get("period"),
-    topic=task.get("topic", ""),
-    query=task.get("query"),
-    answer=answer,
-    retrieved_contexts=context_list,
-    metadata=metadata_list,
-    sources=sources,
-  )
+    metadata_list = [
+      metadata
+      for metadatas in retrieved_metadata.values()
+      for metadata in metadatas
+    ]
 
-  return task_evidence.model_dump()
+    sources = build_sources(
+      metadata_list
+    )
+
+    task_evidence = Evidence(
+      task_id=task["task_id"],
+      company=task.get("company"),
+      period=task.get("period"),
+      topic=task.get("topic", ""),
+      query=task.get("query"),
+      answer=answer,
+      retrieved_contexts=context_list,
+      metadata=metadata_list,
+      sources=sources,
+    )
+
+    print(
+      "[Parallel Research] DONE:",
+      task["task_id"],
+    )
+
+    return task_evidence.model_dump()
 
 
 async def rag_executor(state: FinancialResearchState):
