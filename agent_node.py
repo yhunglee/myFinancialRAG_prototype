@@ -8,6 +8,7 @@ from agent_state import FinancialResearchState
 from myrag_module import FinancialRAGService
 from entity_normalizer import StockEntityNormalizer
 import re
+import asyncio
 
 FINANCIAL_NUMBER_PATTERN = r"\d+(?:,\d{3})*(?:\.\d+)?"
 
@@ -825,6 +826,57 @@ def build_sources(metadata_list: list[dict]) -> list[dict]:
     }
     for metadata in metadata_list
   ]
+
+async def execute_research_task(
+  task: dict,
+  top_k: int,
+) -> dict: 
+  """
+  執行單一 ResearchTask，
+  將同步 rag_task() 放到 worker therad，
+  避免 block async event loop。
+  """
+
+  (
+    answer,
+    retrieved_contexts,
+    retrieve_metadata,
+  ) = await asyncio.to_thread(
+    rag_service.rag_task,
+    task,
+    top_k
+  )
+
+  context_list = [
+    context
+    for contexts in retrieved_contexts.values()
+    for context in contexts
+  ]
+
+  metadata_list = [
+    metadata
+    for metadatas in retrieved_contexts.values()
+    for metadata in metadatas
+  ]
+
+  sources = build_sources(
+    metadata_list
+  )
+
+  task_evidence = Evidence(
+    task_id=task["task_id"],
+    company=task.get("company"),
+    period=task.get("period"),
+    topic=task.get("topic", ""),
+    query=task.get("query"),
+    answer=answer,
+    retrieved_contexts=context_list,
+    metadata=metadata_list,
+    sources=sources,
+  )
+  
+  return task_evidence.model_dump()
+
 
 def rag_executor(state: FinancialResearchState):
   """
