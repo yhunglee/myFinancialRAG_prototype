@@ -6,7 +6,8 @@ This project is an independently developed prototype for portfolio presentation 
 
 It explores local Retrieval-Augmented Generation (RAG) and Agentic RAG workflows for retrieving and comparing information from corporate financial reports across Taiwan and U.S. equity markets.
 
-[![Demo Video](http://img.youtube.com/vi/IZwksbgmWEw/0.jpg)](https://www.youtube.com/watch?v=IZwksbgmWEw "YouTube Demo")
+[![Agentic RAG Demo Video](http://img.youtube.com/vi/5GbhjvNtcno/0.jpg)](https://www.youtube.com/watch?v=5GbhjvNtcno "Agentic RAG YouTube Demo")
+[![RAG Demo Video](http://img.youtube.com/vi/IZwksbgmWEw/0.jpg)](https://www.youtube.com/watch?v=IZwksbgmWEw "YouTube Demo")
 
 ![Multi-turn Conversation](./screenshots/multirounds-chat-terminal.png)
 
@@ -525,7 +526,8 @@ AGPL-v3
 
 專案探索如何在地端建立台股與美股公司財報的 Retrieval-Augmented Generation（RAG）與 Agentic RAG 環境，用於財報資料檢索、跨公司比較與多輪金融問答。
 
-[![Demo 影片](http://img.youtube.com/vi/IZwksbgmWEw/0.jpg)](https://www.youtube.com/watch?v=IZwksbgmWEw "YouTube Demo")
+[![Agentic RAG Demo 影片](http://img.youtube.com/vi/5GbhjvNtcno/0.jpg)](https://www.youtube.com/watch?v=5GbhjvNtcno "Agentic RAG YouTube Demo")
+[![RAG Demo 影片](http://img.youtube.com/vi/IZwksbgmWEw/0.jpg)](https://www.youtube.com/watch?v=IZwksbgmWEw "RAG YouTube Demo")
 
 ![多輪對話](./screenshots/multirounds-chat-terminal.png)
 
