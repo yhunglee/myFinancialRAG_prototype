@@ -874,60 +874,27 @@ async def execute_research_task(
     metadata=metadata_list,
     sources=sources,
   )
-  
+
   return task_evidence.model_dump()
 
 
-def rag_executor(state: FinancialResearchState):
+async def rag_executor(state: FinancialResearchState):
   """
-  依序執行 research_planner 產生的 ResearchTask，
+  平行執行 research_planner 產生的 ResearchTask，
   並將每個任務的 RAG 結果整理成 Evidence。
   """
 
-  evidence: list[dict] = []
-
-  for task in state["research_plan"]:
-
-    answer, retrieved_contexts, retrieved_metadata = rag_service.rag_task(
+  tasks = [
+    execute_research_task(
       task=task,
       top_k=5,
     )
+    for task in state["research_plan"]
+  ]
 
-    # _rag_core() 回傳 dict[str, list[str]]
-    # Evidence 使用 list[str]，所以要攤平成單一 list
-    context_list = [
-      context
-      for contexts in retrieved_contexts.values()
-      for context in contexts
-    ]
-
-    # _rag_core() 回傳 dict[str, list[str]]
-    # Evidence 使用 list[str]，所以要攤平成單一 list
-    metadata_list = [
-      metadata
-      for metadatas in retrieved_metadata.values()
-      for metadata in metadatas
-    ]
-
-    # Notice: MVP 階段直接從 metadata 建立 sources
-    # 後續 Chainlit UI 可以再做專門的 source formatter
-    sources = build_sources(metadata_list)
-
-    task_evidence = Evidence(
-      task_id=task["task_id"],
-      company=task.get("company"),
-      period=task.get("period"),
-      topic=task.get("topic", ""),
-      query=task.get("query"),
-      answer=answer,
-      retrieved_contexts=context_list,
-      metadata=metadata_list,
-      sources=sources
-    )
-
-    evidence.append(
-      task_evidence.model_dump()
-    )
+  evidence = await asyncio.gather(
+    *tasks
+  )
 
   return {
     "evidence": evidence,
