@@ -33,6 +33,15 @@ research_semaphore = asyncio.Semaphore(
   MAX_CONCURRENT_RESEARCH_TASKS,
 )
 
+"""
+第一次 retry 使用 top_k = 8
+第二次 retry 使用 top_k = 10
+"""
+INITIAL_TOP_K = 5
+RETRY_TOP_K_STEP = 3
+MAX_TOP_K = 12
+
+
 class RouterResult(BaseModel):
   """
   自然語言問題, 轉成程式可以理解的決策
@@ -832,6 +841,14 @@ def build_sources(metadata_list: list[dict]) -> list[dict]:
     for metadata in metadata_list
   ]
 
+def get_retrieval_top_k(
+  retrieval_count: int,
+) -> int:
+  return min(
+    INITIAL_TOP_K + retrieval_count * RETRY_TOP_K_STEP,
+    MAX_TOP_K,
+  )
+
 async def execute_research_task(
   task: dict,
   top_k: int,
@@ -901,10 +918,12 @@ async def rag_executor(state: FinancialResearchState):
   並將每個任務的 RAG 結果整理成 Evidence。
   """
 
+  top_k = get_retrieval_top_k(0)
+
   coroutines = [
     execute_research_task(
       task=task,
-      top_k=5,
+      top_k=top_k,
     )
     for task in state["research_plan"]
   ]
@@ -935,11 +954,7 @@ async def retrieve_again(state: FinancialResearchState) -> dict:
     0,
   )
 
-  """
-  第一次 retry 使用 top_k = 8
-  第二次 retry 使用 top_k = 10
-  """
-  top_k = 8 + retrieval_count * 2
+  top_k = get_retrieval_top_k(retrieval_count)
 
   coroutines = [
     execute_research_task(
