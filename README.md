@@ -205,6 +205,11 @@ chainlit run app.py -w
    - Factual Correctness
    - Context Recall
    - 裁判模型：`qwen3.5-9b`
+9. Agentic RAG using LangGraph
+   - Contextualize_question 階段，判斷是否能用手上的 Evidence 直接回答使用者問題
+   - 計算機功能(僅差額)
+   - 重試、擴大範圍重新檢索
+   - 重複使用已驗證通過的證據進入下一回合
 
 ### 架構亮點
 
@@ -235,18 +240,23 @@ chainlit run app.py -w
 5. `test_financial_rag.py`
 6. `RAGAS_folder/ragas_generate_dataset.py`
 7. `RAGAS_folder/evaluate_ragas.py`
+8. Agentic RAG 系列檔案:
+   - `agent_graph.py`
+   - `agent_node.py`
+   - `agent_state.py`
+   - `app.py` 已換成 Agentic RAG 情境
+      - 顯示各階段內容
+      - 帶已驗證通過的證據到下一輪對話
 
 ### 尚未實作
 
-1. Agentic RAG
-2. HyDE（Hypothetical Document Embeddings）
-3. 判斷問題屬於量化或質化分析的 Router
-4. Hybrid search，包含 BM25 與 re-ranking
-5. LlamaIndex
-6. LangChain
-7. 在 report_writer 的之前階段，做金融術語 normalization 元件， 以及供 LLM 呼叫 ratio function ，用於比較多間公司的數字資訊。 
-8. Contextualize_question 階段，判斷是否能用手上的 Evidence 直接回答使用者問題
-9. 驗測 multi-hop questions 的回應品質
+1. HyDE（Hypothetical Document Embeddings）
+2. 判斷問題屬於量化或質化分析的 Router
+3. Hybrid search，包含 BM25 與 re-ranking
+4. LlamaIndex
+5. 在 report_writer 的之前階段，做金融術語 normalization 元件， 以及供 LLM 呼叫 ratio function ，用於比較多間公司的數字資訊。 
+6. 驗測 multi-hop questions 的回應品質
+7. LangGraph fan-out/fan-in
 
 ## 系統需求
 
