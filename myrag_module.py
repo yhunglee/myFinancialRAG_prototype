@@ -245,6 +245,363 @@ class FinancialRAGService:
 
     return answer, retrieved_contexts, retrieved_metadata
 
+  def _prepare_task_retrieval(
+    self,
+    task: dict,
+    top_k: int = 5,
+  ) -> tuple[RetrievedContexts, RetrievedMetadata]:
+    """
+    Agentic RAG 專用 retrieval fast path。
+
+    ResearchTask 已經由 research_planner() 完成:
+    - 指代消解
+    - company
+    - period
+    - topic
+    - standalone query
+
+    因此這裡不再執行
+    - rewrite_query()
+    - decompose_query()
+
+    只負責:
+    1. 驗證 ResearchTask
+    2. company canonicalization
+    3. period -> metadata filter
+    4. vector retrieval
+    """
+
+    if not isinstance(task, dict):
+      raise TypeError(
+        "task must be a dict generated from ResearchTask"
+      )
+
+    # -----------------------------
+    # 1. 驗證 query
+    # -----------------------------
+
+    search_query = (
+      task.get("query") or ""
+    ).strip()
+
+    if not search_query:
+      raise ValueError(
+        "ResearchTask missing query"
+      )
+
+    
+    company = task.get("company")
+    period = (
+      task.get("period") or ""
+    ).strip().upper()
+    
+    filter_conditions: list[dict] = []
+
+    # retrieval result 的 label
+    label = "通用資料"
+    
+    # ----------------------------
+    # 2. Company normalization
+    # ----------------------------
+
+    if company:
+      company_text = str(company).strip()
+
+      normalized_company = (
+        self.normalizer.normalize(
+          company_text
+        )
+      )
+
+      if normalized_company is None:
+        raise ValueError(
+          f"Unable to normalize company: "
+          f"{company_text}"
+        )
+
+      canonical_ticker = (
+        normalized_company["canonical_ticker"]
+      )
+
+      db_ticker = (
+        self._adapt_ticker_for_db(
+          canonical_ticker
+        )
+      )
+
+      if db_ticker:
+        filter_conditions.append(
+          {
+            "ticker": db_ticker,
+          }
+        )
+
+      label = canonical_ticker
+
+
+    # -------------------------------
+    # 3. Period normalization
+    # 
+    # 支援:
+    # 2025Q4
+    # 2025 Q4
+    # 2025-Q4
+    # 2025
+    # -------------------------------
+    if period:
+      period_match = re.fullmatch(
+        r"(\d{4})(?:[\s-]*Q([1-4]))?",
+        period,
+        flags=re.IGNORECASE,
+      )
+
+      if period_match is None:
+        raise ValueError(
+          f"Unsupported period format: "
+          f"{period}"
+        )
+
+
+      year = int(
+        period_match.group(1)
+      )
+
+      quarter_number = (
+        period_match.group(2)
+      )
+
+      filter_conditions.append(
+        {
+          "year": year,
+        }
+      )
+
+      if quarter_number:
+        filter_conditions.append(
+          {
+            "quarter": f"Q{quarter_number}"
+          }
+        )
+
+
+
+    # ------------------------------
+    # 4. 組合 Chroma where filter
+    # ------------------------------
+
+    if not filter_conditions:
+      where_filter = None
+
+    elif len(filter_conditions) == 1:
+
+      where_filter = (
+        filter_conditions[0]
+      )
+
+    else:
+      where_filter = {
+        "$and": filter_conditions
+      }
+
+    print(
+      "[Agentic RAG] Fast retrieval:",
+      {
+        "query": search_query,
+        "company": company,
+        "period": period,
+        "where": where_filter,
+      }
+    )
+
+    # ----------------------
+    # 5. Vector retrieval
+    # ----------------------
+
+    docs, metadatas = self.retrieve(
+      search_query=search_query,
+      top_k=top_k,
+      where_filter=where_filter,
+    )
+
+    retrieved_contexts = {
+      label: docs
+    }
+
+    retrieved_metadata = {
+      label: metadatas,
+    }
+
+    return (
+      retrieved_contexts,
+      retrieved_metadata
+    )
+
+    
+  def rag_task(
+    self,
+    task: dict,
+    top_k: int = 5,
+  ) -> tuple[str, RetrievedContexts, RetrievedMetadata]:
+    """
+    Agentiic RAG 專用的單一研究任務執行介面
+    
+    Fast Path:
+      ResearchTask
+      -> deterministic validation
+      -> metadata filtering
+      -> vector retrieval
+      -> answer generation
+
+    不執行:
+      rewrite_query()
+      decompose_query()
+
+    因為這些問題理解工作已經由:
+      contextualize_question()
+      intent_router()
+      research_planner()
+
+    在上游完成。
+
+    如果 ResearchTask 結構異常，
+    才 fallback 到既有 _rag_core()
+    """
+
+    if not isinstance(task, dict):
+      raise TypeError(
+        "rag_task() expects a ResearchTask dict"
+      )
+
+    query = (
+      task.get("query") or ""
+    ).strip()
+
+    if not query:
+      raise ValueError(
+        "ResearchTask missing query"
+      )
+
+    company = task.get("company")
+    period = task.get("period")
+    topic = task.get("topic")
+
+    # ==========================
+    # Fast Path
+    # ==========================
+
+    try:
+      (
+        retrieved_contexts,
+        retrieved_metadata,
+      ) = self._prepare_task_retrieval(
+        task=task,
+        top_k=top_k,
+      )
+
+      context_text = (
+        self.build_compared_results(
+          retrieved_contexts
+        )
+      )
+
+      """
+      Agentic task 已經是 atomic retrieval task，
+      因此不需要 chat_history、
+      rewrite result 或再次 entity decomposition。
+      """
+      system_prompt = (
+        "你是一名專業的台美股財報研究助理。"
+        "請嚴格依據提供的參考資料回答研究任務。"
+        "不得使用參考資料以外的金融數據。"
+        "若財報資料沒有提供問題所需要的資訊，"
+        "請直接回答「財報未揭露」。"
+        "請保留原始財務數值的單位與期間，"
+        "不要自行變更單位或推測缺失數據。"
+      )
+
+      user_content = f"""
+      [研究任務]
+      公司:
+      {company or "未指定"}
+
+      期間:
+      {period or "未指定"}
+
+      主題:
+      {topic or "未指定"}
+
+      查詢:
+      {query}
+
+      [參考資料]
+
+      {context_text}
+
+      請依據以上參考資料回答研究任務。
+      """
+
+      messages: RAGMessages = [
+        {
+          "role": "system",
+          "content": system_prompt,
+        },
+        {
+          "role": "user",
+          "content": user_content,
+        }
+      ]
+
+      print(
+        "[Agentic RAG] Using fast task path"
+      )
+
+    # ====================
+    # Legacy fallback
+    # ====================
+    except (ValueError, TypeError) as e:
+
+      print(
+        "[Agentic RAG] Fast path unavailable:"
+        f" {e}"
+      )
+
+      print(
+        "[Agentic RAG] "
+        "Fallback to legacy _rag_core()"
+      )
+
+      (
+        messages, retrieved_contexts, retrieved_metadata
+      ) = self._rag_core(
+        user_query=query,
+        top_k=top_k,
+        where_filter=None,
+      )
+      
+
+    """
+    Answer generation
+    """
+
+    response = self.llm_client.chat.completions.create(
+      model=self.llm_model,
+      messages=messages,
+      temperature=0.1
+    )
+
+    answer = response.choices[0].message.content.strip()
+
+    """
+    注意:
+    Agentic ResearchTask 不更新 chat_history，
+    避免多個 ResearchTask 互相汙染。
+    """
+    return (
+      answer,
+      retrieved_contexts,
+      retrieved_metadata,
+    )
+
   def _update_message_history(self, user_query, answer):
     """更新記憶體裡的對話歷史"""
     
