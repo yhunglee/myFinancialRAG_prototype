@@ -681,7 +681,7 @@ Report Writer
 
 1. **Conversation Contextualization**
 
-   * 將使用者追問改寫成可以脫離歷史對話獨立理解的問題。
+   * 利用對話歷史，將追問解析為 standalone question，補回前文中的公司、期間、財務指標與比較條件。
    * 在適當情況保留前一輪的公司、財報期間、金融指標與比較條件。
 
 2. **Intent Router**
