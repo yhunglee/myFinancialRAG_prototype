@@ -6,6 +6,7 @@ Chainlit 的主要檔案
 import chainlit as cl
 
 from agent_graph import build_agent_graph
+import time
 
 agent_graph = build_agent_graph()
 
@@ -260,6 +261,8 @@ async def on_chat_start():
 @cl.on_message
 async def main(message: cl.Message):
 
+  start_time = time.perf_counter()
+
   chat_history = cl.user_session.get(
     "chat_history"
   ) or []
@@ -395,6 +398,18 @@ async def main(message: cl.Message):
       "previous_validated_evidence",
       final_state.get("evidence", [])
     )
+
+  elapsed = time.perf_counter() - start_time
+
+  print(
+    f"[Performance] e2e: "
+    f"{elapsed:.2f} seconds"
+  )
+
+  print(
+    f"retrieval_count: {final_state.get('retrieval_count', 0 )} times, "
+    f"regeneration_count: {final_state.get('regeneration_count', 0)} times"
+  )
 
 
 @cl.on_stop

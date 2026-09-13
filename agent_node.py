@@ -9,6 +9,7 @@ from myrag_module import FinancialRAGService
 from entity_normalizer import StockEntityNormalizer
 import re
 import asyncio
+import time
 
 FINANCIAL_NUMBER_PATTERN = r"\d+(?:,\d{3})*(?:\.\d+)?"
 
@@ -912,24 +913,65 @@ async def execute_research_task(
     return task_evidence.model_dump()
 
 
-async def rag_executor(state: FinancialResearchState):
+def rag_executor(state: FinancialResearchState):
   """
   平行執行 research_planner 產生的 ResearchTask，
   並將每個任務的 RAG 結果整理成 Evidence。
   """
+  start_time = time.perf_counter()
 
   top_k = get_retrieval_top_k(0)
 
-  coroutines = [
-    execute_research_task(
+  evidence: list[dict] = []
+
+  for task in state["research_plan"]:
+
+    answer, retrieved_contexts, retrieved_metadata = rag_service.rag_task(
       task=task,
       top_k=top_k,
     )
-    for task in state["research_plan"]
-  ]
 
-  evidence = await asyncio.gather(
-    *coroutines
+    # _rag_core() 回傳 dict[str, list[str]]
+    # Evidence 使用 list[str]，所以要攤平成單一 list
+    context_list = [
+      context
+      for contexts in retrieved_contexts.values()
+      for context in contexts
+    ]
+
+    # _rag_core() 回傳 dict[str, list[str]]
+    # Evidence 使用 list[str]，所以要攤平成單一 list
+    metadata_list = [
+      metadata
+      for metadatas in retrieved_metadata.values()
+      for metadata in metadatas
+    ]
+
+    # Notice: MVP 階段直接從 metadata 建立 sources
+    # 後續 Chainlit UI 可以再做專門的 source formatter
+    sources = build_sources(metadata_list)
+
+    task_evidence = Evidence(
+      task_id=task["task_id"],
+      company=task.get("company"),
+      period=task.get("period"),
+      topic=task.get("topic", ""),
+      query=task.get("query"),
+      answer=answer,
+      retrieved_contexts=context_list,
+      metadata=metadata_list,
+      sources=sources
+    )
+
+    evidence.append(
+      task_evidence.model_dump()
+    )
+
+  elapsed = time.perf_counter() - start_time
+
+  print(
+    f"[Performance] rag_executor: "
+    f"{elapsed:.2f} seconds"
   )
 
   return {
@@ -937,7 +979,7 @@ async def rag_executor(state: FinancialResearchState):
     "current_task": len(state["research_plan"])
   }
 
-async def retrieve_again(state: FinancialResearchState) -> dict:
+def retrieve_again(state: FinancialResearchState) -> dict:
   """
   當 evidence_checker 判斷目前 Evidence
   缺失或品質不足時，重新執行 retrieval。
@@ -949,6 +991,8 @@ async def retrieve_again(state: FinancialResearchState) -> dict:
   - 使用新的 retrieval 結果取代原 evidence
   """
 
+  start_time = time.perf_counter()
+  
   retrieval_count = state.get(
     "retrieval_count",
     0,
@@ -956,18 +1000,52 @@ async def retrieve_again(state: FinancialResearchState) -> dict:
 
   top_k = get_retrieval_top_k(retrieval_count)
 
-  coroutines = [
-    execute_research_task(
+  evidence: list[dict] = []
+
+  for task in state["research_plan"]:
+
+    answer, retrieved_contexts, retrieved_metadata = rag_service.rag_task(
       task=task,
       top_k=top_k,
     )
-    for task in state["research_plan"]
-  ]
 
-  evidence = await asyncio.gather(
-    *coroutines
+    context_list = [
+      context
+      for contexts in retrieved_contexts.values()
+      for context in contexts
+    ]
+
+    metadata_list = [
+      metadata
+      for metadatas in retrieved_metadata.values()
+      for metadata in metadatas
+    ]
+
+    sources = build_sources(metadata_list)
+
+    task_evidence = Evidence(
+      task_id=task["task_id"],
+      company=task.get("company"),
+      period=task.get("period"),
+      topic=task.get("topic", ""),
+      query=task.get("query"),
+      answer=answer,
+      retrieved_contexts=context_list,
+      metadata=metadata_list,
+      sources=sources,
+    )
+
+    evidence.append(
+      task_evidence.model_dump(),
+    )
+
+  elapsed = time.perf_counter() - start_time
+
+  print(
+    f"[Performance] retrieve_again: "
+    f"{elapsed:.2f} seconds"
   )
-
+  
   return {
     "evidence": evidence,
     "retrieval_count": retrieval_count + 1,
