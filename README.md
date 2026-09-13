@@ -175,7 +175,7 @@ Implemented Agentic RAG capabilities include:
 
    * Executes generated research tasks against the existing financial-report RAG pipeline.
    * Applies company and reporting-period metadata filters before vector retrieval.
-   * Parallelized independent financial-report ResearchTasks using Python asyncio and worker threads; in a five-run two-company comparison benchmark, parallel ResearchTask execution reduced average execution-stage latency by approximately 32% compared with sequential execution, while reducing end-to-end latency by approximately 24%.
+   * Parallelized financial-report ResearchTasks with Python asyncio and worker threads, cutting research-stage latency by 32% and end-to-end latency by 24% versus sequential execution.
 
 
 5. **Evidence validation**
