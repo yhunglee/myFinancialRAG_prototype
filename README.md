@@ -6,6 +6,7 @@ This project is an independently developed prototype for portfolio presentation 
 
 It explores local Retrieval-Augmented Generation (RAG) and Agentic RAG workflows for retrieving and comparing information from corporate financial reports across Taiwan and U.S. equity markets.
 
+![Repo's Agentic RAG flow](./screenshots/agentic-rag-flow-financial-report-en.jpg)
 [![Agentic RAG Demo Video](http://img.youtube.com/vi/OMk06F71ruU/0.jpg)](https://www.youtube.com/watch?v=OMk06F71ruU "Agentic RAG YouTube Demo")
 [![RAG Demo Video](http://img.youtube.com/vi/IZwksbgmWEw/0.jpg)](https://www.youtube.com/watch?v=IZwksbgmWEw "YouTube Demo")
 
@@ -528,6 +529,7 @@ AGPL-v3
 
 專案探索如何在地端建立台股與美股公司財報的 Retrieval-Augmented Generation（RAG）與 Agentic RAG 環境，用於財報資料檢索、跨公司比較與多輪金融問答。
 
+![本產品 Agentic RAG 流程](./screenshots/agentic-rag-flow-financial-report-zh.jpg)
 [![Agentic RAG Demo 影片](http://img.youtube.com/vi/OMk06F71ruU/0.jpg)](https://www.youtube.com/watch?v=OMk06F71ruU "Agentic RAG YouTube Demo")
 [![RAG Demo 影片](http://img.youtube.com/vi/IZwksbgmWEw/0.jpg)](https://www.youtube.com/watch?v=IZwksbgmWEw "RAG YouTube Demo")
 
