@@ -18,6 +18,35 @@ RAGMessages: TypeAlias = list[dict[str, str]]
 class FinancialRAGService:
   """台美股財報專用 RAG 檢索問答服務模組"""
 
+  def load_embedding_model(
+      self,
+      model_name: str,
+    ) -> SentenceTransformer:
+      
+    try:
+      print("[Embedding] 嘗試從本機快取載入模型...")
+
+      model = SentenceTransformer(
+        model_name,
+        local_files_only=True,
+      )
+      print("[Embedding] 已從本機快取載入模型。")
+
+      return model
+    except OSError:
+        print(
+          "[Embedding] 本機找不到模型，"
+          "改由 HuggingFace 下載..."
+        )
+  
+        model = SentenceTransformer(
+          model_name,
+          local_files_only=False,
+        )
+        print("[Embedding] 模型下載並載入完成。")
+        return model
+  
+
   def __init__(
       self,
       db_path: str = "./chroma_db",
@@ -29,7 +58,9 @@ class FinancialRAGService:
   ) -> None:
 
     # 1. 初始化 Embedding 模型
-    self.embedding_model = SentenceTransformer(embedding_model_name)
+    self.embedding_model = self.load_embedding_model(
+      embedding_model_name
+    )
 
     # 2. 連線向量資料庫
     self.chroma_client = chromadb.PersistentClient(path=db_path)
@@ -56,6 +87,7 @@ class FinancialRAGService:
     # 初始化股票名稱實體規範化引擎
     self.normalizer = StockEntityNormalizer()
 
+  
   def clean_history(self) -> None:
     """重設對話歷史紀錄"""
     self.chat_history = []
