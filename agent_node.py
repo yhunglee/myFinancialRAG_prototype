@@ -923,23 +923,182 @@ async def retrieve_task(
   
   這個 node 專門給 fan-out 後的單一 research branch 使用。
 
-  第一版:
-  - 每次只處理一個 task
-  - 暫時固定使用 INITIAL_TOP_K
-  - 暫時不做 retry
-  - retrieval 完成後產生 task_evidence
+  retrieval_count 是這個 branch 自己的 retry count。
   """
 
   task = state['task']
 
+  retrieval_count = task.get(
+    "retrieval_count",
+    0
+  )
+
+  top_k = get_retrieval_top_k(
+    retrieval_count
+  )
+
+  print(
+    "[Task Retrieval]",
+    task['task_id'],
+    f"attempt={retrieval_count + 1}",
+    f"top_k={top_k}",
+  )
+
   task_evidence = await execute_research_task(
     task=task,
-    top_k=INITIAL_TOP_K,
+    top_k=top_k,
   )
 
   return {
     "task_evidence": task_evidence,
-    "evidence": [task_evidence],
+  }
+
+
+def task_evidence_checker(
+  state: ResearchTaskState,    
+) -> dict:
+  """
+  檢查單一 ResearchTask 的 retrieval 結果。
+
+  注意:
+  這裡只判斷[這個 ResearchTask 自己]，
+  不檢查整份 research_plan。
+  """
+  task = state['task']
+
+  task_evidence = state.get(
+    "task_evidence"
+  )
+
+  retrieval_count = state.get(
+    "retrieval_count",
+    0
+  )
+
+  # 完全沒有 evidence
+  if not task_evidence:
+    return {
+      "sufficient": False,
+      "failure_type": "missing_evidence",
+      "next_action": "retrieve_again",
+    }
+
+  retrieved_contexts = task_evidence.get(
+    "retrieved_contexts",
+    []
+  )
+
+  # 有 Evidence object, 但沒有實際 retrieved contexts
+  if not retrieved_contexts:
+    return {
+      "sufficient": False,
+      "failure_type": "missing_evidence",
+      "next_action": "retrieve_again"
+    }
+
+  system_prompt = """
+  You are an evidence checker for ONE research task
+  in a financial-report RAG system.
+
+  Your job is NOT to answer the user's question.
+
+  Determine whether the supplied evidence is sufficient
+  to support this single research task.
+
+  Use ONLY the supplied task and evidence.
+
+  Rules:
+
+  1. Check only this research task.
+  2. Do not evaluate other companies or tasks.
+  3. Do not use outside knowledge.
+  4. Do not invent financial facts.
+  5. The evidence must contain retrieved contexts
+     relevant to the requested:
+     - company
+     - period
+     - financial topic
+  6. The generated answer must be supported by
+     the retrieved contexts.
+  7. If the requried information is absent,
+     report it as missing_topics.
+  8. If information exists but is ambiguous,
+     irrelevant, incomplete, or poorly supported,
+     report it as weak_evidence.
+  9. Set sufficient=true only when this single task
+     has adequate evidence.   
+"""
+
+  user_prompt = f"""
+  Research task:
+  {task}
+
+  Retrieved evidence:
+  {task_evidence}
+
+  Determine whether the evidence is sufficient
+  for this single research task.
+  """
+
+  completion = client.chat.completions.parse(
+    model=MODEL_NAME,
+    messages=[
+      {
+        "role": "system",
+        "content": system_prompt,
+      },
+      {
+        "role": "user",
+        "content": user_prompt,
+      }
+    ],
+    response_format=EvidenceCheckResult,
+    temperature=0,
+  )
+
+  check_result = completion.choices[0].message.parsed
+
+  if check_result is None:
+    raise ValueError(
+      "task_evidence_checker failed"
+      "to generate EvidenceCheckResult"
+    )
+
+  if check_result.sufficient:
+    return {
+      "sufficient": True,
+      "failure_type": "none",
+      "next_action": "proceed",
+    }
+
+  if check_result.missing_topics:
+    failure_type = "missing_evidence"
+
+  else:
+    failure_type = "weak_evidence"
+
+  return {
+    "sufficient": False,
+    "failure_type": failure_type,
+    "next_action": "retrieve_again"
+  }
+
+
+def finalize_task_evidence(
+  state: ResearchTaskState,
+) -> dict:
+  """
+  單一 ResearchTask 已通過驗證後，
+  將最終 evidence 輸出給 parent graph fan-in。
+  
+  """
+
+  task_evidence = state["task_evidence"]
+
+  return {
+    "evidence": [
+      task_evidence
+    ]
   }
 
 async def rag_executor(state: FinancialResearchState):
