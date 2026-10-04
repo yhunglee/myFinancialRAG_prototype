@@ -37,28 +37,42 @@ async def main():
   )
 
   print(
-    "\n====================="
+  "\n=========================="
+  )
+  print(
+    "Validation"
+  )
+  print(
+    "=========================="
   )
 
   print(
-    "Research Task Graph Result"
-  )
-
-  print("=====================")
-
-  print(
-    "task: ",
-    result['task'],
+    "sufficient:",
+    result["sufficient"]
   )
 
   print(
-    "\ntask_evidence:"
+    "retrieval_count:",
+    result["retrieval_count"]
   )
 
-  print(result['task_evidence'])
+  print(
+    "evidence count:",
+    len(result["evidence"])
+  )
 
-  print("\nevidence:")
-  print(result['evidence'])
+
+  assert result["sufficient"] is True
+
+  assert result["retrieval_count"] == 0
+  assert result["task_evidence"] is not None
+
+  assert len(result["evidence"]) == 1
+
+  print(
+    "\n[PASS] Research task graph "
+    "completed without retry."
+  )
 
 
 if __name__ == '__main__':
