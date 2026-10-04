@@ -9,7 +9,7 @@ from langgraph.graph import (
 from agent_state import ResearchTaskState
 from agent_node import retrieve_task
 
-def bulid_search_task_again():
+def bulid_research_task_again():
   """
   建立單一 ResearchTask 使用的 Subgraph。
 
