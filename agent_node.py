@@ -1101,6 +1101,23 @@ def finalize_task_evidence(
     ]
   }
 
+def prepare_task_retry(
+  state: ResearchTaskState,
+) -> dict:
+  """
+  增加目前 ResearchTask 自己的 retry counter。
+  """
+
+  retrieval_count = state.get(
+    "retrieval_count",
+    0,
+  )
+
+  return {
+    "retrieval_count": retrieval_count,
+  }
+  
+
 async def rag_executor(state: FinancialResearchState):
   """
   平行執行 research_planner 產生的 ResearchTask，
