@@ -4,7 +4,11 @@ from pydantic import BaseModel
 from openai import OpenAI
 from decimal import Decimal, getcontext
 
-from agent_state import FinancialResearchState
+from agent_state import (
+  FinancialResearchState,
+  ResearchTaskState,
+)
+
 from myrag_module import FinancialRAGService
 from entity_normalizer import StockEntityNormalizer
 import re
@@ -911,6 +915,32 @@ async def execute_research_task(
 
     return task_evidence.model_dump()
 
+async def retrieve_task(
+  state: ResearchTaskState,
+) -> dict:
+  """
+  執行單一 ResearchTask 的 Retrieval
+  
+  這個 node 專門給 fan-out 後的單一 research branch 使用。
+
+  第一版:
+  - 每次只處理一個 task
+  - 暫時固定使用 INITIAL_TOP_K
+  - 暫時不做 retry
+  - retrieval 完成後產生 task_evidence
+  """
+
+  task = state['task']
+
+  task_evidence = await execute_research_task(
+    task=task,
+    top_k=INITIAL_TOP_K,
+  )
+
+  return {
+    "task_evidence": task_evidence,
+    "evidence": [task_evidence],
+  }
 
 async def rag_executor(state: FinancialResearchState):
   """
