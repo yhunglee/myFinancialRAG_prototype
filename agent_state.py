@@ -1,5 +1,54 @@
 from __future__ import annotations
-from typing import Literal, TypedDict
+import operator
+from typing import (
+  Annotated, 
+  Literal, 
+  TypedDict
+)
+
+class ResearchTaskState(TypedDict):
+  """
+  單一 ResearchTask 在 fan-out branch 中使用的 State。
+
+  每個 task 都有自己的 retrieval_count，
+  因此其中一個 task retry 時，
+  不會影響其他已成功的 task。
+  """
+
+  # research_palnner 產生的單一 task
+  task: dict
+
+  # 這個 task 取得的 evidence
+  task_evidence: dict | None
+
+  # task-level evidence check
+  sufficient: bool
+
+  failure_type: Literal[
+    "none",
+    "missing_evidence",
+    "weak_evidence",
+  ]
+
+  next_action: Literal[
+    "proceed",
+    "retrieve_again",
+    "stop",
+  ]
+
+  # 只屬於這個 task 的 retry counter
+  retrieval_count: int
+
+  """
+  task 完成後，將 evidence 回傳給 parent graph
+  
+  使用 list 是為了之後可以透過 reduce 
+  合併不同的 parallel branches 的結果。
+  """
+  evidence: list[dict]
+
+
+  
 
 class FinancialResearchState(TypedDict):
   # 使用者這一輪輸入的原始問題
@@ -30,7 +79,25 @@ class FinancialResearchState(TypedDict):
   
   # rag_executer 使用
   current_task: int
-  evidence: list
+
+  """
+  fan-out / fan-in 使用。
+  
+  每個 parallel ResearchTask branch 
+  都可以回傳:
+  {"evidence": [task_evidence]}
+  
+  operator.add reducer 會自動合併成:
+  [
+    task_1_evidence,
+    task_2_evidence,
+    ...
+  ]
+  """
+  evidence: Annotated[
+    list[dict],
+    operator.add
+  ]
 
 
   # Evidence_checker 使用
@@ -55,6 +122,10 @@ class FinancialResearchState(TypedDict):
   # answer_regenerator 使用
   regeneration_count: int
 
+  """
+  舊版 global retrieval retry counter。
+  暫時保留，因為舊的 retrieval_again() 仍使用。
+  """
   # retrieval_again 使用
   retrieval_count: int
 
