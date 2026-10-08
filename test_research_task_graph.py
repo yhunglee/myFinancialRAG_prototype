@@ -3,12 +3,12 @@ from __future__ import annotations
 import asyncio
 
 from research_task_graph import (
-  bulid_research_task_again,
+  build_research_task_graph,
 )
 
 async def main():
 
-  graph = bulid_research_task_again()
+  graph = build_research_task_graph()
 
   initial_state = {
     "task": {

@@ -16,7 +16,7 @@ from agent_node import (
 
 MAX_TASK_RETRIEVAL_ATTEMPTS = 2
 
-def bulid_research_task_again():
+def build_research_task_graph():
   """
   建立單一 ResearchTask 使用的 Subgraph。
 
