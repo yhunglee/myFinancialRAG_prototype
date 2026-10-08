@@ -1113,6 +1113,11 @@ def prepare_task_retry(
     0,
   )
 
+  print(
+    "[Task Retry]",
+    f"{retrieval_count} -> {retrieval_count + 1}"
+  ) # debug
+
   return {
     "retrieval_count": retrieval_count,
   }
