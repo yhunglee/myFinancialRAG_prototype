@@ -928,7 +928,7 @@ async def retrieve_task(
 
   task = state['task']
 
-  retrieval_count = task.get(
+  retrieval_count = state.get(
     "retrieval_count",
     0
   )
@@ -1113,13 +1113,17 @@ def prepare_task_retry(
     0,
   )
 
+  next_count = retrieval_count + 1
+
   print(
     "[Task Retry]",
-    f"{retrieval_count} -> {retrieval_count + 1}"
+    f"{retrieval_count} -> {next_count}"
   ) # debug
 
+  
+
   return {
-    "retrieval_count": retrieval_count,
+    "retrieval_count": next_count,
   }
   
 
