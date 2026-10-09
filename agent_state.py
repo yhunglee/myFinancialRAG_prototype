@@ -99,6 +99,12 @@ class FinancialResearchState(TypedDict):
     operator.add
   ]
 
+  # 儲存每個 ResearchTask 的執行結果
+  task_results: Annotated[
+    list[dict],
+    operator.add,
+  ]
+
 
   # Evidence_checker 使用
   sufficient: bool
