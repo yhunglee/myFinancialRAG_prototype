@@ -1627,7 +1627,6 @@ def answer_regenerator(state: FinancialResearchState) -> dict:
 
     # 這筆 Evidence 沒問題，不需要浪費 LLM call
     if not issues:
-      regenerated_evidence.append(item)
       continue
 
     system_prompt = """
