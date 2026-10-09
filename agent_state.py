@@ -110,16 +110,10 @@ class FinancialResearchState(TypedDict):
   都可以回傳:
   {"evidence": [task_evidence]}
   
-  operator.add reducer 會自動合併成:
-  [
-    task_1_evidence,
-    task_2_evidence,
-    ...
-  ]
   """
   evidence: Annotated[
     list[dict],
-    operator.add
+    merge_evidence_by_task_id,
   ]
 
   # 儲存每個 ResearchTask 的執行結果
