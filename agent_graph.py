@@ -114,12 +114,9 @@ def build_agent_graph():
   # Evidence conditional routing
   graph.add_conditional_edges(
     "evidence_checker",
-    route_after_evidence_check,
+    route_after_global_evidence_check,
     {
       "proceed": "calculator",
-      # "retrieve_again": "retrieve_again", 暫時隱藏
-
-      # "regenerate_answer": "answer_regenerator", 暫時隱藏
 
       # regeneration 超過次數限制
       "stop": "failure_report_writer"
