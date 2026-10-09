@@ -66,15 +66,41 @@ def route_after_global_evidence_check(
   state: FinancialResearchState,
 ) -> str:
   """
-  Notice: 過渡性修改
+  全域 Evidence Checker 完成後的路由。
+
+  proceed:
+    證據驗證通過。
+
+  regenerate_answer:
+    財務數值與證據不一致，
+    使用現有 Evidence 重新產生答案。
+
+  stop:
+    無法修正，或達到重試上限。
   """
+
+  next_action = state.get(
+    "next_action",
+    "stop",
+  )
 
   if (
     state.get("sufficient", False)
-    and state.get("next_action") == "proceed"
+    and next_action == "proceed"
   ):
     return "proceed"
 
+  if next_action == "regenerate_answer":
+    regeneration_count = state.get(
+      "regeneration_count",
+      0,
+    )
+
+    if regeneration_count >= MAX_REGENERATION_ATTEMPTS:
+      return "stop"
+
+    return "regeneration_answer"
+  
   return "stop"
 
 def build_agent_graph():
@@ -117,6 +143,7 @@ def build_agent_graph():
     route_after_global_evidence_check,
     {
       "proceed": "calculator",
+      "regenerate_answer": "answer_regenerator",
 
       # regeneration 超過次數限制
       "stop": "failure_report_writer"
@@ -133,8 +160,6 @@ def build_agent_graph():
   必須重新接受 Evidence checker 驗證
   """
   graph.add_edge("answer_regenerator", "evidence_checker")
-
-  graph.add_edge("retrieve_again", "evidence_checker")
 
   graph.add_edge("calculator", "report_writer")
 
