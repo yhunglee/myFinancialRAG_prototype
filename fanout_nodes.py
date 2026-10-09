@@ -123,6 +123,14 @@ def fan_in_gate(
     for item in evidence
   ]
 
+  """
+  研究計畫非空
+  結果數量正確
+  結果 ID 正確
+  Evidence 數量正確
+  Evidence ID 正確
+  全部任務驗證成功
+  """
   all_successful = (
     bool(expected_ids)
     and len(result_ids) == len(expected_ids)
