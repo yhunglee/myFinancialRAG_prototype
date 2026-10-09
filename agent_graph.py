@@ -17,6 +17,13 @@ from agent_node import (
   failure_report_writer,
 )
 
+from fanout_nodes import (
+  dispatch_research_tasks,
+  research_task_worker,
+  fan_in_gate,
+  route_after_fan_in,
+)
+
 
 MAX_REGENERATION_ATTEMPTS = 2
 MAX_RETRIEVAL_ATTEMPTS = 2
@@ -55,16 +62,20 @@ def route_after_evidence_check(
 
   return next_action
 
-def router_after_evidence_reuse_check(
+def route_after_global_evidence_check(
   state: FinancialResearchState,
-)-> str:
-  reuse_evidence = state.get('reuse_evidence')
+) -> str:
+  """
+  Notice: 過渡性修改
+  """
 
-  if reuse_evidence is True:
-    return "reuse"
+  if (
+    state.get("sufficient", False)
+    and state.get("next_action") == "proceed"
+  ):
+    return "proceed"
 
-  return "retrieve"
-
+  return "stop"
 
 def build_agent_graph():
   graph = StateGraph(
@@ -75,7 +86,9 @@ def build_agent_graph():
   graph.add_node("intent_router", intent_router)
   graph.add_node("research_planner", research_planner)
   graph.add_node("evidence_reuse_checker", evidence_reuse_checker)
-  graph.add_node("rag_executor", rag_executor)
+  graph.add_node("research_task_worker", research_task_worker)
+  graph.add_node("fan_in_gate", fan_in_gate)
+
   graph.add_node("evidence_checker", evidence_checker)
   graph.add_node("answer_regenerator", answer_regenerator)
   graph.add_node("retrieve_again", retrieve_again)
@@ -88,7 +101,15 @@ def build_agent_graph():
   graph.add_edge("contextualize_question", "intent_router")
   graph.add_edge("intent_router", "research_planner")
   graph.add_edge("research_planner", "evidence_reuse_checker")
-  graph.add_edge("rag_executor", "evidence_checker")
+  graph.add_edge("research_task_worker", "fan_in_gate")
+  graph.add_conditional_edges(
+    "fan_in_gate",
+    route_after_fan_in,
+    {
+      "proceed": "evidence_checker",
+      "stop": "failure_report_writer"
+    }
+  )
 
   # Evidence conditional routing
   graph.add_conditional_edges(
@@ -96,9 +117,9 @@ def build_agent_graph():
     route_after_evidence_check,
     {
       "proceed": "calculator",
-      "retrieve_again": "retrieve_again",
+      # "retrieve_again": "retrieve_again", 暫時隱藏
 
-      "regenerate_answer": "answer_regenerator",
+      # "regenerate_answer": "answer_regenerator", 暫時隱藏
 
       # regeneration 超過次數限制
       "stop": "failure_report_writer"
@@ -107,11 +128,7 @@ def build_agent_graph():
 
   graph.add_conditional_edges(
     "evidence_reuse_checker",
-    router_after_evidence_reuse_check,
-    {
-      "reuse": "calculator",
-      "retrieve": "rag_executor"
-    }
+    dispatch_research_tasks,
   )
 
   """
