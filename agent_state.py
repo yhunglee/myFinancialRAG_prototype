@@ -6,6 +6,29 @@ from typing import (
   TypedDict
 )
 
+def merge_evidence_by_task_id(
+  current: list[dict],
+  updates: list[dict],
+) -> list[dict]:
+  """
+  根據 task_id 合併 Evidence。
+  
+  1. task_id 不存在: 新增 Evidence
+  2. task_id 已存在: 替換舊 Evidence
+  3. 其他 task_id: 保持不變
+  """
+
+  merged = {
+    item["task_id"]: item
+    for item in current
+  }
+
+  for item in updates:
+    merged[item["task_id"]] = item
+
+  return list(merged.values())
+
+
 class ResearchTaskState(TypedDict):
   """
   單一 ResearchTask 在 fan-out branch 中使用的 State。
