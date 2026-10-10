@@ -27,14 +27,14 @@ def dispatch_research_tasks(
   動態 Fan-out。
 
   Evidence Reuse 命中時:
-    直接進 Calculator
+    直接進 evidence_checker
 
   沒有命中時:
     每個 ResearchTask 各自透過 Send 執行。
   """
 
   if state.get("reuse_evidence", False):
-    return "calculator"
+    return "evidence_checker"
 
   tasks = state.get("research_plan", [])
 
