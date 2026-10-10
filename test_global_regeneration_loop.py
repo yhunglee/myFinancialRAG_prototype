@@ -67,7 +67,7 @@ def main():
       SimpleNamespace(
         message=SimpleNamespace(
           parsed=SimpleNamespace(
-            answer="1,046,09 billion"
+            answer="1,046.09 billion"
           )
         )
       )
