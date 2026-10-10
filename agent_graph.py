@@ -99,7 +99,7 @@ def route_after_global_evidence_check(
     if regeneration_count >= MAX_REGENERATION_ATTEMPTS:
       return "stop"
 
-    return "regeneration_answer"
+    return "regenerate_answer"
   
   return "stop"
 

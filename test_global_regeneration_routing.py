@@ -15,7 +15,7 @@ def main():
 
   assert (
     route_after_global_evidence_check(state)
-    == "regeneration_answer"
+    == "regenerate_answer"
   )
 
   print(
@@ -27,7 +27,7 @@ def main():
 
   assert (
     route_after_global_evidence_check(state)
-    == "regeneration_answer"
+    == "regenerate_answer"
   )
 
   print("[PASS] Second regeneration allowed")
