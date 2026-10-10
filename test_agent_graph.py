@@ -35,6 +35,7 @@ async def main():
 
     "regeneration_count": 0,
     "retrieval_count": 0,
+    "task_results": [],
 
     "calculation_required": False,
     "calculation_results": [],
