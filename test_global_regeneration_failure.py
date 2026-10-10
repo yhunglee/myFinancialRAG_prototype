@@ -201,7 +201,9 @@ def test_regeneration_limit():
 
     # 確認有產生失敗報告，而非未經驗證的正常結論。
     assert result["final_answer"]
-    assert "無法通過證據一致性驗證" in result["final_answer"]
+    assert "無法通過" in result["final_answer"]
+    assert "證據一致性驗證" in result["final_answer"]
+    assert "不提供未經驗證的財務結論" in result["final_answer"]
 
     print("[PASS] Regeneration limit enforced.")
 
