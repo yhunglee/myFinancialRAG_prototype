@@ -1842,23 +1842,23 @@ def failure_report_writer(state: FinancialResearchState) -> dict:
         + "\n - ".join(missing_information)
       )
 
-    elif failure_type == "weak_evidence":
+  elif failure_type == "weak_evidence":
 
-      final_answer = (
-        "目前取得的證據不足以可靠支持"
-        "完整的財務結論。"
-      )
+    final_answer = (
+      "目前取得的證據不足以可靠支持"
+      "完整的財務結論。"
+    )
 
-    else:
+  else:
 
-      final_answer = (
-        "本次研究流程無法產生"
-        "通過驗證的最終回答。"
-      )
+    final_answer = (
+      "本次研究流程無法產生"
+      "通過驗證的最終回答。"
+    )
 
-    return {
-      "final_answer": final_answer,
-    }
+  return {
+    "final_answer": final_answer,
+  }
 
 def report_writer(state: FinancialResearchState) -> dict:
   """
