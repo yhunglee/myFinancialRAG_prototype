@@ -1723,35 +1723,142 @@ def answer_regenerator(state: FinancialResearchState) -> dict:
 
 
 def failure_report_writer(state: FinancialResearchState) -> dict:
+  """
+  整理失敗原因，產生可供使用者理解的報告。
 
-  failure_type = state["failure_type"]
+  優先處理 Task-level Failure，
+  否則依照 Global Evidence Checker 的
+  failure_type 產生報告。
+  """
 
-  if failure_type == 'answer_not_supported':
+  failure_type = state.get(
+    "failure_type",
+    "none",
+  )
+
+  task_results = state.get(
+    "task_results",
+    [],
+  )
+
+  # 找出 Task-level 失敗的任務
+  failed_tasks = [
+    item
+    for item in task_results
+    if not item.get("sufficient", False)
+  ]
+
+  # 找出已成功的任務
+  successful_tasks = [
+    item
+    for item in task_results
+    if item.get("sufficient", False)
+  ]
+
+  # ------------------------
+  # Case A: Task-level Failure
+  # ----------------------------
+
+  if failed_tasks:
+    lines = [
+      "本次研究未能取得全部必要的財報證據，"
+      "因此不提供完整的財務比較結論。",
+      "",
+    ]
+
+    if successful_tasks:
+      lines.append("已完成的研究任務:")
+
+      for task in successful_tasks:
+        company = task.get("company") or task["task_id"]
+        period = task.get("period") or ""
+
+        lines.append(
+          f"- {company} {period}: 證據檢查通過"
+        )
+
+      lines.append("")
+
+    lines.append("未完成的研究任務:")
+
+    for task in failed_tasks:
+      company = task.get("company") or task["task_id"]
+      period = task.get("period") or ""
+      topic = task.get("topic") or ""
+
+      retry_count = task.get(
+        "retrieval_count",
+        0,
+      )
+
+      task_failure = task.get(
+        "failure_type",
+        "missing_evidence",
+      )
+
+      if task_failure == "missing_evidence":
+        reason = "缺少必要的財報證據"
+
+      elif task_failure == "weak_evidence":
+        reason = "取得的證據品質不足"
+
+      else:
+        reason = "研究任務未通過驗證"
+
+      lines.append(
+        f"- {company} {period} {topic}: "
+        f"{reason}; "
+        f"已重試 {retry_count} 次"
+      )
+
+    return {
+      "final_answer": "\n".join(lines),
+    }
+
+  # -----------------------------------
+  # Case B: Global Validation Failure
+  # -----------------------------------
+  if failure_type == "answer_not_supported":
+
     final_answer = (
-      "目前產生的財務數值無法通過證據一致性驗證"
-      "且已達到自動修正次數上限，因此本次不提供未經驗證的財務結論。"
+      "目前產生的財務數值無法通過"
+      "原始證據一致性驗證，"
+      "因此不提供未經驗證的財務結論。"
     )
 
-  elif failure_type == 'missing_evidence':
-    final_answer = (
-      "目前找到的資料不足以完整回答這個問題，"
-      "且已達到重新檢索次數上限"
+  elif failure_type == "missing_evidence":
+    missing_information = state.get(
+      "missing_information",
+      []
     )
 
-  elif failure_type == 'weak_evidence':
     final_answer = (
-      "目前取得的證據不足以可靠支持完整結論，"
-      "且已達到重新檢索次數上限。"
+      "目前取得的資料不足以完整回答問題。"
     )
 
-  else: 
-    final_answer = (
-      "本次研究流程無法產生通過驗證的最終回答。"
-    )
+    if missing_information:
+      final_answer += (
+        "\n缺少的資訊:\n - "
+        + "\n - ".join(missing_information)
+      )
 
-  return {
-    "final_answer": final_answer,
-  }
+    elif failure_type == "weak_evidence":
+
+      final_answer = (
+        "目前取得的證據不足以可靠支持"
+        "完整的財務結論。"
+      )
+
+    else:
+
+      final_answer = (
+        "本次研究流程無法產生"
+        "通過驗證的最終回答。"
+      )
+
+    return {
+      "final_answer": final_answer,
+    }
 
 def report_writer(state: FinancialResearchState) -> dict:
   """
