@@ -95,7 +95,7 @@ def format_step_output(
     for task in task_results:
 
       lines.append(
-        "\n".append(
+        "\n".join(
           [
             f"Task: {task.get('task_id')}",
             f"Company: {task.get('company')}",
