@@ -67,6 +67,9 @@ async def research_task_worker(state: dict) -> dict:
 
   task_result = {
     "task_id": task["task_id"],
+    "company": task.get("company", ""),
+    "period": task.get("period", ""),
+    "topic": task.get("topic", ""),
     "sufficient": sufficient,
     "retrieval_count": result["retrieval_count"],
     "failure_type": result["failure_type"],
@@ -160,6 +163,11 @@ def fan_in_gate(
     failed,
   )
 
+  """
+  Notice:
+  這裡的 missing_evidence 是整份研究未完成的概括狀態，個別 task
+  仍可能是 weak_evidence
+  """
   return {
     "sufficient": False,
     "failure_type": "missing_evidence",
