@@ -38,6 +38,8 @@ def create_initial_state(
     "current_task": 0,
     "evidence": [],
 
+    "task_results": [],
+
     # evidence_checker
     "sufficient": False,
     "missing_information": [],
@@ -64,9 +66,9 @@ STEP_NAMES = {
   "intent_router": "Understanding Question",
   "research_planner": "Planning Research",
   "evidence_reuse_checker": "Checking Reusable Evidence",
-  "rag_executor": "Retrieving Evidence",
   "evidence_checker": "Checking Evidence",
-  "retrieve_again": "Retrieving Additional Evidence",
+  "research_task_worker": "Researching Financial Evidence",
+  "fan_in_gate": "Aggregating Research Results",
   "answer_regenerator": "Regenerating Answer",
   "calculator": "Calculating Result",
   "report_writer": "Writing Report",
@@ -80,6 +82,32 @@ def format_step_output(
   """
   將 LangGraph raw state 轉換成一般使用者看的內容
   """
+
+  if node_name == "research_task_worker":
+
+    task_results = update.get(
+      "task_results",
+      [],
+    )
+
+    lines = []
+
+    for task in task_results:
+
+      lines.append(
+        "\n".append(
+          [
+            f"Task: {task.get('task_id')}",
+            f"Company: {task.get('company')}",
+            f"Period: {task.get('period')}",
+            f"Sufficient: {task.get('sufficient')}",
+            f"Failure: {task.get('failure_type')}",
+            f"Retry count: {task.get('retrieval_count')}",
+          ]
+        )
+      )
+
+    return "\n\n".join(lines)
 
   if node_name == "contextualize_question":
     return (
@@ -175,6 +203,15 @@ def format_step_output(
 
     return "\n".join(lines)
 
+  if node_name == "fan_in_gate":
+
+    return (
+      f"All tasks sufficient: "
+      f"{update.get('sufficient')}\n\n"
+      f"Failure type: "
+      f"{update.get('failure_type')}"
+    )
+  
   if node_name == "evidence_checker":
     return (
       f"Sufficient: {update.get('sufficient')}\n\n"
