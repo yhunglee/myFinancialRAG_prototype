@@ -323,84 +323,43 @@ async def main(message: cl.Message):
   parent_step.output = "Running..."
   await parent_step.send()
 
-  """
-  紀錄目前正在執行中的 Chainlit Step。
-
-  key:
-    LangGraph event 的 run_id
-
-  value:
-    對應的 Chainlit Step
-  """
-  active_steps = {}
-
-  async for event in agent_graph.astream_events(
+  async for mode, chunk in agent_graph.astream(
     initial_state,
-    version="v2",
-    include_names=list(STEP_NAMES.keys())
+    stream_mode=["updates", "values"]
   ):
+    
+    # 取得 reducer 合併後的 State
+    if mode == "values":
+      final_state = chunk
+      continue
 
-    event_type = event["event"]
-    node_name = event["name"]
-    run_id = event["run_id"]
+    if mode != "updates":
+      continue
 
-    """
-    Node 開始執行
-    """
-    if event_type == 'on_chain_start':
+    # 每次 updates 可包含一個或多個 Node
+    for node_name, update in chunk.items():
 
-      step_name = STEP_NAMES.get(
-        node_name,
-        node_name,
-      )
+      if node_name not in STEP_NAMES:
+        continue
+
+      if not isinstance(update, dict):
+        continue
 
       step = cl.Step(
-        name=step_name,
+        name=STEP_NAMES[node_name],
         type="tool",
         parent_id=parent_step.id,
         default_open=False,
       )
 
       step.input = node_name
-      step.output = "Running..."
-
-      await step.send()
-
-      active_steps[run_id] = step
-      continue
-
-    """
-    Node 執行完成
-    """
-    if event_type == 'on_chain_end':
-
-      update = event.get(
-        "data",
-        {}
-      ).get(
-        "output",
-        {}
-      )
-
-      if not isinstance(update, dict):
-        continue
-
-      final_state.update(update)
-
-      step = active_steps.pop(
-        run_id,
-        None,
-      )
-
-      if step is None:
-        continue
 
       step.output = format_step_output(
         node_name=node_name,
         update=update,
       )
 
-      await step.update()
+      await step.send()
 
   parent_step.output = "Research process completed."
   await parent_step.update()
@@ -426,8 +385,8 @@ async def main(message: cl.Message):
     chat_history
   )
 
-  # 1. 這一輪剛取得，而且通過驗證 or 2. 這一輪沒有 retrieval ，是 reuse
-  if final_state.get("sufficient") is True or final_state.get("reuse_evidence") is True:
+  # 1. 這一輪剛取得，而且通過驗證 or 2. 這一輪有回答
+  if final_state.get("sufficient") is True and final_state.get("final_answer"):
     cl.user_session.set(
       "previous_validated_evidence",
       final_state.get("evidence", [])
