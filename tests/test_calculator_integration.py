@@ -81,6 +81,20 @@ def verify_result(
     驗證是否正確使用 Calculator，
     並檢查實際執行的計算結果。
     """
+
+    print("\n========== TEST DIAGNOSTICS ==========")
+    print("Question:", result.get("standalone_question"))
+    print("Sufficient:", result.get("sufficient"))
+    print("Failure type:", result.get("failure_type"))
+    print("Missing information:", result.get("missing_information"))
+    print("Weak evidence:", result.get("weak_evidence"))
+    print("Unsupported answer:", result.get("unsupported_answer"))
+    print("Next action:", result.get("next_action"))
+    print("Calculation required:", result.get("calculation_required"))
+    print("Calculation results:", result.get("calculation_results"))
+    print("Final answer:", result.get("final_answer"))
+    print("======================================\n")
+
     assert result["sufficient"] is True, (
         f"Evidence validation failed: "
         f"{result.get('failure_type')}"
