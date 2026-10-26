@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import re
-from decimal import Decimal
 import asyncio
 import sys
 from decimal import Decimal
@@ -407,3 +406,43 @@ def test_tc03_multi_turn_calculation():
 
     print(f"[TC03] Standalone: {standalone}")
     print("[TC03] PASS")
+
+
+@pytest.mark.parametrize(
+    "answer, should_pass",
+    [
+        ("營收相差 895,902 million", True),
+        ("營收相差 895,902 百萬元", True),
+        ("營收相差 8,959.02 億元", True),
+        ("營收相差 895,902 billion", False),
+        ("營收相差 895,902 十億元", False),
+        ("營收相差 895,920 million", False),
+        (
+            "營收相差 895,902 million (十億新台幣)",
+            False,
+        ),
+    ],
+)
+def test_final_answer_validation(
+    answer: str,
+    should_pass: bool,
+):
+    calculation_results = [
+        {
+            "operation": "difference",
+            "result": Decimal("895902"),
+            "unit": "million",
+        }
+    ]
+
+    if should_pass:
+        assert_final_answer_calculation(
+            answer,
+            calculation_results,
+        )
+    else:
+        with pytest.raises(AssertionError):
+            assert_final_answer_calculation(
+                answer,
+                calculation_results,
+            )
