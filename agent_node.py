@@ -378,7 +378,16 @@ def calculator(
   """
 
   question = state["standalone_question"]
-  evidence = state["evidence"]
+  evidence = [
+    {
+        "task_id": item.get("task_id"),
+        "company": item.get("company"),
+        "period": item.get("period"),
+        "topic": item.get("topic"),
+        "answer": item.get("answer"),
+    }
+    for item in state["evidence"]
+  ]
 
   system_prompt = """
   You are a calculation planner for a financial research system.
