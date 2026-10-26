@@ -1026,7 +1026,20 @@ def task_evidence_checker(
      irrelevant, incomplete, or poorly supported,
      report it as weak_evidence.
   9. Set sufficient=true only when this single task
-     has adequate evidence.   
+     has adequate evidence.
+  10. Distinguish between retrieved source evidence
+      and the generated answer.
+  11. If the retrieved contexts contain the requested
+      financial information, but the generated answer
+      incorrectly states that the information is
+      unavailable or undisclosed, set sufficient=false.
+  12. In that case, classify the issue as weak_evidence,
+      not missing_topics, because the requested
+      information exists in the retrieved contexts.
+  13. Do not set sufficient=true merely because
+      the retrieved contexts contain relevant data.
+      The generated answer must also correctly
+      represent the requested financial information.
 """
 
   user_prompt = f"""
