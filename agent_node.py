@@ -970,11 +970,6 @@ def task_evidence_checker(
     "task_evidence"
   )
 
-  retrieval_count = state.get(
-    "retrieval_count",
-    0
-  )
-
   # 完全沒有 evidence
   if not task_evidence:
     return {
