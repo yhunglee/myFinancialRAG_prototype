@@ -95,6 +95,25 @@ def verify_result(
     print("Final answer:", result.get("final_answer"))
     print("======================================\n")
 
+    print("\n========== EVIDENCE DETAILS ==========")
+
+    for item in result.get("evidence", []):
+        print("Task ID:", item.get("task_id"))
+        print("Company:", item.get("company"))
+        print("Period:", item.get("period"))
+        print("Topic:", item.get("topic"))
+        print("Answer:", item.get("answer"))
+        print(
+            "Retrieved contexts:",
+            item.get("retrieved_contexts")
+        )
+        print("--------------------------------------")
+
+    print("Research Plan:", result.get("research_plan"))
+    print("Task Results:", result.get("task_results"))
+
+    print("======================================\n")
+
     assert result["sufficient"] is True, (
         f"Evidence validation failed: "
         f"{result.get('failure_type')}"
