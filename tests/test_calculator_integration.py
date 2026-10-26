@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import re
+from decimal import Decimal
 import asyncio
 import sys
 from decimal import Decimal
@@ -16,6 +18,131 @@ from agent_graph import build_agent_graph
 
 
 EXPECTED_DIFFERENCE = Decimal("895902")
+
+FINANCIAL_UNIT_PATTERN = (
+    r"百萬元|十億元|billions?|millions?|"
+    r"億元|百萬|十億|億"
+)
+
+# 將不同財務單位轉換為 million
+UNIT_TO_MILLION = {
+    "million": Decimal("1"),
+    "millions": Decimal("1"),
+    "百萬": Decimal("1"),
+    "百萬元": Decimal("1"),
+    "billion": Decimal("1000"),
+    "billions": Decimal("1000"),
+    "十億": Decimal("1000"),
+    "十億元": Decimal("1000"),
+    "億": Decimal("100"),
+    "億元": Decimal("100"),
+}
+
+AMOUNT_PATTERN = re.compile(
+    r"(?<![\d,])"
+    r"(\d[\d,]*(?:\.\d+)?)"
+    r"\s*"
+    rf"({FINANCIAL_UNIT_PATTERN})"
+    r"(?:\s*(?:新台幣|臺幣|台幣|NTD|TWD))?",
+    re.IGNORECASE,
+)
+
+COMPARISON_PATTERN = re.compile(
+    r"差額|相差|差多少|高出|低於|多出|"
+    r"比.{0,40}?高|difference",
+    re.IGNORECASE,
+)
+
+
+def assert_final_answer_calculation(
+    final_answer: str,
+    calculation_results: list,
+):
+    """
+    驗證最終回答中的比較差額與 Calculator 一致。
+
+    僅檢查 comparison / difference 類型。
+    不要求 Report Writer 使用固定的語言或單位。
+    """
+
+    assert calculation_results, (
+        "Calculator 沒有提供計算結果"
+    )
+
+    calculation = calculation_results[0]
+
+    assert calculation["operation"] == "difference"
+
+    expected = Decimal(str(calculation["result"]))
+
+    # Calculator 的標準單位為 million
+    assert calculation["unit"] == "million"
+
+    # 只檢查比較結果所在的回答片段，
+    # 避免將台積電、聯發科的原始營收誤判為差額。
+    markers = list(
+        COMPARISON_PATTERN.finditer(final_answer)
+    )
+
+    assert markers, (
+        "最終回答沒有明確說明比較差額"
+    )
+
+    comparison_text = final_answer[markers[-1].start():]
+
+    matches = list(
+        AMOUNT_PATTERN.finditer(comparison_text)
+    )
+
+    assert matches, (
+        f"無法找到包含數值與單位的比較結果："
+        f"{comparison_text}"
+    )
+
+    # 使用第一個帶單位的數值作為比較差額
+    match = matches[0]
+
+    reported_value = Decimal(
+        match.group(1).replace(",", "")
+    )
+
+    reported_unit = match.group(2).lower()
+
+    actual = (
+        reported_value
+        * UNIT_TO_MILLION[reported_unit]
+    )
+
+    assert actual == expected, (
+        f"最終回答數值或單位錯誤："
+        f"expected={expected} million, "
+        f"actual={actual} million, "
+        f"answer={final_answer}"
+    )
+
+    # 檢查差額後方括號內是否包含矛盾單位
+    tail = comparison_text[match.end():]
+    parenthetical = re.match(
+        r"\s*[（(]([^）)]*)[）)]",
+        tail
+    )
+
+    if parenthetical:
+        text = parenthetical.group(1)
+
+        units = re.findall(
+            FINANCIAL_UNIT_PATTERN,
+            text,
+            re.IGNORECASE,
+        )
+
+        for unit in units:
+            factor = UNIT_TO_MILLION[unit.lower()]
+
+            assert factor == UNIT_TO_MILLION[reported_unit], (
+                f"最終回答存在矛盾單位："
+                f"{reported_unit} / {unit}"
+            )
 
 
 def create_initial_state(
@@ -211,6 +338,12 @@ def test_calculator_tool_selection(
 
     result = asyncio.run(invoke_graph(question))
 
+    if case_id in {"TC02", "TC06"}:
+        assert_final_answer_calculation(
+            final_answer=result["final_answer"],
+            calculation_results=result["calculation_results"],
+        )
+
     verify_result(result, expected_calculation)
 
     print(f"[{case_id}] PASS")
@@ -265,6 +398,12 @@ def test_tc03_multi_turn_calculation():
     )
 
     verify_result(second_result, True)
+
+    # 驗證第二輪追問的最終回答
+    assert_final_answer_calculation(
+        final_answer=second_result["final_answer"],
+        calculation_results=second_result["calculation_results"],
+    )
 
     print(f"[TC03] Standalone: {standalone}")
     print("[TC03] PASS")
