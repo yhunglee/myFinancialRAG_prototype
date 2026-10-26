@@ -954,6 +954,45 @@ async def retrieve_task(
   }
 
 
+def has_financial_numeric_answer(
+    answer: str,
+) -> bool:
+  """
+  初步檢查答案是否包含財務數值。
+
+  移除常見的年度、季度標記，避免把 2025Q4
+  誤認為實際的財務數值。
+
+  此函式只檢查數值是否存在，
+  不負責判斷數值正確性。
+  """
+
+  cleaned = re.sub(
+      r"\b(?:19|20)\d{2}\s*Q[1-4]\b",
+      " ",
+      answer,
+      flags=re.IGNORECASE,
+  )
+
+  cleaned = re.sub(
+      r"\b(?:19|20)\d{2}\b",
+      " ",
+      cleaned,
+  )
+
+  cleaned = re.sub(
+      r"(?:19|20)\d{2}\s*年\s*第?[一二三四1234]\s*季",
+      " ",
+      cleaned,
+  )
+
+  numbers = re.findall(
+      r"(?<!\w)(?:\d{1,3}(?:,\d{3})+|\d+\.\d+|\d+)(?!\w)",
+      cleaned,
+  )
+
+  return bool(numbers)
+
 def task_evidence_checker(
   state: ResearchTaskState,    
 ) -> dict:
@@ -990,6 +1029,41 @@ def task_evidence_checker(
       "failure_type": "missing_evidence",
       "next_action": "retrieve_again"
     }
+
+  # ---------------------------------------
+  # Deterministic Answer Completeness Check
+  # ---------------------------------------
+  numeric_topics = {
+    "營收",
+    "淨營收",
+    "毛利率",
+    "營業利益",
+    "EPS",
+    "每股盈餘",
+    "資本支出",
+  }
+
+  topic = str(task.get("topic", "")).strip()
+
+  answer = str(
+    task_evidence.get("answer", "")
+  ).strip()
+
+  if topic in numeric_topics:
+
+    if not has_financial_numeric_answer(answer):
+
+      print(
+        "[Task Evidence Check] REJECT:",
+        f"task={task.get('task_id')}",
+        "Numeric answer is missing.",
+      )
+
+      return {
+        "sufficient": False,
+        "failure_type": "weak_evidence",
+        "next_action": "retrieve_again",
+      }
 
   system_prompt = """
   You are an evidence checker for ONE research task
