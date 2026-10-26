@@ -1983,7 +1983,19 @@ def report_writer(state: FinancialResearchState) -> dict:
   2. Do not use outside knowledge.
   3. Do not invent financial facts.
   4. Every financial number must be supported by the evidence.
-  5. Preserve the financial units used by the evidence whenever possible.
+  5. Financial unit consistency:
+     - Preserve the numerical values and units
+       from the validated evidence.
+     - When calculation results are provided,
+       use their values and units exactly.
+     - "million" means 百萬.
+     - "billion" means 十億.
+     - Never translate "million" as 十億.
+     - Never translate "billion" as 百萬.
+     - Never change a financial unit without
+       correctly converting the numerical value.
+     - If uncertain, preserve the original
+       English unit.
   6. Make sure company names and reporting periods are correct.
   7. If the question compares multiple companies, perform the
      comparison using the evidence for each company.
