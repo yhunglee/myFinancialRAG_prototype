@@ -46,8 +46,10 @@ AMOUNT_PATTERN = re.compile(
     re.IGNORECASE,
 )
 
+
 COMPARISON_PATTERN = re.compile(
-    r"差額|相差|差多少|高出|低於|多出|少於|"
+    r"收入差|營收差|差額|相差|差多少|"
+    r"高出|低於|多出|少於|"
     r"比.{0,120}?(?:高出|低於|多出|少於|高|低|多|少)|"
     r"difference",
     re.IGNORECASE,
@@ -434,6 +436,14 @@ def test_tc03_multi_turn_calculation():
         ),
         (
             "台積電營收比聯發科多 895,902 billion",
+            False,
+        ),
+        (
+            "兩者之間的收入差為 895,902 million。",
+            True,
+        ),
+        (
+            "兩者之間的收入差為 895,902 billion。",
             False,
         ),
     ],
