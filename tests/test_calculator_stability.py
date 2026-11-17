@@ -62,6 +62,11 @@ FIXED_EVIDENCE = [
 
 TEST_CASES = [
     (
+        "TC01",
+        "比較台積電和聯發科 2025 年第四季營收",
+        False,
+    ),
+    (
         "TC02",
         "台積電和聯發科在 2025 年第四季的營收相差多少？",
         True,
@@ -146,7 +151,7 @@ def verify_calculator_output(
 @pytest.mark.parametrize(
     "case_id, question, expected_required",
     TEST_CASES,
-    ids=["TC02", "TC04"],
+    ids=["TC01", "TC02", "TC04"],
 )
 def test_calculator_decision_stability(
     case_id: str,
