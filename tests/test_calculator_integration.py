@@ -47,8 +47,9 @@ AMOUNT_PATTERN = re.compile(
 )
 
 COMPARISON_PATTERN = re.compile(
-    r"差額|相差|差多少|高出|低於|多出|"
-    r"比.{0,40}?高|difference",
+    r"差額|相差|差多少|高出|低於|多出|少於|"
+    r"比.{0,120}?(?:高出|低於|多出|少於|高|低|多|少)|"
+    r"difference",
     re.IGNORECASE,
 )
 
@@ -87,7 +88,7 @@ def assert_final_answer_calculation(
         "最終回答沒有明確說明比較差額"
     )
 
-    comparison_text = final_answer[markers[-1].start():]
+    comparison_text = final_answer[markers[-1].end():]
 
     matches = list(
         AMOUNT_PATTERN.finditer(comparison_text)
@@ -419,6 +420,20 @@ def test_tc03_multi_turn_calculation():
         ("營收相差 895,920 million", False),
         (
             "營收相差 895,902 million (十億新台幣)",
+            False,
+        ),
+        (
+            "台積電營收比聯發科多 895,902 million",
+            True,
+        ),
+        (
+            "台積電在 2025 年第四季的營收（NT$1,046.09 billion）"
+            "比聯發科在 2025 年第四季的營收（150,188 million）"
+            "多 895,902 million。",
+            True,
+        ),
+        (
+            "台積電營收比聯發科多 895,902 billion",
             False,
         ),
     ],
